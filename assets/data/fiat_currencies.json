@@ -1,0 +1,1477 @@
+[
+    {
+        "iso_code": "AED",
+        "name": "UAE Dirham",
+        "symbol": "د.إ",
+        "regions": [
+            "United Arab Emirates"
+        ],
+        "description": "Official currency of the United Arab Emirates. Symbol will be updated after Unicode release."
+    },
+    {
+        "iso_code": "AFN",
+        "name": "Afghan Afghani",
+        "symbol": "؋",
+        "regions": [
+            "Afghanistan"
+        ],
+        "description": "Official currency of Afghanistan."
+    },
+    {
+        "iso_code": "ALL",
+        "name": "Albanian Lek",
+        "symbol": "L",
+        "regions": [
+            "Albania"
+        ],
+        "description": "Official currency of Albania."
+    },
+    {
+        "iso_code": "AMD",
+        "name": "Armenian Dram",
+        "symbol": "֏",
+        "regions": [
+            "Armenia"
+        ],
+        "description": "Official currency of Armenia."
+    },
+    {
+        "iso_code": "AOA",
+        "name": "Angolan Kwanza",
+        "symbol": "Kz",
+        "regions": [
+            "Angola"
+        ],
+        "description": "Official currency of Angola."
+    },
+    {
+        "iso_code": "ARS",
+        "name": "Argentine Peso",
+        "symbol": "$",
+        "regions": [
+            "Argentina"
+        ],
+        "description": "Official currency of Argentina."
+    },
+    {
+        "iso_code": "AUD",
+        "name": "Australian Dollar",
+        "symbol": "A$",
+        "regions": [
+            "Australia",
+            "Christmas Island",
+            "Cocos (Keeling) Islands",
+            "Heard Island and McDonald Islands",
+            "Kiribati",
+            "Nauru",
+            "Norfolk Island",
+            "Tuvalu"
+        ],
+        "description": "Official currency of Australia (and its territories), Kiribati, Nauru and Tuvalu."
+    },
+    {
+        "iso_code": "AWG",
+        "name": "Aruban Florin",
+        "symbol": "ƒ",
+        "regions": [
+            "Aruba"
+        ],
+        "description": "Official currency of Aruba, a constituent country of the Kingdom of the Netherlands."
+    },
+    {
+        "iso_code": "AZN",
+        "name": "Azerbaijani Manat",
+        "symbol": "₼",
+        "regions": [
+            "Azerbaijan"
+        ],
+        "description": "Official currency of Azerbaijan."
+    },
+    {
+        "iso_code": "BAM",
+        "name": "Bosnia-Herzegovina Convertible Mark",
+        "symbol": "KM",
+        "regions": [
+            "Bosnia and Herzegovina"
+        ],
+        "description": "Currency of Bosnia and Herzegovina, pegged at 1.95583:1 to the Euro."
+    },
+    {
+        "iso_code": "BBD",
+        "name": "Barbadian Dollar",
+        "symbol": "Bds$",
+        "regions": [
+            "Barbados"
+        ],
+        "description": "Official currency of Barbados."
+    },
+    {
+        "iso_code": "BDT",
+        "name": "Bangladeshi Taka",
+        "symbol": "৳",
+        "regions": [
+            "Bangladesh"
+        ],
+        "description": "Official currency of Bangladesh."
+    },
+    {
+        "iso_code": "BHD",
+        "name": "Bahraini Dinar",
+        "symbol": ".د.ب",
+        "regions": [
+            "Bahrain"
+        ],
+        "description": "Official currency of Bahrain."
+    },
+    {
+        "iso_code": "BIF",
+        "name": "Burundian Franc",
+        "symbol": "Fr",
+        "regions": [
+            "Burundi"
+        ],
+        "description": "Official currency of Burundi."
+    },
+    {
+        "iso_code": "BMD",
+        "name": "Bermudian Dollar",
+        "symbol": "$",
+        "regions": [
+            "Bermuda"
+        ],
+        "description": "Official currency of Bermuda, pegged at parity with the US Dollar."
+    },
+    {
+        "iso_code": "BND",
+        "name": "Brunei Dollar",
+        "symbol": "B$",
+        "regions": [
+            "Brunei"
+        ],
+        "description": "Official currency of Brunei. Interchangeable with the Singapore Dollar at par."
+    },
+    {
+        "iso_code": "BOB",
+        "name": "Bolivian Boliviano",
+        "symbol": "Bs.",
+        "regions": [
+            "Bolivia"
+        ],
+        "description": "Official currency of Bolivia."
+    },
+    {
+        "iso_code": "BRL",
+        "name": "Brazilian Real",
+        "symbol": "R$",
+        "regions": [
+            "Brazil"
+        ],
+        "description": "Official currency of Brazil."
+    },
+    {
+        "iso_code": "BSD",
+        "name": "Bahamian Dollar",
+        "symbol": "B$",
+        "regions": [
+            "Bahamas"
+        ],
+        "description": "Official currency of the Bahamas, pegged at parity with the US Dollar."
+    },
+    {
+        "iso_code": "BTN",
+        "name": "Bhutanese Ngultrum",
+        "symbol": "Nu",
+        "regions": [
+            "Bhutan"
+        ],
+        "description": "Official currency of Bhutan, pegged at parity with the Indian Rupee."
+    },
+    {
+        "iso_code": "BWP",
+        "name": "Botswanan Pula",
+        "symbol": "P",
+        "regions": [
+            "Botswana"
+        ],
+        "description": "Official currency of Botswana."
+    },
+    {
+        "iso_code": "BYN",
+        "name": "Belarusian Ruble",
+        "symbol": "Br",
+        "regions": [
+            "Belarus"
+        ],
+        "description": "Official currency of Belarus."
+    },
+    {
+        "iso_code": "BZD",
+        "name": "Belize Dollar",
+        "symbol": "BZ$",
+        "regions": [
+            "Belize"
+        ],
+        "description": "Official currency of Belize, pegged at 2:1 to the US Dollar."
+    },
+    {
+        "iso_code": "CAD",
+        "name": "Canadian Dollar",
+        "symbol": "C$",
+        "regions": [
+            "Canada"
+        ],
+        "description": "Official currency of Canada."
+    },
+    {
+        "iso_code": "CDF",
+        "name": "Congolese Franc",
+        "symbol": "FC",
+        "regions": [
+            "Democratic Republic of the Congo"
+        ],
+        "description": "Official currency of the Democratic Republic of the Congo."
+    },
+    {
+        "iso_code": "CHF",
+        "name": "Swiss Franc",
+        "symbol": "CHF",
+        "regions": [
+            "Switzerland",
+            "Liechtenstein"
+        ],
+        "description": "Official currency of Switzerland and Liechtenstein. Considered a safe-haven currency."
+    },
+    {
+        "iso_code": "CLP",
+        "name": "Chilean Peso",
+        "symbol": "$",
+        "regions": [
+            "Chile"
+        ],
+        "description": "Official currency of Chile."
+    },
+    {
+        "iso_code": "CNY",
+        "name": "Chinese Yuan",
+        "symbol": "¥",
+        "regions": [
+            "China"
+        ],
+        "description": "Official currency of China (Mainland), also known as the Renminbi (RMB) in Chinese."
+    },
+    {
+        "iso_code": "COP",
+        "name": "Colombian Peso",
+        "symbol": "$",
+        "regions": [
+            "Colombia"
+        ],
+        "description": "Official currency of Colombia."
+    },
+    {
+        "iso_code": "CRC",
+        "name": "Costa Rican Colón",
+        "symbol": "₡",
+        "regions": [
+            "Costa Rica"
+        ],
+        "description": "Official currency of Costa Rica."
+    },
+    {
+        "iso_code": "CUP",
+        "name": "Cuban Peso",
+        "symbol": "$",
+        "regions": [
+            "Cuba"
+        ],
+        "description": "Official currency of Cuba."
+    },
+    {
+        "iso_code": "CVE",
+        "name": "Cape Verdean Escudo",
+        "symbol": "Esc",
+        "regions": [
+            "Cape Verde"
+        ],
+        "description": "Official currency of Cape Verde, pegged at 110.265:1 to the Euro."
+    },
+    {
+        "iso_code": "CZK",
+        "name": "Czech Koruna",
+        "symbol": "Kč",
+        "regions": [
+            "Czech Republic"
+        ],
+        "description": "Official currency of the Czech Republic."
+    },
+    {
+        "iso_code": "DJF",
+        "name": "Djiboutian Franc",
+        "symbol": "Fdj",
+        "regions": [
+            "Djibouti"
+        ],
+        "description": "Official currency of Djibouti, pegged at 177.721:1 to the US Dollar."
+    },
+    {
+        "iso_code": "DKK",
+        "name": "Danish Krone",
+        "symbol": "kr",
+        "regions": [
+            "Denmark",
+            "Faroe Islands",
+            "Greenland"
+        ],
+        "description": "Official currency of Denmark, the Faroe Islands (Faroese króna is the localized version), and Greenland."
+    },
+    {
+        "iso_code": "DOP",
+        "name": "Dominican Peso",
+        "symbol": "RD$",
+        "regions": [
+            "Dominican Republic"
+        ],
+        "description": "Official currency of the Dominican Republic."
+    },
+    {
+        "iso_code": "DZD",
+        "name": "Algerian Dinar",
+        "symbol": "دج",
+        "regions": [
+            "Algeria"
+        ],
+        "description": "Official currency of Algeria."
+    },
+    {
+        "iso_code": "EGP",
+        "name": "Egyptian Pound",
+        "symbol": "£",
+        "regions": [
+            "Egypt"
+        ],
+        "description": "Official currency of Egypt."
+    },
+    {
+        "iso_code": "ERN",
+        "name": "Eritrean Nakfa",
+        "symbol": "Nfk",
+        "regions": [
+            "Eritrea"
+        ],
+        "description": "Official currency of Eritrea."
+    },
+    {
+        "iso_code": "ETB",
+        "name": "Ethiopian Birr",
+        "symbol": "Br",
+        "regions": [
+            "Ethiopia"
+        ],
+        "description": "Official currency of Ethiopia."
+    },
+    {
+        "iso_code": "EUR",
+        "name": "Euro",
+        "symbol": "€",
+        "regions": [
+            "Andorra",
+            "Austria",
+            "Belgium",
+            "Bulgaria",
+            "Croatia",
+            "Cyprus",
+            "Estonia",
+            "Finland (including Åland Islands)",
+            "France (except French Polynesia, New Caledonia, Wallis and Futuna)",
+            "Germany",
+            "Greece",
+            "Holy See",
+            "Ireland",
+            "Italy",
+            "Kosovo",
+            "Latvia",
+            "Lithuania",
+            "Luxembourg",
+            "Malta",
+            "Montenegro",
+            "Netherlands (European part only)",
+            "Portugal",
+            "San Marino",
+            "Slovakia",
+            "Slovenia",
+            "Spain"
+        ],
+        "description": "Official currency of the Eurozone, which includes 21 EU member states, and some non-EU countries."
+    },
+    {
+        "iso_code": "FJD",
+        "name": "Fijian Dollar",
+        "symbol": "FJ$",
+        "regions": [
+            "Fiji"
+        ],
+        "description": "Official currency of Fiji."
+    },
+    {
+        "iso_code": "FKP",
+        "name": "Falkland Islands Pound",
+        "symbol": "£",
+        "regions": [
+            "Falkland Islands"
+        ],
+        "description": "Official currency of the Falkland Islands, pegged at parity to the British Pound."
+    },
+    {
+        "iso_code": "GBP",
+        "name": "British Pound Sterling",
+        "symbol": "£",
+        "regions": [
+            "United Kingdom",
+            "Jersey",
+            "Guernsey",
+            "Isle of Man"
+        ],
+        "description": "Official currency of the United Kingdom"
+    },
+    {
+        "iso_code": "GEL",
+        "name": "Georgian Lari",
+        "symbol": "₾",
+        "regions": [
+            "Georgia"
+        ],
+        "description": "Official currency of Georgia."
+    },
+    {
+        "iso_code": "GHS",
+        "name": "Ghanaian Cedi",
+        "symbol": "GH₵",
+        "regions": [
+            "Ghana"
+        ],
+        "description": "Official currency of Ghana."
+    },
+    {
+        "iso_code": "GIP",
+        "name": "Gibraltar Pound",
+        "symbol": "£",
+        "regions": [
+            "Gibraltar"
+        ],
+        "description": "Official currency of Gibraltar, pegged at parity with the British Pound."
+    },
+    {
+        "iso_code": "GMD",
+        "name": "Gambian Dalasi",
+        "symbol": "D",
+        "regions": [
+            "Gambia"
+        ],
+        "description": "Official currency of the Gambia."
+    },
+    {
+        "iso_code": "GNF",
+        "name": "Guinean Franc",
+        "symbol": "FG",
+        "regions": [
+            "Guinea"
+        ],
+        "description": "Official currency of Guinea."
+    },
+    {
+        "iso_code": "GTQ",
+        "name": "Guatemalan Quetzal",
+        "symbol": "Q",
+        "regions": [
+            "Guatemala"
+        ],
+        "description": "Official currency of Guatemala, named after the quetzal bird."
+    },
+    {
+        "iso_code": "GYD",
+        "name": "Guyanaese Dollar",
+        "symbol": "$",
+        "regions": [
+            "Guyana"
+        ],
+        "description": "Official currency of Guyana."
+    },
+    {
+        "iso_code": "HKD",
+        "name": "Hong Kong Dollar",
+        "symbol": "HK$",
+        "regions": [
+            "Hong Kong"
+        ],
+        "description": "Official currency of Hong Kong, pegged at 7.75-7.85:1 to the US Dollar."
+    },
+    {
+        "iso_code": "HNL",
+        "name": "Honduran Lempira",
+        "symbol": "L",
+        "regions": [
+            "Honduras"
+        ],
+        "description": "Official currency of Honduras."
+    },
+    {
+        "iso_code": "HTG",
+        "name": "Haitian Gourde",
+        "symbol": "G",
+        "regions": [
+            "Haiti"
+        ],
+        "description": "Official currency of Haiti."
+    },
+    {
+        "iso_code": "HUF",
+        "name": "Hungarian Forint",
+        "symbol": "Ft",
+        "regions": [
+            "Hungary"
+        ],
+        "description": "Official currency of Hungary."
+    },
+    {
+        "iso_code": "IDR",
+        "name": "Indonesian Rupiah",
+        "symbol": "Rp",
+        "regions": [
+            "Indonesia"
+        ],
+        "description": "Official currency of Indonesia."
+    },
+    {
+        "iso_code": "ILS",
+        "name": "New Israeli Shekel",
+        "symbol": "₪",
+        "regions": [
+            "Israel"
+        ],
+        "description": "Official currency of Israel."
+    },
+    {
+        "iso_code": "INR",
+        "name": "Indian Rupee",
+        "symbol": "₹",
+        "regions": [
+            "India"
+        ],
+        "description": "Official currency of India."
+    },
+    {
+        "iso_code": "IQD",
+        "name": "Iraqi Dinar",
+        "symbol": "د.ع",
+        "regions": [
+            "Iraq"
+        ],
+        "description": "Official currency of Iraq."
+    },
+    {
+        "iso_code": "IRR",
+        "name": "Iranian Rial",
+        "symbol": "﷼",
+        "regions": [
+            "Iran"
+        ],
+        "description": "Official currency of Iran."
+    },
+    {
+        "iso_code": "ISK",
+        "name": "Icelandic Króna",
+        "symbol": "kr",
+        "regions": [
+            "Iceland"
+        ],
+        "description": "Official currency of Iceland."
+    },
+    {
+        "iso_code": "JMD",
+        "name": "Jamaican Dollar",
+        "symbol": "J$",
+        "regions": [
+            "Jamaica"
+        ],
+        "description": "Official currency of Jamaica."
+    },
+    {
+        "iso_code": "JOD",
+        "name": "Jordanian Dinar",
+        "symbol": "JD",
+        "regions": [
+            "Jordan"
+        ],
+        "description": "Official currency of Jordan, pegged at 0.708/0.710:1 (buy/sell) to the US Dollar."
+    },
+    {
+        "iso_code": "JPY",
+        "name": "Japanese Yen",
+        "symbol": "¥",
+        "regions": [
+            "Japan"
+        ],
+        "description": "Official currency of Japan, one of the most traded currencies globally."
+    },
+    {
+        "iso_code": "KES",
+        "name": "Kenyan Shilling",
+        "symbol": "KSh",
+        "regions": [
+            "Kenya"
+        ],
+        "description": "Official currency of Kenya."
+    },
+    {
+        "iso_code": "KGS",
+        "name": "Kyrgystani Som",
+        "symbol": "с",
+        "regions": [
+            "Kyrgyzstan"
+        ],
+        "description": "Official currency of Kyrgyzstan."
+    },
+    {
+        "iso_code": "KHR",
+        "name": "Cambodian Riel",
+        "symbol": "៛",
+        "regions": [
+            "Cambodia"
+        ],
+        "description": "Official currency of Cambodia."
+    },
+    {
+        "iso_code": "KMF",
+        "name": "Comorian Franc",
+        "symbol": "FC",
+        "regions": [
+            "Comoros"
+        ],
+        "description": "Official currency of Comoros, pegged at 491.96775:1 to the Euro."
+    },
+    {
+        "iso_code": "KPW",
+        "name": "North Korean Won",
+        "symbol": "₩",
+        "regions": [
+            "North Korea"
+        ],
+        "description": "Official currency of North Korea."
+    },
+    {
+        "iso_code": "KRW",
+        "name": "South Korean Won",
+        "symbol": "₩",
+        "regions": [
+            "South Korea"
+        ],
+        "description": "Official currency of South Korea."
+    },
+    {
+        "iso_code": "KWD",
+        "name": "Kuwaiti Dinar",
+        "symbol": "KD",
+        "regions": [
+            "Kuwait"
+        ],
+        "description": "Official currency of Kuwait, one of the highest-valued currencies in the world. It is pegged to undisclosed currency bucket."
+    },
+    {
+        "iso_code": "KYD",
+        "name": "Cayman Islands Dollar",
+        "symbol": "$",
+        "regions": [
+            "Cayman Islands"
+        ],
+        "description": "Official currency of the Cayman Islands, pegged at 1.2:1 to the US Dollar."
+    },
+    {
+        "iso_code": "KZT",
+        "name": "Kazakhstani Tenge",
+        "symbol": "₸",
+        "regions": [
+            "Kazakhstan"
+        ],
+        "description": "Official currency of Kazakhstan."
+    },
+    {
+        "iso_code": "LAK",
+        "name": "Laotian Kip",
+        "symbol": "₭",
+        "regions": [
+            "Laos"
+        ],
+        "description": "Official currency of Laos."
+    },
+    {
+        "iso_code": "LBP",
+        "name": "Lebanese Pound",
+        "symbol": "ل.ل",
+        "regions": [
+            "Lebanon"
+        ],
+        "description": "Official currency of Lebanon."
+    },
+    {
+        "iso_code": "LKR",
+        "name": "Sri Lankan Rupee",
+        "symbol": "Rs",
+        "regions": [
+            "Sri Lanka"
+        ],
+        "description": "Official currency of Sri Lanka."
+    },
+    {
+        "iso_code": "LRD",
+        "name": "Liberian Dollar",
+        "symbol": "$",
+        "regions": [
+            "Liberia"
+        ],
+        "description": "Official currency of Liberia."
+    },
+    {
+        "iso_code": "LSL",
+        "name": "Lesotho Loti",
+        "symbol": "L",
+        "regions": [
+            "Lesotho"
+        ],
+        "description": "Official currency of Lesotho, pegged at parity with the South African Rand."
+    },
+    {
+        "iso_code": "LYD",
+        "name": "Libyan Dinar",
+        "symbol": "LD",
+        "regions": [
+            "Libya"
+        ],
+        "description": "Official currency of Libya."
+    },
+    {
+        "iso_code": "MAD",
+        "name": "Moroccan Dirham",
+        "symbol": "DH",
+        "regions": [
+            "Morocco",
+            "Western Sahara"
+        ],
+        "description": "Official currency of Morocco."
+    },
+    {
+        "iso_code": "MDL",
+        "name": "Moldovan Leu",
+        "symbol": "L",
+        "regions": [
+            "Moldova"
+        ],
+        "description": "Official currency of Moldova."
+    },
+    {
+        "iso_code": "MGA",
+        "name": "Malagasy Ariary",
+        "symbol": "Ar",
+        "regions": [
+            "Madagascar"
+        ],
+        "description": "Official currency of Madagascar."
+    },
+    {
+        "iso_code": "MKD",
+        "name": "Macedonian Denar",
+        "symbol": "ден",
+        "regions": [
+            "North Macedonia"
+        ],
+        "description": "Official currency of North Macedonia."
+    },
+    {
+        "iso_code": "MMK",
+        "name": "Myanma Kyat",
+        "symbol": "K",
+        "regions": [
+            "Myanmar"
+        ],
+        "description": "Official currency of Myanmar."
+    },
+    {
+        "iso_code": "MNT",
+        "name": "Mongolian Tugrik",
+        "symbol": "₮",
+        "regions": [
+            "Mongolia"
+        ],
+        "description": "Official currency of Mongolia."
+    },
+    {
+        "iso_code": "MOP",
+        "name": "Macanese Pataca",
+        "symbol": "P",
+        "regions": [
+            "Macau"
+        ],
+        "description": "Official currency of Macau, pegged at 1.03:1 to the Hong Kong Dollar."
+    },
+    {
+        "iso_code": "MRU",
+        "name": "Mauritanian Ouguiya",
+        "symbol": "UM",
+        "regions": [
+            "Mauritania"
+        ],
+        "description": "Official currency of Mauritania."
+    },
+    {
+        "iso_code": "MUR",
+        "name": "Mauritian Rupee",
+        "symbol": "Rs",
+        "regions": [
+            "Mauritius"
+        ],
+        "description": "Official currency of Mauritius."
+    },
+    {
+        "iso_code": "MVR",
+        "name": "Maldivian Rufiyaa",
+        "symbol": "Rf",
+        "regions": [
+            "Maldives"
+        ],
+        "description": "Official currency of the Maldives."
+    },
+    {
+        "iso_code": "MWK",
+        "name": "Malawian Kwacha",
+        "symbol": "K",
+        "regions": [
+            "Malawi"
+        ],
+        "description": "Official currency of Malawi."
+    },
+    {
+        "iso_code": "MXN",
+        "name": "Mexican Peso",
+        "symbol": "$",
+        "regions": [
+            "Mexico"
+        ],
+        "description": "Official currency of Mexico."
+    },
+    {
+        "iso_code": "MYR",
+        "name": "Malaysian Ringgit",
+        "symbol": "RM",
+        "regions": [
+            "Malaysia"
+        ],
+        "description": "Official currency of Malaysia."
+    },
+    {
+        "iso_code": "MZN",
+        "name": "Mozambican Metical",
+        "symbol": "MT",
+        "regions": [
+            "Mozambique"
+        ],
+        "description": "Official currency of Mozambique."
+    },
+    {
+        "iso_code": "NAD",
+        "name": "Namibian Dollar",
+        "symbol": "$",
+        "regions": [
+            "Namibia"
+        ],
+        "description": "Official currency of Namibia, pegged at parity with the South African Rand."
+    },
+    {
+        "iso_code": "NGN",
+        "name": "Nigerian Naira",
+        "symbol": "₦",
+        "regions": [
+            "Nigeria"
+        ],
+        "description": "Official currency of Nigeria."
+    },
+    {
+        "iso_code": "NIO",
+        "name": "Nicaraguan Córdoba",
+        "symbol": "C$",
+        "regions": [
+            "Nicaragua"
+        ],
+        "description": "Official currency of Nicaragua."
+    },
+    {
+        "iso_code": "NOK",
+        "name": "Norwegian Krone",
+        "symbol": "kr",
+        "regions": [
+            "Norway",
+            "Bouvet Island",
+            "Svalbard and Jan Mayen"
+        ],
+        "description": "Official currency of Norway."
+    },
+    {
+        "iso_code": "NPR",
+        "name": "Nepalese Rupee",
+        "symbol": "Rs",
+        "regions": [
+            "Nepal"
+        ],
+        "description": "Official currency of Nepal, pegged at 1.6/1.6015:1 (buy/sell) to the Indian Rupee."
+    },
+    {
+        "iso_code": "NZD",
+        "name": "New Zealand Dollar",
+        "symbol": "NZ$",
+        "regions": [
+            "New Zealand",
+            "Cook Islands",
+            "Niue",
+            "Pitcairn Islands",
+            "Tokelau"
+        ],
+        "description": "Official currency of New Zealand and several Pacific island territories."
+    },
+    {
+        "iso_code": "OMR",
+        "name": "Omani Rial",
+        "symbol": "﷼",
+        "regions": [
+            "Oman"
+        ],
+        "description": "Official currency of Oman, pegged at 0.384/0.385:1 (buy/sell) to the US Dollar."
+    },
+    {
+        "iso_code": "PAB",
+        "name": "Panamanian Balboa",
+        "symbol": "B/.",
+        "regions": [
+            "Panama"
+        ],
+        "description": "Official currency of Panama, pegged at parity with the US Dollar."
+    },
+    {
+        "iso_code": "PEN",
+        "name": "Peruvian Sol",
+        "symbol": "S/",
+        "regions": [
+            "Peru"
+        ],
+        "description": "Official currency of Peru."
+    },
+    {
+        "iso_code": "PGK",
+        "name": "Papua New Guinean Kina",
+        "symbol": "K",
+        "regions": [
+            "Papua New Guinea"
+        ],
+        "description": "Official currency of Papua New Guinea."
+    },
+    {
+        "iso_code": "PHP",
+        "name": "Philippine Peso",
+        "symbol": "₱",
+        "regions": [
+            "Philippines"
+        ],
+        "description": "Official currency of the Philippines."
+    },
+    {
+        "iso_code": "PKR",
+        "name": "Pakistani Rupee",
+        "symbol": "Rs",
+        "regions": [
+            "Pakistan"
+        ],
+        "description": "Official currency of Pakistan."
+    },
+    {
+        "iso_code": "PLN",
+        "name": "Polish Złoty",
+        "symbol": "zł",
+        "regions": [
+            "Poland"
+        ],
+        "description": "Official currency of Poland."
+    },
+    {
+        "iso_code": "PYG",
+        "name": "Paraguayan Guarani",
+        "symbol": "₲",
+        "regions": [
+            "Paraguay"
+        ],
+        "description": "Official currency of Paraguay."
+    },
+    {
+        "iso_code": "QAR",
+        "name": "Qatari Rial",
+        "symbol": "QR",
+        "regions": [
+            "Qatar"
+        ],
+        "description": "Official currency of Qatar, pegged at 3.64:1 to the US Dollar."
+    },
+    {
+        "iso_code": "RON",
+        "name": "Romanian Leu",
+        "symbol": "lei",
+        "regions": [
+            "Romania"
+        ],
+        "description": "Official currency of Romania."
+    },
+    {
+        "iso_code": "RSD",
+        "name": "Serbian Dinar",
+        "symbol": "din",
+        "regions": [
+            "Serbia"
+        ],
+        "description": "Official currency of Serbia."
+    },
+    {
+        "iso_code": "RUB",
+        "name": "Russian Ruble",
+        "symbol": "₽",
+        "regions": [
+            "Russia"
+        ],
+        "description": "Official currency of Russia."
+    },
+    {
+        "iso_code": "RWF",
+        "name": "Rwandan Franc",
+        "symbol": "RF",
+        "regions": [
+            "Rwanda"
+        ],
+        "description": "Official currency of Rwanda."
+    },
+    {
+        "iso_code": "SAR",
+        "name": "Saudi Riyal",
+        "symbol": "SAR",
+        "regions": [
+            "Saudi Arabia"
+        ],
+        "description": "Official currency of Saudi Arabia, pegged at 3.75:1 to the US Dollar."
+    },
+    {
+        "iso_code": "SBD",
+        "name": "Solomon Islands Dollar",
+        "symbol": "SI$",
+        "regions": [
+            "Solomon Islands"
+        ],
+        "description": "Official currency of the Solomon Islands."
+    },
+    {
+        "iso_code": "SCR",
+        "name": "Seychellois Rupee",
+        "symbol": "R",
+        "regions": [
+            "Seychelles"
+        ],
+        "description": "Official currency of Seychelles."
+    },
+    {
+        "iso_code": "SDG",
+        "name": "Sudanese Pound",
+        "symbol": "LS",
+        "regions": [
+            "Sudan"
+        ],
+        "description": "Official currency of Sudan."
+    },
+    {
+        "iso_code": "SEK",
+        "name": "Swedish Krona",
+        "symbol": "kr",
+        "regions": [
+            "Sweden"
+        ],
+        "description": "Official currency of Sweden."
+    },
+    {
+        "iso_code": "SGD",
+        "name": "Singapore Dollar",
+        "symbol": "S$",
+        "regions": [
+            "Singapore"
+        ],
+        "description": "Official currency of Singapore. Interchangeable with the Brunei Dollar at par."
+    },
+    {
+        "iso_code": "SHP",
+        "name": "Saint Helena Pound",
+        "symbol": "£",
+        "regions": [
+            "Saint Helena",
+            "Ascension Island",
+            "Tristan da Cunha"
+        ],
+        "description": "Official currency of Saint Helena, Ascension Island, and Tristan da Cunha, pegged at parity to the British Pound."
+    },
+    {
+        "iso_code": "SLE",
+        "name": "Sierra Leonean Leone",
+        "symbol": "Le",
+        "regions": [
+            "Sierra Leone"
+        ],
+        "description": "Official currency of Sierra Leone."
+    },
+    {
+        "iso_code": "SOS",
+        "name": "Somali Shilling",
+        "symbol": "Sh.So.",
+        "regions": [
+            "Somalia"
+        ],
+        "description": "Official currency of Somalia."
+    },
+    {
+        "iso_code": "SRD",
+        "name": "Surinamese Dollar",
+        "symbol": "$",
+        "regions": [
+            "Suriname"
+        ],
+        "description": "Official currency of Suriname."
+    },
+    {
+        "iso_code": "SSP",
+        "name": "South Sudanese Pound",
+        "symbol": "£",
+        "regions": [
+            "South Sudan"
+        ],
+        "description": "Official currency of South Sudan."
+    },
+    {
+        "iso_code": "STN",
+        "name": "São Tomé and Príncipe Dobra",
+        "symbol": "Db",
+        "regions": [
+            "São Tomé and Príncipe"
+        ],
+        "description": "Official currency of São Tomé and Príncipe, pegged at 24.5:1 to the Euro."
+    },
+    {
+        "iso_code": "SYP",
+        "name": "Syrian Pound",
+        "symbol": "LS",
+        "regions": [
+            "Syria"
+        ],
+        "description": "Official currency of Syria."
+    },
+    {
+        "iso_code": "SZL",
+        "name": "Swazi Lilangeni",
+        "symbol": "L",
+        "regions": [
+            "Eswatini"
+        ],
+        "description": "Official currency of Eswatini, pegged at parity with the South African Rand."
+    },
+    {
+        "iso_code": "THB",
+        "name": "Thai Baht",
+        "symbol": "฿",
+        "regions": [
+            "Thailand"
+        ],
+        "description": "Official currency of Thailand."
+    },
+    {
+        "iso_code": "TJS",
+        "name": "Tajikistani Somoni",
+        "symbol": "SM",
+        "regions": [
+            "Tajikistan"
+        ],
+        "description": "Official currency of Tajikistan."
+    },
+    {
+        "iso_code": "TMT",
+        "name": "Turkmenistani Manat",
+        "symbol": "T",
+        "regions": [
+            "Turkmenistan"
+        ],
+        "description": "Official currency of Turkmenistan."
+    },
+    {
+        "iso_code": "TND",
+        "name": "Tunisian Dinar",
+        "symbol": "دت",
+        "regions": [
+            "Tunisia"
+        ],
+        "description": "Official currency of Tunisia."
+    },
+    {
+        "iso_code": "TOP",
+        "name": "Tongan Paʻanga",
+        "symbol": "T$",
+        "regions": [
+            "Tonga"
+        ],
+        "description": "Official currency of Tonga."
+    },
+    {
+        "iso_code": "TRY",
+        "name": "Turkish Lira",
+        "symbol": "₺",
+        "regions": [
+            "Turkey/Türkiye"
+        ],
+        "description": "Official currency of Turkey/Türkiye."
+    },
+    {
+        "iso_code": "TTD",
+        "name": "Trinidad and Tobago Dollar",
+        "symbol": "TT$",
+        "regions": [
+            "Trinidad and Tobago"
+        ],
+        "description": "Official currency of Trinidad and Tobago."
+    },
+    {
+        "iso_code": "TWD",
+        "name": "New Taiwan Dollar",
+        "symbol": "NT$",
+        "regions": [
+            "Taiwan"
+        ],
+        "description": "Official currency of Taiwan."
+    },
+    {
+        "iso_code": "TZS",
+        "name": "Tanzanian Shilling",
+        "symbol": "TSh",
+        "regions": [
+            "Tanzania"
+        ],
+        "description": "Official currency of Tanzania."
+    },
+    {
+        "iso_code": "UAH",
+        "name": "Ukrainian Hryvnia",
+        "symbol": "₴",
+        "regions": [
+            "Ukraine"
+        ],
+        "description": "Official currency of Ukraine."
+    },
+    {
+        "iso_code": "UGX",
+        "name": "Ugandan Shilling",
+        "symbol": "USh",
+        "regions": [
+            "Uganda"
+        ],
+        "description": "Official currency of Uganda."
+    },
+    {
+        "iso_code": "USD",
+        "name": "US Dollar",
+        "symbol": "$",
+        "regions": [
+            "United States",
+            "American Samoa",
+            "Bonaire, Sint Eustatius and Saba (The Caribbean Netherlands)",
+            "British Indian Ocean Territory",
+            "British Virgin Islands",
+            "Ecuador",
+            "El Salvador",
+            "Guam",
+            "Marshall Islands",
+            "Micronesia",
+            "Northern Mariana Islands",
+            "Palau",
+            "Panama",
+            "Puerto Rico",
+            "Timor-Leste",
+            "United States Virgin Islands",
+            "United States Minor Outlying Islands",
+            "Zimbabwe"
+        ],
+        "description": "Official currency of the United States (including its territories) and other regions. The world's primary reserve currency."
+    },
+    {
+        "iso_code": "UYU",
+        "name": "Uruguayan Peso",
+        "symbol": "$",
+        "regions": [
+            "Uruguay"
+        ],
+        "description": "Official currency of Uruguay."
+    },
+    {
+        "iso_code": "UZS",
+        "name": "Uzbekistan Sum",
+        "symbol": "sum",
+        "regions": [
+            "Uzbekistan"
+        ],
+        "description": "Official currency of Uzbekistan."
+    },
+    {
+        "iso_code": "VED",
+        "name": "Venezuelan Bolívar Digital",
+        "symbol": "Bs.D",
+        "regions": [
+            "Venezuela"
+        ],
+        "description": "One of oficial currencies of Venezuela."
+    },
+    {
+        "iso_code": "VES",
+        "name": "Venezuelan Bolívar Soberano",
+        "symbol": "Bs.S",
+        "regions": [
+            "Venezuela"
+        ],
+        "description": "One of official currencies of Venezuela."
+    },
+    {
+        "iso_code": "VND",
+        "name": "Vietnamese Đồng",
+        "symbol": "₫",
+        "regions": [
+            "Vietnam"
+        ],
+        "description": "Official currency of Vietnam."
+    },
+    {
+        "iso_code": "VUV",
+        "name": "Vanuatu Vatu",
+        "symbol": "VT",
+        "regions": [
+            "Vanuatu"
+        ],
+        "description": "Official currency of Vanuatu."
+    },
+    {
+        "iso_code": "WST",
+        "name": "Samoan Tālā",
+        "symbol": "$",
+        "regions": [
+            "Samoa"
+        ],
+        "description": "Official currency of Samoa."
+    },
+    {
+        "iso_code": "XAF",
+        "name": "Central African CFA Franc",
+        "symbol": "F.CFA",
+        "regions": [
+            "Cameroon",
+            "Central African Republic",
+            "Chad",
+            "Republic of the Congo",
+            "Equatorial Guinea",
+            "Gabon"
+        ],
+        "description": "Official currency of 6 Central African countries, pegged at 655.957:1 to the Euro."
+    },
+    {
+        "iso_code": "XCD",
+        "name": "East Caribbean Dollar",
+        "symbol": "EC$",
+        "regions": [
+            "Antigua and Barbuda",
+            "Dominica",
+            "Grenada",
+            "Saint Kitts and Nevis",
+            "Saint Lucia",
+            "Saint Vincent and the Grenadines",
+            "Anguilla",
+            "Montserrat"
+        ],
+        "description": "Official currency of 8 Caribbean countries and territories, pegged at 2.7:1 to the US Dollar."
+    },
+    {
+        "iso_code": "XCG",
+        "name": "Caribbean Guilder",
+        "symbol": "Cg",
+        "regions": [
+            "Curaçao",
+            "Sint Maarten"
+        ],
+        "description": "Official currency of Curaçao and Sint Maarten, the constituent countries of the Kingdom of the Netherlands, pegged at 1.79:1 to the US Dollar."
+    },
+    {
+        "iso_code": "XOF",
+        "name": "West African CFA Franc",
+        "symbol": "F.CFA",
+        "regions": [
+            "Benin",
+            "Burkina Faso",
+            "Côte d'Ivoire",
+            "Guinea-Bissau",
+            "Mali",
+            "Niger",
+            "Senegal",
+            "Togo"
+        ],
+        "description": "Official currency of 8 West African countries, pegged at 655.957:1 to the Euro."
+    },
+    {
+        "iso_code": "XPF",
+        "name": "CFP Franc",
+        "symbol": "₣",
+        "regions": [
+            "French Polynesia",
+            "New Caledonia",
+            "Wallis and Futuna"
+        ],
+        "description": "Official currency of French territories in the Pacific, pegged at 1000:8.38 to the Euro."
+    },
+    {
+        "iso_code": "YER",
+        "name": "Yemeni Rial",
+        "symbol": "﷼",
+        "regions": [
+            "Yemen"
+        ],
+        "description": "Official currency of Yemen."
+    },
+    {
+        "iso_code": "ZAR",
+        "name": "South African Rand",
+        "symbol": "R",
+        "regions": [
+            "South Africa",
+            "Lesotho",
+            "Namibia",
+            "Eswatini"
+        ],
+        "description": "Official currency of South Africa. Lesotho, Namibia, and Eswatini officially use the Rand alongside their own currencies."
+    },
+    {
+        "iso_code": "ZMW",
+        "name": "Zambian Kwacha",
+        "symbol": "ZK",
+        "regions": [
+            "Zambia"
+        ],
+        "description": "Official currency of Zambia."
+    },
+    {
+        "iso_code": "ZWG",
+        "name": "Zimbabwe Gold",
+        "symbol": "ZiG",
+        "regions": [
+            "Zimbabwe"
+        ],
+        "description": "Official currency of Zimbabwe, used alongside the US Dollar and other foreign currencies."
+    }
+]

@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "OpenFXpedia (Windows)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "args": [
+        "-d",
+        "windows"
+      ]
+    },
+    {
+      "name": "OpenFXpedia (Android)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "args": [
+        "-d",
+        "android"
+      ]
+    },
+    {
+      "name": "OpenFXpedia (Windows, profile)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "args": [
+        "-d",
+        "windows"
+      ]
+    },
+    {
+      "name": "OpenFXpedia (Windows, release)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "args": [
+        "-d",
+        "windows"
+      ]
+    }
+  ]
+}

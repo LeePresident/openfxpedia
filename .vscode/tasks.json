@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "flutter: pub get",
+      "type": "shell",
+      "command": "flutter pub get",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "flutter: analyze",
+      "type": "shell",
+      "command": "flutter analyze",
+      "group": "test",
+      "problemMatcher": [
+        "$dart-analyze"
+      ]
+    },
+    {
+      "label": "flutter: test",
+      "type": "shell",
+      "command": "flutter test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$dart-test"
+      ]
+    },
+    {
+      "label": "flutter: test (coverage)",
+      "type": "shell",
+      "command": "flutter test --coverage",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "flutter: build Windows",
+      "type": "shell",
+      "command": "flutter build windows --debug",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "flutter: build Android APK",
+      "type": "shell",
+      "command": "flutter build apk --debug",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "flutter: clean",
+      "type": "shell",
+      "command": "flutter clean",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}
