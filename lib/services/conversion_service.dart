@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+﻿import 'dart:math' as math;
 import '../services/exchange_client.dart';
 import '../services/cache_service.dart';
 import '../models/exchange_rate.dart';
@@ -26,9 +26,6 @@ class ConversionService {
   })  : _client = client,
         _cache = cache;
 
-  /// Convert [amount] from [base] to [target].
-  /// Returns a [ConversionResult] with the converted amount, the rate used,
-  /// and whether the result came from the local cache.
   Future<ConversionResult> convert(
     double amount,
     String base,
@@ -53,7 +50,6 @@ class ConversionService {
         await _cache.putRates(b, rates, timestamp);
       } catch (_) {
         if (cached.rates != null) {
-          // Use stale cache as fallback
           rates = cached.rates!;
           timestamp = cached.timestamp!;
           fromCache = true;
@@ -83,7 +79,6 @@ class ConversionService {
     );
   }
 
-  /// Force-refresh rates for [base] from the network, bypassing TTL.
   Future<void> refreshRates(String base) async {
     final rates = await _client.fetchRatesFor(base.toLowerCase());
     await _cache.putRates(base.toLowerCase(), rates, DateTime.now().toUtc());

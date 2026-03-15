@@ -6,7 +6,6 @@ import '../widgets/amount_input.dart';
 import '../widgets/rate_info.dart';
 import '../widgets/favorites_bar.dart';
 import '../widgets/search_bar.dart' as app_search;
-import '../widgets/theme_mode_button.dart';
 
 enum _FavoriteFieldChoice { from, to }
 
@@ -71,10 +70,6 @@ class ConverterScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Currency Converter'),
             actions: [
-              ThemeModeButton(
-                themeMode: state.themeMode,
-                onSelected: state.setThemeMode,
-              ),
               IconButton(
                 icon: const Icon(Icons.refresh),
                 tooltip: 'Refresh rates',
@@ -86,14 +81,13 @@ class ConverterScreen extends StatelessWidget {
               ? Center(
                   child: isLoading
                       ? const CircularProgressIndicator()
-                      : Text(state.errorMessage ?? 'Loading currencies…'),
+                      : Text(state.errorMessage ?? 'Loading currencies...'),
                 )
               : SingleChildScrollView(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // Favorites quick-select
                       if (state.favoriteCurrencies.isNotEmpty) ...[
                         Text(
                           'Favorites',
@@ -107,8 +101,6 @@ class ConverterScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                       ],
-
-                      // Base currency selector
                       Text(
                         'From',
                         style: Theme.of(context).textTheme.labelMedium,
@@ -117,19 +109,15 @@ class ConverterScreen extends StatelessWidget {
                       app_search.CurrencySearchBar(
                         currencies: state.currencies,
                         selectedCurrency: state.baseCurrency,
-                        hint: 'From currency…',
+                        hint: 'From currency...',
                         onSelected: state.setBaseCurrency,
                       ),
                       const SizedBox(height: 8),
-
-                      // Amount input
                       AmountInput(
                         initialValue: state.inputAmount,
                         onChanged: state.setInputAmount,
                       ),
                       const SizedBox(height: 8),
-
-                      // Swap button
                       Center(
                         child: IconButton(
                           icon: const Icon(Icons.swap_vert),
@@ -141,8 +129,6 @@ class ConverterScreen extends StatelessWidget {
                               : state.swapCurrencies,
                         ),
                       ),
-
-                      // Target currency selector
                       Text(
                         'To',
                         style: Theme.of(context).textTheme.labelMedium,
@@ -151,12 +137,10 @@ class ConverterScreen extends StatelessWidget {
                       app_search.CurrencySearchBar(
                         currencies: state.currencies,
                         selectedCurrency: state.targetCurrency,
-                        hint: 'To currency…',
+                        hint: 'To currency...',
                         onSelected: state.setTargetCurrency,
                       ),
                       const SizedBox(height: 16),
-
-                      // Result
                       Card(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),

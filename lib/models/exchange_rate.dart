@@ -13,7 +13,9 @@ class ExchangeRate {
     required this.source,
   });
 
-  factory ExchangeRate.fromMap(String base, String target, Map<String, dynamic> m) => ExchangeRate(
+  factory ExchangeRate.fromMap(
+          String base, String target, Map<String, dynamic> m) =>
+      ExchangeRate(
         baseCurrency: base,
         targetCurrency: target,
         rate: (m['rate'] as num).toDouble(),

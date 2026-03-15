@@ -1,10 +1,11 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../services/exchange_client.dart';
 import '../services/cache_service.dart';
 import '../models/currency.dart';
+import '../generated/icon_asset.dart' as generated_icons;
 
 class CurrencyCatalogService {
   final ExchangeClient _client;
@@ -12,7 +13,6 @@ class CurrencyCatalogService {
 
   List<Currency>? _currencies;
 
-  // Fiat currencies whitelist will be loaded from asset JSON at runtime.
   static Set<String>? _fiatCurrencies;
   static Map<String, Map<String, dynamic>>? _fiatMetadata;
   static const String _fiatAssetPath = 'assets/data/fiat_currencies.json';
@@ -23,12 +23,9 @@ class CurrencyCatalogService {
   })  : _client = client,
         _cache = cache;
 
-  /// Returns the full list of fiat currencies, loading from cache or network.
-  /// Excludes cryptocurrencies and precious metals.
   Future<List<Currency>> getCurrencies({bool forceRefresh = false}) async {
     if (_currencies != null && !forceRefresh) return _currencies!;
 
-    // Ensure fiat whitelist is loaded from bundled JSON asset.
     await _ensureFiatLoaded();
 
     Map<String, String> catalog;
@@ -87,12 +84,11 @@ class CurrencyCatalogService {
   }
 
   String? _iconAssetPath(String isoCode) {
-    // Return asset path only if the icon file exists in the bundle.
-    // Icons should be at assets/icons/<lowercase_code>.svg or .png
-    return 'assets/icons/${isoCode.toLowerCase()}.svg';
+    final key = isoCode.toLowerCase();
+    return generated_icons.iconAsset[key] ??
+        generated_icons.iconAsset['generic'];
   }
 
-  /// Checks if a currency code is a fiat currency (not crypto or precious metal).
   bool _isFiatCurrency(String code) {
     final upperCode = code.toUpperCase();
     return _fiatCurrencies?.contains(upperCode) ?? false;
@@ -120,7 +116,6 @@ class CurrencyCatalogService {
       _fiatCurrencies = codes;
       _fiatMetadata = meta;
     } catch (_) {
-      // If asset loading fails, fall back to an empty set to avoid including non-fiat codes.
       _fiatCurrencies = <String>{};
     }
   }

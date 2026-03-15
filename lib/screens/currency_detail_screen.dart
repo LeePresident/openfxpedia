@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../models/currency.dart';
 import '../providers/app_state.dart';
@@ -91,18 +92,7 @@ class CurrencyDetailScreen extends StatelessWidget {
                 Center(
                   child: Hero(
                     tag: 'currency_icon_${currency.isoCode}',
-                    child: CircleAvatar(
-                      radius: 40,
-                      child: Text(
-                        currency.isoCode.length >= 2
-                            ? currency.isoCode.substring(0, 2)
-                            : currency.isoCode,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                    child: _DetailCurrencyIcon(currency: currency),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -135,6 +125,48 @@ class CurrencyDetailScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _DetailCurrencyIcon extends StatelessWidget {
+  final Currency currency;
+
+  const _DetailCurrencyIcon({required this.currency});
+
+  @override
+  Widget build(BuildContext context) {
+    if (currency.iconAsset != null && currency.iconAsset!.isNotEmpty) {
+      return SizedBox(
+        width: 80,
+        height: 80,
+        child: ClipOval(
+          child: SvgPicture.asset(
+            currency.iconAsset!,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            placeholderBuilder: (_) => _fallbackTextIcon(),
+          ),
+        ),
+      );
+    }
+
+    return _fallbackTextIcon();
+  }
+
+  Widget _fallbackTextIcon() {
+    return CircleAvatar(
+      radius: 40,
+      child: Text(
+        currency.isoCode.length >= 2
+            ? currency.isoCode.substring(0, 2)
+            : currency.isoCode,
+        style: const TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

@@ -16,9 +16,6 @@ class ExchangeClient {
   ExchangeClient({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  /// Fetches all rates for [base] currency (lowercase ISO code).
-  /// Returns a map of target_currency → rate.
-  /// Tries the primary CDN; on failure falls back to the secondary.
   Future<Map<String, double>> fetchRatesFor(String base) async {
     final primaryUrl =
         '${AppConfig.exchangeApiBase}/${base.toLowerCase()}.json';
@@ -41,8 +38,6 @@ class ExchangeClient {
     );
   }
 
-  /// Fetches the full currency name map from the CDN catalogue.
-  /// Returns a map of iso_code → human-readable name.
   Future<Map<String, String>> fetchCurrencyCatalog() async {
     final body = await _getJson(AppConfig.currencyListUrl);
     return body.map((k, v) => MapEntry(k, v.toString()));
@@ -50,9 +45,9 @@ class ExchangeClient {
 
   Future<Map<String, dynamic>> _getJson(String url) async {
     final uri = Uri.parse(url);
-    final response = await _httpClient
-        .get(uri, headers: {'Accept': 'application/json'})
-        .timeout(const Duration(seconds: 15));
+    final response = await _httpClient.get(uri, headers: {
+      'Accept': 'application/json'
+    }).timeout(const Duration(seconds: 15));
 
     if (response.statusCode != 200) {
       throw ExchangeApiException(
@@ -62,4 +57,3 @@ class ExchangeClient {
     return json.decode(response.body) as Map<String, dynamic>;
   }
 }
-

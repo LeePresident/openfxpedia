@@ -18,8 +18,6 @@ class CacheService {
     _initialized = true;
   }
 
-  // ── Rates ──────────────────────────────────────────────────────────────────
-
   Future<void> putRates(
     String base,
     Map<String, double> rates,
@@ -32,8 +30,8 @@ class CacheService {
     await _ratesBox.put(base.toLowerCase(), payload);
   }
 
-  /// Returns cached rates if they exist and are younger than [ttlHours].
-  ({Map<String, double>? rates, DateTime? timestamp, bool stale}) getCachedRates(
+  ({Map<String, double>? rates, DateTime? timestamp, bool stale})
+      getCachedRates(
     String base, {
     int ttlHours = AppConfig.rateTtlHours,
   }) {
@@ -42,15 +40,14 @@ class CacheService {
 
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final timestamp = DateTime.parse(decoded['timestamp'] as String);
-    final stale = DateTime.now().toUtc().difference(timestamp).inHours >= ttlHours;
+    final stale =
+        DateTime.now().toUtc().difference(timestamp).inHours >= ttlHours;
 
     final rates = (decoded['rates'] as Map<String, dynamic>).map(
       (k, v) => MapEntry(k, (v as num).toDouble()),
     );
     return (rates: rates, timestamp: timestamp, stale: stale);
   }
-
-  // ── Currency catalogue ─────────────────────────────────────────────────────
 
   Future<void> putCurrencyCatalog(
     Map<String, String> catalog,
@@ -63,22 +60,22 @@ class CacheService {
     await _currenciesBox.put('catalog', payload);
   }
 
-  ({Map<String, String>? catalog, DateTime? timestamp, bool stale}) getCachedCatalog({
-    int ttlHours = AppConfig.rateTtlHours,
+  ({Map<String, String>? catalog, DateTime? timestamp, bool stale})
+      getCachedCatalog({
+    int ttlHours = AppConfig.catalogTtlHours,
   }) {
     final raw = _currenciesBox.get('catalog');
     if (raw == null) return (catalog: null, timestamp: null, stale: true);
 
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final timestamp = DateTime.parse(decoded['timestamp'] as String);
-    final stale = DateTime.now().toUtc().difference(timestamp).inHours >= ttlHours;
+    final stale =
+        DateTime.now().toUtc().difference(timestamp).inHours >= ttlHours;
 
     final catalog = (decoded['catalog'] as Map<String, dynamic>)
         .map((k, v) => MapEntry(k, v.toString()));
     return (catalog: catalog, timestamp: timestamp, stale: stale);
   }
-
-  // ── Preferences / Favorites ────────────────────────────────────────────────
 
   Future<void> putFavorites(List<String> favorites) async {
     await _prefsBox.put(AppConfig.favoritesKey, jsonEncode(favorites));
@@ -103,4 +100,3 @@ class CacheService {
     _initialized = false;
   }
 }
-

@@ -1,14 +1,18 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'models/currency.dart';
 import 'providers/app_state.dart';
 import 'screens/converter_screen.dart';
 import 'screens/encyclopedia_screen.dart';
+import 'screens/settings_screen.dart';
+import 'widgets/search_bar.dart' as app_search;
 import 'services/cache_service.dart';
 import 'services/conversion_service.dart';
 import 'services/currency_catalog.dart';
 import 'services/exchange_client.dart';
 import 'services/favorites_service.dart';
+import 'services/refresh_scheduler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,14 +27,23 @@ Future<void> main() async {
       CurrencyCatalogService(client: exchangeClient, cache: cache);
   final favoritesService = FavoritesService(cache: cache);
 
+  final appState = AppState(
+    conversionService: conversionService,
+    catalogService: catalogService,
+    favoritesService: favoritesService,
+    cacheService: cache,
+  );
+
+  final refreshScheduler = RefreshScheduler(onRefresh: () {
+    Future.microtask(() => appState.refreshRates());
+  });
+  refreshScheduler.start(initialRun: true);
+
+  appState.initialize();
+
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => AppState(
-        conversionService: conversionService,
-        catalogService: catalogService,
-        favoritesService: favoritesService,
-        cacheService: cache,
-      )..initialize(),
+    ChangeNotifierProvider.value(
+      value: appState,
       child: const OpenFXpediaApp(),
     ),
   );
@@ -46,6 +59,15 @@ class OpenFXpediaApp extends StatelessWidget {
         return MaterialApp(
           title: 'OpenFXpedia',
           debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'),
+            Locale('zh'),
+          ],
           themeMode: state.themeMode,
           theme: _buildLightTheme(),
           darkTheme: _buildDarkTheme(),
@@ -185,6 +207,7 @@ class _HomeShellState extends State<_HomeShell> {
   static const _screens = [
     ConverterScreen(),
     EncyclopediaScreen(),
+    SettingsScreen(),
   ];
 
   @override
@@ -220,6 +243,10 @@ class _HomeShellState extends State<_HomeShell> {
                 icon: Icon(Icons.menu_book),
                 label: 'Encyclopedia',
               ),
+              NavigationDestination(
+                icon: Icon(Icons.settings),
+                label: 'Settings',
+              ),
             ],
           ),
         );
@@ -252,24 +279,11 @@ class _HomeShellState extends State<_HomeShell> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownButtonFormField<Currency>(
-                      initialValue: selectedFrom,
-                      decoration: const InputDecoration(
-                        labelText: 'From',
-                        border: OutlineInputBorder(),
-                      ),
-                      items: state.currencies
-                          .map(
-                            (currency) => DropdownMenuItem<Currency>(
-                              value: currency,
-                              child: Text(
-                                '${currency.isoCode} — ${currency.name}',
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        if (value == null) return;
+                    app_search.CurrencySearchBar(
+                      currencies: state.currencies,
+                      selectedCurrency: selectedFrom,
+                      hint: 'From currency...',
+                      onSelected: (value) {
                         setDialogState(() {
                           selectedFrom = value;
                           if (selectedTo?.isoCode == value.isoCode) {
@@ -282,26 +296,12 @@ class _HomeShellState extends State<_HomeShell> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    DropdownButtonFormField<Currency>(
-                      initialValue: selectedTo,
-                      decoration: const InputDecoration(
-                        labelText: 'To',
-                        border: OutlineInputBorder(),
-                      ),
-                      items: state.currencies
-                          .map(
-                            (currency) => DropdownMenuItem<Currency>(
-                              value: currency,
-                              child: Text(
-                                '${currency.isoCode} — ${currency.name}',
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        if (value == null) return;
-                        setDialogState(() => selectedTo = value);
-                      },
+                    app_search.CurrencySearchBar(
+                      currencies: state.currencies,
+                      selectedCurrency: selectedTo,
+                      hint: 'To currency...',
+                      onSelected: (value) =>
+                          setDialogState(() => selectedTo = value),
                     ),
                     const SizedBox(height: 12),
                     const Text(

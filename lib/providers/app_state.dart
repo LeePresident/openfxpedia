@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../core/config.dart';
 import '../models/currency.dart';
 import '../models/exchange_rate.dart';

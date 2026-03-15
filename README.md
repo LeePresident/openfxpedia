@@ -6,7 +6,7 @@ OpenFXpedia is a lightweight Flutter application combining a currency converter 
 
 Quick links
 
-- Spec & tasks: `specs/001-openfxpedia`
+- Spec & tasks: `specs/master`
 
 Features
 
@@ -38,6 +38,22 @@ flutter pub get
 flutter run
 ```
 
+Release builds
+
+```powershell
+# Windows
+./scripts/build_windows.ps1
+
+# Android (bash)
+bash ./scripts/build_android.sh
+```
+
+Performance benchmark
+
+```powershell
+dart run tool/conversion_benchmark.dart --samples 100 --threshold-ms 2000
+```
+
 APIs and Data Sources
 
 - Exchange rates: https://github.com/fawazahmed0/exchange-api
@@ -67,12 +83,12 @@ Troubleshooting
 
 - If desktop build fails: verify desktop support and Visual Studio (with C++ workload) are installed for Windows.
 - If Flutter cannot find devices: run `flutter doctor -v` and ensure Android SDK/emulator or Windows desktop is configured.
-- For dependency issues: run `flutter pub get`and resolve pub errors.
+- For dependency issues: run `flutter pub get` and resolve pub errors.
 
 Contributing
 
-- Open a branch for your work and submit a PR. For feature design and tasks see `specs/001-openfxpedia`.
-- When adding or updating currency metadata, also update `assets/data/fiat_currencies.json` and include a short validation note in `specs/001-openfxpedia/data/`.
+- Open a branch for your work and submit a PR. For feature design and tasks see `specs/master`.
+- When adding or updating currency metadata, also update `assets/data/fiat_currencies.json` and include a short validation note in `specs/master/data/`.
 
 License
 

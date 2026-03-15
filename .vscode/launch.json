@@ -6,40 +6,32 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",
-      "args": [
-        "-d",
-        "windows"
-      ]
+      "program": "lib/main.dart",
+      "deviceId": "windows"
     },
     {
       "name": "OpenFXpedia (Android)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",
-      "args": [
-        "-d",
-        "android"
-      ]
+      "program": "lib/main.dart",
+      "deviceId": "android"
     },
     {
       "name": "OpenFXpedia (Windows, profile)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile",
-      "args": [
-        "-d",
-        "windows"
-      ]
+      "program": "lib/main.dart",
+      "deviceId": "windows"
     },
     {
       "name": "OpenFXpedia (Windows, release)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
-      "args": [
-        "-d",
-        "windows"
-      ]
+      "program": "lib/main.dart",
+      "deviceId": "windows"
     }
   ]
 }

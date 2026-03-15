@@ -12,7 +12,7 @@ class CurrencySearchBar extends StatefulWidget {
     required this.currencies,
     required this.onSelected,
     this.selectedCurrency,
-    this.hint = 'Search currency…',
+    this.hint = 'Search currency...',
   });
 
   @override
@@ -21,13 +21,10 @@ class CurrencySearchBar extends StatefulWidget {
 
 class _CurrencySearchBarState extends State<CurrencySearchBar> {
   final TextEditingController _controller = TextEditingController();
-  List<Currency> _filtered = [];
-  bool _showDropdown = false;
 
   @override
   void initState() {
     super.initState();
-    _filtered = widget.currencies;
     if (widget.selectedCurrency != null) {
       _controller.text =
           '${widget.selectedCurrency!.isoCode} — ${widget.selectedCurrency!.name}';
@@ -37,7 +34,6 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
   @override
   void didUpdateWidget(covariant CurrencySearchBar oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // Update the controller text when the externally selected currency changes
     if (widget.selectedCurrency?.isoCode !=
         oldWidget.selectedCurrency?.isoCode) {
       if (widget.selectedCurrency != null) {
@@ -47,10 +43,6 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
         _controller.clear();
       }
     }
-    // Refresh the filtered list if the currencies list changed
-    if (widget.currencies != oldWidget.currencies) {
-      _filtered = widget.currencies;
-    }
   }
 
   @override
@@ -59,21 +51,78 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
     super.dispose();
   }
 
-  void _onTextChanged(String query) {
-    final q = query.toLowerCase();
-    setState(() {
-      _filtered = widget.currencies.where((c) {
-        return c.isoCode.toLowerCase().contains(q) ||
-            c.name.toLowerCase().contains(q);
-      }).toList();
-      _showDropdown = query.isNotEmpty;
-    });
-  }
-
   void _select(Currency currency) {
     _controller.text = '${currency.isoCode} — ${currency.name}';
-    setState(() => _showDropdown = false);
     widget.onSelected(currency);
+  }
+
+  Future<void> _openSelectorDialog() async {
+    final picked = await showDialog<Currency>(
+      context: context,
+      builder: (dialogContext) {
+        List<Currency> localFiltered = widget.currencies;
+        final TextEditingController dialogController = TextEditingController();
+
+        return StatefulBuilder(builder: (context, setDialogState) {
+          return Dialog(
+            insetPadding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.75,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: TextField(
+                      key: const Key('currency_search_field'),
+                      controller: dialogController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        hintText: widget.hint,
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () => Navigator.pop(dialogContext),
+                        ),
+                      ),
+                      onChanged: (query) {
+                        final q = query.toLowerCase();
+                        setDialogState(() {
+                          localFiltered = widget.currencies.where((c) {
+                            return c.isoCode.toLowerCase().contains(q) ||
+                                c.name.toLowerCase().contains(q);
+                          }).toList();
+                        });
+                      },
+                    ),
+                  ),
+                  const Divider(height: 1),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: localFiltered.length,
+                      itemBuilder: (context, index) {
+                        final currency = localFiltered[index];
+                        return ListTile(
+                          title: Text(currency.isoCode),
+                          subtitle: Text(currency.name),
+                          onTap: () => Navigator.pop(dialogContext, currency),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    );
+
+    if (picked != null) {
+      _select(picked);
+    }
   }
 
   @override
@@ -82,35 +131,29 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        TextField(
-          controller: _controller,
-          decoration: InputDecoration(
-            hintText: widget.hint,
-            border: const OutlineInputBorder(),
-            prefixIcon: const Icon(Icons.search),
-          ),
-          onChanged: _onTextChanged,
-        ),
-        if (_showDropdown && _filtered.isNotEmpty)
-          Material(
-            elevation: 4,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 200),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: _filtered.length,
-                itemBuilder: (context, index) {
-                  final currency = _filtered[index];
-                  return ListTile(
-                    dense: true,
-                    title: Text(currency.isoCode),
-                    subtitle: Text(currency.name),
-                    onTap: () => _select(currency),
-                  );
-                },
-              ),
+        InkWell(
+          onTap: _openSelectorDialog,
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.selectedCurrency != null
+                        ? '${widget.selectedCurrency!.isoCode} — ${widget.selectedCurrency!.name}'
+                        : 'Pick',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const Icon(Icons.arrow_drop_down),
+              ],
             ),
           ),
+        ),
       ],
     );
   }

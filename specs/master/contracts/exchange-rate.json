@@ -1,0 +1,9 @@
+{
+    "base": "USD",
+    "rates": {
+        "EUR": 0.92,
+        "GBP": 0.79
+    },
+    "timestamp": "2026-03-15T00:00:00.000Z",
+    "source": "example-cdn"
+}

@@ -20,9 +20,12 @@ class RateInfoWidget extends StatelessWidget {
       return const Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2)),
+          SizedBox(
+              width: 14,
+              height: 14,
+              child: CircularProgressIndicator(strokeWidth: 2)),
           SizedBox(width: 8),
-          Text('Refreshing rates…', style: TextStyle(fontSize: 12)),
+          Text('Refreshing rates...', style: TextStyle(fontSize: 12)),
         ],
       );
     }
@@ -47,7 +50,7 @@ class RateInfoWidget extends StatelessWidget {
         Text(
           '1 ${rate!.baseCurrency.toUpperCase()} = '
           '${rate!.rate.toStringAsFixed(4)} ${rate!.targetCurrency.toUpperCase()} '
-          '· $timeLabel ($sourceLabel)',
+          '- $timeLabel ($sourceLabel)',
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ],

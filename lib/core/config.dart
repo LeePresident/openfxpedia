@@ -1,4 +1,4 @@
-class AppConfig {
+﻿class AppConfig {
   AppConfig._();
 
   static const String currencyListUrl =
@@ -10,7 +10,13 @@ class AppConfig {
   static const String exchangeApiFallbackBase =
       'https://latest.currency-api.pages.dev/v1/currencies';
 
+  static const String githubRepoOwner = 'LeePresident';
+  static const String githubRepoName = 'openfxpedia';
+  static const String githubTagsApiUrl =
+      'https://api.github.com/repos/$githubRepoOwner/$githubRepoName/tags';
+
   static const int rateTtlHours = 12;
+  static const int catalogTtlHours = 24;
 
   static const String ratesBoxName = 'rates';
   static const String currenciesBoxName = 'currencies';

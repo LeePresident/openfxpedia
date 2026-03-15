@@ -4,8 +4,6 @@ import 'package:openfxpedia/services/conversion_service.dart';
 import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/cache_service.dart';
 
-// ── Minimal fakes ────────────────────────────────────────────────────────────
-
 class _FakeExchangeClient extends ExchangeClient {
   final Map<String, Map<String, double>> _rates;
   bool calledFetch = false;
@@ -16,7 +14,9 @@ class _FakeExchangeClient extends ExchangeClient {
   Future<Map<String, double>> fetchRatesFor(String base) async {
     calledFetch = true;
     final key = base.toLowerCase();
-    if (!_rates.containsKey(key)) throw ExchangeApiException('no rates for $key');
+    if (!_rates.containsKey(key)) {
+      throw ExchangeApiException('no rates for $key');
+    }
     return _rates[key]!;
   }
 
@@ -35,7 +35,8 @@ class _StubCacheService extends CacheService {
   Future<void> init() async {}
 
   @override
-  ({Map<String, double>? rates, DateTime? timestamp, bool stale}) getCachedRates(
+  ({Map<String, double>? rates, DateTime? timestamp, bool stale})
+      getCachedRates(
     String base, {
     int ttlHours = 12,
   }) {
@@ -57,11 +58,9 @@ class _StubCacheService extends CacheService {
   }
 }
 
-// ── Tests ─────────────────────────────────────────────────────────────────────
-
 void main() {
   group('ConversionService', () {
-    test('converts USD → EUR correctly using fresh rates', () async {
+    test('converts USD to EUR correctly using fresh rates', () async {
       final client = _FakeExchangeClient({
         'usd': {'eur': 0.92, 'gbp': 0.79},
       });
@@ -94,7 +93,8 @@ void main() {
     test('falls back to stale cache when network fails', () async {
       final cache = _StubCacheService(stale: true)
         .._storedRates = {'eur': 0.88}
-        .._storedTimestamp = DateTime.now().toUtc().subtract(const Duration(hours: 24));
+        .._storedTimestamp =
+            DateTime.now().toUtc().subtract(const Duration(hours: 24));
 
       final client = _FakeExchangeClient({});
       final service = ConversionService(client: client, cache: cache);
@@ -117,7 +117,9 @@ void main() {
     });
 
     test('handles zero amount', () async {
-      final client = _FakeExchangeClient({'usd': {'eur': 0.92}});
+      final client = _FakeExchangeClient({
+        'usd': {'eur': 0.92}
+      });
       final cache = _StubCacheService(stale: true);
       final service = ConversionService(client: client, cache: cache);
 
@@ -156,4 +158,3 @@ void main() {
     });
   });
 }
-

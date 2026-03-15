@@ -7,9 +7,30 @@ on:
     branches: ["main", "develop"]
 
 jobs:
+  generate_icon_mapping:
+    name: Generate Icon Mapping
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run icon mapping generator
+        run: dart run lib/tools/generate_icon_mapping.dart
+
   analyze_and_test:
     name: Analyze & Test
     runs-on: ubuntu-latest
+    needs: generate_icon_mapping
 
     steps:
       - uses: actions/checkout@v4
@@ -37,10 +58,31 @@ jobs:
           files: coverage/lcov.info
           fail_ci_if_error: false
 
+  benchmark_conversion:
+    name: Benchmark Conversion
+    runs-on: ubuntu-latest
+    needs: analyze_and_test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run conversion microbenchmark
+        run: dart run tool/conversion_benchmark.dart --samples 100 --threshold-ms 2000
+
   build_android:
     name: Build Android APK
     runs-on: ubuntu-latest
-    needs: analyze_and_test
+    needs: [analyze_and_test, benchmark_conversion]
 
     steps:
       - uses: actions/checkout@v4
@@ -61,13 +103,13 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build Android APK (debug)
-        run: flutter build apk --debug
+      - name: Build Android APK (release)
+        run: flutter build apk --release
 
   build_windows:
     name: Build Windows
     runs-on: windows-latest
-    needs: analyze_and_test
+    needs: [analyze_and_test, benchmark_conversion]
 
     steps:
       - uses: actions/checkout@v4
@@ -85,5 +127,5 @@ jobs:
       - name: Enable Windows desktop
         run: flutter config --enable-windows-desktop
 
-      - name: Build Windows (debug)
-        run: flutter build windows --debug
+      - name: Build Windows (release)
+        run: flutter build windows --release

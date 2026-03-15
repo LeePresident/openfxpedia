@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
 import '../models/currency.dart';
 import 'currency_detail_screen.dart';
-import '../widgets/theme_mode_button.dart';
 
 class EncyclopediaScreen extends StatefulWidget {
   const EncyclopediaScreen({super.key});
@@ -31,12 +31,6 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Currency Encyclopedia'),
-            actions: [
-              ThemeModeButton(
-                themeMode: state.themeMode,
-                onSelected: state.setThemeMode,
-              ),
-            ],
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(56),
               child: Padding(
@@ -44,7 +38,7 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: TextField(
                   decoration: const InputDecoration(
-                    hintText: 'Search currencies…',
+                    hintText: 'Search currencies...',
                     prefixIcon: Icon(Icons.search),
                     filled: true,
                     border: OutlineInputBorder(),
@@ -60,6 +54,8 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
               : filtered.isEmpty
                   ? const Center(child: Text('No currencies found.'))
                   : ListView.builder(
+                      cacheExtent: 480,
+                      itemExtent: 72,
                       itemCount: filtered.length,
                       itemBuilder: (context, index) {
                         final currency = filtered[index];
@@ -107,6 +103,26 @@ class _CurrencyIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (currency.iconAsset != null && currency.iconAsset!.isNotEmpty) {
+      return SizedBox(
+        width: 40,
+        height: 40,
+        child: ClipOval(
+          child: SvgPicture.asset(
+            currency.iconAsset!,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            placeholderBuilder: (_) => _fallbackTextIcon(currency),
+          ),
+        ),
+      );
+    }
+
+    return _fallbackTextIcon(currency);
+  }
+
+  Widget _fallbackTextIcon(Currency currency) {
     return CircleAvatar(
       child: Text(
         currency.isoCode.length >= 2

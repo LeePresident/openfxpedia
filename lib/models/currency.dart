@@ -1,4 +1,4 @@
-class Currency {
+﻿class Currency {
   final String isoCode;
   final String name;
   final String? symbol;

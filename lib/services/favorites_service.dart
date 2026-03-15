@@ -35,6 +35,5 @@ class FavoritesService {
     }
   }
 
-  bool isFavorite(String isoCode) =>
-      _favorites.contains(isoCode.toLowerCase());
+  bool isFavorite(String isoCode) => _favorites.contains(isoCode.toLowerCase());
 }

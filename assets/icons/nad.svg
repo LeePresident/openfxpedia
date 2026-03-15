@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="24" fill="#165E69"/>
+  <circle cx="64" cy="64" r="42" fill="#2E7BB8"/>
+  <text x="64" y="72" text-anchor="middle" font-size="26" font-family="Arial, sans-serif" fill="#F7FAFC">NAD</text>
+</svg>
