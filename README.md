@@ -44,8 +44,35 @@ Release builds
 # Windows
 ./scripts/build_windows.ps1
 
-# Android (bash)
+# EXE output (release)
+# build/windows/x64/runner/Release/openfxpedia_<version>.exe
+
+# Android (Windows PowerShell)
+./scripts/build_android.ps1
+./scripts/build_android.ps1 -Mode debug
+
+# APK output (release)
+# build/app/outputs/flutter-apk/openfxpedia_<version>.apk
+# SHA1 output (release)
+# build/app/outputs/flutter-apk/openfxpedia_<version>.apk.sha1
+```
+
+```bash
+# Windows (Git Bash)
+bash ./scripts/build_windows.sh
+bash ./scripts/build_windows.sh debug
+
+# EXE output (release)
+# build/windows/x64/runner/Release/openfxpedia_<version>.exe
+
+# Android (macOS/Linux/Git Bash)
 bash ./scripts/build_android.sh
+bash ./scripts/build_android.sh debug
+
+# APK output (release)
+# build/app/outputs/flutter-apk/openfxpedia_<version>.apk
+# SHA1 output (release)
+# build/app/outputs/flutter-apk/openfxpedia_<version>.apk.sha1
 ```
 
 Performance benchmark

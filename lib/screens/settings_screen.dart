@@ -18,47 +18,41 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late Future<PackageInfo> _pkgInfo;
-  late Future<String> _changelog;
+  late Future<List<_ReleaseNote>> _releaseNotes;
   bool _checking = false;
 
   @override
   void initState() {
     super.initState();
     _pkgInfo = PackageInfo.fromPlatform();
-    _changelog = rootBundle.loadString('CHANGELOG.md');
+    _releaseNotes = _fetchReleaseNotes();
+  }
+
+  Future<List<_ReleaseNote>> _fetchReleaseNotes() async {
+    final allReleases = await _fetchAllGithubReleases();
+    return allReleases
+        .map((item) => _ReleaseNote.fromJson(item))
+        .where((entry) => entry.name.isNotEmpty || entry.body.isNotEmpty)
+        .toList();
   }
 
   Future<void> _checkForUpdates(String currentVersion) async {
     setState(() => _checking = true);
     try {
-      final res =
-          await http.get(Uri.parse(AppConfig.githubTagsApiUrl), headers: {
-        'Accept': 'application/vnd.github+json',
-      }).timeout(const Duration(seconds: 8));
-      if (res.statusCode == 200) {
-        final tags = jsonDecode(res.body) as List<dynamic>;
-        final latestTag = tags.isNotEmpty
-            ? (tags.first as Map<String, dynamic>)['name'] as String?
-            : null;
-        final latestVersion = _normalizeVersion(latestTag);
-        final current = _normalizeVersion(currentVersion);
+      final latestVersion = await _fetchLatestStableReleaseVersion();
+      final current = _normalizeVersion(currentVersion);
 
-        if (latestVersion == null || latestVersion.isEmpty) {
-          _showMessage('Unable to determine latest tag from GitHub.');
-        } else {
-          final compare = _compareSemver(current, latestVersion);
-          if (compare >= 0) {
-            _showMessage('You are on the latest version ($currentVersion).');
-          } else {
-            _showMessage(
-              'Update available: $latestVersion (current $currentVersion)',
-            );
-          }
-        }
+      if (latestVersion == null || latestVersion.isEmpty) {
+        _showMessage('Unable to determine latest stable release from GitHub.');
       } else {
-        _showMessage(
-          'Failed to check GitHub tags (status ${res.statusCode}).',
-        );
+        final compare = _compareSemver(current, latestVersion);
+        if (compare >= 0) {
+          _showMessage('You are on the latest version ($currentVersion).');
+        } else {
+          _showMessage(
+            'Update available: $latestVersion (current $currentVersion)',
+          );
+        }
       }
     } catch (e) {
       _showMessage('Update check failed: $e');
@@ -109,13 +103,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const Divider(),
               ExpansionTile(
-                title: const Text('Changelog'),
-                subtitle: const Text('Show release notes'),
+                title: const Text('Changelogs'),
+                subtitle: const Text('Fetched from GitHub release notes'),
                 children: [
-                  FutureBuilder<String>(
-                    future: _changelog,
-                    builder: (context, changelogSnap) {
-                      if (changelogSnap.connectionState ==
+                  FutureBuilder<List<_ReleaseNote>>(
+                    future: _releaseNotes,
+                    builder: (context, releaseSnap) {
+                      if (releaseSnap.connectionState ==
                           ConnectionState.waiting) {
                         return const Padding(
                           padding: EdgeInsets.all(16),
@@ -123,17 +117,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         );
                       }
 
-                      if (changelogSnap.hasError) {
+                      if (releaseSnap.hasError) {
                         return Padding(
                           padding: const EdgeInsets.all(16),
                           child: Text(
-                              'Failed to load changelog: ${changelogSnap.error}'),
+                            'Failed to load release notes: ${releaseSnap.error}',
+                          ),
                         );
                       }
 
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                        child: SelectableText(changelogSnap.data ?? ''),
+                      final entries = releaseSnap.data ?? const [];
+                      if (entries.isEmpty) {
+                        return const Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Text('No release notes available yet.'),
+                        );
+                      }
+
+                      return Column(
+                        children: entries
+                            .map(
+                              (entry) => ListTile(
+                                dense: true,
+                                title: Text(entry.name),
+                                subtitle: SelectableText(entry.body),
+                                trailing: Text(entry.dateLabel),
+                              ),
+                            )
+                            .toList(),
                       );
                     },
                   ),
@@ -141,14 +152,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const Divider(),
               ListTile(
-                title: const Text('About'),
+                title: const Text('License'),
                 subtitle: const Text(
                     'OpenFXpedia — Currency Converter and Encyclopedia.'),
-                onTap: () => showAboutDialog(
-                  context: context,
-                  applicationName: pkg?.appName ?? 'OpenFXpedia',
-                  applicationVersion: version,
-                  applicationLegalese: '© 2026 LeePresident',
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => LicensePage(
+                      appName: pkg?.appName ?? 'OpenFXpedia',
+                      version: version,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -206,7 +220,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (plus >= 0) {
       value = value.substring(0, plus);
     }
+    final hyphen = value.indexOf('-');
+    if (hyphen >= 0) {
+      value = value.substring(0, hyphen);
+    }
     return value;
+  }
+
+  Future<List<Map<String, dynamic>>> _fetchAllGithubReleases() async {
+    final releases = <Map<String, dynamic>>[];
+    var page = 1;
+
+    while (true) {
+      final pageUri = Uri.parse('${AppConfig.githubReleasesApiUrl}&page=$page');
+      final res = await http.get(pageUri, headers: {
+        'Accept': 'application/vnd.github+json',
+      }).timeout(const Duration(seconds: 8));
+
+      if (res.statusCode != 200) {
+        throw Exception('GitHub releases request failed (${res.statusCode})');
+      }
+
+      final pageItems = jsonDecode(res.body) as List<dynamic>;
+      if (pageItems.isEmpty) {
+        break;
+      }
+
+      releases.addAll(pageItems.cast<Map<String, dynamic>>());
+      page++;
+    }
+
+    return releases;
+  }
+
+  Future<String?> _fetchLatestStableReleaseVersion() async {
+    final releases = await _fetchAllGithubReleases();
+    for (final release in releases) {
+      final isDraft = release['draft'] == true;
+      final isPreRelease = release['prerelease'] == true;
+      if (isDraft || isPreRelease) continue;
+
+      final tagName = release['tag_name'] as String?;
+      final normalized = _normalizeVersion(tagName);
+      if (normalized != null && normalized.isNotEmpty) {
+        return normalized;
+      }
+    }
+
+    return null;
   }
 
   int _compareSemver(String? current, String? latest) {
@@ -223,5 +284,92 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (a != b) return a.compareTo(b);
     }
     return 0;
+  }
+}
+
+class _ReleaseNote {
+  final String name;
+  final String body;
+  final String dateLabel;
+
+  const _ReleaseNote({
+    required this.name,
+    required this.body,
+    required this.dateLabel,
+  });
+
+  factory _ReleaseNote.fromJson(Map<String, dynamic> json) {
+    final rawName = (json['name'] as String?)?.trim();
+    final tag = (json['tag_name'] as String?)?.trim() ?? '';
+    final body = (json['body'] as String?)?.trim() ?? '';
+    final publishedAt = (json['published_at'] as String?)?.trim() ?? '';
+
+    final dateLabel =
+        publishedAt.length >= 10 ? publishedAt.substring(0, 10) : publishedAt;
+
+    return _ReleaseNote(
+      name: (rawName == null || rawName.isEmpty) ? tag : rawName,
+      body: body,
+      dateLabel: dateLabel,
+    );
+  }
+}
+
+class LicensePage extends StatefulWidget {
+  final String appName;
+  final String version;
+
+  const LicensePage({
+    super.key,
+    required this.appName,
+    required this.version,
+  });
+
+  @override
+  State<LicensePage> createState() => _LicensePageState();
+}
+
+class _LicensePageState extends State<LicensePage> {
+  late Future<String> _license;
+
+  @override
+  void initState() {
+    super.initState();
+    _license = rootBundle.loadString('LICENSE');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('License')),
+      body: FutureBuilder<String>(
+        future: _license,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text('Failed to load LICENSE: ${snapshot.error}'),
+            );
+          }
+
+          return ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              Text(
+                '${widget.appName} ${widget.version}',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 4),
+              const SizedBox(height: 16),
+              SelectableText(snapshot.data ?? ''),
+            ],
+          );
+        },
+      ),
+    );
   }
 }

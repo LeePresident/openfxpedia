@@ -14,6 +14,8 @@
   static const String githubRepoName = 'openfxpedia';
   static const String githubTagsApiUrl =
       'https://api.github.com/repos/$githubRepoOwner/$githubRepoName/tags';
+  static const String githubReleasesApiUrl =
+      'https://api.github.com/repos/$githubRepoOwner/$githubRepoName/releases?per_page=10';
 
   static const int rateTtlHours = 12;
   static const int catalogTtlHours = 24;
