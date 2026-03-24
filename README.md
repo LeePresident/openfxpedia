@@ -14,11 +14,13 @@ Features
 - Encyclopedia entries for fiat currencies: names, symbols, regions, descriptions and images.
 - Light / Dark / System theme selection persisted in app settings.
 - Favorites, quick-swap, and From/To chooser dialogs for fast workflows.
+- In-app update checks open the device-specific GitHub release asset: `openfxpedia_<version>_setup.exe` on Windows and `openfxpedia_<version>.apk` on Android.
 
 Prerequisites
 
 - Flutter SDK (stable channel)
 - Windows: enable desktop support (`flutter config --enable-windows-desktop`)
+- Windows release installer: NSIS (`makensis` must be on PATH)
 - Android: Android SDK + emulator or device
 - Recommended: run `flutter doctor` to verify environment
 
@@ -44,8 +46,11 @@ Release builds
 # Windows
 ./scripts/build_windows.ps1
 
-# EXE output (release)
-# build/windows/x64/runner/Release/openfxpedia_<version>.exe
+# Portable EXE output (release)
+# build/windows/portable/openfxpedia_<version>.exe
+
+# NSIS installer output (release)
+# build/windows/installer/openfxpedia_<version>_setup.exe
 
 # Android (Windows PowerShell)
 ./scripts/build_android.ps1
@@ -62,8 +67,10 @@ Release builds
 bash ./scripts/build_windows.sh
 bash ./scripts/build_windows.sh debug
 
-# EXE output (release)
-# build/windows/x64/runner/Release/openfxpedia_<version>.exe
+# Portable EXE output (release)
+# build/windows/portable/openfxpedia_<version>.exe
+
+# For the NSIS installer, use the PowerShell script above.
 
 # Android (macOS/Linux/Git Bash)
 bash ./scripts/build_android.sh
@@ -109,6 +116,7 @@ VS Code
 Troubleshooting
 
 - If desktop build fails: verify desktop support and Visual Studio (with C++ workload) are installed for Windows.
+- If installer build fails: verify NSIS is installed and `makensis` is available in PATH.
 - If Flutter cannot find devices: run `flutter doctor -v` and ensure Android SDK/emulator or Windows desktop is configured.
 - For dependency issues: run `flutter pub get` and resolve pub errors.
 

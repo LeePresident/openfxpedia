@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../core/config.dart';
 import '../providers/app_state.dart';
@@ -39,7 +41,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _checkForUpdates(String currentVersion) async {
     setState(() => _checking = true);
     try {
-      final latestVersion = await _fetchLatestStableReleaseVersion();
+      final latestRelease = await _fetchLatestStableRelease();
+      final latestVersion = _normalizeVersion(
+        latestRelease?['tag_name'] as String?,
+      );
       final current = _normalizeVersion(currentVersion);
 
       if (latestVersion == null || latestVersion.isEmpty) {
@@ -49,9 +54,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
         if (compare >= 0) {
           _showMessage('You are on the latest version ($currentVersion).');
         } else {
-          _showMessage(
-            'Update available: $latestVersion (current $currentVersion)',
+          final shouldDownload = await _confirmUpdateDownload(latestVersion);
+          if (!shouldDownload) return;
+
+          final assetUrl = _releaseAssetUrlForDevice(
+            latestRelease,
+            latestVersion,
           );
+          if (assetUrl == null || assetUrl.isEmpty) {
+            _showMessage(
+              'No release asset found for this device on GitHub releases.',
+            );
+            return;
+          }
+
+          final opened = await launchUrl(
+            Uri.parse(assetUrl),
+            mode: LaunchMode.externalApplication,
+          );
+          if (!opened) {
+            _showMessage('Could not open the GitHub release download link.');
+          }
         }
       }
     } catch (e) {
@@ -64,6 +87,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _showMessage(String text) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+  }
+
+  Future<bool> _confirmUpdateDownload(String latestVersion) async {
+    final assetName = _preferredUpdateAssetName(latestVersion);
+    if (assetName == null) {
+      _showMessage(
+        'This device is not supported for direct release downloads.',
+      );
+      return false;
+    }
+
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Update available'),
+          content: Text(
+            'Version $latestVersion is available.\n\nDownload $assetName from GitHub releases for this device?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(dialogContext).pop(true),
+              child: const Text('Download'),
+            ),
+          ],
+        );
+      },
+    );
+
+    return result ?? false;
   }
 
   @override
@@ -253,7 +310,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return releases;
   }
 
-  Future<String?> _fetchLatestStableReleaseVersion() async {
+  String? _preferredUpdateAssetName(String latestVersion) {
+    if (Platform.isWindows) {
+      return 'openfxpedia_${latestVersion}_setup.exe';
+    }
+
+    if (Platform.isAndroid) {
+      return 'openfxpedia_$latestVersion.apk';
+    }
+
+    return null;
+  }
+
+  String? _releaseAssetUrlForDevice(
+    Map<String, dynamic>? release,
+    String latestVersion,
+  ) {
+    final assetName = _preferredUpdateAssetName(latestVersion);
+    if (assetName == null || release == null) return null;
+
+    final assets = release['assets'];
+    if (assets is List) {
+      for (final asset in assets) {
+        if (asset is Map<String, dynamic> && asset['name'] == assetName) {
+          final url = asset['browser_download_url'] as String?;
+          if (url != null && url.isNotEmpty) return url;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  Future<Map<String, dynamic>?> _fetchLatestStableRelease() async {
     final releases = await _fetchAllGithubReleases();
     for (final release in releases) {
       final isDraft = release['draft'] == true;
@@ -263,7 +352,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final tagName = release['tag_name'] as String?;
       final normalized = _normalizeVersion(tagName);
       if (normalized != null && normalized.isNotEmpty) {
-        return normalized;
+        return release;
       }
     }
 
