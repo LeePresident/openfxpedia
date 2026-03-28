@@ -1,6 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/app_state.dart';
 import '../models/currency.dart';
 import 'currency_detail_screen.dart';
@@ -19,6 +20,7 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, state, _) {
+        final l10n = AppLocalizations.of(context);
         final all = state.currencies;
         final filtered = _query.isEmpty
             ? all
@@ -30,18 +32,18 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Currency Encyclopedia'),
+            title: Text(l10n.encyclopedia_currency_title),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(56),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: TextField(
-                  decoration: const InputDecoration(
-                    hintText: 'Search currencies...',
-                    prefixIcon: Icon(Icons.search),
+                  decoration: InputDecoration(
+                    hintText: l10n.encyclopedia_search,
+                    prefixIcon: const Icon(Icons.search),
                     filled: true,
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     isDense: true,
                   ),
                   onChanged: (v) => setState(() => _query = v),
@@ -52,7 +54,7 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
           body: all.isEmpty
               ? const Center(child: CircularProgressIndicator())
               : filtered.isEmpty
-                  ? const Center(child: Text('No currencies found.'))
+                  ? Center(child: Text(l10n.encyclopedia_not_found))
                   : ListView.builder(
                       cacheExtent: 480,
                       itemExtent: 72,
@@ -76,6 +78,7 @@ class _CurrencyTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final isFav = state.isFavorite(currency.isoCode);
     return ListTile(
       leading: _CurrencyIcon(currency: currency),
@@ -84,7 +87,7 @@ class _CurrencyTile extends StatelessWidget {
       trailing: IconButton(
         icon: Icon(isFav ? Icons.star : Icons.star_border),
         color: isFav ? Colors.amber : null,
-        tooltip: isFav ? 'Remove from favorites' : 'Add to favorites',
+        tooltip: isFav ? l10n.favorites_remove : l10n.favorites_add,
         onPressed: () => state.toggleFavorite(currency.isoCode),
       ),
       onTap: () => Navigator.push(

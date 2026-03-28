@@ -93,6 +93,17 @@ class CacheService {
 
   String? getString(String key) => _prefsBox.get(key);
 
+  // Convenience helpers for locale persistence
+  Future<void> setLocaleCode(String? code) async {
+    if (code == null) {
+      await _prefsBox.delete(AppConfig.localeKey);
+    } else {
+      await putString(AppConfig.localeKey, code);
+    }
+  }
+
+  String? getLocaleCode() => getString(AppConfig.localeKey);
+
   Future<void> close() async {
     await _ratesBox.close();
     await _currenciesBox.close();

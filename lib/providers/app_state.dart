@@ -46,6 +46,8 @@ class AppState extends ChangeNotifier {
 
   ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;
+  Locale? _locale;
+  Locale? get locale => _locale;
 
   AppState({
     required ConversionService conversionService,
@@ -69,6 +71,7 @@ class AppState extends ChangeNotifier {
   Future<void> initialize() async {
     _setLoading();
     try {
+      await _loadLocale();
       _loadThemeMode();
       _currencies = await _catalogService.getCurrencies();
       _favoritesService.load();
@@ -118,6 +121,43 @@ class AppState extends ChangeNotifier {
     notifyListeners();
     await _cacheService.putString(
         AppConfig.themeModeKey, _serializeThemeMode(mode));
+  }
+
+  Future<void> setLocale(Locale? locale) async {
+    // Normalize locale to a simple code for storage: 'en', 'zh_Hans', 'zh_Hant'
+    String? code;
+    if (locale == null) {
+      code = null;
+    } else if (locale.languageCode == 'zh' && locale.scriptCode != null) {
+      code = 'zh_${locale.scriptCode}';
+    } else {
+      code = locale.languageCode;
+    }
+
+    if ((_locale?.languageCode == locale?.languageCode) &&
+        (_locale?.scriptCode == locale?.scriptCode)) return;
+
+    _locale = locale;
+    notifyListeners();
+    await _cacheService.setLocaleCode(code);
+  }
+
+  Future<void> _loadLocale() async {
+    final code = _cacheService.getLocaleCode();
+    if (code == null) {
+      _locale = null;
+      return;
+    }
+
+    if (code.startsWith('zh_')) {
+      final parts = code.split('_');
+      if (parts.length >= 2) {
+        _locale = Locale.fromSubtags(languageCode: 'zh', scriptCode: parts[1]);
+        return;
+      }
+    }
+
+    _locale = Locale(code);
   }
 
   void swapCurrencies() {

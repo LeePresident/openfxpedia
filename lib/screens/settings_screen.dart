@@ -9,7 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../core/config.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/app_state.dart';
+import 'changelog_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -20,25 +22,16 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late Future<PackageInfo> _pkgInfo;
-  late Future<List<_ReleaseNote>> _releaseNotes;
   bool _checking = false;
 
   @override
   void initState() {
     super.initState();
     _pkgInfo = PackageInfo.fromPlatform();
-    _releaseNotes = _fetchReleaseNotes();
-  }
-
-  Future<List<_ReleaseNote>> _fetchReleaseNotes() async {
-    final allReleases = await _fetchAllGithubReleases();
-    return allReleases
-        .map((item) => _ReleaseNote.fromJson(item))
-        .where((entry) => entry.name.isNotEmpty || entry.body.isNotEmpty)
-        .toList();
   }
 
   Future<void> _checkForUpdates(String currentVersion) async {
+    final l10n = AppLocalizations.of(context);
     setState(() => _checking = true);
     try {
       final latestRelease = await _fetchLatestStableRelease();
@@ -52,7 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       } else {
         final compare = _compareSemver(current, latestVersion);
         if (compare >= 0) {
-          _showMessage('You are on the latest version ($currentVersion).');
+          _showMessage(l10n.settings_latest_version(currentVersion));
         } else {
           final shouldDownload = await _confirmUpdateDownload(latestVersion);
           if (!shouldDownload) return;
@@ -123,150 +116,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return result ?? false;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context, listen: false);
-
-    return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
-      body: FutureBuilder<PackageInfo>(
-        future: _pkgInfo,
-        builder: (context, snap) {
-          final pkg = snap.data;
-          final version = pkg?.version ?? 'unknown';
-
-          return ListView(
-            padding: const EdgeInsets.all(8),
-            children: [
-              ListTile(
-                title: const Text('Theme'),
-                subtitle: Text(_describeThemeMode(appState.themeMode)),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => _showThemeDialog(appState),
-              ),
-              ListTile(
-                title: const Text('App version'),
-                subtitle: Text(version),
-                trailing: _checking
-                    ? const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : TextButton(
-                        onPressed: () => _checkForUpdates(version),
-                        child: const Text('Check updates'),
-                      ),
-              ),
-              const Divider(),
-              ExpansionTile(
-                title: const Text('Changelogs'),
-                subtitle: const Text('Fetched from GitHub release notes'),
-                children: [
-                  FutureBuilder<List<_ReleaseNote>>(
-                    future: _releaseNotes,
-                    builder: (context, releaseSnap) {
-                      if (releaseSnap.connectionState ==
-                          ConnectionState.waiting) {
-                        return const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      }
-
-                      if (releaseSnap.hasError) {
-                        return Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Text(
-                            'Failed to load release notes: ${releaseSnap.error}',
-                          ),
-                        );
-                      }
-
-                      final entries = releaseSnap.data ?? const [];
-                      if (entries.isEmpty) {
-                        return const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text('No release notes available yet.'),
-                        );
-                      }
-
-                      return Column(
-                        children: entries
-                            .map(
-                              (entry) => ListTile(
-                                dense: true,
-                                title: Text(entry.name),
-                                subtitle: SelectableText(entry.body),
-                                trailing: Text(entry.dateLabel),
-                              ),
-                            )
-                            .toList(),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('License'),
-                subtitle: const Text(
-                    'OpenFXpedia — Currency Converter and Encyclopedia.'),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => LicensePage(
-                      appName: pkg?.appName ?? 'OpenFXpedia',
-                      version: version,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  String _describeThemeMode(ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.light:
-        return 'Light';
-      case ThemeMode.dark:
-        return 'Dark';
-      case ThemeMode.system:
-        return 'System';
-    }
-  }
-
-  Future<void> _showThemeDialog(AppState state) async {
-    final chosen = await showDialog<ThemeMode>(
-      context: context,
-      builder: (ctx) {
-        return SimpleDialog(
-          title: const Text('Select theme'),
-          children: [
-            SimpleDialogOption(
-              onPressed: () => Navigator.pop(ctx, ThemeMode.system),
-              child: const Text('System'),
-            ),
-            SimpleDialogOption(
-              onPressed: () => Navigator.pop(ctx, ThemeMode.light),
-              child: const Text('Light'),
-            ),
-            SimpleDialogOption(
-              onPressed: () => Navigator.pop(ctx, ThemeMode.dark),
-              child: const Text('Dark'),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (chosen != null) await state.setThemeMode(chosen);
-  }
-
   String? _normalizeVersion(String? raw) {
     if (raw == null || raw.trim().isEmpty) return null;
     var value = raw.trim();
@@ -310,6 +159,191 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return releases;
   }
 
+  Future<Map<String, dynamic>?> _fetchLatestStableRelease() async {
+    final releases = await _fetchAllGithubReleases();
+    for (final release in releases) {
+      final isDraft = release['draft'] == true;
+      final isPreRelease = release['prerelease'] == true;
+      if (isDraft || isPreRelease) continue;
+
+      final tagName = release['tag_name'] as String?;
+      final normalized = _normalizeVersion(tagName);
+      if (normalized != null && normalized.isNotEmpty) {
+        return release;
+      }
+    }
+
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final appState = context.watch<AppState>();
+    final l10n = AppLocalizations.of(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(l10n.settings_title)),
+      body: FutureBuilder<PackageInfo>(
+        future: _pkgInfo,
+        builder: (context, snap) {
+          final pkg = snap.data;
+          final version = pkg?.version ?? 'unknown';
+
+          return ListView(
+            padding: const EdgeInsets.all(8),
+            children: [
+              ListTile(
+                title: Text(l10n.settings_language),
+                subtitle: Text(_describeLocale(appState.locale, l10n)),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => _showLanguageDialog(appState),
+              ),
+              ListTile(
+                title: Text(l10n.settings_theme),
+                subtitle: Text(_describeThemeMode(appState.themeMode, l10n)),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => _showThemeDialog(appState),
+              ),
+              ListTile(
+                title: Text(l10n.settings_app_version),
+                subtitle: Text(version),
+                trailing: _checking
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : TextButton(
+                        onPressed: () => _checkForUpdates(version),
+                        child: Text(l10n.settings_check_updates),
+                      ),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text(l10n.settings_changelogs),
+                subtitle: Text(l10n.settings_changelogs_subtitle),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const ChangelogScreen(),
+                  ),
+                ),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text(l10n.settings_license),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => LicensePage(
+                      appName: pkg?.appName ?? 'OpenFXpedia',
+                      version: version,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  String _describeThemeMode(ThemeMode mode, AppLocalizations l10n) {
+    switch (mode) {
+      case ThemeMode.light:
+        return l10n.settings_light;
+      case ThemeMode.dark:
+        return l10n.settings_dark;
+      case ThemeMode.system:
+        return l10n.settings_system;
+    }
+  }
+
+  String _describeLocale(Locale? locale, AppLocalizations l10n) {
+    if (locale == null) return l10n.settings_system;
+    if (locale.languageCode == 'zh' && locale.scriptCode == 'Hans') {
+      return l10n.language_simplified_chinese;
+    }
+    if (locale.languageCode == 'zh') {
+      return l10n.language_traditional_chinese;
+    }
+    return l10n.language_english;
+  }
+
+  Future<void> _showLanguageDialog(AppState state) async {
+    final l10n = AppLocalizations.of(context);
+    final chosen = await showDialog<Locale?>(
+      context: context,
+      builder: (ctx) {
+        return SimpleDialog(
+          title: Text(l10n.settings_language_dialog_title),
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+              child: Text(l10n.settings_language_dialog_subtitle),
+            ),
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, null),
+              child: Text(l10n.settings_system),
+            ),
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(
+                ctx,
+                const Locale.fromSubtags(
+                    languageCode: 'zh', scriptCode: 'Hant'),
+              ),
+              child: Text(l10n.language_traditional_chinese),
+            ),
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(
+                ctx,
+                const Locale.fromSubtags(
+                    languageCode: 'zh', scriptCode: 'Hans'),
+              ),
+              child: Text(l10n.language_simplified_chinese),
+            ),
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, const Locale('en')),
+              child: Text(l10n.language_english),
+            ),
+          ],
+        );
+      },
+    );
+
+    await state.setLocale(chosen);
+  }
+
+  Future<void> _showThemeDialog(AppState state) async {
+    final l10n = AppLocalizations.of(context);
+    final chosen = await showDialog<ThemeMode>(
+      context: context,
+      builder: (ctx) {
+        return SimpleDialog(
+          title: Text(l10n.settings_select_theme),
+          children: [
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, ThemeMode.system),
+              child: Text(l10n.settings_system),
+            ),
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, ThemeMode.light),
+              child: Text(l10n.settings_light),
+            ),
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, ThemeMode.dark),
+              child: Text(l10n.settings_dark),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (chosen != null) await state.setThemeMode(chosen);
+  }
+
   String? _preferredUpdateAssetName(String latestVersion) {
     if (Platform.isWindows) {
       return 'openfxpedia_${latestVersion}_setup.exe';
@@ -342,23 +376,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return null;
   }
 
-  Future<Map<String, dynamic>?> _fetchLatestStableRelease() async {
-    final releases = await _fetchAllGithubReleases();
-    for (final release in releases) {
-      final isDraft = release['draft'] == true;
-      final isPreRelease = release['prerelease'] == true;
-      if (isDraft || isPreRelease) continue;
-
-      final tagName = release['tag_name'] as String?;
-      final normalized = _normalizeVersion(tagName);
-      if (normalized != null && normalized.isNotEmpty) {
-        return release;
-      }
-    }
-
-    return null;
-  }
-
   int _compareSemver(String? current, String? latest) {
     final currentParts = (current ?? '0.0.0').split('.');
     final latestParts = (latest ?? '0.0.0').split('.');
@@ -373,34 +390,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (a != b) return a.compareTo(b);
     }
     return 0;
-  }
-}
-
-class _ReleaseNote {
-  final String name;
-  final String body;
-  final String dateLabel;
-
-  const _ReleaseNote({
-    required this.name,
-    required this.body,
-    required this.dateLabel,
-  });
-
-  factory _ReleaseNote.fromJson(Map<String, dynamic> json) {
-    final rawName = (json['name'] as String?)?.trim();
-    final tag = (json['tag_name'] as String?)?.trim() ?? '';
-    final body = (json['body'] as String?)?.trim() ?? '';
-    final publishedAt = (json['published_at'] as String?)?.trim() ?? '';
-
-    final dateLabel =
-        publishedAt.length >= 10 ? publishedAt.substring(0, 10) : publishedAt;
-
-    return _ReleaseNote(
-      name: (rawName == null || rawName.isEmpty) ? tag : rawName,
-      body: body,
-      dateLabel: dateLabel,
-    );
   }
 }
 
@@ -430,7 +419,8 @@ class _LicensePageState extends State<LicensePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('License')),
+      appBar:
+          AppBar(title: Text(AppLocalizations.of(context).settings_license)),
       body: FutureBuilder<String>(
         future: _license,
         builder: (context, snapshot) {
