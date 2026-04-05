@@ -1,9 +1,9 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../models/currency.dart';
 import '../providers/app_state.dart';
-import '../widgets/theme_mode_button.dart';
 
 enum _ConversionFieldChoice { from, to }
 
@@ -16,31 +16,31 @@ class CurrencyDetailScreen extends StatelessWidget {
     BuildContext context,
     AppState state,
   ) async {
+    final l10n = AppLocalizations.of(context);
     final choice = await showDialog<_ConversionFieldChoice>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: Text('Use ${currency.isoCode} for conversion'),
-          content:
-              const Text('Which field should be filled with this currency?'),
+          title: Text('${l10n.detail_convert} ${currency.isoCode}'),
+          content: Text(l10n.detail_currency_prompt),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
-              child: const Text('Cancel'),
+              child: Text(l10n.detail_cancel),
             ),
             OutlinedButton(
               onPressed: () => Navigator.pop(
                 dialogContext,
                 _ConversionFieldChoice.to,
               ),
-              child: const Text('To'),
+              child: Text(l10n.detail_to_field),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(
                 dialogContext,
                 _ConversionFieldChoice.from,
               ),
-              child: const Text('From'),
+              child: Text(l10n.detail_from_field),
             ),
           ],
         );
@@ -66,20 +66,19 @@ class CurrencyDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, state, _) {
+        final l10n = AppLocalizations.of(context);
         final isFav = state.isFavorite(currency.isoCode);
 
         return Scaffold(
           appBar: AppBar(
             title: Text(currency.isoCode),
             actions: [
-              ThemeModeButton(
-                themeMode: state.themeMode,
-                onSelected: state.setThemeMode,
-              ),
               IconButton(
                 icon: Icon(isFav ? Icons.star : Icons.star_border),
                 color: isFav ? Colors.amber : null,
-                tooltip: isFav ? 'Remove favorite' : 'Add to favorites',
+                tooltip: isFav
+                    ? l10n.detail_remove_favorite
+                    : l10n.detail_add_favorite,
                 onPressed: () => state.toggleFavorite(currency.isoCode),
               ),
             ],
@@ -96,19 +95,21 @@ class CurrencyDetailScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                _DetailRow(label: 'ISO Code', value: currency.isoCode),
-                _DetailRow(label: 'Name', value: currency.name),
+                _DetailRow(
+                    label: l10n.detail_iso_code, value: currency.isoCode),
+                _DetailRow(label: l10n.detail_name, value: currency.name),
                 if (currency.symbol != null)
-                  _DetailRow(label: 'Symbol', value: currency.symbol!),
+                  _DetailRow(
+                      label: l10n.detail_symbol, value: currency.symbol!),
                 if (currency.regions.isNotEmpty)
                   _DetailRow(
-                    label: 'Regions',
+                    label: l10n.detail_regions,
                     value: currency.regions.join(', '),
                   ),
                 if (currency.description != null &&
                     currency.description!.isNotEmpty)
                   _DetailRow(
-                    label: 'Description',
+                    label: l10n.detail_description,
                     value: currency.description!,
                   ),
                 const SizedBox(height: 24),
@@ -116,7 +117,7 @@ class CurrencyDetailScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     icon: const Icon(Icons.swap_horiz),
-                    label: Text('Convert ${currency.isoCode}'),
+                    label: Text('${l10n.detail_convert} ${currency.isoCode}'),
                     onPressed: () => _showConvertChoiceDialog(context, state),
                   ),
                 ),

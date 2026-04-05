@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../l10n/app_localizations.dart';
 import '../models/exchange_rate.dart';
 
 class RateInfoWidget extends StatelessWidget {
@@ -16,25 +17,26 @@ class RateInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     if (isLoading) {
-      return const Row(
+      return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
+          const SizedBox(
               width: 14,
               height: 14,
               child: CircularProgressIndicator(strokeWidth: 2)),
-          SizedBox(width: 8),
-          Text('Refreshing rates...', style: TextStyle(fontSize: 12)),
+          const SizedBox(width: 8),
+          Text(l10n.rate_info_refreshing, style: const TextStyle(fontSize: 12)),
         ],
       );
     }
 
     if (rate == null) return const SizedBox.shrink();
 
-    final formatter = DateFormat('dd MMM yyyy, HH:mm');
+    final formatter = DateFormat.yMMMd(l10n.localeName).add_Hm();
     final timeLabel = formatter.format(rate!.timestamp.toLocal());
-    final sourceLabel = fromCache ? 'cached' : 'live';
+    final sourceLabel = fromCache ? l10n.rate_info_cached : l10n.rate_info_live;
 
     return Row(
       mainAxisSize: MainAxisSize.min,

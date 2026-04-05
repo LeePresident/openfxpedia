@@ -1,0 +1,34 @@
+[
+    {
+        "version": "v1.0.0",
+        "date": "2026-03-26",
+        "summary": "Initial stable release of OpenFXpedia.",
+        "highlights": [
+            "Added currency converter and encyclopedia views.",
+            "Added settings for theme selection, update checks, and license page.",
+            "Added versioned Windows and Android release artifacts."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.0",
+                "date": "2026-03-26",
+                "summary": "OpenFXpedia 的首个稳定版。",
+                "highlights": [
+                    "新增货币转换器和货币百科页面。",
+                    "新增主题选择、更新检查和许可页面。",
+                    "新增带版本号的 Windows 和 Android 发布产物。"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.0",
+                "date": "2026-03-26",
+                "summary": "OpenFXpedia 的首個穩定版。",
+                "highlights": [
+                    "新增貨幣轉換器和貨幣百科頁面。",
+                    "新增主題選擇、更新檢查和授權頁面。",
+                    "新增帶版本號的 Windows 和 Android 發佈產物。"
+                ]
+            }
+        }
+    }
+]

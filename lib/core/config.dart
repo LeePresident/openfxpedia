@@ -28,6 +28,7 @@
   static const String defaultBaseCurrencyKey = 'default_base';
   static const String defaultTargetCurrencyKey = 'default_target';
   static const String themeModeKey = 'theme_mode';
+  static const String localeKey = 'locale';
 
   static const String defaultBaseCurrency = 'usd';
   static const String defaultTargetCurrency = 'eur';

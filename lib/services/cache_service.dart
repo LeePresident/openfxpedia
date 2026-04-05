@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import '../core/config.dart';
 
 class CacheService {
@@ -11,7 +12,8 @@ class CacheService {
 
   Future<void> init() async {
     if (_initialized) return;
-    await Hive.initFlutter();
+    final supportDirectory = await getApplicationSupportDirectory();
+    Hive.init(supportDirectory.path);
     _ratesBox = await Hive.openBox<String>(AppConfig.ratesBoxName);
     _currenciesBox = await Hive.openBox<String>(AppConfig.currenciesBoxName);
     _prefsBox = await Hive.openBox<String>(AppConfig.prefsBoxName);
@@ -92,6 +94,17 @@ class CacheService {
   }
 
   String? getString(String key) => _prefsBox.get(key);
+
+  // Convenience helpers for locale persistence
+  Future<void> setLocaleCode(String? code) async {
+    if (code == null) {
+      await _prefsBox.delete(AppConfig.localeKey);
+    } else {
+      await putString(AppConfig.localeKey, code);
+    }
+  }
+
+  String? getLocaleCode() => getString(AppConfig.localeKey);
 
   Future<void> close() async {
     await _ratesBox.close();

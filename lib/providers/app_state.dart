@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../core/config.dart';
 import '../models/currency.dart';
 import '../models/exchange_rate.dart';
@@ -14,6 +15,7 @@ class AppState extends ChangeNotifier {
   final CurrencyCatalogService _catalogService;
   final FavoritesService _favoritesService;
   final CacheService _cacheService;
+  final Iterable<Locale> Function() _systemLocales;
 
   List<Currency> _currencies = [];
   List<Currency> get currencies => _currencies;
@@ -46,16 +48,21 @@ class AppState extends ChangeNotifier {
 
   ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;
+  Locale? _locale;
+  Locale? get locale => _locale;
 
   AppState({
     required ConversionService conversionService,
     required CurrencyCatalogService catalogService,
     required FavoritesService favoritesService,
     required CacheService cacheService,
+    Iterable<Locale> Function()? systemLocales,
   })  : _conversionService = conversionService,
         _catalogService = catalogService,
         _favoritesService = favoritesService,
-        _cacheService = cacheService;
+        _cacheService = cacheService,
+        _systemLocales = systemLocales ??
+            (() => WidgetsBinding.instance.platformDispatcher.locales);
 
   List<Currency> get favoriteCurrencies {
     return _favoritesService.favorites
@@ -69,8 +76,11 @@ class AppState extends ChangeNotifier {
   Future<void> initialize() async {
     _setLoading();
     try {
+      await _loadLocale();
       _loadThemeMode();
-      _currencies = await _catalogService.getCurrencies();
+      _currencies = await _catalogService.getCurrencies(
+        locale: _effectiveLocale,
+      );
       _favoritesService.load();
       _setIdle();
     } catch (e) {
@@ -118,6 +128,124 @@ class AppState extends ChangeNotifier {
     notifyListeners();
     await _cacheService.putString(
         AppConfig.themeModeKey, _serializeThemeMode(mode));
+  }
+
+  Future<void> setLocale(Locale? locale) async {
+    // Normalize locale to a simple code for storage: 'en', 'zh_Hans', 'zh_Hant'
+    String? code;
+    if (locale == null) {
+      code = null;
+    } else if (locale.languageCode == 'zh' && locale.scriptCode != null) {
+      code = 'zh_${locale.scriptCode}';
+    } else {
+      code = locale.languageCode;
+    }
+
+    if ((_locale?.languageCode == locale?.languageCode) &&
+        (_locale?.scriptCode == locale?.scriptCode)) return;
+
+    _locale = locale;
+    notifyListeners();
+    await _cacheService.setLocaleCode(code);
+
+    if (_currencies.isNotEmpty) {
+      _currencies = await _catalogService.getCurrencies(
+        locale: _effectiveLocale,
+      );
+      notifyListeners();
+    }
+  }
+
+  Locale? get _effectiveLocale => _locale ?? _resolveSystemLocale();
+
+  Future<void> _loadLocale() async {
+    final code = _cacheService.getLocaleCode();
+    if (code == null) {
+      _locale = _resolveSystemLocale();
+      return;
+    }
+
+    if (code.startsWith('zh_')) {
+      final parts = code.split('_');
+      if (parts.length >= 2) {
+        _locale = Locale.fromSubtags(languageCode: 'zh', scriptCode: parts[1]);
+        return;
+      }
+    }
+
+    _locale = Locale(code);
+  }
+
+  Locale? _resolveSystemLocale() {
+    for (final locale in _systemLocales()) {
+      final chineseLocale = _resolveChineseLocale(locale);
+      if (chineseLocale != null) return chineseLocale;
+
+      final exactMatch =
+          _matchSupportedLocale(locale, allowLanguageOnly: false);
+      if (exactMatch != null) return exactMatch;
+
+      final languageMatch =
+          _matchSupportedLocale(locale, allowLanguageOnly: true);
+      if (languageMatch != null) return languageMatch;
+    }
+    return null;
+  }
+
+  Locale? _resolveChineseLocale(Locale locale) {
+    if (locale.languageCode != 'zh') return null;
+
+    final preferredScript = _preferredChineseScript(locale);
+    if (preferredScript == null) return null;
+
+    for (final supported in AppLocalizations.supportedLocales) {
+      if (supported.languageCode != 'zh') continue;
+      if (supported.scriptCode == preferredScript) return supported;
+    }
+
+    return null;
+  }
+
+  String? _preferredChineseScript(Locale locale) {
+    final scriptCode = locale.scriptCode;
+    if (scriptCode == 'Hans' || scriptCode == 'Hant') {
+      return scriptCode;
+    }
+
+    switch (locale.countryCode?.toUpperCase()) {
+      case 'HK':
+      case 'MO':
+      case 'TW':
+        return 'Hant';
+      case 'CN':
+      case 'SG':
+      case 'MY':
+        return 'Hans';
+    }
+
+    return null;
+  }
+
+  Locale? _matchSupportedLocale(
+    Locale locale, {
+    required bool allowLanguageOnly,
+  }) {
+    for (final supported in AppLocalizations.supportedLocales) {
+      if (locale.languageCode != supported.languageCode) continue;
+
+      final scriptsMatch = locale.scriptCode == supported.scriptCode;
+      final countriesMatch = supported.countryCode == null ||
+          locale.countryCode == null ||
+          locale.countryCode == supported.countryCode;
+
+      if (scriptsMatch && countriesMatch) return supported;
+      if (allowLanguageOnly &&
+          supported.scriptCode == null &&
+          supported.countryCode == null) {
+        return supported;
+      }
+    }
+    return null;
   }
 
   void swapCurrencies() {

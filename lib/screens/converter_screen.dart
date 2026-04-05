@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../models/currency.dart';
 import '../providers/app_state.dart';
 import '../widgets/amount_input.dart';
@@ -17,31 +18,31 @@ class ConverterScreen extends StatelessWidget {
     AppState state,
     Currency currency,
   ) async {
+    final l10n = AppLocalizations.of(context);
     final choice = await showDialog<_FavoriteFieldChoice>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: Text('Use ${currency.isoCode} in converter'),
-          content:
-              const Text('Which field should be filled with this currency?'),
+          title: Text('${l10n.converter_currency_title}: ${currency.isoCode}'),
+          content: Text(l10n.converter_currency_prompt),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
-              child: const Text('Cancel'),
+              child: Text(l10n.converter_cancel),
             ),
             OutlinedButton(
               onPressed: () => Navigator.pop(
                 dialogContext,
                 _FavoriteFieldChoice.to,
               ),
-              child: const Text('To'),
+              child: Text(l10n.converter_to_field),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(
                 dialogContext,
                 _FavoriteFieldChoice.from,
               ),
-              child: const Text('From'),
+              child: Text(l10n.converter_from_field),
             ),
           ],
         );
@@ -64,15 +65,16 @@ class ConverterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, state, _) {
+        final l10n = AppLocalizations.of(context);
         final isLoading = state.loadingState == LoadingState.loading;
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Currency Converter'),
+            title: Text(l10n.converter_currency_title),
             actions: [
               IconButton(
                 icon: const Icon(Icons.refresh),
-                tooltip: 'Refresh rates',
+                tooltip: l10n.converter_refresh_rates,
                 onPressed: isLoading ? null : state.refreshRates,
               ),
             ],
@@ -90,7 +92,7 @@ class ConverterScreen extends StatelessWidget {
                     children: [
                       if (state.favoriteCurrencies.isNotEmpty) ...[
                         Text(
-                          'Favorites',
+                          l10n.converter_favorites,
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                         const SizedBox(height: 4),
@@ -102,19 +104,20 @@ class ConverterScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                       ],
                       Text(
-                        'From',
+                        l10n.converter_from,
                         style: Theme.of(context).textTheme.labelMedium,
                       ),
                       const SizedBox(height: 4),
                       app_search.CurrencySearchBar(
                         currencies: state.currencies,
                         selectedCurrency: state.baseCurrency,
-                        hint: 'From currency...',
+                        hint: l10n.converter_from_hint,
                         onSelected: state.setBaseCurrency,
                       ),
                       const SizedBox(height: 8),
                       AmountInput(
                         initialValue: state.inputAmount,
+                        label: l10n.amount_label,
                         onChanged: state.setInputAmount,
                       ),
                       const SizedBox(height: 8),
@@ -122,7 +125,7 @@ class ConverterScreen extends StatelessWidget {
                         child: IconButton(
                           icon: const Icon(Icons.swap_vert),
                           iconSize: 32,
-                          tooltip: 'Swap currencies',
+                          tooltip: l10n.converter_swap,
                           onPressed: state.baseCurrency == null ||
                                   state.targetCurrency == null
                               ? null
@@ -130,14 +133,14 @@ class ConverterScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'To',
+                        l10n.converter_to,
                         style: Theme.of(context).textTheme.labelMedium,
                       ),
                       const SizedBox(height: 4),
                       app_search.CurrencySearchBar(
                         currencies: state.currencies,
                         selectedCurrency: state.targetCurrency,
-                        hint: 'To currency...',
+                        hint: l10n.converter_to_hint,
                         onSelected: state.setTargetCurrency,
                       ),
                       const SizedBox(height: 16),
@@ -166,9 +169,7 @@ class ConverterScreen extends StatelessWidget {
                                 )
                               else if (state.baseCurrency == null ||
                                   state.targetCurrency == null)
-                                const Text(
-                                  'Choose a from and to currency to begin converting.',
-                                )
+                                Text(l10n.converter_choose_pair)
                               else
                                 Text(
                                   state.convertedAmount != null
@@ -184,6 +185,18 @@ class ConverterScreen extends StatelessWidget {
                                 rate: state.lastRate,
                                 fromCache: state.rateFromCache,
                                 isLoading: isLoading,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                l10n.rate_info_disclaimer,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.outline,
+                                      fontStyle: FontStyle.italic,
+                                    ),
                               ),
                             ],
                           ),

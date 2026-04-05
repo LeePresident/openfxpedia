@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'models/currency.dart';
 import 'providers/app_state.dart';
@@ -57,17 +58,16 @@ class OpenFXpediaApp extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, state, _) {
         return MaterialApp(
-          title: 'OpenFXpedia',
           debugShowCheckedModeBanner: false,
+          onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
           localizationsDelegates: const [
+            AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('zh'),
-          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: state.locale,
           themeMode: state.themeMode,
           theme: _buildLightTheme(),
           darkTheme: _buildDarkTheme(),
@@ -214,6 +214,7 @@ class _HomeShellState extends State<_HomeShell> {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, state, _) {
+        final l10n = AppLocalizations.of(context);
         if (!_showingInitialCurrencyDialog &&
             state.loadingState == LoadingState.idle &&
             state.currencies.isNotEmpty &&
@@ -234,18 +235,18 @@ class _HomeShellState extends State<_HomeShell> {
           bottomNavigationBar: NavigationBar(
             selectedIndex: state.selectedTab,
             onDestinationSelected: state.setSelectedTab,
-            destinations: const [
+            destinations: [
               NavigationDestination(
-                icon: Icon(Icons.currency_exchange),
-                label: 'Converter',
+                icon: const Icon(Icons.currency_exchange),
+                label: l10n.converter_title,
               ),
               NavigationDestination(
-                icon: Icon(Icons.menu_book),
-                label: 'Encyclopedia',
+                icon: const Icon(Icons.menu_book),
+                label: l10n.encyclopedia_title,
               ),
               NavigationDestination(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
+                icon: const Icon(Icons.settings),
+                label: l10n.settings_title,
               ),
             ],
           ),
@@ -258,6 +259,7 @@ class _HomeShellState extends State<_HomeShell> {
     BuildContext context,
     AppState state,
   ) async {
+    final l10n = AppLocalizations.of(context);
     Currency? selectedFrom = state.baseCurrency ?? state.currencies.first;
     Currency? selectedTo = state.targetCurrency ??
         state.currencies.firstWhere(
@@ -272,7 +274,7 @@ class _HomeShellState extends State<_HomeShell> {
         return StatefulBuilder(
           builder: (dialogContext, setDialogState) {
             return AlertDialog(
-              title: const Text('Choose your currencies'),
+              title: Text(l10n.converter_choose_currencies),
               content: SizedBox(
                 width: 420,
                 child: Column(
@@ -282,7 +284,7 @@ class _HomeShellState extends State<_HomeShell> {
                     app_search.CurrencySearchBar(
                       currencies: state.currencies,
                       selectedCurrency: selectedFrom,
-                      hint: 'From currency...',
+                      hint: l10n.converter_from_hint,
                       onSelected: (value) {
                         setDialogState(() {
                           selectedFrom = value;
@@ -299,13 +301,9 @@ class _HomeShellState extends State<_HomeShell> {
                     app_search.CurrencySearchBar(
                       currencies: state.currencies,
                       selectedCurrency: selectedTo,
-                      hint: 'To currency...',
+                      hint: l10n.converter_to_hint,
                       onSelected: (value) =>
                           setDialogState(() => selectedTo = value),
-                    ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'Select the currencies to prefill the converter.',
                     ),
                   ],
                 ),
@@ -324,7 +322,7 @@ class _HomeShellState extends State<_HomeShell> {
                           state.setSelectedTab(0);
                           Navigator.pop(dialogContext);
                         },
-                  child: const Text('Continue'),
+                  child: Text(l10n.converter_continue),
                 ),
               ],
             );
