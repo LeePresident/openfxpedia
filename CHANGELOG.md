@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.1] - 2026-04-05
+
+- Bumped package version to `1.0.1`.
+- Implemented app-wide i18n for the currency encyclopedia and related UI.
+
 ## [1.0.0] - 2026-03-15
 
 - Bumped package version to `1.0.0`.

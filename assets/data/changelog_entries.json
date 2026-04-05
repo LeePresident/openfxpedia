@@ -1,5 +1,37 @@
 [
     {
+        "version": "v1.0.1",
+        "date": "2026-04-05",
+        "summary": "Maintenance release for version 1.0.1.",
+        "highlights": [
+            "Implemented app-wide i18n for the currency encyclopedia and related UI.",
+            "Bumped package version to 1.0.1.",
+            "Updated changelog and release metadata for the new version."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.1",
+                "date": "2026-04-05",
+                "summary": "1.0.1 维护版本，已完成国际化。",
+                "highlights": [
+                    "已完成货币百科及相关界面的国际化。",
+                    "版本号已更新为 1.0.1。",
+                    "已同步更新变更记录和发布元数据。"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.1",
+                "date": "2026-04-05",
+                "summary": "1.0.1 維護版本，已完成國際化。",
+                "highlights": [
+                    "已完成貨幣百科及相關介面的國際化。",
+                    "版本號已更新為 1.0.1。",
+                    "已同步更新更新紀錄和發佈中繼資料。"
+                ]
+            }
+        }
+    },
+    {
         "version": "v1.0.0",
         "date": "2026-03-26",
         "summary": "Initial stable release of OpenFXpedia.",
