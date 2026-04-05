@@ -196,4 +196,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rate_info_live => 'live';
+
+  @override
+  String get rate_info_disclaimer => 'Exchange rates are for reference only.';
 }

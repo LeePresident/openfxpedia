@@ -69,5 +69,6 @@
     },
     "rate_info_refreshing": "Refreshing rates...",
     "rate_info_cached": "cached",
-    "rate_info_live": "live"
+    "rate_info_live": "live",
+    "rate_info_disclaimer": "Exchange rates are for reference only."
 }

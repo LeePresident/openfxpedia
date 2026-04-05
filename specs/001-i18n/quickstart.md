@@ -12,7 +12,7 @@
 3. Change the language between English, Traditional Chinese, and Simplified Chinese.
 4. Confirm that screen titles, navigation labels, prompts, and other visible text update immediately.
 5. Restart the app and confirm the selected language persists.
-6. Verify the localization sources are split across `lib/l10n/app_zh.arb`, `lib/l10n/app_zh_Hans.arb`, and `lib/l10n/app_zh_Hant.arb`, with the neutral `zh` file acting as the Traditional Chinese fallback and generated outputs in `lib/l10n/app_localizations_zh.dart`, `lib/l10n/app_localizations_zh_Hans.dart`, and `lib/l10n/app_localizations_zh_Hant.dart`.
+6. Verify the localization sources are split across `lib/l10n/app_zh.arb`, `lib/l10n/app_zh_Hans.arb`, and `lib/l10n/app_zh_Hant.arb`, with the neutral `zh` file acting as the English fallback base and generated outputs in `lib/l10n/app_localizations_zh.dart`, `lib/l10n/app_localizations_zh_Hans.dart`, and `lib/l10n/app_localizations_zh_Hant.dart`.
 
 ## Adding a New Translation Later
 
@@ -21,7 +21,7 @@
 3. Fill in translated values for all user-facing strings.
 4. Regenerate localization output using Flutter's localization tooling.
 5. Add or update widget tests that exercise the new locale.
-6. If you are updating Chinese translations, edit `app_zh.arb` when you need the neutral Traditional Chinese fallback, `app_zh_Hans.arb` for Simplified Chinese, or `app_zh_Hant.arb` for the explicit Traditional Chinese variant.
+6. If you are updating Chinese translations, edit `app_zh.arb` for the English fallback base, `app_zh_Hans.arb` for Simplified Chinese, or `app_zh_Hant.arb` for the explicit Traditional Chinese variant.
 
 ## Validation Checklist
 

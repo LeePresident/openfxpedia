@@ -42,10 +42,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get settings_check_updates => '檢查更新';
 
   @override
-  String get settings_changelogs => '更新日誌';
+  String get settings_changelogs => '更新紀錄';
 
   @override
-  String get settings_changelogs_subtitle => '查看所有版本的簡明變更記錄';
+  String get settings_changelogs_subtitle => '查看所有版本的簡短更新紀錄';
 
   @override
   String get settings_license => '授權';
@@ -72,7 +72,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get converter_currency_title => '貨幣轉換器';
 
   @override
-  String get converter_refresh_rates => '重新整理匯率';
+  String get converter_refresh_rates => '更新匯率';
 
   @override
   String get converter_favorites => '收藏';
@@ -99,7 +99,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get converter_choose_currencies => '選擇貨幣';
 
   @override
-  String get converter_currency_prompt => '要將這個幣別填入哪個欄位？';
+  String get converter_currency_prompt => '要將這個貨幣填入哪個欄位？';
 
   @override
   String get converter_cancel => '取消';
@@ -141,7 +141,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get detail_to_field => '到';
 
   @override
-  String get detail_currency_prompt => '要將這個幣別填入哪個欄位？';
+  String get detail_currency_prompt => '要將這個貨幣填入哪個欄位？';
 
   @override
   String get detail_remove_favorite => '移出收藏';
@@ -162,7 +162,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get detail_regions => '地區';
 
   @override
-  String get detail_description => '說明';
+  String get detail_description => '簡介';
 
   @override
   String get detail_convert => '轉換';
@@ -185,11 +185,14 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get rate_info_refreshing => '正在重新整理匯率...';
+  String get rate_info_refreshing => '正在更新匯率...';
 
   @override
   String get rate_info_cached => '快取';
 
   @override
   String get rate_info_live => '即時';
+
+  @override
+  String get rate_info_disclaimer => '匯率僅供參考，請以實際報價為準。';
 }

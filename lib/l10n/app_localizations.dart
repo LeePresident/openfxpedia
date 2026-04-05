@@ -465,6 +465,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'live'**
   String get rate_info_live;
+
+  /// No description provided for @rate_info_disclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange rates are for reference only.'**
+  String get rate_info_disclaimer;
 }
 
 class _AppLocalizationsDelegate

@@ -80,7 +80,10 @@ class _FakeCurrencyCatalogService extends CurrencyCatalogService {
   _FakeCurrencyCatalogService({required super.client, required super.cache});
 
   @override
-  Future<List<Currency>> getCurrencies({bool forceRefresh = false}) async {
+  Future<List<Currency>> getCurrencies({
+    bool forceRefresh = false,
+    Locale? locale,
+  }) async {
     return [
       Currency(
         isoCode: 'USD',

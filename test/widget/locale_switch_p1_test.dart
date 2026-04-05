@@ -29,7 +29,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Language'), findsOneWidget);
-    expect(find.text('System'), findsOneWidget);
+    expect(find.text('English'), findsOneWidget);
 
     await tester.tap(find.text('Select language'));
     await tester.pumpAndSettle();
@@ -59,6 +59,7 @@ AppState _buildAppState(InMemoryCacheService cache) {
     catalogService: _FakeCatalogService(cache: cache),
     favoritesService: FavoritesService(cache: cache),
     cacheService: cache,
+    systemLocales: () => const [Locale('en')],
   );
 }
 
@@ -227,7 +228,10 @@ class _FakeCatalogService extends CurrencyCatalogService {
       : super(client: ExchangeClient(), cache: cache);
 
   @override
-  Future<List<Currency>> getCurrencies({bool forceRefresh = false}) async {
+  Future<List<Currency>> getCurrencies({
+    bool forceRefresh = false,
+    Locale? locale,
+  }) async {
     return const [];
   }
 }

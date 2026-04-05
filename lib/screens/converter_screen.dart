@@ -186,6 +186,18 @@ class ConverterScreen extends StatelessWidget {
                                 fromCache: state.rateFromCache,
                                 isLoading: isLoading,
                               ),
+                              const SizedBox(height: 4),
+                              Text(
+                                l10n.rate_info_disclaimer,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.outline,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                              ),
                             ],
                           ),
                         ),

@@ -95,18 +95,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('Update available'),
+          title: Text(AppLocalizations.of(context).update_available),
           content: Text(
             'Version $latestVersion is available.\n\nDownload $assetName from GitHub releases for this device?',
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(false),
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context).update_cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.of(dialogContext).pop(true),
-              child: const Text('Download'),
+              child: Text(AppLocalizations.of(context).update_download),
             ),
           ],
         );
@@ -226,7 +226,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const ChangelogScreen(),
+                    builder: (_) => ChangelogScreen(),
                   ),
                 ),
               ),
@@ -266,7 +266,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (locale.languageCode == 'zh' && locale.scriptCode == 'Hans') {
       return l10n.language_simplified_chinese;
     }
-    if (locale.languageCode == 'zh') {
+    if (locale.languageCode == 'zh' && locale.scriptCode == 'Hant') {
       return l10n.language_traditional_chinese;
     }
     return l10n.language_english;

@@ -1,12 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 import '../l10n/app_localizations.dart';
+import '../services/observability.dart';
 
 class ChangelogScreen extends StatefulWidget {
-  const ChangelogScreen({super.key});
+  final AssetBundle bundle;
+
+  ChangelogScreen({super.key, AssetBundle? bundle})
+      : bundle = bundle ?? rootBundle;
 
   @override
   State<ChangelogScreen> createState() => _ChangelogScreenState();
@@ -23,7 +27,7 @@ class _ChangelogScreenState extends State<ChangelogScreen> {
 
   Future<List<_ChangelogEntry>> _loadEntries() async {
     final raw =
-        await rootBundle.loadString('assets/data/changelog_entries.json');
+        await widget.bundle.loadString('assets/data/changelog_entries.json');
     final decoded = jsonDecode(raw) as List<dynamic>;
     return decoded
         .whereType<Map<String, dynamic>>()
@@ -142,15 +146,40 @@ class _ChangelogEntry {
   }
 
   _LocalizedChangelog localize(String localeKey) {
-    return translations[localeKey] ??
-        translations[_languageFallback(localeKey)] ??
-        translations['en'] ??
-        _LocalizedChangelog(
-          version: version,
-          dateLabel: dateLabel,
-          summary: summary,
-          highlights: highlights,
-        );
+    final direct = translations[localeKey];
+    if (direct != null) return direct;
+
+    final english = translations['en'];
+    if (english != null) {
+      LocalizationObservability.recordFallback(
+        surface: 'changelog',
+        localeKey: localeKey,
+        fallbackKey: 'en',
+      );
+      return english;
+    }
+
+    final languageFallback = translations[_languageFallback(localeKey)];
+    if (languageFallback != null) {
+      LocalizationObservability.recordFallback(
+        surface: 'changelog',
+        localeKey: localeKey,
+        fallbackKey: _languageFallback(localeKey),
+      );
+      return languageFallback;
+    }
+
+    LocalizationObservability.recordFallback(
+      surface: 'changelog',
+      localeKey: localeKey,
+      fallbackKey: 'inline-default',
+    );
+    return _LocalizedChangelog(
+      version: version,
+      dateLabel: dateLabel,
+      summary: summary,
+      highlights: highlights,
+    );
   }
 }
 
@@ -192,6 +221,5 @@ String _localeKeyFor(String localeName) {
 }
 
 String _languageFallback(String localeKey) {
-  if (localeKey.startsWith('zh')) return 'zh_Hant';
   return 'en';
 }

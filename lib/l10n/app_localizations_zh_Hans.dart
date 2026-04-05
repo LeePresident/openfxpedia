@@ -192,6 +192,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get rate_info_live => '实时';
+
+  @override
+  String get rate_info_disclaimer => '汇率仅供参考，请以实际报价为准。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).

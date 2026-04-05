@@ -13,6 +13,7 @@ Features
 - Fast currency conversion using live exchange rates (with local cache and offline support).
 - Encyclopedia entries for fiat currencies: names, symbols, regions, descriptions and images.
 - Light / Dark / System theme selection persisted in app settings.
+- English, Simplified Chinese, and Traditional Chinese language selection in Settings.
 - Favorites, quick-swap, and From/To chooser dialogs for fast workflows.
 - In-app update checks open the device-specific GitHub release asset: `openfxpedia_<version>_setup.exe` on Windows and `openfxpedia_<version>.apk` on Android.
 
@@ -107,6 +108,13 @@ Testing
 ```powershell
 flutter test
 ```
+
+Localization notes:
+
+- Update `lib/l10n/app_en.arb` first when adding a new string.
+- Keep `lib/l10n/app_zh_Hans.arb` and `lib/l10n/app_zh_Hant.arb` aligned with the English key set.
+- `lib/l10n/app_zh.arb` acts as the English fallback base for the Chinese locale family.
+- Regenerate the localization output after ARB changes.
 
 VS Code
 
