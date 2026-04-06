@@ -63,12 +63,15 @@
         "placeholders": {
             "version": {
                 "type": "String",
-                "example": "1.0.0"
+                "example": "1.0.1"
             }
         }
     },
     "rate_info_refreshing": "Refreshing rates...",
     "rate_info_cached": "cached",
     "rate_info_live": "live",
-    "rate_info_disclaimer": "Exchange rates are for reference only."
+    "rate_info_disclaimer": "Exchange rates are for reference only.",
+    "error_network_unavailable": "Network error — unable to reach the server. Please check your internet connection and try again.",
+    "error_service_unavailable": "Unable to reach the remote service right now. Please try again later.",
+    "error_generic": "Something went wrong. Please try again."
 }

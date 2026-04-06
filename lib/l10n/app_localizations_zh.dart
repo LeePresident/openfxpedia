@@ -85,10 +85,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get converter_to => 'To';
 
   @override
-  String get converter_from_hint => 'From currency...';
+  String get converter_from_hint => 'From currency…';
 
   @override
-  String get converter_to_hint => 'To currency...';
+  String get converter_to_hint => 'To currency…';
 
   @override
   String get converter_swap => 'Swap currencies';
@@ -123,7 +123,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get encyclopedia_currency_title => 'Currency Encyclopedia';
 
   @override
-  String get encyclopedia_search => 'Search currencies...';
+  String get encyclopedia_search => 'Search currencies…';
 
   @override
   String get encyclopedia_not_found => 'No currencies found.';
@@ -189,7 +189,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get rate_info_refreshing => 'Refreshing rates...';
+  String get rate_info_refreshing => 'Refreshing rates…';
 
   @override
   String get rate_info_cached => 'cached';
@@ -199,6 +199,17 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get rate_info_disclaimer => 'Exchange rates are for reference only.';
+
+  @override
+  String get error_network_unavailable =>
+      'Network error—unable to connect to the server. Please check your internet connection and try again.';
+
+  @override
+  String get error_service_unavailable =>
+      'Unable to connect to the update service. Please try again later.';
+
+  @override
+  String get error_generic => 'An error occurred. Please try again.';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).
@@ -281,10 +292,10 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get converter_to => '到';
 
   @override
-  String get converter_from_hint => '来源货币...';
+  String get converter_from_hint => '来源货币…';
 
   @override
-  String get converter_to_hint => '目标货币...';
+  String get converter_to_hint => '目标货币…';
 
   @override
   String get converter_swap => '交换货币';
@@ -317,7 +328,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get encyclopedia_currency_title => '货币百科';
 
   @override
-  String get encyclopedia_search => '搜索货币...';
+  String get encyclopedia_search => '搜索货币…';
 
   @override
   String get encyclopedia_not_found => '未找到货币。';
@@ -382,7 +393,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   }
 
   @override
-  String get rate_info_refreshing => '正在刷新汇率...';
+  String get rate_info_refreshing => '正在刷新汇率…';
 
   @override
   String get rate_info_cached => '缓存';
@@ -392,6 +403,15 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get rate_info_disclaimer => '汇率仅供参考，请以实际报价为准。';
+
+  @override
+  String get error_network_unavailable => '网络错误—无法连接到服务器。请检查您的网络连接后重试。';
+
+  @override
+  String get error_service_unavailable => '无法连接更新服务，请稍后再试。';
+
+  @override
+  String get error_generic => '发生错误，请重试。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -474,10 +494,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get converter_to => '到';
 
   @override
-  String get converter_from_hint => '來源貨幣...';
+  String get converter_from_hint => '來源貨幣…';
 
   @override
-  String get converter_to_hint => '目標貨幣...';
+  String get converter_to_hint => '目標貨幣…';
 
   @override
   String get converter_swap => '交換貨幣';
@@ -510,7 +530,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get encyclopedia_currency_title => '貨幣百科';
 
   @override
-  String get encyclopedia_search => '搜尋貨幣...';
+  String get encyclopedia_search => '搜尋貨幣…';
 
   @override
   String get encyclopedia_not_found => '找不到貨幣。';
@@ -575,7 +595,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get rate_info_refreshing => '正在更新匯率...';
+  String get rate_info_refreshing => '正在更新匯率…';
 
   @override
   String get rate_info_cached => '快取';
@@ -585,4 +605,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get rate_info_disclaimer => '匯率僅供參考，請以實際報價為準。';
+
+  @override
+  String get error_network_unavailable => '網絡錯誤—無法連線到伺服器。請檢查您的網路連線後重試。';
+
+  @override
+  String get error_service_unavailable => '無法連線更新服務，請稍後再試。';
+
+  @override
+  String get error_generic => '發生錯誤，請重試。';
 }

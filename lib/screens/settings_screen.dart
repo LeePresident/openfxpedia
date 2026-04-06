@@ -71,10 +71,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
         }
       }
     } catch (e) {
-      _showMessage('Update check failed: $e');
+      // Log technical details for developers, but show a concise message to users.
+      debugPrint('Update check failed: $e');
+      _showMessage(_friendlyUpdateError(e));
     } finally {
       setState(() => _checking = false);
     }
+  }
+
+  String _friendlyUpdateError(Object e) {
+    final l10n = AppLocalizations.of(context);
+    final lower = e.toString().toLowerCase();
+    if (lower.contains('socketexception') ||
+        lower.contains('failed host lookup') ||
+        lower.contains('host lookup') ||
+        lower.contains('network is unreachable') ||
+        lower.contains('timeout')) {
+      return l10n.error_network_unavailable;
+    }
+
+    if (lower.contains('api.github.com')) {
+      return l10n.error_service_unavailable;
+    }
+
+    return l10n.error_generic;
   }
 
   void _showMessage(String text) {

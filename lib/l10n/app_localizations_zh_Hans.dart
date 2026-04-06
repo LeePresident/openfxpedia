@@ -195,6 +195,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get rate_info_disclaimer => '汇率仅供参考，请以实际报价为准。';
+
+  @override
+  String get error_network_unavailable => '网络错误 — 无法连接到服务器。请检查您的网络连接后重试。';
+
+  @override
+  String get error_service_unavailable => '无法连接更新服务，请稍后再试。';
+
+  @override
+  String get error_generic => '发生错误，请重试。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).

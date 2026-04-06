@@ -25,8 +25,8 @@
     "converter_favorites": "收藏",
     "converter_from": "从",
     "converter_to": "到",
-    "converter_from_hint": "来源货币...",
-    "converter_to_hint": "目标货币...",
+    "converter_from_hint": "来源货币…",
+    "converter_to_hint": "目标货币…",
     "converter_swap": "交换货币",
     "converter_choose_pair": "请选择来源和目标货币以开始转换。",
     "converter_choose_currencies": "选择货币",
@@ -37,7 +37,7 @@
     "converter_continue": "继续",
     "amount_label": "金额",
     "encyclopedia_currency_title": "货币百科",
-    "encyclopedia_search": "搜索货币...",
+    "encyclopedia_search": "搜索货币…",
     "encyclopedia_not_found": "未找到货币。",
     "favorites_add": "加入收藏",
     "favorites_remove": "移出收藏",
@@ -63,12 +63,15 @@
         "placeholders": {
             "version": {
                 "type": "String",
-                "example": "1.0.0"
+                "example": "1.0.1"
             }
         }
     },
-    "rate_info_refreshing": "正在刷新汇率...",
+    "rate_info_refreshing": "正在刷新汇率…",
     "rate_info_cached": "缓存",
     "rate_info_live": "实时",
-    "rate_info_disclaimer": "汇率仅供参考，请以实际报价为准。"
+    "rate_info_disclaimer": "汇率仅供参考，请以实际报价为准。",
+    "error_network_unavailable": "网络错误—无法连接到服务器。请检查您的网络连接后重试。",
+    "error_service_unavailable": "无法连接更新服务，请稍后再试。",
+    "error_generic": "发生错误，请重试。"
 }

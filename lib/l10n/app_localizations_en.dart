@@ -199,4 +199,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rate_info_disclaimer => 'Exchange rates are for reference only.';
+
+  @override
+  String get error_network_unavailable =>
+      'Network error — unable to reach the server. Please check your internet connection and try again.';
+
+  @override
+  String get error_service_unavailable =>
+      'Unable to reach the remote service right now. Please try again later.';
+
+  @override
+  String get error_generic => 'Something went wrong. Please try again.';
 }

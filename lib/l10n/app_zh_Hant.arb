@@ -25,8 +25,8 @@
     "converter_favorites": "收藏",
     "converter_from": "從",
     "converter_to": "到",
-    "converter_from_hint": "來源貨幣...",
-    "converter_to_hint": "目標貨幣...",
+    "converter_from_hint": "來源貨幣…",
+    "converter_to_hint": "目標貨幣…",
     "converter_swap": "交換貨幣",
     "converter_choose_pair": "請選擇來源與目標貨幣以開始轉換。",
     "converter_choose_currencies": "選擇貨幣",
@@ -37,7 +37,7 @@
     "converter_continue": "繼續",
     "amount_label": "金額",
     "encyclopedia_currency_title": "貨幣百科",
-    "encyclopedia_search": "搜尋貨幣...",
+    "encyclopedia_search": "搜尋貨幣…",
     "encyclopedia_not_found": "找不到貨幣。",
     "favorites_add": "加入收藏",
     "favorites_remove": "移出收藏",
@@ -63,12 +63,15 @@
         "placeholders": {
             "version": {
                 "type": "String",
-                "example": "1.0.0"
+                "example": "1.0.1"
             }
         }
     },
-    "rate_info_refreshing": "正在更新匯率...",
+    "rate_info_refreshing": "正在更新匯率…",
     "rate_info_cached": "快取",
     "rate_info_live": "即時",
-    "rate_info_disclaimer": "匯率僅供參考，請以實際報價為準。"
+    "rate_info_disclaimer": "匯率僅供參考，請以實際報價為準。",
+    "error_network_unavailable": "網絡錯誤—無法連線到伺服器。請檢查您的網路連線後重試。",
+    "error_service_unavailable": "無法連線更新服務，請稍後再試。",
+    "error_generic": "發生錯誤，請重試。"
 }

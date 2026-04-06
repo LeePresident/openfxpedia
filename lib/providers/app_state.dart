@@ -45,6 +45,8 @@ class AppState extends ChangeNotifier {
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
+  String? _errorCode;
+  String? get errorCode => _errorCode;
 
   ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;
@@ -149,9 +151,37 @@ class AppState extends ChangeNotifier {
     await _cacheService.setLocaleCode(code);
 
     if (_currencies.isNotEmpty) {
+      // Remember previously selected currencies by ISO code so we can
+      // re-resolve them after reloading the catalog in the new locale.
+      final oldBaseIso = _baseCurrency?.isoCode;
+      final oldTargetIso = _targetCurrency?.isoCode;
+
       _currencies = await _catalogService.getCurrencies(
         locale: _effectiveLocale,
       );
+
+      if (_currencies.isNotEmpty) {
+        if (oldBaseIso != null) {
+          _baseCurrency = _currencies.firstWhere(
+              (c) => c.isoCode.toLowerCase() == oldBaseIso.toLowerCase(),
+              orElse: () => _baseCurrency ?? _currencies.first);
+        }
+
+        if (oldTargetIso != null) {
+          _targetCurrency = _currencies.firstWhere(
+              (c) => c.isoCode.toLowerCase() == oldTargetIso.toLowerCase(),
+              orElse: () =>
+                  _targetCurrency ??
+                  (_currencies.length > 1
+                      ? _currencies.firstWhere(
+                          (c) =>
+                              c.isoCode.toLowerCase() !=
+                              oldBaseIso?.toLowerCase(),
+                          orElse: () => _currencies.first)
+                      : _currencies.first));
+        }
+      }
+
       notifyListeners();
     }
   }
@@ -274,6 +304,7 @@ class AppState extends ChangeNotifier {
       _lastRate = result.rate;
       _rateFromCache = result.fromCache;
       _errorMessage = null;
+      _errorCode = null;
       notifyListeners();
     } catch (e) {
       _setError(e.toString());
@@ -302,6 +333,7 @@ class AppState extends ChangeNotifier {
   void _setLoading() {
     _loadingState = LoadingState.loading;
     _errorMessage = null;
+    _errorCode = null;
     notifyListeners();
   }
 
@@ -311,9 +343,53 @@ class AppState extends ChangeNotifier {
   }
 
   void _setError(String message) {
+    // Keep the original technical message in logs for debugging
+    // and show a concise, layman-friendly message to users.
+    final friendly = _friendlyMessageFor(message);
+    debugPrint('Error (technical): $message');
+
     _loadingState = LoadingState.error;
-    _errorMessage = message;
+    _errorMessage = friendly;
+    _errorCode = _errorCodeFor(message);
     notifyListeners();
+  }
+
+  String _friendlyMessageFor(String raw) {
+    final lower = raw.toLowerCase();
+
+    // Network/DNS related issues
+    if (lower.contains('socketexception') ||
+        lower.contains('failed host lookup') ||
+        lower.contains('host lookup') ||
+        lower.contains('network is unreachable') ||
+        (lower.contains('os error') && lower.contains('errno'))) {
+      return 'Network error — unable to reach the server. Please check your internet connection and try again.';
+    }
+
+    // Specific common cases: API or update server unreachable
+    if (lower.contains('api.github.com') || lower.contains('currency-api')) {
+      return 'Unable to reach the remote service right now. Please try again later.';
+    }
+
+    // Generic fallback: short friendly message
+    return 'Something went wrong. Please try again.';
+  }
+
+  String _errorCodeFor(String raw) {
+    final lower = raw.toLowerCase();
+    if (lower.contains('socketexception') ||
+        lower.contains('failed host lookup') ||
+        lower.contains('host lookup') ||
+        lower.contains('network is unreachable') ||
+        (lower.contains('os error') && lower.contains('errno'))) {
+      return 'error_network_unavailable';
+    }
+
+    if (lower.contains('api.github.com') || lower.contains('currency-api')) {
+      return 'error_service_unavailable';
+    }
+
+    return 'error_generic';
   }
 
   void _loadThemeMode() {

@@ -471,6 +471,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exchange rates are for reference only.'**
   String get rate_info_disclaimer;
+
+  /// No description provided for @error_network_unavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error — unable to reach the server. Please check your internet connection and try again.'**
+  String get error_network_unavailable;
+
+  /// No description provided for @error_service_unavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to reach the remote service right now. Please try again later.'**
+  String get error_service_unavailable;
+
+  /// No description provided for @error_generic.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get error_generic;
 }
 
 class _AppLocalizationsDelegate

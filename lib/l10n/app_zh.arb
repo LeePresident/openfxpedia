@@ -25,8 +25,8 @@
     "converter_favorites": "Favorites",
     "converter_from": "From",
     "converter_to": "To",
-    "converter_from_hint": "From currency...",
-    "converter_to_hint": "To currency...",
+    "converter_from_hint": "From currency…",
+    "converter_to_hint": "To currency…",
     "converter_swap": "Swap currencies",
     "converter_choose_pair": "Choose a from and to currency to begin converting.",
     "converter_choose_currencies": "Choose your currencies",
@@ -37,7 +37,7 @@
     "converter_continue": "Continue",
     "amount_label": "Amount",
     "encyclopedia_currency_title": "Currency Encyclopedia",
-    "encyclopedia_search": "Search currencies...",
+    "encyclopedia_search": "Search currencies…",
     "encyclopedia_not_found": "No currencies found.",
     "favorites_add": "Add to favorites",
     "favorites_remove": "Remove from favorites",
@@ -63,12 +63,15 @@
         "placeholders": {
             "version": {
                 "type": "String",
-                "example": "1.0.0"
+                "example": "1.0.1"
             }
         }
     },
-    "rate_info_refreshing": "Refreshing rates...",
+    "rate_info_refreshing": "Refreshing rates…",
     "rate_info_cached": "cached",
     "rate_info_live": "live",
-    "rate_info_disclaimer": "Exchange rates are for reference only."
+    "rate_info_disclaimer": "Exchange rates are for reference only.",
+    "error_network_unavailable": "Network error—unable to connect to the server. Please check your internet connection and try again.",
+    "error_service_unavailable": "Unable to connect to the update service. Please try again later.",
+    "error_generic": "An error occurred. Please try again."
 }

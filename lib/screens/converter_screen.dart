@@ -13,6 +13,17 @@ enum _FavoriteFieldChoice { from, to }
 class ConverterScreen extends StatelessWidget {
   const ConverterScreen({super.key});
 
+  String _localizedErrorForCode(AppLocalizations l10n, String code) {
+    switch (code) {
+      case 'error_network_unavailable':
+        return l10n.error_network_unavailable;
+      case 'error_service_unavailable':
+        return l10n.error_service_unavailable;
+      default:
+        return l10n.error_generic;
+    }
+  }
+
   Future<void> _showFavoriteChoiceDialog(
     BuildContext context,
     AppState state,
@@ -83,7 +94,9 @@ class ConverterScreen extends StatelessWidget {
               ? Center(
                   child: isLoading
                       ? const CircularProgressIndicator()
-                      : Text(state.errorMessage ?? 'Loading currencies...'),
+                      : Text(state.errorCode != null
+                          ? _localizedErrorForCode(l10n, state.errorCode!)
+                          : 'Loading currencies...'),
                 )
               : SingleChildScrollView(
                   padding: const EdgeInsets.all(16.0),
@@ -152,17 +165,38 @@ class ConverterScreen extends StatelessWidget {
                             children: [
                               if (isLoading)
                                 const Center(child: CircularProgressIndicator())
-                              else if (state.errorMessage != null)
+                              else if (state.errorCode != null ||
+                                  state.errorMessage != null)
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Icon(Icons.warning_amber,
-                                        color: Colors.orange),
+                                    Icon(
+                                      Icons.warning_amber,
+                                      color:
+                                          Theme.of(context).colorScheme.error,
+                                    ),
                                     const SizedBox(width: 8),
                                     Expanded(
-                                      child: Text(
-                                        state.errorMessage!,
-                                        style: const TextStyle(
-                                            color: Colors.orange),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            // Prefer localized message via errorCode when available
+                                            state.errorCode != null
+                                                ? _localizedErrorForCode(
+                                                    AppLocalizations.of(
+                                                        context),
+                                                    state.errorCode!,
+                                                  )
+                                                : (state.errorMessage ?? ''),
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .error),
+                                          ),
+                                          // Technical details intentionally hidden from users.
+                                        ],
                                       ),
                                     ),
                                   ],

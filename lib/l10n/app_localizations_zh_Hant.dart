@@ -195,4 +195,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get rate_info_disclaimer => '匯率僅供參考，請以實際報價為準。';
+
+  @override
+  String get error_network_unavailable => '網絡錯誤 — 無法連線到伺服器。請檢查您的網路連線後重試。';
+
+  @override
+  String get error_service_unavailable => '無法連線更新服務，請稍後再試。';
+
+  @override
+  String get error_generic => '發生錯誤，請重試。';
 }
