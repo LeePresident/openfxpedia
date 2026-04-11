@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'models/currency.dart';
@@ -16,38 +17,237 @@ import 'services/favorites_service.dart';
 import 'services/refresh_scheduler.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final binding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
 
-  final cache = CacheService();
-  await cache.init();
+  runApp(const _BootstrapApp());
+}
 
-  final exchangeClient = ExchangeClient();
-  final conversionService =
-      ConversionService(client: exchangeClient, cache: cache);
-  final catalogService =
-      CurrencyCatalogService(client: exchangeClient, cache: cache);
-  final favoritesService = FavoritesService(cache: cache);
+class _BootstrapApp extends StatefulWidget {
+  const _BootstrapApp();
 
-  final appState = AppState(
-    conversionService: conversionService,
-    catalogService: catalogService,
-    favoritesService: favoritesService,
-    cacheService: cache,
-  );
+  @override
+  State<_BootstrapApp> createState() => _BootstrapAppState();
+}
 
-  final refreshScheduler = RefreshScheduler(onRefresh: () {
-    Future.microtask(() => appState.refreshRates());
-  });
-  refreshScheduler.start(initialRun: true);
+class _BootstrapAppState extends State<_BootstrapApp> {
+  AppState? _appState;
+  RefreshScheduler? _refreshScheduler;
+  Object? _startupError;
 
-  appState.initialize();
+  @override
+  void initState() {
+    super.initState();
+    _bootstrap();
+  }
 
-  runApp(
-    ChangeNotifierProvider.value(
-      value: appState,
-      child: const OpenFXpediaApp(),
-    ),
-  );
+  @override
+  void dispose() {
+    _refreshScheduler?.stop();
+    _appState?.dispose();
+    super.dispose();
+  }
+
+  Future<void> _bootstrap() async {
+    final startupTimer = Stopwatch()..start();
+
+    try {
+      final appState = await _createAppState();
+      final refreshScheduler = RefreshScheduler(onRefresh: () {
+        Future.microtask(() => appState.refreshRates());
+      });
+      refreshScheduler.start(initialRun: true);
+
+      await appState.initialize();
+
+      final remainingSplashTime =
+          const Duration(seconds: 2) - startupTimer.elapsed;
+      if (!remainingSplashTime.isNegative) {
+        await Future.delayed(remainingSplashTime);
+      }
+
+      if (!mounted) {
+        refreshScheduler.stop();
+        appState.dispose();
+        return;
+      }
+
+      FlutterNativeSplash.remove();
+
+      setState(() {
+        _appState = appState;
+        _refreshScheduler = refreshScheduler;
+      });
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+
+      FlutterNativeSplash.remove();
+
+      setState(() {
+        _startupError = error;
+      });
+    }
+  }
+
+  Future<AppState> _createAppState() async {
+    final cache = CacheService();
+    await cache.init();
+
+    final exchangeClient = ExchangeClient();
+    final conversionService =
+        ConversionService(client: exchangeClient, cache: cache);
+    final catalogService =
+        CurrencyCatalogService(client: exchangeClient, cache: cache);
+    final favoritesService = FavoritesService(cache: cache);
+
+    return AppState(
+      conversionService: conversionService,
+      catalogService: catalogService,
+      favoritesService: favoritesService,
+      cacheService: cache,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_appState != null) {
+      return ChangeNotifierProvider.value(
+        value: _appState!,
+        child: const OpenFXpediaApp(),
+      );
+    }
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      theme: _buildLightTheme(),
+      darkTheme: _buildDarkTheme(),
+      home: _startupError == null
+          ? const _StartupSplashScreen()
+          : _StartupErrorScreen(error: _startupError!),
+    );
+  }
+}
+
+class _StartupSplashScreen extends StatelessWidget {
+  const _StartupSplashScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+
+    return Scaffold(
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              scheme.surface,
+              scheme.surfaceContainerHighest.withValues(alpha: 0.55),
+            ],
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(28),
+                decoration: BoxDecoration(
+                  color: theme.cardColor,
+                  borderRadius: BorderRadius.circular(32),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.08),
+                      blurRadius: 28,
+                      offset: const Offset(0, 14),
+                    ),
+                  ],
+                ),
+                child: Image.asset(
+                  'assets/branding/openfxpedia_logo.png',
+                  width: 120,
+                  height: 120,
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'OpenFXpedia',
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: -0.5,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Loading currencies and cached rates',
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: 28),
+              SizedBox(
+                width: 28,
+                height: 28,
+                child: CircularProgressIndicator(
+                  strokeWidth: 3,
+                  color: scheme.primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _StartupErrorScreen extends StatelessWidget {
+  const _StartupErrorScreen({required this.error});
+
+  final Object error;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Scaffold(
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 420),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  size: 48,
+                  color: theme.colorScheme.error,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Startup failed',
+                  style: theme.textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  error.toString(),
+                  style: theme.textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class OpenFXpediaApp extends StatelessWidget {

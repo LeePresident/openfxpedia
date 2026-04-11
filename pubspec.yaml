@@ -19,6 +19,7 @@ dependencies:
   intl: ^0.20.2
   package_info_plus: ^4.0.0
   url_launcher: ^6.3.1
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +32,7 @@ flutter:
   uses-material-design: true
   assets:
     - LICENSE
+    - assets/branding/
     - assets/icons/
     - assets/data/fiat_currencies.json
     - assets/data/fiat_currency_overlays/
@@ -45,3 +47,15 @@ flutter_launcher_icons:
     generate: true
     image_path: assets/branding/openfxpedia_logo.png
     icon_size: 256
+
+flutter_native_splash:
+  color: "#F7F9FC"
+  color_dark: "#101417"
+  image: assets/branding/openfxpedia_logo.png
+  image_dark: assets/branding/openfxpedia_logo.png
+  android: true
+  android_12:
+    color: "#F7F9FC"
+    color_dark: "#101417"
+    image: assets/branding/openfxpedia_logo.png
+    image_dark: assets/branding/openfxpedia_logo.png
