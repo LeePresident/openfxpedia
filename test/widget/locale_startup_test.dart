@@ -145,8 +145,8 @@ class _InMemoryCacheService extends CacheService {
 }
 
 class _FakeConversionService extends ConversionService {
-  _FakeConversionService({required CacheService cache})
-      : super(client: ExchangeClient(), cache: cache);
+  _FakeConversionService({required super.cache})
+      : super(client: ExchangeClient());
 
   @override
   Future<ConversionResult> convert(
@@ -161,8 +161,7 @@ class _FakeConversionService extends ConversionService {
 class _FakeCatalogService extends CurrencyCatalogService {
   Locale? lastLocale;
 
-  _FakeCatalogService({required CacheService cache})
-      : super(client: ExchangeClient(), cache: cache);
+  _FakeCatalogService({required super.cache}) : super(client: ExchangeClient());
 
   @override
   Future<List<Currency>> getCurrencies({

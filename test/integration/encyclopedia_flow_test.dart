@@ -1,7 +1,9 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
+import 'package:openfxpedia/l10n/app_localizations.dart';
 import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/providers/app_state.dart';
 import 'package:openfxpedia/screens/encyclopedia_screen.dart';
@@ -123,7 +125,16 @@ void main() {
     await tester.pumpWidget(
       ChangeNotifierProvider<AppState>.value(
         value: state,
-        child: const MaterialApp(home: EncyclopediaScreen()),
+        child: const MaterialApp(
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          home: EncyclopediaScreen(),
+        ),
       ),
     );
 

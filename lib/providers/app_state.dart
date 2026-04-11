@@ -144,7 +144,9 @@ class AppState extends ChangeNotifier {
     }
 
     if ((_locale?.languageCode == locale?.languageCode) &&
-        (_locale?.scriptCode == locale?.scriptCode)) return;
+        (_locale?.scriptCode == locale?.scriptCode)) {
+      return;
+    }
 
     _locale = locale;
     notifyListeners();

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,20 +15,19 @@ void main() {
     tester,
   ) async {
     await tester.pumpWidget(
-      MaterialApp(
-        locale:
-            const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
-        supportedLocales: const [
+      const MaterialApp(
+        locale: Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+        supportedLocales: [
           Locale('en'),
           Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
         ],
-        localizationsDelegates: const [
+        localizationsDelegates: [
           _PartialUiDelegate(),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        home: const _UiFallbackProbe(),
+        home: _UiFallbackProbe(),
       ),
     );
 
@@ -125,6 +123,7 @@ class _PartialUiLocalizations extends AppLocalizationsEn {
   _PartialUiLocalizations() : super('zh_Hans');
 
   @override
+  // ignore: non_constant_identifier_names
   String get settings_language => '语言';
 }
 

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 import 'package:openfxpedia/l10n/app_localizations.dart';
-import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/providers/app_state.dart';
 import 'package:openfxpedia/screens/encyclopedia_screen.dart';
 import 'package:openfxpedia/services/cache_service.dart';
@@ -26,7 +24,7 @@ void main() {
 
       final cache = _StubCacheService();
       final exchange = _FakeExchangeClient();
-      final catalog = _FakeCurrencyCatalogService(
+      final catalog = CurrencyCatalogService(
         client: exchange,
         cache: cache,
         bundle: _OverlayAssetBundle(
@@ -166,22 +164,6 @@ class _FakeExchangeClient extends ExchangeClient {
 
   @override
   Future<Map<String, double>> fetchRatesFor(String base) async => {'usd': 1.0};
-}
-
-class _FakeCurrencyCatalogService extends CurrencyCatalogService {
-  _FakeCurrencyCatalogService({
-    required super.client,
-    required super.cache,
-    super.bundle,
-  });
-
-  @override
-  Future<List<Currency>> getCurrencies({
-    bool forceRefresh = false,
-    Locale? locale,
-  }) async {
-    return super.getCurrencies(forceRefresh: forceRefresh, locale: locale);
-  }
 }
 
 class _OverlayAssetBundle extends CachingAssetBundle {
