@@ -140,7 +140,7 @@ License
 Contact / Acknowledgements
 
 - Maintainer: project team (open a GitHub issue or PR for questions).
-- Data sources: thanks to the `exchange-api` project and the `@fawazahmed0/currency-api` CDN.
+- Data sources: thanks to the `@fawazahmed0/exchange-api` project and the `@fawazahmed0/currency-api` CDN.
 
 ---
 Notes: keep `pubspec.yaml` and `assets/` synchronized when adding icons or images.
