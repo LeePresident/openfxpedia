@@ -2,7 +2,6 @@
 import '../services/exchange_client.dart';
 import '../services/cache_service.dart';
 import '../models/exchange_rate.dart';
-import '../core/config.dart';
 
 class ConversionResult {
   final double amount;
@@ -37,22 +36,38 @@ class ConversionService {
     Map<String, double> rates;
     DateTime timestamp;
     bool fromCache = false;
+    String source = 'cache';
 
-    final cached = _cache.getCachedRates(b);
-    if (cached.rates != null && !cached.stale) {
+    final cached = _cache.getCachedRateSnapshot(b);
+    final freshCacheHasRequestedRate = cached.rates?.containsKey(t) ?? false;
+    final canUseFreshPrimaryCache = cached.rates != null &&
+        !cached.stale &&
+        cached.source == 'frankfurter' &&
+        freshCacheHasRequestedRate;
+
+    if (canUseFreshPrimaryCache) {
       rates = cached.rates!;
       timestamp = cached.timestamp!;
       fromCache = true;
+      source = cached.source ?? 'cache';
     } else {
       try {
-        rates = await _client.fetchRatesFor(b);
-        timestamp = DateTime.now().toUtc();
-        await _cache.putRates(b, rates, timestamp);
+        final snapshot = await _client.fetchRateSnapshotFor(b, target: t);
+        rates = snapshot.rates;
+        timestamp = snapshot.quotedAt;
+        source = snapshot.sourceId;
+        await _cache.putRateSnapshot(
+          b,
+          rates,
+          timestamp,
+          source: snapshot.sourceId,
+        );
       } catch (_) {
         if (cached.rates != null) {
           rates = cached.rates!;
           timestamp = cached.timestamp!;
           fromCache = true;
+          source = cached.source ?? 'cache';
         } else {
           rethrow;
         }
@@ -73,15 +88,20 @@ class ConversionService {
         targetCurrency: t,
         rate: rateValue,
         timestamp: timestamp,
-        source: fromCache ? 'cache' : AppConfig.exchangeApiBase,
+        source: source,
       ),
       fromCache: fromCache,
     );
   }
 
   Future<void> refreshRates(String base) async {
-    final rates = await _client.fetchRatesFor(base.toLowerCase());
-    await _cache.putRates(base.toLowerCase(), rates, DateTime.now().toUtc());
+    final snapshot = await _client.fetchRateSnapshot(base.toLowerCase());
+    await _cache.putRateSnapshot(
+      base.toLowerCase(),
+      snapshot.rates,
+      snapshot.quotedAt,
+      source: snapshot.sourceId,
+    );
   }
 
   double _roundToDecimals(double value, int places) {

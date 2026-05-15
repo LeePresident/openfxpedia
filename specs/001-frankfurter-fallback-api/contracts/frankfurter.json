@@ -1,0 +1,39 @@
+{
+    "description": "Sample response shape from Frankfurter /latest endpoint",
+    "sample": {
+        "amount": 1.0,
+        "base": "USD",
+        "date": "2026-05-07",
+        "rates": {
+            "EUR": 0.92,
+            "GBP": 0.79
+        }
+    },
+    "schema": {
+        "type": "object",
+        "properties": {
+            "amount": {
+                "type": "number"
+            },
+            "base": {
+                "type": "string"
+            },
+            "date": {
+                "type": "string",
+                "format": "date"
+            },
+            "rates": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "number"
+                }
+            }
+        },
+        "required": [
+            "amount",
+            "base",
+            "date",
+            "rates"
+        ]
+    }
+}

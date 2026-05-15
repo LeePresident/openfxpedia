@@ -194,7 +194,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get rate_info_live => '实时';
 
   @override
+  String rate_info_source_with_provider(String source, String provider) {
+    return '$source，来自$provider';
+  }
+
+  @override
   String get rate_info_disclaimer => '汇率仅供参考，请以实际报价为准。';
+
+  @override
+  String get rate_info_source_prefix => '来源：';
+
+  @override
+  String get provider_frankfurter => 'Frankfurter';
+
+  @override
+  String get provider_exchange_api => '汇率 API';
 
   @override
   String get error_network_unavailable => '网络错误 — 无法连接到服务器。请检查您的网络连接后重试。';

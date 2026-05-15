@@ -1,62 +1,233 @@
 {
     "@@locale": "zh_Hant",
     "appTitle": "外匯百科",
+    "@appTitle": {
+        "description": "應用程式的標題。"
+    },
     "settings_language": "語言",
+    "@settings_language": {
+        "description": "語言設定選項的標籤。"
+    },
     "language_english": "英文",
+    "@language_english": {
+        "description": "英文語言名稱。"
+    },
     "language_simplified_chinese": "簡體中文",
+    "@language_simplified_chinese": {
+        "description": "簡體中文語言名稱。"
+    },
     "language_traditional_chinese": "繁體中文",
+    "@language_traditional_chinese": {
+        "description": "繁體中文語言名稱。"
+    },
     "converter_title": "轉換器",
+    "@converter_title": {
+        "description": "轉換器畫面的標題。"
+    },
     "encyclopedia_title": "百科",
+    "@encyclopedia_title": {
+        "description": "百科畫面的標題。"
+    },
     "settings_title": "設定",
+    "@settings_title": {
+        "description": "設定畫面的標題。"
+    },
     "settings_theme": "主題",
+    "@settings_theme": {
+        "description": "主題設定選項的標籤。"
+    },
     "settings_app_version": "應用程式版本",
+    "@settings_app_version": {
+        "description": "設定中應用程式版本顯示的標籤。"
+    },
     "settings_check_updates": "檢查更新",
+    "@settings_check_updates": {
+        "description": "檢查更新選項的標籤。"
+    },
     "settings_changelogs": "更新紀錄",
+    "@settings_changelogs": {
+        "description": "檢視更新紀錄的標籤。"
+    },
     "settings_changelogs_subtitle": "查看所有版本的簡短更新紀錄",
+    "@settings_changelogs_subtitle": {
+        "description": "解釋更新紀錄功能的副標題。"
+    },
     "settings_license": "授權",
+    "@settings_license": {
+        "description": "授權資訊的標籤。"
+    },
     "settings_select_theme": "選擇主題",
+    "@settings_select_theme": {
+        "description": "選擇主題的對話方塊標題。"
+    },
     "settings_system": "跟隨系統",
+    "@settings_system": {
+        "description": "系統/自動主題的主題選項。"
+    },
     "settings_light": "淺色",
+    "@settings_light": {
+        "description": "淺色主題的主題選項。"
+    },
     "settings_dark": "深色",
+    "@settings_dark": {
+        "description": "深色主題的主題選項。"
+    },
     "settings_language_dialog_title": "選擇語言",
+    "@settings_language_dialog_title": {
+        "description": "語言選擇對話方塊的標題。"
+    },
     "settings_language_dialog_subtitle": "選擇應用程式語言。",
+    "@settings_language_dialog_subtitle": {
+        "description": "語言選擇對話方塊的副標題。"
+    },
     "converter_currency_title": "貨幣轉換器",
+    "@converter_currency_title": {
+        "description": "貨幣轉換器的標題。"
+    },
     "converter_refresh_rates": "更新匯率",
+    "@converter_refresh_rates": {
+        "description": "更新匯率按鈕的標籤。"
+    },
     "converter_favorites": "收藏",
+    "@converter_favorites": {
+        "description": "轉換器中收藏功能的標籤。"
+    },
     "converter_from": "從",
+    "@converter_from": {
+        "description": "'來源'貨幣欄位的標籤。"
+    },
     "converter_to": "到",
+    "@converter_to": {
+        "description": "'目標'貨幣欄位的標籤。"
+    },
     "converter_from_hint": "來源貨幣…",
+    "@converter_from_hint": {
+        "description": "'來源'貨幣輸入欄位的提示文字。"
+    },
     "converter_to_hint": "目標貨幣…",
+    "@converter_to_hint": {
+        "description": "'目標'貨幣輸入欄位的提示文字。"
+    },
     "converter_swap": "交換貨幣",
+    "@converter_swap": {
+        "description": "交換來源和目標貨幣按鈕的標籤。"
+    },
     "converter_choose_pair": "請選擇來源與目標貨幣以開始轉換。",
+    "@converter_choose_pair": {
+        "description": "提示使用者選擇貨幣的訊息。"
+    },
     "converter_choose_currencies": "選擇貨幣",
+    "@converter_choose_currencies": {
+        "description": "貨幣選擇對話方塊的標題。"
+    },
     "converter_currency_prompt": "要將這個貨幣填入哪個欄位？",
+    "@converter_currency_prompt": {
+        "description": "提示選擇要填充的欄位。"
+    },
     "converter_cancel": "取消",
+    "@converter_cancel": {
+        "description": "轉換器中取消按鈕的標籤。"
+    },
     "converter_from_field": "從",
+    "@converter_from_field": {
+        "description": "貨幣選擇對話方塊中'來源'欄位的標籤。"
+    },
     "converter_to_field": "到",
+    "@converter_to_field": {
+        "description": "貨幣選擇對話方塊中'目標'欄位的標籤。"
+    },
     "converter_continue": "繼續",
+    "@converter_continue": {
+        "description": "繼續按鈕的標籤。"
+    },
     "amount_label": "金額",
+    "@amount_label": {
+        "description": "金額輸入欄位的標籤。"
+    },
     "encyclopedia_currency_title": "貨幣百科",
+    "@encyclopedia_currency_title": {
+        "description": "貨幣百科的標題。"
+    },
     "encyclopedia_search": "搜尋貨幣…",
+    "@encyclopedia_search": {
+        "description": "貨幣搜尋欄位的提示文字。"
+    },
     "encyclopedia_not_found": "找不到貨幣。",
+    "@encyclopedia_not_found": {
+        "description": "未找到符合貨幣時的訊息。"
+    },
     "favorites_add": "加入收藏",
+    "@favorites_add": {
+        "description": "將貨幣新增到收藏的標籤。"
+    },
     "favorites_remove": "移出收藏",
+    "@favorites_remove": {
+        "description": "從收藏中移除貨幣的標籤。"
+    },
     "detail_cancel": "取消",
+    "@detail_cancel": {
+        "description": "詳情檢視中取消按鈕的標籤。"
+    },
     "detail_from_field": "從",
+    "@detail_from_field": {
+        "description": "詳情檢視中'來源'欄位的標籤。"
+    },
     "detail_to_field": "到",
+    "@detail_to_field": {
+        "description": "詳情檢視中'目標'欄位的標籤。"
+    },
     "detail_currency_prompt": "要將這個貨幣填入哪個欄位？",
+    "@detail_currency_prompt": {
+        "description": "詳情檢視中的欄位選擇提示。"
+    },
     "detail_remove_favorite": "移出收藏",
+    "@detail_remove_favorite": {
+        "description": "在詳情檢視中移除收藏的標籤。"
+    },
     "detail_add_favorite": "加入收藏",
+    "@detail_add_favorite": {
+        "description": "在詳情檢視中新增收藏的標籤。"
+    },
     "detail_iso_code": "ISO 代碼",
+    "@detail_iso_code": {
+        "description": "詳情檢視中 ISO 貨幣代碼的標籤。"
+    },
     "detail_name": "名稱",
+    "@detail_name": {
+        "description": "詳情檢視中貨幣名稱的標籤。"
+    },
     "detail_symbol": "符號",
+    "@detail_symbol": {
+        "description": "詳情檢視中貨幣符號的標籤。"
+    },
     "detail_regions": "地區",
+    "@detail_regions": {
+        "description": "使用貨幣的地區標籤。"
+    },
     "detail_description": "簡介",
+    "@detail_description": {
+        "description": "貨幣簡介的標籤。"
+    },
     "detail_convert": "轉換",
+    "@detail_convert": {
+        "description": "詳情檢視中轉換按鈕的標籤。"
+    },
     "update_available": "有可用更新",
+    "@update_available": {
+        "description": "更新可用對話方塊的標題。"
+    },
     "update_cancel": "取消",
+    "@update_cancel": {
+        "description": "更新對話方塊中取消按鈕的標籤。"
+    },
     "update_download": "下載",
+    "@update_download": {
+        "description": "更新對話方塊中下載按鈕的標籤。"
+    },
     "update_latest": "目前已是最新版本",
+    "@update_latest": {
+        "description": "表示應用程式已是最新版本的訊息。"
+    },
     "settings_latest_version": "您目前已是最新版本（{version}）。",
     "@settings_latest_version": {
         "description": "當應用程式已是最新版本時顯示的訊息。",
@@ -68,10 +239,57 @@
         }
     },
     "rate_info_refreshing": "正在更新匯率…",
+    "@rate_info_refreshing": {
+        "description": "正在更新匯率時顯示的訊息。"
+    },
     "rate_info_cached": "快取",
+    "@rate_info_cached": {
+        "description": "表示匯率來自快取的標籤。"
+    },
     "rate_info_live": "即時",
+    "@rate_info_live": {
+        "description": "表示匯率是即時的標籤。"
+    },
+    "rate_info_source_with_provider": "{source}，來自{provider}",
+    "@rate_info_source_with_provider": {
+        "description": "匯率資訊中顯示來源狀態與提供方。",
+        "placeholders": {
+            "source": {
+                "type": "String",
+                "example": "即時"
+            },
+            "provider": {
+                "type": "String",
+                "example": "Frankfurter"
+            }
+        }
+    },
+    "rate_info_source_prefix": "來源：",
+    "@rate_info_source_prefix": {
+        "description": "匯率來源的標籤前綴。"
+    },
+    "provider_frankfurter": "Frankfurter",
+    "@provider_frankfurter": {
+        "description": "Frankfurter 匯率提供方的名稱。"
+    },
+    "provider_exchange_api": "Exchange API",
+    "@provider_exchange_api": {
+        "description": "Exchange API 提供方的名稱。"
+    },
     "rate_info_disclaimer": "匯率僅供參考，請以實際報價為準。",
+    "@rate_info_disclaimer": {
+        "description": "關於匯率準確性的免責聲明。"
+    },
     "error_network_unavailable": "網絡錯誤—無法連線到伺服器。請檢查您的網路連線後重試。",
+    "@error_network_unavailable": {
+        "description": "網路不可用時的錯誤訊息。"
+    },
     "error_service_unavailable": "無法連線更新服務，請稍後再試。",
-    "error_generic": "發生錯誤，請重試。"
+    "@error_service_unavailable": {
+        "description": "服務不可用時的錯誤訊息。"
+    },
+    "error_generic": "發生錯誤，請重試。",
+    "@error_generic": {
+        "description": "通用錯誤訊息。"
+    }
 }

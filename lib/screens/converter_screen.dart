@@ -232,6 +232,37 @@ class ConverterScreen extends StatelessWidget {
                                       fontStyle: FontStyle.italic,
                                     ),
                               ),
+                              const SizedBox(height: 4),
+                              // Localized source label under the disclaimer.
+                              Builder(builder: (ctx) {
+                                final providerSrc = state.lastRate?.source;
+                                String providerLabel;
+                                if (providerSrc != null) {
+                                  final s = providerSrc.toLowerCase();
+                                  if (s.contains('frank')) {
+                                    providerLabel = l10n.provider_frankfurter;
+                                  } else {
+                                    providerLabel = l10n.provider_exchange_api;
+                                  }
+                                } else {
+                                  // Fallback to cache flag or generic label
+                                  providerLabel = state.rateFromCache
+                                      ? l10n.provider_exchange_api
+                                      : l10n.provider_frankfurter;
+                                }
+
+                                return Text(
+                                  '${l10n.rate_info_source_prefix} $providerLabel',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      ),
+                                );
+                              }),
                             ],
                           ),
                         ),

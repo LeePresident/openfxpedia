@@ -91,10 +91,11 @@ dart run tool/conversion_benchmark.dart --samples 100 --threshold-ms 2000
 
 APIs and Data Sources
 
-- Exchange rates: https://github.com/fawazahmed0/exchange-api
+- Exchange rates (primary): https://github.com/lineofflight/frankfurter
+- Exchange rates (fallback): https://github.com/fawazahmed0/exchange-api
 - Currency list (ISO 4217): https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json
 
-The app fetches live exchange rates from the exchange-api and uses the CDN JSON as the canonical source for currency metadata. The repository also maintains a curated whitelist asset at `assets/data/fiat_currencies.json` that ships with richer metadata used by the encyclopedia.
+The app fetches live exchange rates from Frankfurter first and falls back to exchange-api only when the primary source is unavailable, times out, or cannot provide the requested rate. The CDN JSON remains the canonical source for currency metadata. The repository also maintains a curated whitelist asset at `assets/data/fiat_currencies.json` that ships with richer metadata used by the encyclopedia.
 
 Assets
 

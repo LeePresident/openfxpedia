@@ -37,6 +37,9 @@ class RateInfoWidget extends StatelessWidget {
     final formatter = DateFormat.yMMMd(l10n.localeName).add_Hm();
     final timeLabel = formatter.format(rate!.timestamp.toLocal());
     final sourceLabel = fromCache ? l10n.rate_info_cached : l10n.rate_info_live;
+    final providerLabel = rate!.source;
+    final sourceWithProvider =
+        l10n.rate_info_source_with_provider(sourceLabel, providerLabel);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -52,7 +55,7 @@ class RateInfoWidget extends StatelessWidget {
         Text(
           '1 ${rate!.baseCurrency.toUpperCase()} = '
           '${rate!.rate.toStringAsFixed(4)} ${rate!.targetCurrency.toUpperCase()} '
-          '- $timeLabel ($sourceLabel)',
+          '- $timeLabel ($sourceWithProvider)',
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ],

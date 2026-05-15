@@ -198,6 +198,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get rate_info_live => 'live';
 
   @override
+  String rate_info_source_with_provider(String source, String provider) {
+    return '$source via $provider';
+  }
+
+  @override
+  String get rate_info_source_prefix => 'Source:';
+
+  @override
+  String get provider_frankfurter => 'Frankfurter';
+
+  @override
+  String get provider_exchange_api => 'Exchange API';
+
+  @override
   String get rate_info_disclaimer => 'Exchange rates are for reference only.';
 
   @override
@@ -402,6 +416,20 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get rate_info_live => '实时';
 
   @override
+  String rate_info_source_with_provider(String source, String provider) {
+    return '$source，来自$provider';
+  }
+
+  @override
+  String get rate_info_source_prefix => '来源：';
+
+  @override
+  String get provider_frankfurter => 'Frankfurter';
+
+  @override
+  String get provider_exchange_api => 'Exchange API';
+
+  @override
   String get rate_info_disclaimer => '汇率仅供参考，请以实际报价为准。';
 
   @override
@@ -602,6 +630,20 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get rate_info_live => '即時';
+
+  @override
+  String rate_info_source_with_provider(String source, String provider) {
+    return '$source，來自$provider';
+  }
+
+  @override
+  String get rate_info_source_prefix => '來源：';
+
+  @override
+  String get provider_frankfurter => 'Frankfurter';
+
+  @override
+  String get provider_exchange_api => 'Exchange API';
 
   @override
   String get rate_info_disclaimer => '匯率僅供參考，請以實際報價為準。';
