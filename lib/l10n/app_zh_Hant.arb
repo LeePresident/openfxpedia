@@ -250,20 +250,6 @@
     "@rate_info_live": {
         "description": "表示匯率是即時的標籤。"
     },
-    "rate_info_source_with_provider": "{source}，來自{provider}",
-    "@rate_info_source_with_provider": {
-        "description": "匯率資訊中顯示來源狀態與提供方。",
-        "placeholders": {
-            "source": {
-                "type": "String",
-                "example": "即時"
-            },
-            "provider": {
-                "type": "String",
-                "example": "Frankfurter"
-            }
-        }
-    },
     "rate_info_source_prefix": "來源：",
     "@rate_info_source_prefix": {
         "description": "匯率來源的標籤前綴。"

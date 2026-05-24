@@ -198,11 +198,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rate_info_live => 'live';
 
   @override
-  String rate_info_source_with_provider(String source, String provider) {
-    return '$source via $provider';
-  }
-
-  @override
   String get rate_info_source_prefix => 'Source:';
 
   @override

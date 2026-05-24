@@ -466,12 +466,6 @@ abstract class AppLocalizations {
   /// **'live'**
   String get rate_info_live;
 
-  /// Source status text with provider name for rate info row.
-  ///
-  /// In en, this message translates to:
-  /// **'{source} via {provider}'**
-  String rate_info_source_with_provider(String source, String provider);
-
   /// Label prefix for the rate source.
   ///
   /// In en, this message translates to:

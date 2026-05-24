@@ -250,20 +250,6 @@
     "@rate_info_live": {
         "description": "Label indicating the rate is live."
     },
-    "rate_info_source_with_provider": "{source} via {provider}",
-    "@rate_info_source_with_provider": {
-        "description": "Source status text with provider name for rate info row.",
-        "placeholders": {
-            "source": {
-                "type": "String",
-                "example": "live"
-            },
-            "provider": {
-                "type": "String",
-                "example": "Frankfurter"
-            }
-        }
-    },
     "rate_info_source_prefix": "Source:",
     "@rate_info_source_prefix": {
         "description": "Label prefix for the rate source."

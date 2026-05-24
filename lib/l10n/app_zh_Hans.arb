@@ -250,20 +250,6 @@
     "@rate_info_live": {
         "description": "表示汇率是实时的标签。"
     },
-    "rate_info_source_with_provider": "{source}，来自{provider}",
-    "@rate_info_source_with_provider": {
-        "description": "汇率信息中展示来源状态与提供方。",
-        "placeholders": {
-            "source": {
-                "type": "String",
-                "example": "实时"
-            },
-            "provider": {
-                "type": "String",
-                "example": "Frankfurter"
-            }
-        }
-    },
     "rate_info_source_prefix": "来源：",
     "@rate_info_source_prefix": {
         "description": "汇率来源的标签前缀。"
