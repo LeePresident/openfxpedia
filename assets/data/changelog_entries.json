@@ -1,5 +1,43 @@
 [
     {
+        "version": "v1.0.2",
+        "date": "2026-05-25",
+        "summary": "Switch primary exchange rate source to Frankfurter; localization and UI polish.",
+        "highlights": [
+            "Use Frankfurter as the primary exchange-rate API with a fallback provider.",
+            "Refactor rate source handling and update RateInfoWidget usage.",
+            "Improve localization: clean up i18n keys and add localized error messages.",
+            "Add splash screen support with dark mode and localized assets.",
+            "Remove obsolete Flutter CI workflow configuration and update README."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.2",
+                "date": "2026-05-25",
+                "summary": "1.0.2 维护版本：切换汇率来源并改进本地化",
+                "highlights": [
+                    "将 Frankfurter 设为主要汇率 API，并添加备用 API",
+                    "重构汇率来源处理并更新 RateInfoWidget 的用法",
+                    "改进本地化：清理 i18n 键并添加本地化错误信息",
+                    "新增支持暗色模式和本地化资源的启动屏",
+                    "移除已过时的 Flutter CI 工作流并更新 README"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.2",
+                "date": "2026-05-25",
+                "summary": "1.0.2 維護版本：切換匯率來源並改進在地化",
+                "highlights": [
+                    "將 Frankfurter 設為主要匯率 API，並加入備用 API",
+                    "重構匯率來源處理並更新 RateInfoWidget 的用法",
+                    "改進在地化：清理 i18n 鍵並新增在地化錯誤訊息",
+                    "新增支援深色模式與在地化資源的啟動畫面",
+                    "移除已過時的 Flutter CI 工作流程並更新 README"
+                ]
+            }
+        }
+    },
+    {
         "version": "v1.0.1",
         "date": "2026-04-05",
         "summary": "Maintenance release for version 1.0.1.",

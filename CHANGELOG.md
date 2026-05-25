@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.2] - 2026-05-25
+
+- Use Frankfurter as the primary exchange-rate API with a reliable fallback.
+- Refactored rate source handling and updated `RateInfoWidget` usage.
+- Enhanced localization: cleaned up i18n keys and added localized error messages.
+- Added splash screen support with dark mode and localized assets.
+- Removed an obsolete Flutter CI workflow configuration and updated the README.
+
+
 ## [1.0.1] - 2026-04-05
 
 - Bumped package version to `1.0.1`.

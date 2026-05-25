@@ -56,7 +56,6 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
               : filtered.isEmpty
                   ? Center(child: Text(l10n.encyclopedia_not_found))
                   : ListView.builder(
-                      cacheExtent: 480,
                       itemExtent: 72,
                       itemCount: filtered.length,
                       itemBuilder: (context, index) {
