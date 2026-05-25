@@ -20,25 +20,41 @@ class CacheService {
     _initialized = true;
   }
 
+  Future<void> putRateSnapshot(
+    String base,
+    Map<String, double> rates,
+    DateTime timestamp, {
+    String? source,
+  }) async {
+    final payload = jsonEncode({
+      'rates': rates,
+      'timestamp': timestamp.toUtc().toIso8601String(),
+      'source': source,
+    });
+    await _ratesBox.put(base.toLowerCase(), payload);
+  }
+
   Future<void> putRates(
     String base,
     Map<String, double> rates,
     DateTime timestamp,
   ) async {
-    final payload = jsonEncode({
-      'rates': rates,
-      'timestamp': timestamp.toUtc().toIso8601String(),
-    });
-    await _ratesBox.put(base.toLowerCase(), payload);
+    await putRateSnapshot(base, rates, timestamp);
   }
 
-  ({Map<String, double>? rates, DateTime? timestamp, bool stale})
-      getCachedRates(
+  ({
+    Map<String, double>? rates,
+    DateTime? timestamp,
+    String? source,
+    bool stale
+  }) getCachedRateSnapshot(
     String base, {
     int ttlHours = AppConfig.rateTtlHours,
   }) {
     final raw = _ratesBox.get(base.toLowerCase());
-    if (raw == null) return (rates: null, timestamp: null, stale: true);
+    if (raw == null) {
+      return (rates: null, timestamp: null, source: null, stale: true);
+    }
 
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final timestamp = DateTime.parse(decoded['timestamp'] as String);
@@ -48,7 +64,25 @@ class CacheService {
     final rates = (decoded['rates'] as Map<String, dynamic>).map(
       (k, v) => MapEntry(k, (v as num).toDouble()),
     );
-    return (rates: rates, timestamp: timestamp, stale: stale);
+    return (
+      rates: rates,
+      timestamp: timestamp,
+      source: decoded['source'] as String?,
+      stale: stale,
+    );
+  }
+
+  ({Map<String, double>? rates, DateTime? timestamp, bool stale})
+      getCachedRates(
+    String base, {
+    int ttlHours = AppConfig.rateTtlHours,
+  }) {
+    final cached = getCachedRateSnapshot(base, ttlHours: ttlHours);
+    return (
+      rates: cached.rates,
+      timestamp: cached.timestamp,
+      stale: cached.stale,
+    );
   }
 
   Future<void> putCurrencyCatalog(

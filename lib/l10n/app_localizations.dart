@@ -100,343 +100,343 @@ abstract class AppLocalizations {
     Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant')
   ];
 
-  /// No description provided for @appTitle.
+  /// The title of the application.
   ///
   /// In en, this message translates to:
   /// **'OpenFXpedia'**
   String get appTitle;
 
-  /// No description provided for @settings_language.
+  /// Label for language settings option.
   ///
   /// In en, this message translates to:
   /// **'Language'**
   String get settings_language;
 
-  /// No description provided for @language_english.
+  /// English language name.
   ///
   /// In en, this message translates to:
   /// **'English'**
   String get language_english;
 
-  /// No description provided for @language_simplified_chinese.
+  /// Simplified Chinese language name.
   ///
   /// In en, this message translates to:
   /// **'Simplified Chinese'**
   String get language_simplified_chinese;
 
-  /// No description provided for @language_traditional_chinese.
+  /// Traditional Chinese language name.
   ///
   /// In en, this message translates to:
   /// **'Traditional Chinese'**
   String get language_traditional_chinese;
 
-  /// No description provided for @converter_title.
+  /// Title for the converter screen.
   ///
   /// In en, this message translates to:
   /// **'Converter'**
   String get converter_title;
 
-  /// No description provided for @encyclopedia_title.
+  /// Title for the encyclopedia screen.
   ///
   /// In en, this message translates to:
   /// **'Encyclopedia'**
   String get encyclopedia_title;
 
-  /// No description provided for @settings_title.
+  /// Title for the settings screen.
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings_title;
 
-  /// No description provided for @settings_theme.
+  /// Label for theme settings option.
   ///
   /// In en, this message translates to:
   /// **'Theme'**
   String get settings_theme;
 
-  /// No description provided for @settings_app_version.
+  /// Label for app version display in settings.
   ///
   /// In en, this message translates to:
   /// **'App version'**
   String get settings_app_version;
 
-  /// No description provided for @settings_check_updates.
+  /// Label for checking updates option.
   ///
   /// In en, this message translates to:
   /// **'Check updates'**
   String get settings_check_updates;
 
-  /// No description provided for @settings_changelogs.
+  /// Label for viewing changelogs.
   ///
   /// In en, this message translates to:
   /// **'Changelogs'**
   String get settings_changelogs;
 
-  /// No description provided for @settings_changelogs_subtitle.
+  /// Subtitle explaining the changelogs feature.
   ///
   /// In en, this message translates to:
   /// **'View concise changelogs for all versions'**
   String get settings_changelogs_subtitle;
 
-  /// No description provided for @settings_license.
+  /// Label for license information.
   ///
   /// In en, this message translates to:
   /// **'License'**
   String get settings_license;
 
-  /// No description provided for @settings_select_theme.
+  /// Dialog title for selecting a theme.
   ///
   /// In en, this message translates to:
   /// **'Select theme'**
   String get settings_select_theme;
 
-  /// No description provided for @settings_system.
+  /// Theme option for system/auto theme.
   ///
   /// In en, this message translates to:
   /// **'System'**
   String get settings_system;
 
-  /// No description provided for @settings_light.
+  /// Theme option for light theme.
   ///
   /// In en, this message translates to:
   /// **'Light'**
   String get settings_light;
 
-  /// No description provided for @settings_dark.
+  /// Theme option for dark theme.
   ///
   /// In en, this message translates to:
   /// **'Dark'**
   String get settings_dark;
 
-  /// No description provided for @settings_language_dialog_title.
+  /// Dialog title for language selection.
   ///
   /// In en, this message translates to:
   /// **'Select language'**
   String get settings_language_dialog_title;
 
-  /// No description provided for @settings_language_dialog_subtitle.
+  /// Dialog subtitle for language selection.
   ///
   /// In en, this message translates to:
   /// **'Choose the app language.'**
   String get settings_language_dialog_subtitle;
 
-  /// No description provided for @converter_currency_title.
+  /// Title for the currency converter.
   ///
   /// In en, this message translates to:
   /// **'Currency Converter'**
   String get converter_currency_title;
 
-  /// No description provided for @converter_refresh_rates.
+  /// Label for refreshing exchange rates button.
   ///
   /// In en, this message translates to:
   /// **'Refresh rates'**
   String get converter_refresh_rates;
 
-  /// No description provided for @converter_favorites.
+  /// Label for favorites feature in converter.
   ///
   /// In en, this message translates to:
   /// **'Favorites'**
   String get converter_favorites;
 
-  /// No description provided for @converter_from.
+  /// Label for the 'from' currency field.
   ///
   /// In en, this message translates to:
   /// **'From'**
   String get converter_from;
 
-  /// No description provided for @converter_to.
+  /// Label for the 'to' currency field.
   ///
   /// In en, this message translates to:
   /// **'To'**
   String get converter_to;
 
-  /// No description provided for @converter_from_hint.
+  /// Hint text for the 'from' currency input field.
   ///
   /// In en, this message translates to:
   /// **'From currency...'**
   String get converter_from_hint;
 
-  /// No description provided for @converter_to_hint.
+  /// Hint text for the 'to' currency input field.
   ///
   /// In en, this message translates to:
   /// **'To currency...'**
   String get converter_to_hint;
 
-  /// No description provided for @converter_swap.
+  /// Label for button to swap from and to currencies.
   ///
   /// In en, this message translates to:
   /// **'Swap currencies'**
   String get converter_swap;
 
-  /// No description provided for @converter_choose_pair.
+  /// Message prompting user to select currencies.
   ///
   /// In en, this message translates to:
   /// **'Choose a from and to currency to begin converting.'**
   String get converter_choose_pair;
 
-  /// No description provided for @converter_choose_currencies.
+  /// Dialog title for currency selection.
   ///
   /// In en, this message translates to:
   /// **'Choose your currencies'**
   String get converter_choose_currencies;
 
-  /// No description provided for @converter_currency_prompt.
+  /// Prompt asking which field to fill with selected currency.
   ///
   /// In en, this message translates to:
   /// **'Which field should be filled with this currency?'**
   String get converter_currency_prompt;
 
-  /// No description provided for @converter_cancel.
+  /// Label for cancel button in converter.
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get converter_cancel;
 
-  /// No description provided for @converter_from_field.
+  /// Label for 'from' field in currency selection dialog.
   ///
   /// In en, this message translates to:
   /// **'From'**
   String get converter_from_field;
 
-  /// No description provided for @converter_to_field.
+  /// Label for 'to' field in currency selection dialog.
   ///
   /// In en, this message translates to:
   /// **'To'**
   String get converter_to_field;
 
-  /// No description provided for @converter_continue.
+  /// Label for continue button.
   ///
   /// In en, this message translates to:
   /// **'Continue'**
   String get converter_continue;
 
-  /// No description provided for @amount_label.
+  /// Label for the amount input field.
   ///
   /// In en, this message translates to:
   /// **'Amount'**
   String get amount_label;
 
-  /// No description provided for @encyclopedia_currency_title.
+  /// Title for the currency encyclopedia.
   ///
   /// In en, this message translates to:
   /// **'Currency Encyclopedia'**
   String get encyclopedia_currency_title;
 
-  /// No description provided for @encyclopedia_search.
+  /// Hint text for currency search field.
   ///
   /// In en, this message translates to:
   /// **'Search currencies...'**
   String get encyclopedia_search;
 
-  /// No description provided for @encyclopedia_not_found.
+  /// Message when no currencies match the search.
   ///
   /// In en, this message translates to:
   /// **'No currencies found.'**
   String get encyclopedia_not_found;
 
-  /// No description provided for @favorites_add.
+  /// Label for adding currency to favorites.
   ///
   /// In en, this message translates to:
   /// **'Add to favorites'**
   String get favorites_add;
 
-  /// No description provided for @favorites_remove.
+  /// Label for removing currency from favorites.
   ///
   /// In en, this message translates to:
   /// **'Remove from favorites'**
   String get favorites_remove;
 
-  /// No description provided for @detail_cancel.
+  /// Label for cancel button in detail view.
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get detail_cancel;
 
-  /// No description provided for @detail_from_field.
+  /// Label for 'from' field in detail view.
   ///
   /// In en, this message translates to:
   /// **'From'**
   String get detail_from_field;
 
-  /// No description provided for @detail_to_field.
+  /// Label for 'to' field in detail view.
   ///
   /// In en, this message translates to:
   /// **'To'**
   String get detail_to_field;
 
-  /// No description provided for @detail_currency_prompt.
+  /// Prompt in detail view for field selection.
   ///
   /// In en, this message translates to:
   /// **'Which field should be filled with this currency?'**
   String get detail_currency_prompt;
 
-  /// No description provided for @detail_remove_favorite.
+  /// Label for removing favorite in detail view.
   ///
   /// In en, this message translates to:
   /// **'Remove favorite'**
   String get detail_remove_favorite;
 
-  /// No description provided for @detail_add_favorite.
+  /// Label for adding favorite in detail view.
   ///
   /// In en, this message translates to:
   /// **'Add to favorites'**
   String get detail_add_favorite;
 
-  /// No description provided for @detail_iso_code.
+  /// Label for ISO currency code in detail view.
   ///
   /// In en, this message translates to:
   /// **'ISO Code'**
   String get detail_iso_code;
 
-  /// No description provided for @detail_name.
+  /// Label for currency name in detail view.
   ///
   /// In en, this message translates to:
   /// **'Name'**
   String get detail_name;
 
-  /// No description provided for @detail_symbol.
+  /// Label for currency symbol in detail view.
   ///
   /// In en, this message translates to:
   /// **'Symbol'**
   String get detail_symbol;
 
-  /// No description provided for @detail_regions.
+  /// Label for regions where currency is used.
   ///
   /// In en, this message translates to:
   /// **'Regions'**
   String get detail_regions;
 
-  /// No description provided for @detail_description.
+  /// Label for currency description.
   ///
   /// In en, this message translates to:
   /// **'Description'**
   String get detail_description;
 
-  /// No description provided for @detail_convert.
+  /// Label for convert button in detail view.
   ///
   /// In en, this message translates to:
   /// **'Convert'**
   String get detail_convert;
 
-  /// No description provided for @update_available.
+  /// Title for update available dialog.
   ///
   /// In en, this message translates to:
   /// **'Update available'**
   String get update_available;
 
-  /// No description provided for @update_cancel.
+  /// Label for cancel button in update dialog.
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get update_cancel;
 
-  /// No description provided for @update_download.
+  /// Label for download button in update dialog.
   ///
   /// In en, this message translates to:
   /// **'Download'**
   String get update_download;
 
-  /// No description provided for @update_latest.
+  /// Message indicating app is up to date.
   ///
   /// In en, this message translates to:
   /// **'You are on the latest version'**
@@ -448,43 +448,61 @@ abstract class AppLocalizations {
   /// **'You are on the latest version ({version}).'**
   String settings_latest_version(String version);
 
-  /// No description provided for @rate_info_refreshing.
+  /// Message shown while refreshing exchange rates.
   ///
   /// In en, this message translates to:
   /// **'Refreshing rates...'**
   String get rate_info_refreshing;
 
-  /// No description provided for @rate_info_cached.
+  /// Label indicating the rate is from cache.
   ///
   /// In en, this message translates to:
   /// **'cached'**
   String get rate_info_cached;
 
-  /// No description provided for @rate_info_live.
+  /// Label indicating the rate is live.
   ///
   /// In en, this message translates to:
   /// **'live'**
   String get rate_info_live;
 
-  /// No description provided for @rate_info_disclaimer.
+  /// Label prefix for the rate source.
+  ///
+  /// In en, this message translates to:
+  /// **'Source:'**
+  String get rate_info_source_prefix;
+
+  /// Name of the Frankfurter exchange rate provider.
+  ///
+  /// In en, this message translates to:
+  /// **'Frankfurter'**
+  String get provider_frankfurter;
+
+  /// Name of the Exchange API provider.
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange API'**
+  String get provider_exchange_api;
+
+  /// Disclaimer about exchange rate accuracy.
   ///
   /// In en, this message translates to:
   /// **'Exchange rates are for reference only.'**
   String get rate_info_disclaimer;
 
-  /// No description provided for @error_network_unavailable.
+  /// Error message when network is unavailable.
   ///
   /// In en, this message translates to:
   /// **'Network error — unable to reach the server. Please check your internet connection and try again.'**
   String get error_network_unavailable;
 
-  /// No description provided for @error_service_unavailable.
+  /// Error message when service is unavailable.
   ///
   /// In en, this message translates to:
   /// **'Unable to reach the remote service right now. Please try again later.'**
   String get error_service_unavailable;
 
-  /// No description provided for @error_generic.
+  /// Generic error message.
   ///
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**

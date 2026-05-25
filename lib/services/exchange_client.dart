@@ -1,41 +1,103 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../core/config.dart';
+import 'exchange_api_exception.dart';
+import 'exchange_observability.dart';
+import 'exchange_provider.dart';
+import 'frankfurter_provider.dart';
 
-class ExchangeApiException implements Exception {
-  final String message;
-  ExchangeApiException(this.message);
-
-  @override
-  String toString() => 'ExchangeApiException: $message';
-}
+export 'exchange_api_exception.dart';
 
 class ExchangeClient {
-  final http.Client _httpClient;
+  late final http.Client _httpClient;
+  late final ExchangeProvider _primaryProvider;
+  late final ExchangeProvider _fallbackProvider;
 
-  ExchangeClient({http.Client? httpClient})
-      : _httpClient = httpClient ?? http.Client();
+  ExchangeClient({
+    http.Client? httpClient,
+    ExchangeProvider? primaryProvider,
+    ExchangeProvider? fallbackProvider,
+  }) {
+    final resolvedHttpClient = httpClient ?? http.Client();
+    _httpClient = resolvedHttpClient;
+    _primaryProvider =
+        primaryProvider ?? FrankfurterProvider(httpClient: resolvedHttpClient);
+    _fallbackProvider = fallbackProvider ??
+        LegacyExchangeProvider(httpClient: resolvedHttpClient);
+  }
+
+  Future<ExchangeRateSnapshot> fetchRateSnapshot(String base) async {
+    return fetchRateSnapshotFor(base);
+  }
+
+  Future<ExchangeRateSnapshot> fetchRateSnapshotFor(
+    String base, {
+    String? target,
+  }) async {
+    final normalizedBase = base.toLowerCase();
+    final normalizedTarget = target?.toLowerCase();
+
+    try {
+      final snapshot = await _primaryProvider.fetchLatestRates(normalizedBase);
+      if (normalizedTarget != null &&
+          !snapshot.rates.containsKey(normalizedTarget)) {
+        ExchangeObservability.recordAttempt(
+          source: _primaryProvider.sourceId,
+          status: 'missing-rate',
+          base: normalizedBase,
+          failureReason: 'Missing rate for $normalizedTarget',
+        );
+      } else {
+        ExchangeObservability.recordAttempt(
+          source: _primaryProvider.sourceId,
+          status: 'success',
+          base: normalizedBase,
+        );
+        return snapshot;
+      }
+    } catch (error) {
+      ExchangeObservability.recordAttempt(
+        source: _primaryProvider.sourceId,
+        status: 'failed',
+        base: normalizedBase,
+        failureReason: error.toString(),
+      );
+    }
+
+    try {
+      final snapshot = await _fallbackProvider.fetchLatestRates(normalizedBase);
+      if (normalizedTarget != null &&
+          !snapshot.rates.containsKey(normalizedTarget)) {
+        ExchangeObservability.recordAttempt(
+          source: _fallbackProvider.sourceId,
+          status: 'missing-rate',
+          base: normalizedBase,
+          failureReason: 'Missing rate for $normalizedTarget',
+        );
+        throw ExchangeApiException(
+          'No rate found for target $normalizedTarget',
+        );
+      }
+      ExchangeObservability.recordAttempt(
+        source: _fallbackProvider.sourceId,
+        status: 'success',
+        base: normalizedBase,
+      );
+      return snapshot;
+    } catch (error) {
+      ExchangeObservability.recordAttempt(
+        source: _fallbackProvider.sourceId,
+        status: 'failed',
+        base: normalizedBase,
+        failureReason: error.toString(),
+      );
+      rethrow;
+    }
+  }
 
   Future<Map<String, double>> fetchRatesFor(String base) async {
-    final primaryUrl =
-        '${AppConfig.exchangeApiBase}/${base.toLowerCase()}.json';
-    final fallbackUrl =
-        '${AppConfig.exchangeApiFallbackBase}/${base.toLowerCase()}.json';
-
-    Map<String, dynamic> body;
-    try {
-      body = await _getJson(primaryUrl);
-    } catch (_) {
-      body = await _getJson(fallbackUrl);
-    }
-
-    final rates = body[base.toLowerCase()] as Map<String, dynamic>?;
-    if (rates == null) {
-      throw ExchangeApiException('Unexpected response shape for base $base');
-    }
-    return rates.map(
-      (k, v) => MapEntry(k, (v as num).toDouble()),
-    );
+    final snapshot = await fetchRateSnapshot(base);
+    return snapshot.rates;
   }
 
   Future<Map<String, String>> fetchCurrencyCatalog() async {

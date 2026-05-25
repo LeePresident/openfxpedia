@@ -1,0 +1,38 @@
+{
+    "description": "Sample response shape used by the existing provider (legacy) as observed in repository/specs",
+    "sample": {
+        "base": "USD",
+        "rates": {
+            "EUR": 0.92,
+            "GBP": 0.79
+        },
+        "timestamp": "2026-03-15T00:00:00.000Z",
+        "source": "example-cdn"
+    },
+    "schema": {
+        "type": "object",
+        "properties": {
+            "base": {
+                "type": "string"
+            },
+            "rates": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "number"
+                }
+            },
+            "timestamp": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "source": {
+                "type": "string"
+            }
+        },
+        "required": [
+            "base",
+            "rates",
+            "timestamp"
+        ]
+    }
+}

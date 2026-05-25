@@ -197,6 +197,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get rate_info_disclaimer => '匯率僅供參考，請以實際報價為準。';
 
   @override
+  String get rate_info_source_prefix => '來源：';
+
+  @override
+  String get provider_frankfurter => 'Frankfurter';
+
+  @override
+  String get provider_exchange_api => '匯率 API';
+
+  @override
   String get error_network_unavailable => '網絡錯誤 — 無法連線到伺服器。請檢查您的網路連線後重試。';
 
   @override

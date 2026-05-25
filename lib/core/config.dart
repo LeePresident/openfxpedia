@@ -1,6 +1,8 @@
 ﻿class AppConfig {
   AppConfig._();
 
+  static const String frankfurterApiBase = 'https://api.frankfurter.dev/v2';
+
   static const String currencyListUrl =
       'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json';
 
@@ -17,7 +19,7 @@
   static const String githubReleasesApiUrl =
       'https://api.github.com/repos/$githubRepoOwner/$githubRepoName/releases?per_page=10';
 
-  static const int rateTtlHours = 12;
+  static const int rateTtlHours = 24;
   static const int catalogTtlHours = 24;
 
   static const String ratesBoxName = 'rates';

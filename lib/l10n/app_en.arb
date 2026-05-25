@@ -1,62 +1,233 @@
 {
     "@@locale": "en",
     "appTitle": "OpenFXpedia",
+    "@appTitle": {
+        "description": "The title of the application."
+    },
     "settings_language": "Language",
+    "@settings_language": {
+        "description": "Label for language settings option."
+    },
     "language_english": "English",
+    "@language_english": {
+        "description": "English language name."
+    },
     "language_simplified_chinese": "Simplified Chinese",
+    "@language_simplified_chinese": {
+        "description": "Simplified Chinese language name."
+    },
     "language_traditional_chinese": "Traditional Chinese",
+    "@language_traditional_chinese": {
+        "description": "Traditional Chinese language name."
+    },
     "converter_title": "Converter",
+    "@converter_title": {
+        "description": "Title for the converter screen."
+    },
     "encyclopedia_title": "Encyclopedia",
+    "@encyclopedia_title": {
+        "description": "Title for the encyclopedia screen."
+    },
     "settings_title": "Settings",
+    "@settings_title": {
+        "description": "Title for the settings screen."
+    },
     "settings_theme": "Theme",
+    "@settings_theme": {
+        "description": "Label for theme settings option."
+    },
     "settings_app_version": "App version",
+    "@settings_app_version": {
+        "description": "Label for app version display in settings."
+    },
     "settings_check_updates": "Check updates",
+    "@settings_check_updates": {
+        "description": "Label for checking updates option."
+    },
     "settings_changelogs": "Changelogs",
+    "@settings_changelogs": {
+        "description": "Label for viewing changelogs."
+    },
     "settings_changelogs_subtitle": "View concise changelogs for all versions",
+    "@settings_changelogs_subtitle": {
+        "description": "Subtitle explaining the changelogs feature."
+    },
     "settings_license": "License",
+    "@settings_license": {
+        "description": "Label for license information."
+    },
     "settings_select_theme": "Select theme",
+    "@settings_select_theme": {
+        "description": "Dialog title for selecting a theme."
+    },
     "settings_system": "System",
+    "@settings_system": {
+        "description": "Theme option for system/auto theme."
+    },
     "settings_light": "Light",
+    "@settings_light": {
+        "description": "Theme option for light theme."
+    },
     "settings_dark": "Dark",
+    "@settings_dark": {
+        "description": "Theme option for dark theme."
+    },
     "settings_language_dialog_title": "Select language",
+    "@settings_language_dialog_title": {
+        "description": "Dialog title for language selection."
+    },
     "settings_language_dialog_subtitle": "Choose the app language.",
+    "@settings_language_dialog_subtitle": {
+        "description": "Dialog subtitle for language selection."
+    },
     "converter_currency_title": "Currency Converter",
+    "@converter_currency_title": {
+        "description": "Title for the currency converter."
+    },
     "converter_refresh_rates": "Refresh rates",
+    "@converter_refresh_rates": {
+        "description": "Label for refreshing exchange rates button."
+    },
     "converter_favorites": "Favorites",
+    "@converter_favorites": {
+        "description": "Label for favorites feature in converter."
+    },
     "converter_from": "From",
+    "@converter_from": {
+        "description": "Label for the 'from' currency field."
+    },
     "converter_to": "To",
+    "@converter_to": {
+        "description": "Label for the 'to' currency field."
+    },
     "converter_from_hint": "From currency...",
+    "@converter_from_hint": {
+        "description": "Hint text for the 'from' currency input field."
+    },
     "converter_to_hint": "To currency...",
+    "@converter_to_hint": {
+        "description": "Hint text for the 'to' currency input field."
+    },
     "converter_swap": "Swap currencies",
+    "@converter_swap": {
+        "description": "Label for button to swap from and to currencies."
+    },
     "converter_choose_pair": "Choose a from and to currency to begin converting.",
+    "@converter_choose_pair": {
+        "description": "Message prompting user to select currencies."
+    },
     "converter_choose_currencies": "Choose your currencies",
+    "@converter_choose_currencies": {
+        "description": "Dialog title for currency selection."
+    },
     "converter_currency_prompt": "Which field should be filled with this currency?",
+    "@converter_currency_prompt": {
+        "description": "Prompt asking which field to fill with selected currency."
+    },
     "converter_cancel": "Cancel",
+    "@converter_cancel": {
+        "description": "Label for cancel button in converter."
+    },
     "converter_from_field": "From",
+    "@converter_from_field": {
+        "description": "Label for 'from' field in currency selection dialog."
+    },
     "converter_to_field": "To",
+    "@converter_to_field": {
+        "description": "Label for 'to' field in currency selection dialog."
+    },
     "converter_continue": "Continue",
+    "@converter_continue": {
+        "description": "Label for continue button."
+    },
     "amount_label": "Amount",
+    "@amount_label": {
+        "description": "Label for the amount input field."
+    },
     "encyclopedia_currency_title": "Currency Encyclopedia",
+    "@encyclopedia_currency_title": {
+        "description": "Title for the currency encyclopedia."
+    },
     "encyclopedia_search": "Search currencies...",
+    "@encyclopedia_search": {
+        "description": "Hint text for currency search field."
+    },
     "encyclopedia_not_found": "No currencies found.",
+    "@encyclopedia_not_found": {
+        "description": "Message when no currencies match the search."
+    },
     "favorites_add": "Add to favorites",
+    "@favorites_add": {
+        "description": "Label for adding currency to favorites."
+    },
     "favorites_remove": "Remove from favorites",
+    "@favorites_remove": {
+        "description": "Label for removing currency from favorites."
+    },
     "detail_cancel": "Cancel",
+    "@detail_cancel": {
+        "description": "Label for cancel button in detail view."
+    },
     "detail_from_field": "From",
+    "@detail_from_field": {
+        "description": "Label for 'from' field in detail view."
+    },
     "detail_to_field": "To",
+    "@detail_to_field": {
+        "description": "Label for 'to' field in detail view."
+    },
     "detail_currency_prompt": "Which field should be filled with this currency?",
+    "@detail_currency_prompt": {
+        "description": "Prompt in detail view for field selection."
+    },
     "detail_remove_favorite": "Remove favorite",
+    "@detail_remove_favorite": {
+        "description": "Label for removing favorite in detail view."
+    },
     "detail_add_favorite": "Add to favorites",
+    "@detail_add_favorite": {
+        "description": "Label for adding favorite in detail view."
+    },
     "detail_iso_code": "ISO Code",
+    "@detail_iso_code": {
+        "description": "Label for ISO currency code in detail view."
+    },
     "detail_name": "Name",
+    "@detail_name": {
+        "description": "Label for currency name in detail view."
+    },
     "detail_symbol": "Symbol",
+    "@detail_symbol": {
+        "description": "Label for currency symbol in detail view."
+    },
     "detail_regions": "Regions",
+    "@detail_regions": {
+        "description": "Label for regions where currency is used."
+    },
     "detail_description": "Description",
+    "@detail_description": {
+        "description": "Label for currency description."
+    },
     "detail_convert": "Convert",
+    "@detail_convert": {
+        "description": "Label for convert button in detail view."
+    },
     "update_available": "Update available",
+    "@update_available": {
+        "description": "Title for update available dialog."
+    },
     "update_cancel": "Cancel",
+    "@update_cancel": {
+        "description": "Label for cancel button in update dialog."
+    },
     "update_download": "Download",
+    "@update_download": {
+        "description": "Label for download button in update dialog."
+    },
     "update_latest": "You are on the latest version",
+    "@update_latest": {
+        "description": "Message indicating app is up to date."
+    },
     "settings_latest_version": "You are on the latest version ({version}).",
     "@settings_latest_version": {
         "description": "Message shown when the app is already on the latest version.",
@@ -68,10 +239,43 @@
         }
     },
     "rate_info_refreshing": "Refreshing rates...",
+    "@rate_info_refreshing": {
+        "description": "Message shown while refreshing exchange rates."
+    },
     "rate_info_cached": "cached",
+    "@rate_info_cached": {
+        "description": "Label indicating the rate is from cache."
+    },
     "rate_info_live": "live",
+    "@rate_info_live": {
+        "description": "Label indicating the rate is live."
+    },
+    "rate_info_source_prefix": "Source:",
+    "@rate_info_source_prefix": {
+        "description": "Label prefix for the rate source."
+    },
+    "provider_frankfurter": "Frankfurter",
+    "@provider_frankfurter": {
+        "description": "Name of the Frankfurter exchange rate provider."
+    },
+    "provider_exchange_api": "Exchange API",
+    "@provider_exchange_api": {
+        "description": "Name of the Exchange API provider."
+    },
     "rate_info_disclaimer": "Exchange rates are for reference only.",
+    "@rate_info_disclaimer": {
+        "description": "Disclaimer about exchange rate accuracy."
+    },
     "error_network_unavailable": "Network error — unable to reach the server. Please check your internet connection and try again.",
+    "@error_network_unavailable": {
+        "description": "Error message when network is unavailable."
+    },
     "error_service_unavailable": "Unable to reach the remote service right now. Please try again later.",
-    "error_generic": "Something went wrong. Please try again."
+    "@error_service_unavailable": {
+        "description": "Error message when service is unavailable."
+    },
+    "error_generic": "Something went wrong. Please try again.",
+    "@error_generic": {
+        "description": "Generic error message."
+    }
 }
