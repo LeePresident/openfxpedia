@@ -181,6 +181,23 @@ class AppLocalizationsZh extends AppLocalizations {
   String get update_download => 'Download';
 
   @override
+  String update_download_prompt(String version, String assetName) {
+    return '已有 $version 版本可用。\n\n要从 GitHub Releases 下载适用于此设备的 $assetName 吗？';
+  }
+
+  @override
+  String get update_latest_release_unavailable => '无法从 GitHub 判断最新的稳定版本。';
+
+  @override
+  String get update_asset_not_found => 'GitHub Releases 上找不到适用于此设备的发布文件。';
+
+  @override
+  String get update_open_download_failed => '无法打开 GitHub 发布下载链接。';
+
+  @override
+  String get update_direct_download_unsupported => '此设备不支持直接下载发布版本。';
+
+  @override
   String get update_latest => 'You are on the latest version';
 
   @override
@@ -394,6 +411,23 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get update_download => '下载';
 
   @override
+  String update_download_prompt(String version, String assetName) {
+    return '已有 $version 版本可用。\n\n要从 GitHub Releases 下载适用于此设备的 $assetName 吗？';
+  }
+
+  @override
+  String get update_latest_release_unavailable => '无法从 GitHub 判断最新的稳定版本。';
+
+  @override
+  String get update_asset_not_found => 'GitHub Releases 上找不到适用于此设备的发布文件。';
+
+  @override
+  String get update_open_download_failed => '无法打开 GitHub 发布下载链接。';
+
+  @override
+  String get update_direct_download_unsupported => '此设备不支持直接下载发布版本。';
+
+  @override
   String get update_latest => '当前已是最新版本';
 
   @override
@@ -603,6 +637,23 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get update_download => '下載';
+
+  @override
+  String update_download_prompt(String version, String assetName) {
+    return '已有 $version 版本可用。\n\n要從 GitHub Releases 下載適用於此裝置的 $assetName 嗎？';
+  }
+
+  @override
+  String get update_latest_release_unavailable => '無法從 GitHub 判斷最新的穩定版本。';
+
+  @override
+  String get update_asset_not_found => 'GitHub Releases 上找不到適用於此裝置的發行檔案。';
+
+  @override
+  String get update_open_download_failed => '無法開啟 GitHub 發行下載連結。';
+
+  @override
+  String get update_direct_download_unsupported => '此裝置不支援直接下載發行版本。';
 
   @override
   String get update_latest => '目前已是最新版本';

@@ -177,6 +177,23 @@ class AppLocalizationsZh extends AppLocalizations {
   String get update_download => '下载';
 
   @override
+  String update_download_prompt(String version, String assetName) {
+    return '已有 $version 版本可用。\n\n要从 GitHub Releases 下载适用于此设备的 $assetName 吗？';
+  }
+
+  @override
+  String get update_latest_release_unavailable => '无法从 GitHub 判断最新的稳定版本。';
+
+  @override
+  String get update_asset_not_found => 'GitHub Releases 上找不到适用于此设备的发布文件。';
+
+  @override
+  String get update_open_download_failed => '无法打开 GitHub 发布下载链接。';
+
+  @override
+  String get update_direct_download_unsupported => '此设备不支持直接下载发布版本。';
+
+  @override
   String get update_latest => '当前已是最新版本';
 
   @override

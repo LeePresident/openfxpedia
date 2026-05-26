@@ -181,6 +181,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get update_download => 'Download';
 
   @override
+  String update_download_prompt(String version, String assetName) {
+    return 'Version $version is available.\n\nDownload $assetName from GitHub releases for this device?';
+  }
+
+  @override
+  String get update_latest_release_unavailable =>
+      'Unable to determine the latest stable release from GitHub.';
+
+  @override
+  String get update_asset_not_found =>
+      'No release asset was found for this device on GitHub releases.';
+
+  @override
+  String get update_open_download_failed =>
+      'Could not open the GitHub release download link.';
+
+  @override
+  String get update_direct_download_unsupported =>
+      'This device does not support direct release downloads.';
+
+  @override
   String get update_latest => 'You are on the latest version';
 
   @override

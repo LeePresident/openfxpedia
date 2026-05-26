@@ -224,6 +224,36 @@
     "@update_download": {
         "description": "更新對話方塊中下載按鈕的標籤。"
     },
+    "update_download_prompt": "已有 {version} 版本可用。\n\n要從 GitHub Releases 下載適用於此裝置的 {assetName} 嗎？",
+    "@update_download_prompt": {
+        "description": "更新下載確認對話方塊的內文。",
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.2"
+            },
+            "assetName": {
+                "type": "String",
+                "example": "openfxpedia_1.0.2.apk"
+            }
+        }
+    },
+    "update_latest_release_unavailable": "無法從 GitHub 判斷最新的穩定版本。",
+    "@update_latest_release_unavailable": {
+        "description": "當應用程式無法判斷最新穩定版本時顯示的訊息。"
+    },
+    "update_asset_not_found": "GitHub Releases 上找不到適用於此裝置的發行檔案。",
+    "@update_asset_not_found": {
+        "description": "當目前裝置找不到對應發行檔案時顯示的訊息。"
+    },
+    "update_open_download_failed": "無法開啟 GitHub 發行下載連結。",
+    "@update_open_download_failed": {
+        "description": "當外部下載連結無法開啟時顯示的訊息。"
+    },
+    "update_direct_download_unsupported": "此裝置不支援直接下載發行版本。",
+    "@update_direct_download_unsupported": {
+        "description": "當裝置類型不支援直接下載發行版本時顯示的訊息。"
+    },
     "update_latest": "目前已是最新版本",
     "@update_latest": {
         "description": "表示應用程式已是最新版本的訊息。"

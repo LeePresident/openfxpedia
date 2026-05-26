@@ -436,6 +436,36 @@ abstract class AppLocalizations {
   /// **'Download'**
   String get update_download;
 
+  /// Body text for the update download confirmation dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} is available.\n\nDownload {assetName} from GitHub releases for this device?'**
+  String update_download_prompt(String version, String assetName);
+
+  /// Message shown when the app cannot determine the latest stable release version.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to determine the latest stable release from GitHub.'**
+  String get update_latest_release_unavailable;
+
+  /// Message shown when no matching release asset exists for the current device.
+  ///
+  /// In en, this message translates to:
+  /// **'No release asset was found for this device on GitHub releases.'**
+  String get update_asset_not_found;
+
+  /// Message shown when opening the external release download URL fails.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the GitHub release download link.'**
+  String get update_open_download_failed;
+
+  /// Message shown when the device type is unsupported for direct release downloads.
+  ///
+  /// In en, this message translates to:
+  /// **'This device does not support direct release downloads.'**
+  String get update_direct_download_unsupported;
+
   /// Message indicating app is up to date.
   ///
   /// In en, this message translates to:

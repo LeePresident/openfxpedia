@@ -41,7 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final current = _normalizeVersion(currentVersion);
 
       if (latestVersion == null || latestVersion.isEmpty) {
-        _showMessage('Unable to determine latest stable release from GitHub.');
+        _showMessage(l10n.update_latest_release_unavailable);
       } else {
         final compare = _compareSemver(current, latestVersion);
         if (compare >= 0) {
@@ -55,9 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             latestVersion,
           );
           if (assetUrl == null || assetUrl.isEmpty) {
-            _showMessage(
-              'No release asset found for this device on GitHub releases.',
-            );
+            _showMessage(l10n.update_asset_not_found);
             return;
           }
 
@@ -66,7 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             mode: LaunchMode.externalApplication,
           );
           if (!opened) {
-            _showMessage('Could not open the GitHub release download link.');
+            _showMessage(l10n.update_open_download_failed);
           }
         }
       }
@@ -103,11 +101,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<bool> _confirmUpdateDownload(String latestVersion) async {
+    final l10n = AppLocalizations.of(context);
     final assetName = _preferredUpdateAssetName(latestVersion);
     if (assetName == null) {
-      _showMessage(
-        'This device is not supported for direct release downloads.',
-      );
+      _showMessage(l10n.update_direct_download_unsupported);
       return false;
     }
 
@@ -115,18 +112,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: Text(AppLocalizations.of(context).update_available),
-          content: Text(
-            'Version $latestVersion is available.\n\nDownload $assetName from GitHub releases for this device?',
-          ),
+          title: Text(l10n.update_available),
+          content: Text(l10n.update_download_prompt(latestVersion, assetName)),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(false),
-              child: Text(AppLocalizations.of(context).update_cancel),
+              child: Text(l10n.update_cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.of(dialogContext).pop(true),
-              child: Text(AppLocalizations.of(context).update_download),
+              child: Text(l10n.update_download),
             ),
           ],
         );

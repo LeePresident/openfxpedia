@@ -224,6 +224,36 @@
     "@update_download": {
         "description": "更新对话框中下载按钮的标签。"
     },
+    "update_download_prompt": "已有 {version} 版本可用。\n\n要从 GitHub Releases 下载适用于此设备的 {assetName} 吗？",
+    "@update_download_prompt": {
+        "description": "更新下载确认对话框的正文。",
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.2"
+            },
+            "assetName": {
+                "type": "String",
+                "example": "openfxpedia_1.0.2.apk"
+            }
+        }
+    },
+    "update_latest_release_unavailable": "无法从 GitHub 判断最新的稳定版本。",
+    "@update_latest_release_unavailable": {
+        "description": "当应用无法判断最新稳定版本时显示的消息。"
+    },
+    "update_asset_not_found": "GitHub Releases 上找不到适用于此设备的发布文件。",
+    "@update_asset_not_found": {
+        "description": "当当前设备找不到对应发布文件时显示的消息。"
+    },
+    "update_open_download_failed": "无法打开 GitHub 发布下载链接。",
+    "@update_open_download_failed": {
+        "description": "当外部下载链接无法打开时显示的消息。"
+    },
+    "update_direct_download_unsupported": "此设备不支持直接下载发布版本。",
+    "@update_direct_download_unsupported": {
+        "description": "当设备类型不支持直接下载发布版本时显示的消息。"
+    },
     "update_latest": "当前已是最新版本",
     "@update_latest": {
         "description": "表示应用程序已是最新版本的消息。"

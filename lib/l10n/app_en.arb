@@ -224,6 +224,36 @@
     "@update_download": {
         "description": "Label for download button in update dialog."
     },
+    "update_download_prompt": "Version {version} is available.\n\nDownload {assetName} from GitHub releases for this device?",
+    "@update_download_prompt": {
+        "description": "Body text for the update download confirmation dialog.",
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.2"
+            },
+            "assetName": {
+                "type": "String",
+                "example": "openfxpedia_1.0.2.apk"
+            }
+        }
+    },
+    "update_latest_release_unavailable": "Unable to determine the latest stable release from GitHub.",
+    "@update_latest_release_unavailable": {
+        "description": "Message shown when the app cannot determine the latest stable release version."
+    },
+    "update_asset_not_found": "No release asset was found for this device on GitHub releases.",
+    "@update_asset_not_found": {
+        "description": "Message shown when no matching release asset exists for the current device."
+    },
+    "update_open_download_failed": "Could not open the GitHub release download link.",
+    "@update_open_download_failed": {
+        "description": "Message shown when opening the external release download URL fails."
+    },
+    "update_direct_download_unsupported": "This device does not support direct release downloads.",
+    "@update_direct_download_unsupported": {
+        "description": "Message shown when the device type is unsupported for direct release downloads."
+    },
     "update_latest": "You are on the latest version",
     "@update_latest": {
         "description": "Message indicating app is up to date."
