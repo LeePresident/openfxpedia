@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:openfxpedia/l10n/app_localizations.dart';
 import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/widgets/search_bar.dart' as app_search;
 
@@ -15,6 +17,14 @@ Widget _buildWidget({
   required ValueChanged<Currency> onSelected,
 }) {
   return MaterialApp(
+    locale: const Locale('en'),
+    localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: AppLocalizations.supportedLocales,
     home: Scaffold(
       body: app_search.CurrencySearchBar(
         currencies: _currencies,

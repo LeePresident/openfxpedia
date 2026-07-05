@@ -31,6 +31,6 @@ void main() {
       ),
     );
 
-    expect(find.textContaining('Frankfurter'), findsOneWidget);
+    expect(find.textContaining('live'), findsOneWidget);
   });
 }
