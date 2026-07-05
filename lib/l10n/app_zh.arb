@@ -1,228 +1,220 @@
 {
     "@@locale": "zh",
-    "appTitle": "OpenFXpedia",
+    "appTitle": "外汇百科",
     "@appTitle": {
-        "description": "The title of the application."
+        "description": "应用程序的标题。"
     },
-    "settings_language": "Language",
+    "settings_language": "语言",
     "@settings_language": {
-        "description": "Label for language settings option."
+        "description": "语言设置选项的标签。"
     },
-    "language_english": "English",
+    "language_english": "英文",
     "@language_english": {
-        "description": "English language name."
+        "description": "英文语言名称。"
     },
-    "language_simplified_chinese": "Simplified Chinese",
+    "language_simplified_chinese": "简体中文",
     "@language_simplified_chinese": {
-        "description": "Simplified Chinese language name."
+        "description": "简体中文语言名称。"
     },
-    "language_traditional_chinese": "Traditional Chinese",
+    "language_traditional_chinese": "繁体中文",
     "@language_traditional_chinese": {
-        "description": "Traditional Chinese language name."
+        "description": "繁体中文语言名称。"
     },
-    "converter_title": "Converter",
+    "converter_title": "转换器",
     "@converter_title": {
-        "description": "Title for the converter screen."
+        "description": "转换器屏幕的标题。"
     },
-    "encyclopedia_title": "Encyclopedia",
+    "encyclopedia_title": "百科",
     "@encyclopedia_title": {
-        "description": "Title for the encyclopedia screen."
+        "description": "百科屏幕的标题。"
     },
-    "settings_title": "Settings",
+    "settings_title": "设置",
     "@settings_title": {
-        "description": "Title for the settings screen."
+        "description": "设置屏幕的标题。"
     },
-    "settings_theme": "Theme",
+    "settings_theme": "主题",
     "@settings_theme": {
-        "description": "Label for theme settings option."
+        "description": "主题设置选项的标签。"
     },
-    "settings_app_version": "App version",
+    "settings_app_version": "应用版本",
     "@settings_app_version": {
-        "description": "Label for app version display in settings."
+        "description": "设置中应用程序版本显示的标签。"
     },
-    "settings_check_updates": "Check updates",
+    "settings_check_updates": "检查更新",
     "@settings_check_updates": {
-        "description": "Label for checking updates option."
+        "description": "检查更新选项的标签。"
     },
-    "settings_changelogs": "Changelogs",
+    "settings_changelogs": "更新日志",
     "@settings_changelogs": {
-        "description": "Label for viewing changelogs."
+        "description": "查看更新日志的标签。"
     },
-    "settings_changelogs_subtitle": "View concise changelogs for all versions",
+    "settings_changelogs_subtitle": "查看所有版本的简明变更记录",
     "@settings_changelogs_subtitle": {
-        "description": "Subtitle explaining the changelogs feature."
+        "description": "解释更新日志功能的副标题。"
     },
-    "settings_license": "License",
+    "settings_license": "许可",
     "@settings_license": {
-        "description": "Label for license information."
+        "description": "许可信息的标签。"
     },
-    "settings_select_theme": "Select theme",
+    "settings_select_theme": "选择主题",
     "@settings_select_theme": {
-        "description": "Dialog title for selecting a theme."
+        "description": "选择主题的对话框标题。"
     },
-    "settings_system": "System",
+    "settings_system": "跟随系统",
     "@settings_system": {
-        "description": "Theme option for system/auto theme."
+        "description": "系统/自动主题的主题选项。"
     },
-    "settings_light": "Light",
+    "settings_light": "浅色",
     "@settings_light": {
-        "description": "Theme option for light theme."
+        "description": "浅色主题的主题选项。"
     },
-    "settings_dark": "Dark",
+    "settings_dark": "深色",
     "@settings_dark": {
-        "description": "Theme option for dark theme."
+        "description": "深色主题的主题选项。"
     },
-    "settings_language_dialog_title": "Select language",
+    "settings_language_dialog_title": "选择语言",
     "@settings_language_dialog_title": {
-        "description": "Dialog title for language selection."
+        "description": "语言选择对话框的标题。"
     },
-    "settings_language_dialog_subtitle": "Choose the app language.",
+    "settings_language_dialog_subtitle": "选择应用语言。",
     "@settings_language_dialog_subtitle": {
-        "description": "Dialog subtitle for language selection."
+        "description": "语言选择对话框的副标题。"
     },
-    "converter_currency_title": "Currency Converter",
+    "converter_currency_title": "货币转换器",
     "@converter_currency_title": {
-        "description": "Title for the currency converter."
+        "description": "货币转换器的标题。"
     },
-    "converter_refresh_rates": "Refresh rates",
+    "converter_refresh_rates": "刷新汇率",
     "@converter_refresh_rates": {
-        "description": "Label for refreshing exchange rates button."
+        "description": "刷新汇率按钮的标签。"
     },
-    "converter_favorites": "Favorites",
+    "converter_favorites": "收藏",
     "@converter_favorites": {
-        "description": "Label for favorites feature in converter."
+        "description": "转换器中收藏功能的标签。"
     },
-    "converter_from": "From",
+    "converter_from": "从",
     "@converter_from": {
-        "description": "Label for the 'from' currency field."
+        "description": "'来源'货币字段的标签。"
     },
-    "converter_to": "To",
+    "converter_to": "到",
     "@converter_to": {
-        "description": "Label for the 'to' currency field."
+        "description": "'目标'货币字段的标签。"
     },
-    "converter_from_hint": "From currency…",
+    "converter_from_hint": "来源货币…",
     "@converter_from_hint": {
-        "description": "Hint text for the 'from' currency input field."
+        "description": "'来源'货币输入字段的提示文本。"
     },
-    "converter_to_hint": "To currency…",
+    "converter_to_hint": "目标货币…",
     "@converter_to_hint": {
-        "description": "Hint text for the 'to' currency input field."
+        "description": "'目标'货币输入字段的提示文本。"
     },
-    "converter_swap": "Swap currencies",
+    "converter_swap": "交换货币",
     "@converter_swap": {
-        "description": "Label for button to swap from and to currencies."
+        "description": "交换来源和目标货币按钮的标签。"
     },
-    "converter_choose_pair": "Choose a from and to currency to begin converting.",
+    "converter_choose_pair": "请选择来源和目标货币以开始转换。",
     "@converter_choose_pair": {
-        "description": "Message prompting user to select currencies."
+        "description": "提示用户选择货币的消息。"
     },
-    "converter_choose_currencies": "Choose your currencies",
-    "@converter_choose_currencies": {
-        "description": "Dialog title for currency selection."
-    },
-    "converter_currency_prompt": "Which field should be filled with this currency?",
+    "converter_currency_prompt": "要将这枚货币填入哪个字段？",
     "@converter_currency_prompt": {
-        "description": "Prompt asking which field to fill with selected currency."
+        "description": "提示选择要填充的字段。"
     },
-    "converter_cancel": "Cancel",
+    "converter_cancel": "取消",
     "@converter_cancel": {
-        "description": "Label for cancel button in converter."
+        "description": "转换器中取消按钮的标签。"
     },
-    "converter_from_field": "From",
+    "converter_from_field": "从",
     "@converter_from_field": {
-        "description": "Label for 'from' field in currency selection dialog."
+        "description": "货币选择对话框中'来源'字段的标签。"
     },
-    "converter_to_field": "To",
+    "converter_to_field": "到",
     "@converter_to_field": {
-        "description": "Label for 'to' field in currency selection dialog."
+        "description": "货币选择对话框中'目标'字段的标签。"
     },
-    "converter_continue": "Continue",
-    "@converter_continue": {
-        "description": "Label for continue button."
-    },
-    "amount_label": "Amount",
+    "amount_label": "金额",
     "@amount_label": {
-        "description": "Label for the amount input field."
+        "description": "金额输入字段的标签。"
     },
-    "encyclopedia_currency_title": "Currency Encyclopedia",
+    "encyclopedia_currency_title": "货币百科",
     "@encyclopedia_currency_title": {
-        "description": "Title for the currency encyclopedia."
+        "description": "货币百科的标题。"
     },
-    "encyclopedia_search": "Search currencies…",
+    "encyclopedia_search": "搜索货币…",
     "@encyclopedia_search": {
-        "description": "Hint text for currency search field."
+        "description": "货币搜索字段的提示文本。"
     },
-    "encyclopedia_not_found": "No currencies found.",
+    "encyclopedia_not_found": "未找到货币。",
     "@encyclopedia_not_found": {
-        "description": "Message when no currencies match the search."
+        "description": "未找到匹配货币时的消息。"
     },
-    "favorites_add": "Add to favorites",
+    "favorites_add": "加入收藏",
     "@favorites_add": {
-        "description": "Label for adding currency to favorites."
+        "description": "将货币添加到收藏的标签。"
     },
-    "favorites_remove": "Remove from favorites",
+    "favorites_remove": "移出收藏",
     "@favorites_remove": {
-        "description": "Label for removing currency from favorites."
+        "description": "从收藏中移除货币的标签。"
     },
-    "detail_cancel": "Cancel",
+    "detail_cancel": "取消",
     "@detail_cancel": {
-        "description": "Label for cancel button in detail view."
+        "description": "详情视图中取消按钮的标签。"
     },
-    "detail_from_field": "From",
+    "detail_from_field": "从",
     "@detail_from_field": {
-        "description": "Label for 'from' field in detail view."
+        "description": "详情视图中'来源'字段的标签。"
     },
-    "detail_to_field": "To",
+    "detail_to_field": "到",
     "@detail_to_field": {
-        "description": "Label for 'to' field in detail view."
+        "description": "详情视图中'目标'字段的标签。"
     },
-    "detail_currency_prompt": "Which field should be filled with this currency?",
+    "detail_currency_prompt": "要将这枚货币填入哪个字段？",
     "@detail_currency_prompt": {
-        "description": "Prompt in detail view for field selection."
+        "description": "详情视图中的字段选择提示。"
     },
-    "detail_remove_favorite": "Remove favorite",
+    "detail_remove_favorite": "移出收藏",
     "@detail_remove_favorite": {
-        "description": "Label for removing favorite in detail view."
+        "description": "在详情视图中移除收藏的标签。"
     },
-    "detail_add_favorite": "Add to favorites",
+    "detail_add_favorite": "加入收藏",
     "@detail_add_favorite": {
-        "description": "Label for adding favorite in detail view."
+        "description": "在详情视图中添加收藏的标签。"
     },
-    "detail_iso_code": "ISO Code",
+    "detail_iso_code": "ISO 代码",
     "@detail_iso_code": {
-        "description": "Label for ISO currency code in detail view."
+        "description": "详情视图中 ISO 货币代码的标签。"
     },
-    "detail_name": "Name",
+    "detail_name": "名称",
     "@detail_name": {
-        "description": "Label for currency name in detail view."
+        "description": "详情视图中货币名称的标签。"
     },
-    "detail_symbol": "Symbol",
+    "detail_symbol": "符号",
     "@detail_symbol": {
-        "description": "Label for currency symbol in detail view."
+        "description": "详情视图中货币符号的标签。"
     },
-    "detail_regions": "Regions",
+    "detail_regions": "地区",
     "@detail_regions": {
-        "description": "Label for regions where currency is used."
+        "description": "使用货币的地区标签。"
     },
-    "detail_description": "Description",
+    "detail_description": "说明",
     "@detail_description": {
-        "description": "Label for currency description."
+        "description": "货币说明的标签。"
     },
-    "detail_convert": "Convert",
+    "detail_convert": "转换",
     "@detail_convert": {
-        "description": "Label for convert button in detail view."
+        "description": "详情视图中转换按钮的标签。"
     },
-    "update_available": "Update available",
+    "update_available": "有可用更新",
     "@update_available": {
-        "description": "Title for update available dialog."
+        "description": "更新可用对话框的标题。"
     },
-    "update_cancel": "Cancel",
+    "update_cancel": "取消",
     "@update_cancel": {
-        "description": "Label for cancel button in update dialog."
+        "description": "更新对话框中取消按钮的标签。"
     },
-    "update_download": "Download",
+    "update_download": "下载",
     "@update_download": {
-        "description": "Label for download button in update dialog."
+        "description": "更新对话框中下载按钮的标签。"
     },
     "update_download_prompt": "已有 {version} 版本可用。\n\n要从 GitHub Releases 下载适用于此设备的 {assetName} 吗？",
     "@update_download_prompt": {
@@ -254,13 +246,13 @@
     "@update_direct_download_unsupported": {
         "description": "当设备类型不支持直接下载发布版本时显示的消息。"
     },
-    "update_latest": "You are on the latest version",
+    "update_latest": "当前已是最新版本",
     "@update_latest": {
-        "description": "Message indicating app is up to date."
+        "description": "表示应用程序已是最新版本的消息。"
     },
-    "settings_latest_version": "You are on the latest version ({version}).",
+    "settings_latest_version": "您当前已是最新版本（{version}）。",
     "@settings_latest_version": {
-        "description": "Message shown when the app is already on the latest version.",
+        "description": "当应用程序已是最新版本时显示的消息。",
         "placeholders": {
             "version": {
                 "type": "String",
@@ -268,44 +260,48 @@
             }
         }
     },
-    "rate_info_refreshing": "Refreshing rates…",
+    "rate_info_refreshing": "正在刷新汇率…",
     "@rate_info_refreshing": {
-        "description": "Message shown while refreshing exchange rates."
+        "description": "正在刷新汇率时显示的消息。"
     },
-    "rate_info_cached": "cached",
+    "rate_info_cached": "缓存",
     "@rate_info_cached": {
-        "description": "Label indicating the rate is from cache."
+        "description": "表示汇率来自缓存的标签。"
     },
-    "rate_info_live": "live",
+    "rate_info_live": "实时",
     "@rate_info_live": {
-        "description": "Label indicating the rate is live."
+        "description": "表示汇率是实时的标签。"
     },
-    "rate_info_source_prefix": "Source:",
+    "rate_info_source_prefix": "来源：",
     "@rate_info_source_prefix": {
-        "description": "Label prefix for the rate source."
+        "description": "汇率来源的标签前缀。"
     },
     "provider_frankfurter": "Frankfurter",
     "@provider_frankfurter": {
-        "description": "Name of the Frankfurter exchange rate provider."
+        "description": "Frankfurter 汇率提供方的名称。"
     },
     "provider_exchange_api": "Exchange API",
     "@provider_exchange_api": {
-        "description": "Name of the Exchange API provider."
+        "description": "Exchange API 提供方的名称。"
     },
-    "rate_info_disclaimer": "Exchange rates are for reference only.",
+    "rate_info_disclaimer": "汇率仅供参考，请以实际报价为准。",
     "@rate_info_disclaimer": {
-        "description": "Disclaimer about exchange rate accuracy."
+        "description": "关于汇率准确性的免责声明。"
     },
-    "error_network_unavailable": "Network error—unable to connect to the server. Please check your internet connection and try again.",
+    "error_network_unavailable": "网络错误—无法连接到服务器。请检查您的网络连接后重试。",
     "@error_network_unavailable": {
-        "description": "Error message when network is unavailable."
+        "description": "网络不可用时的错误消息。"
     },
-    "error_service_unavailable": "Unable to connect to the update service. Please try again later.",
+    "error_service_unavailable": "无法连接更新服务，请稍后再试。",
     "@error_service_unavailable": {
-        "description": "Error message when service is unavailable."
+        "description": "服务不可用时的错误消息。"
     },
-    "error_generic": "An error occurred. Please try again.",
+    "error_generic": "发生错误，请重试。",
     "@error_generic": {
-        "description": "Generic error message."
+        "description": "通用错误消息。"
+    },
+    "pick": "选择",
+    "@pick": {
+        "description": "用于“Pick”下拉控件的标签。"
     }
 }

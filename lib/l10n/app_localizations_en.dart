@@ -98,9 +98,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Choose a from and to currency to begin converting.';
 
   @override
-  String get converter_choose_currencies => 'Choose your currencies';
-
-  @override
   String get converter_currency_prompt =>
       'Which field should be filled with this currency?';
 
@@ -112,9 +109,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get converter_to_field => 'To';
-
-  @override
-  String get converter_continue => 'Continue';
 
   @override
   String get amount_label => 'Amount';
@@ -240,4 +234,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get error_generic => 'Something went wrong. Please try again.';
+
+  @override
+  String get pick => 'Pick';
 }

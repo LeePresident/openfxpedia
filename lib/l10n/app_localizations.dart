@@ -274,12 +274,6 @@ abstract class AppLocalizations {
   /// **'Choose a from and to currency to begin converting.'**
   String get converter_choose_pair;
 
-  /// Dialog title for currency selection.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose your currencies'**
-  String get converter_choose_currencies;
-
   /// Prompt asking which field to fill with selected currency.
   ///
   /// In en, this message translates to:
@@ -303,12 +297,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To'**
   String get converter_to_field;
-
-  /// Label for continue button.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue'**
-  String get converter_continue;
 
   /// Label for the amount input field.
   ///
@@ -537,6 +525,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get error_generic;
+
+  /// Label used in the UI for the pick control (e.g. dropdown header).
+  ///
+  /// In en, this message translates to:
+  /// **'Pick'**
+  String get pick;
 }
 
 class _AppLocalizationsDelegate

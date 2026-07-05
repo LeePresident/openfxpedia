@@ -116,10 +116,6 @@
     "@converter_choose_pair": {
         "description": "提示使用者選擇貨幣的訊息。"
     },
-    "converter_choose_currencies": "選擇貨幣",
-    "@converter_choose_currencies": {
-        "description": "貨幣選擇對話方塊的標題。"
-    },
     "converter_currency_prompt": "要將這個貨幣填入哪個欄位？",
     "@converter_currency_prompt": {
         "description": "提示選擇要填充的欄位。"
@@ -135,10 +131,6 @@
     "converter_to_field": "到",
     "@converter_to_field": {
         "description": "貨幣選擇對話方塊中'目標'欄位的標籤。"
-    },
-    "converter_continue": "繼續",
-    "@converter_continue": {
-        "description": "繼續按鈕的標籤。"
     },
     "amount_label": "金額",
     "@amount_label": {
@@ -307,5 +299,9 @@
     "error_generic": "發生錯誤，請重試。",
     "@error_generic": {
         "description": "通用錯誤訊息。"
+    },
+    "pick": "選擇",
+    "@pick": {
+        "description": "用於“Pick”下拉控制項的標籤。"
     }
 }

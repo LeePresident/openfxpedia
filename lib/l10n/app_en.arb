@@ -116,10 +116,6 @@
     "@converter_choose_pair": {
         "description": "Message prompting user to select currencies."
     },
-    "converter_choose_currencies": "Choose your currencies",
-    "@converter_choose_currencies": {
-        "description": "Dialog title for currency selection."
-    },
     "converter_currency_prompt": "Which field should be filled with this currency?",
     "@converter_currency_prompt": {
         "description": "Prompt asking which field to fill with selected currency."
@@ -135,10 +131,6 @@
     "converter_to_field": "To",
     "@converter_to_field": {
         "description": "Label for 'to' field in currency selection dialog."
-    },
-    "converter_continue": "Continue",
-    "@converter_continue": {
-        "description": "Label for continue button."
     },
     "amount_label": "Amount",
     "@amount_label": {
@@ -307,5 +299,9 @@
     "error_generic": "Something went wrong. Please try again.",
     "@error_generic": {
         "description": "Generic error message."
+    },
+    "pick": "Pick",
+    "@pick": {
+        "description": "Label used in the UI for the pick control (e.g. dropdown header)."
     }
 }

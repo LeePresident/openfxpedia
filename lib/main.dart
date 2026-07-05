@@ -3,12 +3,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'models/currency.dart';
 import 'providers/app_state.dart';
 import 'screens/converter_screen.dart';
 import 'screens/encyclopedia_screen.dart';
 import 'screens/settings_screen.dart';
-import 'widgets/search_bar.dart' as app_search;
 import 'services/cache_service.dart';
 import 'services/conversion_service.dart';
 import 'services/currency_catalog.dart';
@@ -402,8 +400,6 @@ class _HomeShell extends StatefulWidget {
 }
 
 class _HomeShellState extends State<_HomeShell> {
-  bool _showingInitialCurrencyDialog = false;
-
   static const _screens = [
     ConverterScreen(),
     EncyclopediaScreen(),
@@ -415,21 +411,6 @@ class _HomeShellState extends State<_HomeShell> {
     return Consumer<AppState>(
       builder: (context, state, _) {
         final l10n = AppLocalizations.of(context);
-        if (!_showingInitialCurrencyDialog &&
-            state.loadingState == LoadingState.idle &&
-            state.currencies.isNotEmpty &&
-            (state.baseCurrency == null || state.targetCurrency == null)) {
-          _showingInitialCurrencyDialog = true;
-          WidgetsBinding.instance.addPostFrameCallback((_) async {
-            await _showInitialCurrencyPicker(context, state);
-            if (mounted) {
-              setState(() => _showingInitialCurrencyDialog = false);
-            } else {
-              _showingInitialCurrencyDialog = false;
-            }
-          });
-        }
-
         return Scaffold(
           body: _screens[state.selectedTab],
           bottomNavigationBar: NavigationBar(
@@ -450,83 +431,6 @@ class _HomeShellState extends State<_HomeShell> {
               ),
             ],
           ),
-        );
-      },
-    );
-  }
-
-  Future<void> _showInitialCurrencyPicker(
-    BuildContext context,
-    AppState state,
-  ) async {
-    final l10n = AppLocalizations.of(context);
-    Currency? selectedFrom = state.baseCurrency ?? state.currencies.first;
-    Currency? selectedTo = state.targetCurrency ??
-        state.currencies.firstWhere(
-          (currency) => currency.isoCode != selectedFrom!.isoCode,
-          orElse: () => state.currencies.first,
-        );
-
-    await showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (dialogContext) {
-        return StatefulBuilder(
-          builder: (dialogContext, setDialogState) {
-            return AlertDialog(
-              title: Text(l10n.converter_choose_currencies),
-              content: SizedBox(
-                width: 420,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    app_search.CurrencySearchBar(
-                      currencies: state.currencies,
-                      selectedCurrency: selectedFrom,
-                      hint: l10n.converter_from_hint,
-                      onSelected: (value) {
-                        setDialogState(() {
-                          selectedFrom = value;
-                          if (selectedTo?.isoCode == value.isoCode) {
-                            selectedTo = state.currencies.firstWhere(
-                              (currency) => currency.isoCode != value.isoCode,
-                              orElse: () => value,
-                            );
-                          }
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    app_search.CurrencySearchBar(
-                      currencies: state.currencies,
-                      selectedCurrency: selectedTo,
-                      hint: l10n.converter_to_hint,
-                      onSelected: (value) =>
-                          setDialogState(() => selectedTo = value),
-                    ),
-                  ],
-                ),
-              ),
-              actions: [
-                FilledButton(
-                  onPressed: selectedFrom == null ||
-                          selectedTo == null ||
-                          selectedFrom!.isoCode == selectedTo!.isoCode
-                      ? null
-                      : () {
-                          state.setCurrencyPair(
-                            baseCurrency: selectedFrom!,
-                            targetCurrency: selectedTo!,
-                          );
-                          state.setSelectedTab(0);
-                          Navigator.pop(dialogContext);
-                        },
-                  child: Text(l10n.converter_continue),
-                ),
-              ],
-            );
-          },
         );
       },
     );

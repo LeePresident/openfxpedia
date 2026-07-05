@@ -116,10 +116,6 @@
     "@converter_choose_pair": {
         "description": "提示用户选择货币的消息。"
     },
-    "converter_choose_currencies": "选择货币",
-    "@converter_choose_currencies": {
-        "description": "货币选择对话框的标题。"
-    },
     "converter_currency_prompt": "要将这枚货币填入哪个字段？",
     "@converter_currency_prompt": {
         "description": "提示选择要填充的字段。"
@@ -135,10 +131,6 @@
     "converter_to_field": "到",
     "@converter_to_field": {
         "description": "货币选择对话框中'目标'字段的标签。"
-    },
-    "converter_continue": "继续",
-    "@converter_continue": {
-        "description": "继续按钮的标签。"
     },
     "amount_label": "金额",
     "@amount_label": {
@@ -307,5 +299,9 @@
     "error_generic": "发生错误，请重试。",
     "@error_generic": {
         "description": "通用错误消息。"
+    },
+    "pick": "选择",
+    "@pick": {
+        "description": "用于“Pick”下拉控件的标签。"
     }
 }

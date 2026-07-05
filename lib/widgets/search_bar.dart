@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/currency.dart';
+import '../l10n/app_localizations.dart';
 
 class CurrencySearchBar extends StatefulWidget {
   final List<Currency> currencies;
@@ -145,7 +146,7 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
                   child: Text(
                     widget.selectedCurrency != null
                         ? '${widget.selectedCurrency!.isoCode} — ${widget.selectedCurrency!.name}'
-                        : 'Pick',
+                        : AppLocalizations.of(context).pick,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),

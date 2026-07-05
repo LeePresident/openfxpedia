@@ -37,33 +37,40 @@ class RateInfoWidget extends StatelessWidget {
     final formatter = DateFormat.yMMMd(l10n.localeName).add_Hm();
     final timeLabel = formatter.format(rate!.timestamp.toLocal());
     final sourceLabel = fromCache ? l10n.rate_info_cached : l10n.rate_info_live;
-    final providerSource = rate!.source.toLowerCase();
-    final providerLabel = switch (providerSource) {
-      'frankfurter' => l10n.provider_frankfurter,
-      'legacy' || 'exchange_api' || 'exchangeapi' => l10n.provider_exchange_api,
-      _ => rate!.source,
-    };
-    final rateDetails =
-        '1 ${rate!.baseCurrency.toUpperCase()} = ${rate!.rate.toStringAsFixed(4)} ${rate!.targetCurrency.toUpperCase()} - $timeLabel ($sourceLabel${fromCache ? '' : ', ${l10n.rate_info_source_prefix} $providerLabel'})';
+    final rateSummary =
+        '1 ${rate!.baseCurrency.toUpperCase()} = ${rate!.rate.toStringAsFixed(4)} ${rate!.targetCurrency.toUpperCase()}';
+    final metadata = '$timeLabel - $sourceLabel';
 
-    return Row(
-      mainAxisSize: MainAxisSize.max,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(
-          fromCache ? Icons.cloud_off : Icons.cloud_done,
-          size: 14,
-          color: fromCache
-              ? Theme.of(context).colorScheme.secondary
-              : Colors.green,
+        Text(
+          rateSummary,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
-        const SizedBox(width: 4),
-        Flexible(
-          child: Text(
-            rateDetails,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+        const SizedBox(height: 4),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Icon(
+              fromCache ? Icons.cloud_off : Icons.cloud_done,
+              size: 14,
+              color: fromCache
+                  ? Theme.of(context).colorScheme.secondary
+                  : Colors.green,
+            ),
+            const SizedBox(width: 4),
+            Flexible(
+              child: Text(
+                metadata,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+          ],
         ),
       ],
     );
