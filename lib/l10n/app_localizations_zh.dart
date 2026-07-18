@@ -36,6 +36,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settings_theme => '主题';
 
   @override
+  String get settings_exchange_api_source => '汇率 API';
+
+  @override
+  String get settings_select_exchange_api_source => '选择汇率 API';
+
+  @override
+  String get settings_exchange_api_source_auto => '自动';
+
+  @override
   String get settings_app_version => '应用版本';
 
   @override
@@ -261,6 +270,15 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get settings_theme => '主题';
 
   @override
+  String get settings_exchange_api_source => '汇率 API';
+
+  @override
+  String get settings_select_exchange_api_source => '选择汇率 API';
+
+  @override
+  String get settings_exchange_api_source_auto => '自动';
+
+  @override
   String get settings_app_version => '应用版本';
 
   @override
@@ -484,6 +502,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get settings_theme => '主題';
+
+  @override
+  String get settings_exchange_api_source => '匯率 API';
+
+  @override
+  String get settings_select_exchange_api_source => '選擇匯率 API';
+
+  @override
+  String get settings_exchange_api_source_auto => '自動';
 
   @override
   String get settings_app_version => '應用程式版本';

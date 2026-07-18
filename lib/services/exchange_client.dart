@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../core/config.dart';
 import 'exchange_api_exception.dart';
+import 'exchange_api_source.dart';
 import 'exchange_observability.dart';
 import 'exchange_provider.dart';
 import 'frankfurter_provider.dart';
@@ -33,9 +34,26 @@ class ExchangeClient {
   Future<ExchangeRateSnapshot> fetchRateSnapshotFor(
     String base, {
     String? target,
+    ExchangeApiSource preferredSource = ExchangeApiSource.auto,
   }) async {
     final normalizedBase = base.toLowerCase();
     final normalizedTarget = target?.toLowerCase();
+
+    if (preferredSource == ExchangeApiSource.frankfurter) {
+      return _fetchFromSingleProvider(
+        provider: _primaryProvider,
+        base: normalizedBase,
+        target: normalizedTarget,
+      );
+    }
+
+    if (preferredSource == ExchangeApiSource.exchangeApi) {
+      return _fetchFromSingleProvider(
+        provider: _fallbackProvider,
+        base: normalizedBase,
+        target: normalizedTarget,
+      );
+    }
 
     try {
       final snapshot = await _primaryProvider.fetchLatestRates(normalizedBase);
@@ -89,6 +107,40 @@ class ExchangeClient {
         source: _fallbackProvider.sourceId,
         status: 'failed',
         base: normalizedBase,
+        failureReason: error.toString(),
+      );
+      rethrow;
+    }
+  }
+
+  Future<ExchangeRateSnapshot> _fetchFromSingleProvider({
+    required ExchangeProvider provider,
+    required String base,
+    required String? target,
+  }) async {
+    try {
+      final snapshot = await provider.fetchLatestRates(base);
+      if (target != null && !snapshot.rates.containsKey(target)) {
+        ExchangeObservability.recordAttempt(
+          source: provider.sourceId,
+          status: 'missing-rate',
+          base: base,
+          failureReason: 'Missing rate for $target',
+        );
+        throw ExchangeApiException('No rate found for target $target');
+      }
+
+      ExchangeObservability.recordAttempt(
+        source: provider.sourceId,
+        status: 'success',
+        base: base,
+      );
+      return snapshot;
+    } catch (error) {
+      ExchangeObservability.recordAttempt(
+        source: provider.sourceId,
+        status: 'failed',
+        base: base,
         failureReason: error.toString(),
       );
       rethrow;

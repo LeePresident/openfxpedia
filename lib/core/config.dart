@@ -31,6 +31,7 @@
   static const String defaultTargetCurrencyKey = 'default_target';
   static const String themeModeKey = 'theme_mode';
   static const String localeKey = 'locale';
+  static const String exchangeApiSourceKey = 'exchange_api_source';
 
   static const String defaultBaseCurrency = 'usd';
   static const String defaultTargetCurrency = 'eur';

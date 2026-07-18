@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfxpedia/models/exchange_rate.dart';
 import 'package:openfxpedia/services/conversion_service.dart';
+import 'package:openfxpedia/services/exchange_api_source.dart';
 import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/cache_service.dart';
 import 'package:openfxpedia/services/exchange_provider.dart';
@@ -9,6 +10,7 @@ class _FakeExchangeClient extends ExchangeClient {
   final Map<String, Map<String, double>> _rates;
   final Map<String, Map<String, double>> _fallbackRates;
   bool calledFetch = false;
+  ExchangeApiSource? lastPreferredSource;
 
   _FakeExchangeClient(this._rates,
       {Map<String, Map<String, double>>? fallbackRates})
@@ -39,9 +41,28 @@ class _FakeExchangeClient extends ExchangeClient {
   Future<ExchangeRateSnapshot> fetchRateSnapshotFor(
     String base, {
     String? target,
+    ExchangeApiSource preferredSource = ExchangeApiSource.auto,
   }) async {
     final normalizedBase = base.toLowerCase();
     final normalizedTarget = target?.toLowerCase();
+    lastPreferredSource = preferredSource;
+
+    if (preferredSource == ExchangeApiSource.exchangeApi) {
+      final fallbackRates = _fallbackRates[normalizedBase];
+      if (fallbackRates == null ||
+          (normalizedTarget != null &&
+              !fallbackRates.containsKey(normalizedTarget))) {
+        throw ExchangeApiException('no fallback rates for $normalizedBase');
+      }
+
+      return ExchangeRateSnapshot(
+        baseCurrency: normalizedBase,
+        quotedAt: DateTime.utc(2026, 5, 8),
+        sourceId: 'legacy',
+        rates: fallbackRates,
+      );
+    }
+
     final primary = await fetchRateSnapshot(normalizedBase);
     if (normalizedTarget == null ||
         primary.rates.containsKey(normalizedTarget)) {
@@ -186,6 +207,31 @@ void main() {
       expect(result.rate.source, 'frankfurter');
     });
 
+    test('uses fresh legacy cache when Exchange API is selected', () async {
+      final cache = _StubCacheService(stale: false)
+        .._storedRates = {'eur': 0.89}
+        .._storedTimestamp = DateTime.now().toUtc()
+        .._storedSource = 'legacy';
+
+      final client = _FakeExchangeClient(
+        {
+          'usd': {'eur': 0.92},
+        },
+        fallbackRates: {
+          'usd': {'eur': 0.90},
+        },
+      );
+      final service = ConversionService(client: client, cache: cache)
+        ..setPreferredSource(ExchangeApiSource.exchangeApi);
+
+      final result = await service.convert(50.0, 'USD', 'EUR');
+
+      expect(result.fromCache, isTrue);
+      expect(client.calledFetch, isFalse);
+      expect(result.amount, closeTo(44.5, 0.00001));
+      expect(result.rate.source, 'legacy');
+    });
+
     test('refreshes live rates when fresh Frankfurter cache lacks target',
         () async {
       final cache = _StubCacheService(stale: false)
@@ -255,6 +301,27 @@ void main() {
       expect(result.fromCache, isFalse);
       expect(result.rate.source, 'frankfurter');
       expect(result.rate.timestamp, DateTime.utc(2026, 5, 7));
+    });
+
+    test('forwards selected Exchange API source to live conversions', () async {
+      final client = _FakeExchangeClient(
+        {
+          'usd': {'eur': 0.92},
+        },
+        fallbackRates: {
+          'usd': {'eur': 0.90},
+        },
+      );
+      final cache = _StubCacheService(stale: true);
+      final service = ConversionService(client: client, cache: cache)
+        ..setPreferredSource(ExchangeApiSource.exchangeApi);
+
+      final result = await service.convert(100.0, 'USD', 'EUR');
+
+      expect(client.lastPreferredSource, ExchangeApiSource.exchangeApi);
+      expect(result.fromCache, isFalse);
+      expect(result.amount, closeTo(90.0, 0.00001));
+      expect(result.rate.source, 'legacy');
     });
 
     test('preserves provider source when serving a cached result', () async {

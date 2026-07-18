@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../models/currency.dart';
 import '../providers/app_state.dart';
+import '../services/exchange_api_source.dart';
 import '../widgets/amount_input.dart';
 import '../widgets/rate_info.dart';
 import '../widgets/favorites_bar.dart';
@@ -21,6 +22,29 @@ class ConverterScreen extends StatelessWidget {
         return l10n.error_service_unavailable;
       default:
         return l10n.error_generic;
+    }
+  }
+
+  String _providerLabelFor(AppState state, AppLocalizations l10n) {
+    final providerSrc = state.lastRate?.source;
+    if (providerSrc != null) {
+      final source = providerSrc.toLowerCase();
+      if (source.contains('frank')) {
+        return l10n.provider_frankfurter;
+      }
+
+      return l10n.provider_exchange_api;
+    }
+
+    switch (state.exchangeApiSource) {
+      case ExchangeApiSource.exchangeApi:
+        return l10n.provider_exchange_api;
+      case ExchangeApiSource.frankfurter:
+        return l10n.provider_frankfurter;
+      case ExchangeApiSource.auto:
+        return state.rateFromCache
+            ? l10n.provider_exchange_api
+            : l10n.provider_frankfurter;
     }
   }
 
@@ -235,21 +259,8 @@ class ConverterScreen extends StatelessWidget {
                               const SizedBox(height: 4),
                               // Localized source label under the disclaimer.
                               Builder(builder: (ctx) {
-                                final providerSrc = state.lastRate?.source;
-                                String providerLabel;
-                                if (providerSrc != null) {
-                                  final s = providerSrc.toLowerCase();
-                                  if (s.contains('frank')) {
-                                    providerLabel = l10n.provider_frankfurter;
-                                  } else {
-                                    providerLabel = l10n.provider_exchange_api;
-                                  }
-                                } else {
-                                  // Fallback to cache flag or generic label
-                                  providerLabel = state.rateFromCache
-                                      ? l10n.provider_exchange_api
-                                      : l10n.provider_frankfurter;
-                                }
+                                final providerLabel =
+                                    _providerLabelFor(state, l10n);
 
                                 return Text(
                                   '${l10n.rate_info_source_prefix} $providerLabel',

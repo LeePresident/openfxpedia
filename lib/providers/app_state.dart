@@ -6,6 +6,7 @@ import '../models/exchange_rate.dart';
 import '../services/cache_service.dart';
 import '../services/conversion_service.dart';
 import '../services/currency_catalog.dart';
+import '../services/exchange_api_source.dart';
 import '../services/favorites_service.dart';
 
 enum LoadingState { idle, loading, error }
@@ -52,6 +53,8 @@ class AppState extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
   Locale? _locale;
   Locale? get locale => _locale;
+  ExchangeApiSource _exchangeApiSource = ExchangeApiSource.auto;
+  ExchangeApiSource get exchangeApiSource => _exchangeApiSource;
 
   AppState({
     required ConversionService conversionService,
@@ -80,6 +83,7 @@ class AppState extends ChangeNotifier {
     try {
       await _loadLocale();
       _loadThemeMode();
+      _loadExchangeApiSource();
       _currencies = await _catalogService.getCurrencies(
         locale: _effectiveLocale,
       );
@@ -130,6 +134,21 @@ class AppState extends ChangeNotifier {
     notifyListeners();
     await _cacheService.putString(
         AppConfig.themeModeKey, _serializeThemeMode(mode));
+  }
+
+  Future<void> setExchangeApiSource(ExchangeApiSource source) async {
+    if (_exchangeApiSource == source) return;
+
+    _exchangeApiSource = source;
+    _conversionService.setPreferredSource(source);
+    notifyListeners();
+
+    await _cacheService.putString(
+      AppConfig.exchangeApiSourceKey,
+      source.storageValue,
+    );
+
+    await convert();
   }
 
   Future<void> setLocale(Locale? locale) async {
@@ -419,5 +438,11 @@ class AppState extends ChangeNotifier {
       case ThemeMode.system:
         return 'system';
     }
+  }
+
+  void _loadExchangeApiSource() {
+    final raw = _cacheService.getString(AppConfig.exchangeApiSourceKey);
+    _exchangeApiSource = ExchangeApiSourceStorage.fromStorage(raw);
+    _conversionService.setPreferredSource(_exchangeApiSource);
   }
 }

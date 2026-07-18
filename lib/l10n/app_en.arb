@@ -36,6 +36,18 @@
     "@settings_theme": {
         "description": "Label for theme settings option."
     },
+    "settings_exchange_api_source": "Exchange rate API",
+    "@settings_exchange_api_source": {
+        "description": "Label for exchange rate API source settings option."
+    },
+    "settings_select_exchange_api_source": "Select exchange rate API",
+    "@settings_select_exchange_api_source": {
+        "description": "Dialog title for selecting an exchange rate API source."
+    },
+    "settings_exchange_api_source_auto": "Auto",
+    "@settings_exchange_api_source_auto": {
+        "description": "Option to automatically choose the exchange rate API source."
+    },
     "settings_app_version": "App version",
     "@settings_app_version": {
         "description": "Label for app version display in settings."

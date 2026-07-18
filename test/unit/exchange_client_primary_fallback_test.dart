@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:openfxpedia/services/exchange_api_source.dart';
 import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/exchange_provider.dart';
 import 'package:openfxpedia/services/exchange_observability.dart';
@@ -135,6 +136,85 @@ void main() {
       expect(ExchangeObservability.events, hasLength(2));
       expect(ExchangeObservability.events.first['status'], 'missing-rate');
       expect(ExchangeObservability.events.last['source'], 'legacy');
+    });
+
+    test('uses fallback provider only when Exchange API is selected', () async {
+      final primary = _FakeProvider(
+        sourceId: 'frankfurter',
+        snapshot: ExchangeRateSnapshot(
+          baseCurrency: 'usd',
+          quotedAt: DateTime.utc(2026, 5, 7),
+          sourceId: 'frankfurter',
+          rates: const {'eur': 0.92},
+        ),
+      );
+      final fallback = _FakeProvider(
+        sourceId: 'legacy',
+        snapshot: ExchangeRateSnapshot(
+          baseCurrency: 'usd',
+          quotedAt: DateTime.utc(2026, 5, 6),
+          sourceId: 'legacy',
+          rates: const {'eur': 0.90},
+        ),
+      );
+
+      final client = ExchangeClient(
+        primaryProvider: primary,
+        fallbackProvider: fallback,
+      );
+
+      final snapshot = await client.fetchRateSnapshotFor(
+        'usd',
+        target: 'eur',
+        preferredSource: ExchangeApiSource.exchangeApi,
+      );
+
+      expect(snapshot.sourceId, 'legacy');
+      expect(primary.calls, 0);
+      expect(fallback.calls, 1);
+      expect(ExchangeObservability.events, hasLength(1));
+      expect(ExchangeObservability.events.single['source'], 'legacy');
+      expect(ExchangeObservability.events.single['status'], 'success');
+    });
+
+    test('does not fall back when Frankfurter is selected', () async {
+      final primary = _FakeProvider(
+        sourceId: 'frankfurter',
+        snapshot: ExchangeRateSnapshot(
+          baseCurrency: 'usd',
+          quotedAt: DateTime.utc(2026, 5, 7),
+          sourceId: 'frankfurter',
+          rates: const {'gbp': 0.79},
+        ),
+      );
+      final fallback = _FakeProvider(
+        sourceId: 'legacy',
+        snapshot: ExchangeRateSnapshot(
+          baseCurrency: 'usd',
+          quotedAt: DateTime.utc(2026, 5, 6),
+          sourceId: 'legacy',
+          rates: const {'eur': 0.90},
+        ),
+      );
+
+      final client = ExchangeClient(
+        primaryProvider: primary,
+        fallbackProvider: fallback,
+      );
+
+      await expectLater(
+        () => client.fetchRateSnapshotFor(
+          'usd',
+          target: 'eur',
+          preferredSource: ExchangeApiSource.frankfurter,
+        ),
+        throwsA(isA<ExchangeApiException>()),
+      );
+      expect(primary.calls, 1);
+      expect(fallback.calls, 0);
+      expect(ExchangeObservability.events, hasLength(2));
+      expect(ExchangeObservability.events.first['status'], 'missing-rate');
+      expect(ExchangeObservability.events.last['status'], 'failed');
     });
   });
 }

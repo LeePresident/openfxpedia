@@ -36,6 +36,18 @@
     "@settings_theme": {
         "description": "主題設定選項的標籤。"
     },
+    "settings_exchange_api_source": "匯率 API",
+    "@settings_exchange_api_source": {
+        "description": "匯率 API 來源設定選項的標籤。"
+    },
+    "settings_select_exchange_api_source": "選擇匯率 API",
+    "@settings_select_exchange_api_source": {
+        "description": "選擇匯率 API 來源的對話方塊標題。"
+    },
+    "settings_exchange_api_source_auto": "自動",
+    "@settings_exchange_api_source_auto": {
+        "description": "自動選擇匯率 API 來源的選項。"
+    },
     "settings_app_version": "應用程式版本",
     "@settings_app_version": {
         "description": "設定中應用程式版本顯示的標籤。"

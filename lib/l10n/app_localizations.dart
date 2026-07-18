@@ -154,6 +154,24 @@ abstract class AppLocalizations {
   /// **'Theme'**
   String get settings_theme;
 
+  /// Label for exchange rate API source settings option.
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange rate API'**
+  String get settings_exchange_api_source;
+
+  /// Dialog title for selecting an exchange rate API source.
+  ///
+  /// In en, this message translates to:
+  /// **'Select exchange rate API'**
+  String get settings_select_exchange_api_source;
+
+  /// Option to automatically choose the exchange rate API source.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get settings_exchange_api_source_auto;
+
   /// Label for app version display in settings.
   ///
   /// In en, this message translates to:

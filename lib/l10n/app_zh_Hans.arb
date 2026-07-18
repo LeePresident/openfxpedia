@@ -36,6 +36,18 @@
     "@settings_theme": {
         "description": "主题设置选项的标签。"
     },
+    "settings_exchange_api_source": "汇率 API",
+    "@settings_exchange_api_source": {
+        "description": "汇率 API 来源设置选项的标签。"
+    },
+    "settings_select_exchange_api_source": "选择汇率 API",
+    "@settings_select_exchange_api_source": {
+        "description": "选择汇率 API 来源的对话框标题。"
+    },
+    "settings_exchange_api_source_auto": "自动",
+    "@settings_exchange_api_source_auto": {
+        "description": "自动选择汇率 API 来源的选项。"
+    },
     "settings_app_version": "应用版本",
     "@settings_app_version": {
         "description": "设置中应用程序版本显示的标签。"

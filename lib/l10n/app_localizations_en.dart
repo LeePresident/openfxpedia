@@ -36,6 +36,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_theme => 'Theme';
 
   @override
+  String get settings_exchange_api_source => 'Exchange rate API';
+
+  @override
+  String get settings_select_exchange_api_source => 'Select exchange rate API';
+
+  @override
+  String get settings_exchange_api_source_auto => 'Auto';
+
+  @override
   String get settings_app_version => 'App version';
 
   @override

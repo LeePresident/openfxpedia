@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../core/config.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/app_state.dart';
+import '../services/exchange_api_source.dart';
 import 'changelog_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -220,6 +221,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () => _showThemeDialog(appState),
               ),
               ListTile(
+                title: Text(l10n.settings_exchange_api_source),
+                subtitle: Text(_describeExchangeApiSource(
+                    appState.exchangeApiSource, l10n)),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => _showExchangeApiSourceDialog(appState),
+              ),
+              ListTile(
                 title: Text(l10n.settings_app_version),
                 subtitle: Text(version),
                 trailing: _checking
@@ -285,6 +293,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return l10n.language_traditional_chinese;
     }
     return l10n.language_english;
+  }
+
+  String _describeExchangeApiSource(
+    ExchangeApiSource source,
+    AppLocalizations l10n,
+  ) {
+    switch (source) {
+      case ExchangeApiSource.auto:
+        return l10n.settings_exchange_api_source_auto;
+      case ExchangeApiSource.frankfurter:
+        return l10n.provider_frankfurter;
+      case ExchangeApiSource.exchangeApi:
+        return l10n.provider_exchange_api;
+    }
   }
 
   Future<void> _showLanguageDialog(AppState state) async {
@@ -357,6 +379,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
 
     if (chosen != null) await state.setThemeMode(chosen);
+  }
+
+  Future<void> _showExchangeApiSourceDialog(AppState state) async {
+    final l10n = AppLocalizations.of(context);
+    final chosen = await showDialog<ExchangeApiSource>(
+      context: context,
+      builder: (ctx) {
+        return SimpleDialog(
+          title: Text(l10n.settings_select_exchange_api_source),
+          children: [
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, ExchangeApiSource.auto),
+              child: Text(l10n.settings_exchange_api_source_auto),
+            ),
+            SimpleDialogOption(
+              onPressed: () =>
+                  Navigator.pop(ctx, ExchangeApiSource.frankfurter),
+              child: Text(l10n.provider_frankfurter),
+            ),
+            SimpleDialogOption(
+              onPressed: () =>
+                  Navigator.pop(ctx, ExchangeApiSource.exchangeApi),
+              child: Text(l10n.provider_exchange_api),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (chosen != null) await state.setExchangeApiSource(chosen);
   }
 
   String? _preferredUpdateAssetName(String latestVersion) {
