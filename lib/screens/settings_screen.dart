@@ -33,6 +33,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _checkForUpdates(String currentVersion) async {
     final l10n = AppLocalizations.of(context);
+    if (!mounted) return;
     setState(() => _checking = true);
     try {
       final latestRelease = await _fetchLatestStableRelease();
@@ -70,11 +71,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
         }
       }
     } catch (e) {
+      if (!mounted) return;
+
       // Log technical details for developers, but show a concise message to users.
       debugPrint('Update check failed: $e');
       _showMessage(_friendlyUpdateError(e));
     } finally {
-      setState(() => _checking = false);
+      if (mounted) {
+        setState(() => _checking = false);
+      }
     }
   }
 

@@ -17,6 +17,7 @@ class AppState extends ChangeNotifier {
   final FavoritesService _favoritesService;
   final CacheService _cacheService;
   final Iterable<Locale> Function() _systemLocales;
+  int _conversionRequestSequence = 0;
 
   List<Currency> _currencies = [];
   List<Currency> get currencies => _currencies;
@@ -315,12 +316,19 @@ class AppState extends ChangeNotifier {
       return;
     }
 
+    final requestId = ++_conversionRequestSequence;
+
     try {
       final result = await _conversionService.convert(
         _inputAmount,
         _baseCurrency!.isoCode,
         _targetCurrency!.isoCode,
       );
+
+      if (requestId != _conversionRequestSequence) {
+        return;
+      }
+
       _convertedAmount = result.amount;
       _lastRate = result.rate;
       _rateFromCache = result.fromCache;
@@ -328,6 +336,10 @@ class AppState extends ChangeNotifier {
       _errorCode = null;
       notifyListeners();
     } catch (e) {
+      if (requestId != _conversionRequestSequence) {
+        return;
+      }
+
       _setError(e.toString());
     }
   }
@@ -335,11 +347,23 @@ class AppState extends ChangeNotifier {
   Future<void> refreshRates() async {
     if (_baseCurrency == null) return;
     _setLoading();
+
+    final requestId = ++_conversionRequestSequence;
+
     try {
       await _conversionService.refreshRates(_baseCurrency!.isoCode);
+
+      if (requestId != _conversionRequestSequence) {
+        return;
+      }
+
       _setIdle();
       await convert();
     } catch (e) {
+      if (requestId != _conversionRequestSequence) {
+        return;
+      }
+
       _setError(e.toString());
     }
   }
