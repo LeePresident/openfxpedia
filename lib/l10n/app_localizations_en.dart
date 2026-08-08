@@ -160,6 +160,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get detail_iso_code => 'ISO Code';
 
   @override
+  String get detail_iso_numeric => 'ISO Numeric';
+
+  @override
   String get detail_name => 'Name';
 
   @override

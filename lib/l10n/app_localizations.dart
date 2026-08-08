@@ -394,6 +394,12 @@ abstract class AppLocalizations {
   /// **'ISO Code'**
   String get detail_iso_code;
 
+  /// Label for ISO 4217 numeric currency code in detail view.
+  ///
+  /// In en, this message translates to:
+  /// **'ISO Numeric'**
+  String get detail_iso_numeric;
+
   /// Label for currency name in detail view.
   ///
   /// In en, this message translates to:

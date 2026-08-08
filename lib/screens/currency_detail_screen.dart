@@ -97,6 +97,11 @@ class CurrencyDetailScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _DetailRow(
                     label: l10n.detail_iso_code, value: currency.isoCode),
+                if (currency.isoNumeric != null)
+                  _DetailRow(
+                    label: l10n.detail_iso_numeric,
+                    value: currency.isoNumeric!,
+                  ),
                 _DetailRow(label: l10n.detail_name, value: currency.name),
                 if (currency.symbol != null)
                   _DetailRow(

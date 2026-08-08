@@ -89,16 +89,19 @@ class _FakeCurrencyCatalogService extends CurrencyCatalogService {
     return [
       Currency(
         isoCode: 'USD',
+        isoNumeric: '840',
         name: 'US Dollar',
         regions: const ['United States'],
       ),
       Currency(
         isoCode: 'EUR',
+        isoNumeric: '978',
         name: 'Euro',
         regions: const ['Eurozone'],
       ),
       Currency(
         isoCode: 'JPY',
+        isoNumeric: '392',
         name: 'Japanese Yen',
         regions: const ['Japan'],
       ),
@@ -154,6 +157,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('ISO Code'), findsOneWidget);
+    expect(find.text('ISO Numeric'), findsOneWidget);
+    expect(find.text('392'), findsOneWidget);
     expect(find.text('JPY'), findsNWidgets(2));
     expect(find.text('Japanese Yen'), findsOneWidget);
   });

@@ -196,6 +196,10 @@
     "@detail_iso_code": {
         "description": "詳情檢視中 ISO 貨幣代碼的標籤。"
     },
+    "detail_iso_numeric": "ISO 數字代碼",
+    "@detail_iso_numeric": {
+        "description": "詳情檢視中 ISO 4217 數字貨幣代碼的標籤。"
+    },
     "detail_name": "名稱",
     "@detail_name": {
         "description": "詳情檢視中貨幣名稱的標籤。"

@@ -156,6 +156,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get detail_iso_code => 'ISO 代码';
 
   @override
+  String get detail_iso_numeric => 'ISO 数字代码';
+
+  @override
   String get detail_name => '名称';
 
   @override
@@ -390,6 +393,9 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get detail_iso_code => 'ISO 代码';
 
   @override
+  String get detail_iso_numeric => 'ISO 数字代码';
+
+  @override
   String get detail_name => '名称';
 
   @override
@@ -622,6 +628,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get detail_iso_code => 'ISO 代碼';
+
+  @override
+  String get detail_iso_numeric => 'ISO 數字代碼';
 
   @override
   String get detail_name => '名稱';

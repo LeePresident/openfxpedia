@@ -196,6 +196,10 @@
     "@detail_iso_code": {
         "description": "Label for ISO currency code in detail view."
     },
+    "detail_iso_numeric": "ISO Numeric",
+    "@detail_iso_numeric": {
+        "description": "Label for ISO 4217 numeric currency code in detail view."
+    },
     "detail_name": "Name",
     "@detail_name": {
         "description": "Label for currency name in detail view."

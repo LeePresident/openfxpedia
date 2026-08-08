@@ -77,9 +77,7 @@ class CurrencyCatalogService {
         baseValue: baseName,
         overlayEntry: overlayEntry,
       );
-      final symbol = overlayEntry != null && overlayEntry['symbol'] != null
-          ? overlayEntry['symbol'].toString()
-          : (meta != null ? meta['symbol'] as String? : null);
+      final symbol = meta != null ? meta['symbol'] as String? : null;
       final regions = _resolveLocalizedList(
         localeKey: localeKey,
         isoCode: iso,
@@ -97,6 +95,7 @@ class CurrencyCatalogService {
 
       return Currency(
         isoCode: iso,
+        isoNumeric: meta != null ? meta['iso_numeric'] as String? : null,
         name: name,
         symbol: symbol,
         iconAsset: _iconAssetPath(e.key),
