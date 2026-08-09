@@ -1,38 +1,70 @@
 [
     {
+        "version": "v1.0.3",
+        "date": "2026-08-09",
+        "summary": "Added API selection, improved update safety, and enhanced currency search.",
+        "highlights": [
+            "Added an exchange-rate API selection setting with safer conversion request handling.",
+            "Added ISO numeric currency-code support and improved currency search, including clear-search behavior.",
+            "Improved update-check safety and localized accessibility-test and search-bar text."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.3",
+                "date": "2026-08-09",
+                "summary": "新增 API 选择、改进更新安全性并完善货币搜索。",
+                "highlights": [
+                    "新增汇率 API 选择设置，并改进转换请求的安全性",
+                    "新增 ISO 数字货币代码支持，并改进货币搜索和清除搜索功能",
+                    "改进更新检查安全性，并为无障碍测试和搜索栏文本添加本地化支持"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.3",
+                "date": "2026-08-09",
+                "summary": "新增 API 選擇、改進更新安全性並完善貨幣搜尋。",
+                "highlights": [
+                    "新增匯率 API 選擇設定，並改進轉換請求的安全性",
+                    "新增 ISO 數字貨幣代碼支援，並改進貨幣搜尋和清除搜尋功能",
+                    "改進更新檢查安全性，並為無障礙測試和搜尋欄文字新增在地化支援"
+                ]
+            }
+        }
+    },
+    {
         "version": "v1.0.2",
         "date": "2026-05-25",
-        "summary": "Switch primary exchange rate source to Frankfurter; localization and UI polish.",
+        "summary": "Switched the primary exchange-rate source to Frankfurter and improved localization and UI polish.",
         "highlights": [
-            "Use Frankfurter as the primary exchange-rate API with a fallback provider.",
-            "Refactor rate source handling and update RateInfoWidget usage.",
-            "Improve localization: clean up i18n keys and add localized error messages.",
-            "Add splash screen support with dark mode and localized assets.",
-            "Remove obsolete Flutter CI workflow configuration and update README."
+            "Used Frankfurter as the primary exchange-rate API with a fallback provider.",
+            "Refactored rate source handling and updated RateInfoWidget usage.",
+            "Improved localization by cleaning up i18n keys and adding localized error messages.",
+            "Added splash screen support with dark mode and localized assets.",
+            "Removed obsolete Flutter CI workflow configuration and updated the README."
         ],
         "translations": {
             "zh_Hans": {
                 "version": "v1.0.2",
                 "date": "2026-05-25",
-                "summary": "1.0.2 维护版本：切换汇率来源并改进本地化",
+                "summary": "切换主要汇率来源至 Frankfurter，并改进本地化和界面体验。",
                 "highlights": [
-                    "将 Frankfurter 设为主要汇率 API，并添加备用 API",
-                    "重构汇率来源处理并更新 RateInfoWidget 的用法",
-                    "改进本地化：清理 i18n 键并添加本地化错误信息",
+                    "将 Frankfurter 设为主要汇率 API，并加入备用 API",
+                    "重构汇率来源处理并更新 RateInfoWidget 用法",
+                    "改进本地化：清理 i18n 键并新增本地化错误信息",
                     "新增支持暗色模式和本地化资源的启动屏",
-                    "移除已过时的 Flutter CI 工作流并更新 README"
+                    "移除过时的 Flutter CI 工作流程并更新 README"
                 ]
             },
             "zh_Hant": {
                 "version": "v1.0.2",
                 "date": "2026-05-25",
-                "summary": "1.0.2 維護版本：切換匯率來源並改進在地化",
+                "summary": "切換主要匯率來源至 Frankfurter，並改進在地化和介面體驗。",
                 "highlights": [
                     "將 Frankfurter 設為主要匯率 API，並加入備用 API",
-                    "重構匯率來源處理並更新 RateInfoWidget 的用法",
+                    "重構匯率來源處理並更新 RateInfoWidget 用法",
                     "改進在地化：清理 i18n 鍵並新增在地化錯誤訊息",
                     "新增支援深色模式與在地化資源的啟動畫面",
-                    "移除已過時的 Flutter CI 工作流程並更新 README"
+                    "移除過時的 Flutter CI 工作流程並更新 README"
                 ]
             }
         }
@@ -40,7 +72,7 @@
     {
         "version": "v1.0.1",
         "date": "2026-04-05",
-        "summary": "Maintenance release for version 1.0.1.",
+        "summary": "Completed app-wide internationalization and updated release metadata.",
         "highlights": [
             "Implemented app-wide i18n for the currency encyclopedia and related UI.",
             "Bumped package version to 1.0.1.",
@@ -50,21 +82,21 @@
             "zh_Hans": {
                 "version": "v1.0.1",
                 "date": "2026-04-05",
-                "summary": "1.0.1 维护版本，已完成国际化",
+                "summary": "完成全应用国际化并更新发布元数据。",
                 "highlights": [
-                    "已完成货币百科及相关界面的国际化",
-                    "版本号已更新为 1.0.1",
-                    "已同步更新变更记录和发布元数据"
+                    "完成货币百科及相关界面的国际化",
+                    "更新版本号至 1.0.1",
+                    "同步更新变更记录和发布元数据"
                 ]
             },
             "zh_Hant": {
                 "version": "v1.0.1",
                 "date": "2026-04-05",
-                "summary": "1.0.1 維護版本，已完成國際化",
+                "summary": "完成全應用程式在地化並更新發佈中繼資料。",
                 "highlights": [
-                    "已完成貨幣百科及相關介面的國際化",
-                    "版本號已更新為 1.0.1",
-                    "已同步更新更新紀錄和發佈中繼資料"
+                    "完成貨幣百科及相關介面的在地化",
+                    "更新版本號至 1.0.1",
+                    "同步更新變更紀錄和發佈中繼資料"
                 ]
             }
         }
@@ -72,7 +104,7 @@
     {
         "version": "v1.0.0",
         "date": "2026-03-26",
-        "summary": "Initial stable release of OpenFXpedia.",
+        "summary": "Delivered the initial stable release of OpenFXpedia.",
         "highlights": [
             "Added currency converter and encyclopedia views.",
             "Added settings for theme selection, update checks, and license page.",
@@ -82,7 +114,7 @@
             "zh_Hans": {
                 "version": "v1.0.0",
                 "date": "2026-03-26",
-                "summary": "OpenFXpedia 的首个稳定版",
+                "summary": "发布 OpenFXpedia 首个稳定版本。",
                 "highlights": [
                     "新增货币转换器和货币百科页面",
                     "新增主题选择、更新检查和许可页面",
@@ -92,7 +124,7 @@
             "zh_Hant": {
                 "version": "v1.0.0",
                 "date": "2026-03-26",
-                "summary": "OpenFXpedia 的首個穩定版",
+                "summary": "發佈 OpenFXpedia 首個穩定版本。",
                 "highlights": [
                     "新增貨幣轉換器和貨幣百科頁面",
                     "新增主題選擇、更新檢查和授權頁面",

@@ -1,23 +1,27 @@
  # OpenFXpedia — Currency Converter & Encyclopedia
 
-Overview
+## Overview
 
 OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (images, symbols, regions, descriptions). The app targets Windows (desktop) and Android.
 
-Quick links
+Current release: `1.0.3`
+
+## Quick Links
 
 - Spec & tasks: `specs/master`
 
-Features
+## Features
 
 - Fast currency conversion using live exchange rates (with local cache and offline support).
+- Select the exchange-rate API source from Settings, with automatic primary/fallback behavior.
 - Encyclopedia entries for fiat currencies: names, symbols, regions, descriptions and images.
+- Search currencies by name, code, or ISO 4217 numeric code, with clear-search support.
 - Light / Dark / System theme selection persisted in app settings.
 - English, Simplified Chinese, and Traditional Chinese language selection in Settings.
 - Favorites, quick-swap, and From/To chooser dialogs for fast workflows.
 - In-app update checks open the device-specific GitHub release asset: `openfxpedia_<version>_setup.exe` on Windows and `openfxpedia_<version>.apk` on Android.
 
-Prerequisites
+## Prerequisites
 
 - Flutter SDK (stable channel)
 - Windows: enable desktop support (`flutter config --enable-windows-desktop`)
@@ -25,7 +29,7 @@ Prerequisites
 - Android: Android SDK + emulator or device
 - Recommended: run `flutter doctor` to verify environment
 
-Quickstart (Windows)
+## Quickstart (Windows)
 
 1. From repository root:
 
@@ -34,14 +38,14 @@ flutter pub get
 flutter run -d windows
 ```
 
-Quickstart (Android emulator / device)
+## Quickstart (Android Emulator or Device)
 
 ```powershell
 flutter pub get
 flutter run
 ```
 
-Release builds
+## Release Builds
 
 ```powershell
 # Windows
@@ -83,13 +87,13 @@ bash ./scripts/build_android.sh debug
 # build/app/outputs/flutter-apk/openfxpedia_<version>.apk.sha1
 ```
 
-Performance benchmark
+## Performance Benchmark
 
 ```powershell
 dart run tool/conversion_benchmark.dart --samples 100 --threshold-ms 2000
 ```
 
-APIs and Data Sources
+## APIs and Data Sources
 
 - Exchange rates (primary): https://github.com/lineofflight/frankfurter
 - Exchange rates (fallback): https://github.com/fawazahmed0/exchange-api
@@ -97,12 +101,14 @@ APIs and Data Sources
 
 The app fetches live exchange rates from Frankfurter first and falls back to exchange-api only when the primary source is unavailable, times out, or cannot provide the requested rate. The CDN JSON remains the canonical source for currency metadata. The repository also maintains a curated whitelist asset at `assets/data/fiat_currencies.json` that ships with richer metadata used by the encyclopedia.
 
-Assets
+Users can toggle the exchange-rate API source in Settings by choosing automatic selection, Frankfurter, or exchange-api.
 
-- Store app icons and currency images under `assets/` (for example `assets/icons/` and `assets/images/`).
+## Assets
+
+- Store app branding under `assets/branding/`, currency icons under `assets/icons/`, and encyclopedia data under `assets/encyclopedia/`.
 - Ensure `pubspec.yaml` includes the assets entries before running the app.
 
-Testing
+## Testing
 
 - Run unit/widget tests with:
 
@@ -110,38 +116,39 @@ Testing
 flutter test
 ```
 
-Localization notes:
+## Localization Notes
 
 - Update `lib/l10n/app_en.arb` first when adding a new string.
 - Keep `lib/l10n/app_zh_Hans.arb` and `lib/l10n/app_zh_Hant.arb` aligned with the English key set.
-- `lib/l10n/app_zh.arb` acts as the English fallback base for the Chinese locale family.
+- `lib/l10n/app_zh.arb` is the neutral Chinese fallback source for the `zh` locale family.
 - Regenerate the localization output after ARB changes.
 
-VS Code
+## VS Code
 
 - This repo includes `.vscode` launch and task configs to help run and debug the app on Windows and Android.
 - If you use VS Code, open the workspace root and use the Run view to launch the app.
 
-Troubleshooting
+## Troubleshooting
 
 - If desktop build fails: verify desktop support and Visual Studio (with C++ workload) are installed for Windows.
 - If installer build fails: verify NSIS is installed and `makensis` is available in PATH.
 - If Flutter cannot find devices: run `flutter doctor -v` and ensure Android SDK/emulator or Windows desktop is configured.
 - For dependency issues: run `flutter pub get` and resolve pub errors.
 
-Contributing
+## Contributing
 
 - Open a branch for your work and submit a PR. For feature design and tasks see `specs/master`.
 - When adding or updating currency metadata, also update `assets/data/fiat_currencies.json` and include a short validation note in `specs/master/data/`.
 
-License
+## License
 
 - This repository is licensed under MIT (see `LICENSE`).
 
-Contact / Acknowledgements
+## Contact and Acknowledgements
 
 - Maintainer: project team (open a GitHub issue or PR for questions).
 - Data sources: thanks to the `@fawazahmed0/exchange-api` project and the `@fawazahmed0/currency-api` CDN.
 
 ---
-Notes: keep `pubspec.yaml` and `assets/` synchronized when adding icons or images.
+
+**Note:** Keep `pubspec.yaml` and `assets/` synchronized when adding icons or images.

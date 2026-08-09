@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.3] - 2026-08-09
+
+- Added an exchange-rate API selection setting with safer conversion request handling.
+- Added ISO numeric currency-code support and improved currency search, including clear-search behavior.
+- Improved update-check safety and localized accessibility-test and search-bar text.
+
 ## [1.0.2] - 2026-05-25
 
 - Use Frankfurter as the primary exchange-rate API with a reliable fallback.

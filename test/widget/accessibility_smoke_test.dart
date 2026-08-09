@@ -35,7 +35,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('currency_search_field')), findsOneWidget);
-    expect(find.byIcon(Icons.close), findsOneWidget);
+    expect(find.byIcon(Icons.search), findsOneWidget);
     expect(find.text('USD'), findsOneWidget);
 
     await tester.tap(find.text('USD'));
