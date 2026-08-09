@@ -8,6 +8,10 @@
     "@settings_language": {
         "description": "语言设置选项的标签。"
     },
+    "clear_search": "清除搜索",
+    "@clear_search": {
+        "description": "清除搜索查询按钮的工具提示。"
+    },
     "language_english": "英文",
     "@language_english": {
         "description": "英文语言名称。"

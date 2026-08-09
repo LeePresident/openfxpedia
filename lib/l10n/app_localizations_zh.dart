@@ -15,6 +15,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settings_language => '语言';
 
   @override
+  String get clear_search => '清除搜索';
+
+  @override
   String get language_english => '英文';
 
   @override
@@ -252,6 +255,9 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get settings_language => '语言';
 
   @override
+  String get clear_search => '清除搜索';
+
+  @override
   String get language_english => '英文';
 
   @override
@@ -487,6 +493,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get settings_language => '語言';
+
+  @override
+  String get clear_search => '清除搜尋';
 
   @override
   String get language_english => '英文';

@@ -6,10 +6,10 @@ import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/widgets/search_bar.dart' as app_search;
 
 final _currencies = [
-  Currency(isoCode: 'USD', name: 'US Dollar'),
-  Currency(isoCode: 'EUR', name: 'Euro'),
-  Currency(isoCode: 'GBP', name: 'British Pound'),
-  Currency(isoCode: 'JPY', name: 'Japanese Yen'),
+  Currency(isoCode: 'USD', isoNumeric: '840', name: 'US Dollar'),
+  Currency(isoCode: 'EUR', isoNumeric: '978', name: 'Euro'),
+  Currency(isoCode: 'GBP', isoNumeric: '826', name: 'British Pound'),
+  Currency(isoCode: 'JPY', isoNumeric: '392', name: 'Japanese Yen'),
 ];
 
 Widget _buildWidget({
@@ -75,6 +75,46 @@ void main() {
       expect(find.text('JPY'), findsNothing);
     });
 
+    testWidgets('filters list by ISO numeric code', (tester) async {
+      await tester.pumpWidget(_buildWidget(onSelected: (_) {}));
+
+      await tester.tap(find.byType(InkWell));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(
+          find.byKey(const Key('currency_search_field')), '392');
+      await tester.pump();
+
+      expect(find.text('JPY'), findsOneWidget);
+      expect(find.text('USD'), findsNothing);
+      expect(find.text('EUR'), findsNothing);
+      expect(find.text('GBP'), findsNothing);
+    });
+
+    testWidgets('clears the search query and restores all currencies',
+        (tester) async {
+      await tester.pumpWidget(_buildWidget(onSelected: (_) {}));
+
+      await tester.tap(find.byType(InkWell));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(
+          find.byKey(const Key('currency_search_field')), '392');
+      await tester.pump();
+
+      expect(find.byKey(const Key('currency_search_clear')), findsOneWidget);
+      expect(find.text('JPY'), findsOneWidget);
+      expect(find.text('USD'), findsNothing);
+
+      await tester.tap(find.byKey(const Key('currency_search_clear')));
+      await tester.pump();
+
+      expect(find.byKey(const Key('currency_search_clear')), findsNothing);
+      for (final c in _currencies) {
+        expect(find.text(c.isoCode), findsOneWidget);
+      }
+    });
+
     testWidgets('calls onSelected and closes dialog when item is tapped',
         (tester) async {
       Currency? selected;
@@ -94,7 +134,7 @@ void main() {
       expect(selected?.isoCode, 'EUR');
     });
 
-    testWidgets('closes dialog without selecting when close button tapped',
+    testWidgets('closes dialog without selecting when barrier tapped',
         (tester) async {
       Currency? selected;
       await tester.pumpWidget(_buildWidget(onSelected: (c) => selected = c));
@@ -102,7 +142,7 @@ void main() {
       await tester.tap(find.byType(InkWell));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byIcon(Icons.close));
+      await tester.tapAt(const Offset(0, 0));
       await tester.pumpAndSettle();
 
       expect(find.byType(Dialog), findsNothing);

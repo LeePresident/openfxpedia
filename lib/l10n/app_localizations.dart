@@ -112,6 +112,12 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get settings_language;
 
+  /// Tooltip for clearing a search query.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get clear_search;
+
   /// English language name.
   ///
   /// In en, this message translates to:

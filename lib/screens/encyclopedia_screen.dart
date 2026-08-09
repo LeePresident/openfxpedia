@@ -14,7 +14,14 @@ class EncyclopediaScreen extends StatefulWidget {
 }
 
 class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
+  final TextEditingController _searchController = TextEditingController();
   String _query = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,8 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
             : all.where((c) {
                 final q = _query.toLowerCase();
                 return c.isoCode.toLowerCase().contains(q) ||
-                    c.name.toLowerCase().contains(q);
+                    c.name.toLowerCase().contains(q) ||
+                    (c.isoNumeric?.contains(q) ?? false);
               }).toList();
 
         return Scaffold(
@@ -39,9 +47,20 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 child: TextField(
+                  controller: _searchController,
                   decoration: InputDecoration(
                     hintText: l10n.encyclopedia_search,
                     prefixIcon: const Icon(Icons.search),
+                    suffixIcon: _searchController.text.isNotEmpty
+                        ? IconButton(
+                            icon: const Icon(Icons.clear),
+                            tooltip: 'Clear search',
+                            onPressed: () {
+                              _searchController.clear();
+                              setState(() => _query = '');
+                            },
+                          )
+                        : null,
                     filled: true,
                     border: const OutlineInputBorder(),
                     isDense: true,

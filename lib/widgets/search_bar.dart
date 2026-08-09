@@ -83,9 +83,22 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
                         hintText: widget.hint,
                         border: const OutlineInputBorder(),
                         prefixIcon: const Icon(Icons.search),
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () => Navigator.pop(dialogContext),
+                        suffixIcon: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (dialogController.text.isNotEmpty)
+                              IconButton(
+                                key: const Key('currency_search_clear'),
+                                icon: const Icon(Icons.clear),
+                                tooltip: 'Clear search',
+                                onPressed: () {
+                                  dialogController.clear();
+                                  setDialogState(() {
+                                    localFiltered = widget.currencies;
+                                  });
+                                },
+                              ),
+                          ],
                         ),
                       ),
                       onChanged: (query) {
@@ -93,7 +106,8 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
                         setDialogState(() {
                           localFiltered = widget.currencies.where((c) {
                             return c.isoCode.toLowerCase().contains(q) ||
-                                c.name.toLowerCase().contains(q);
+                                c.name.toLowerCase().contains(q) ||
+                                (c.isoNumeric?.contains(q) ?? false);
                           }).toList();
                         });
                       },

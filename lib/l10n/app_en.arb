@@ -8,6 +8,10 @@
     "@settings_language": {
         "description": "Label for language settings option."
     },
+    "clear_search": "Clear search",
+    "@clear_search": {
+        "description": "Tooltip for clearing a search query."
+    },
     "language_english": "English",
     "@language_english": {
         "description": "English language name."

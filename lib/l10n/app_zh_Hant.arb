@@ -8,6 +8,10 @@
     "@settings_language": {
         "description": "語言設定選項的標籤。"
     },
+    "clear_search": "清除搜尋",
+    "@clear_search": {
+        "description": "清除搜尋查詢按鈕的工具提示。"
+    },
     "language_english": "英文",
     "@language_english": {
         "description": "英文語言名稱。"

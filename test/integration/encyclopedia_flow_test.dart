@@ -147,6 +147,12 @@ void main() {
     expect(find.text('USD'), findsOneWidget);
     expect(find.text('EUR'), findsOneWidget);
 
+    await tester.enterText(find.byType(TextField).first, '392');
+    await tester.pumpAndSettle();
+
+    expect(find.text('JPY'), findsOneWidget);
+    expect(find.text('USD'), findsNothing);
+
     await tester.enterText(find.byType(TextField).first, 'yen');
     await tester.pumpAndSettle();
 
