@@ -108,6 +108,8 @@ Users can toggle the exchange-rate API source in Settings by choosing automatic 
 - Store app branding under `assets/branding/`, currency icons under `assets/icons/`, and encyclopedia data under `assets/encyclopedia/`.
 - Ensure `pubspec.yaml` includes the assets entries before running the app.
 
+Country flags in the encyclopedia use the [`country_flags`](https://pub.dev/packages/country_flags) Flutter package (MIT License). The package acknowledges the [`flag-icons`](https://github.com/lipis/flag-icons) project for the bundled SVG flag artwork.
+
 ## Testing
 
 - Run unit/widget tests with:

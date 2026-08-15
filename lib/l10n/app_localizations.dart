@@ -424,6 +424,18 @@ abstract class AppLocalizations {
   /// **'Regions'**
   String get detail_regions;
 
+  /// Expand the full list of currency regions.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get detail_show_more_regions;
+
+  /// Collapse the currency regions list.
+  ///
+  /// In en, this message translates to:
+  /// **'Show less'**
+  String get detail_show_less_regions;
+
   /// Label for currency description.
   ///
   /// In en, this message translates to:

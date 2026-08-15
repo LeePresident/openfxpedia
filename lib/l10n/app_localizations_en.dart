@@ -175,6 +175,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get detail_regions => 'Regions';
 
   @override
+  String get detail_show_more_regions => 'Show more';
+
+  @override
+  String get detail_show_less_regions => 'Show less';
+
+  @override
   String get detail_description => 'Description';
 
   @override

@@ -171,6 +171,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get detail_regions => '地区';
 
   @override
+  String get detail_show_more_regions => '显示更多';
+
+  @override
+  String get detail_show_less_regions => '显示较少';
+
+  @override
   String get detail_description => '说明';
 
   @override
@@ -411,6 +417,12 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get detail_regions => '地区';
 
   @override
+  String get detail_show_more_regions => '显示更多';
+
+  @override
+  String get detail_show_less_regions => '显示较少';
+
+  @override
   String get detail_description => '说明';
 
   @override
@@ -649,6 +661,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get detail_regions => '地區';
+
+  @override
+  String get detail_show_more_regions => '顯示更多';
+
+  @override
+  String get detail_show_less_regions => '顯示較少';
 
   @override
   String get detail_description => '簡介';

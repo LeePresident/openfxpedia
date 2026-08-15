@@ -216,6 +216,14 @@
     "@detail_regions": {
         "description": "Label for regions where currency is used."
     },
+    "detail_show_more_regions": "Show more",
+    "@detail_show_more_regions": {
+        "description": "Expand the full list of currency regions."
+    },
+    "detail_show_less_regions": "Show less",
+    "@detail_show_less_regions": {
+        "description": "Collapse the currency regions list."
+    },
     "detail_description": "Description",
     "@detail_description": {
         "description": "Label for currency description."

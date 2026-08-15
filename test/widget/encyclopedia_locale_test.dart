@@ -78,7 +78,7 @@ void main() {
       await tester.tap(find.text('USD'));
       await tester.pumpAndSettle();
 
-      expect(find.text('美元'), findsOneWidget);
+      expect(find.text('美元'), findsNWidgets(2));
       expect(
         find.text(
           'Official currency of the United States (including its territories) and other regions. The world\'s primary reserve currency.',

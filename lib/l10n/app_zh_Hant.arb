@@ -216,6 +216,14 @@
     "@detail_regions": {
         "description": "使用貨幣的地區標籤。"
     },
+    "detail_show_more_regions": "顯示更多",
+    "@detail_show_more_regions": {
+        "description": "展開完整的貨幣使用地區列表。"
+    },
+    "detail_show_less_regions": "顯示較少",
+    "@detail_show_less_regions": {
+        "description": "收起貨幣使用地區列表。"
+    },
     "detail_description": "簡介",
     "@detail_description": {
         "description": "貨幣簡介的標籤。"

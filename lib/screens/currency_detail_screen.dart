@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../models/currency.dart';
 import '../providers/app_state.dart';
+import '../widgets/region_flag.dart';
 
 enum _ConversionFieldChoice { from, to }
 
@@ -71,7 +72,7 @@ class CurrencyDetailScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(currency.isoCode),
+            title: Text(currency.name),
             actions: [
               IconButton(
                 icon: Icon(isFav ? Icons.star : Icons.star_border),
@@ -107,9 +108,11 @@ class CurrencyDetailScreen extends StatelessWidget {
                   _DetailRow(
                       label: l10n.detail_symbol, value: currency.symbol!),
                 if (currency.regions.isNotEmpty)
-                  _DetailRow(
+                  _RegionsDetailRow(
                     label: l10n.detail_regions,
-                    value: currency.regions.join(', '),
+                    regions: currency.regions,
+                    showMoreLabel: l10n.detail_show_more_regions,
+                    showLessLabel: l10n.detail_show_less_regions,
                   ),
                 if (currency.description != null &&
                     currency.description!.isNotEmpty)
@@ -199,6 +202,79 @@ class _DetailRow extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Expanded(child: Text(value)),
+        ],
+      ),
+    );
+  }
+}
+
+class _RegionsDetailRow extends StatefulWidget {
+  static const initialRegionCount = 3;
+
+  final String label;
+  final List<String> regions;
+  final String showMoreLabel;
+  final String showLessLabel;
+
+  const _RegionsDetailRow({
+    required this.label,
+    required this.regions,
+    required this.showMoreLabel,
+    required this.showLessLabel,
+  });
+
+  @override
+  State<_RegionsDetailRow> createState() => _RegionsDetailRowState();
+}
+
+class _RegionsDetailRowState extends State<_RegionsDetailRow> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final hasOverflow =
+        widget.regions.length > _RegionsDetailRow.initialRegionCount;
+    final visibleRegions = _isExpanded || !hasOverflow
+        ? widget.regions
+        : widget.regions.take(_RegionsDetailRow.initialRegionCount).toList();
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(
+              widget.label,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (final region in visibleRegions)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      buildRegionFlag(region),
+                      const SizedBox(width: 8),
+                      Expanded(child: Text(region)),
+                    ],
+                  ),
+                if (hasOverflow)
+                  TextButton(
+                    onPressed: () => setState(() => _isExpanded = !_isExpanded),
+                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                    child: Text(
+                      _isExpanded ? widget.showLessLabel : widget.showMoreLabel,
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ],
       ),
     );

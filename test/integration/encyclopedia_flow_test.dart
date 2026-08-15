@@ -103,7 +103,7 @@ class _FakeCurrencyCatalogService extends CurrencyCatalogService {
         isoCode: 'JPY',
         isoNumeric: '392',
         name: 'Japanese Yen',
-        regions: const ['Japan'],
+        regions: const ['Japan', 'Okinawa', 'Tokyo', 'Osaka'],
       ),
     ];
   }
@@ -165,7 +165,18 @@ void main() {
     expect(find.text('ISO Code'), findsOneWidget);
     expect(find.text('ISO Numeric'), findsOneWidget);
     expect(find.text('392'), findsOneWidget);
-    expect(find.text('JPY'), findsNWidgets(2));
-    expect(find.text('Japanese Yen'), findsOneWidget);
+    expect(find.text('JPY'), findsOneWidget);
+    expect(find.text('Japanese Yen'), findsNWidgets(2));
+    expect(find.text('Japan'), findsOneWidget);
+    expect(find.text('Okinawa'), findsOneWidget);
+    expect(find.text('Tokyo'), findsOneWidget);
+    expect(find.text('Osaka'), findsNothing);
+    expect(find.text('Show more'), findsOneWidget);
+
+    await tester.tap(find.text('Show more'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Osaka'), findsOneWidget);
+    expect(find.text('Show less'), findsOneWidget);
   });
 }
