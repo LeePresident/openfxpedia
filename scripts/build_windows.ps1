@@ -117,9 +117,47 @@ ShowUninstDetails show
 SetCompressor /SOLID lzma
 
 !include "MUI2.nsh"
+!include "LogicLib.nsh"
+!include "StrFunc.nsh"
+${Using:StrFunc} StrStr
 !define MUI_ABORTWARNING
 !define MUI_ICON "__ICON_PATH__"
 !define MUI_UNICON "__ICON_PATH__"
+
+Function .onInit
+    nsExec::ExecToStack 'tasklist /FI "IMAGENAME eq openfxpedia.exe" /FO CSV /NH'
+    Pop $0
+    Pop $1
+    ${StrStr} $2 $1 '"openfxpedia.exe"'
+    StrCmp $2 "" done
+
+    MessageBox MB_YESNO|MB_ICONEXCLAMATION "OpenFXpedia is currently running. Close it now so the installation can continue?" IDYES close IDNO cancel
+
+close:
+    nsExec::ExecToStack '"$SYSDIR\taskkill.exe" /IM openfxpedia.exe /T /F'
+    Pop $0
+    Pop $1
+    StrCpy $3 0
+
+wait_for_close:
+    nsExec::ExecToStack 'tasklist /FI "IMAGENAME eq openfxpedia.exe" /FO CSV /NH'
+    Pop $0
+    Pop $1
+    ${StrStr} $2 $1 '"openfxpedia.exe"'
+    StrCmp $2 "" done
+    IntOp $3 $3 + 1
+    IntCmp $3 10 give_up wait_for_close give_up
+    Sleep 500
+    Goto wait_for_close
+
+give_up:
+    MessageBox MB_OK|MB_ICONSTOP "OpenFXpedia could not be closed. Please close it manually and run the installer again."
+
+cancel:
+    Abort
+
+done:
+FunctionEnd
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
@@ -174,6 +212,10 @@ SectionEnd
 
         Write-Host '==> Building NSIS installer'
         & $makensisPath $installerScript
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "NSIS failed to build the installer (exit code $LASTEXITCODE)."
+            exit 5
+        }
 
         if (-not (Test-Path $installerExe)) {
             Write-Error "Expected installer not found: $installerExe"
