@@ -111,6 +111,7 @@ class CurrencyDetailScreen extends StatelessWidget {
                   _RegionsDetailRow(
                     label: l10n.detail_regions,
                     regions: currency.regions,
+                    regionCodes: currency.regionCodes,
                     showMoreLabel: l10n.detail_show_more_regions,
                     showLessLabel: l10n.detail_show_less_regions,
                   ),
@@ -213,12 +214,14 @@ class _RegionsDetailRow extends StatefulWidget {
 
   final String label;
   final List<String> regions;
+  final List<String?> regionCodes;
   final String showMoreLabel;
   final String showLessLabel;
 
   const _RegionsDetailRow({
     required this.label,
     required this.regions,
+    required this.regionCodes,
     required this.showMoreLabel,
     required this.showLessLabel,
   });
@@ -255,13 +258,18 @@ class _RegionsDetailRowState extends State<_RegionsDetailRow> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                for (final region in visibleRegions)
+                for (var index = 0; index < visibleRegions.length; index++)
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      buildRegionFlag(region),
+                      buildRegionFlag(
+                        visibleRegions[index],
+                        regionCode: widget.regionCodes.length > index
+                            ? widget.regionCodes[index]
+                            : null,
+                      ),
                       const SizedBox(width: 8),
-                      Expanded(child: Text(region)),
+                      Expanded(child: Text(visibleRegions[index])),
                     ],
                   ),
                 if (hasOverflow)

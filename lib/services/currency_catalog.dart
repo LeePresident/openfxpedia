@@ -7,6 +7,7 @@ import '../services/exchange_client.dart';
 import '../services/cache_service.dart';
 import '../models/currency.dart';
 import '../generated/icon_asset.dart' as generated_icons;
+import '../widgets/region_flag.dart' show regionCountryCode;
 import 'observability.dart';
 
 class CurrencyCatalogService {
@@ -85,6 +86,15 @@ class CurrencyCatalogService {
         baseValue: meta != null ? meta['regions'] as List<dynamic>? : null,
         overlayEntry: overlayEntry,
       );
+      final baseRegions =
+          meta != null ? meta['regions'] as List<dynamic>? : null;
+      final regionCodes = <String?>[];
+      for (var i = 0; i < regions.length; i++) {
+        final baseRegion = baseRegions != null && i < baseRegions.length
+            ? baseRegions[i].toString()
+            : regions[i];
+        regionCodes.add(regionCountryCode(baseRegion));
+      }
       final description = _resolveLocalizedField(
         localeKey: localeKey,
         isoCode: iso,
@@ -100,6 +110,7 @@ class CurrencyCatalogService {
         symbol: symbol,
         iconAsset: _iconAssetPath(e.key),
         regions: regions,
+        regionCodes: regionCodes,
         description: description,
       );
     }).toList()

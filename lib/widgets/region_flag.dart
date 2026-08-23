@@ -100,8 +100,8 @@ String? regionCountryCode(String region) {
       _countryCodeByCommonName[baseName];
 }
 
-Widget buildRegionFlag(String region) {
-  final code = regionCountryCode(region);
+Widget buildRegionFlag(String region, {String? regionCode}) {
+  final code = regionCode ?? regionCountryCode(region);
   if (code == null) return const SizedBox(width: 24);
 
   return Padding(
