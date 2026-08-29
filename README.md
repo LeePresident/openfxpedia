@@ -2,7 +2,7 @@
 
 ## Overview
 
-OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (images, symbols, regions, descriptions). The app targets Windows (desktop) and Android.
+OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (flags, symbols, regions, and descriptions). The app targets Windows (desktop) and Android.
 
 Current release: `1.0.3`
 
@@ -14,7 +14,7 @@ Current release: `1.0.3`
 
 - Fast currency conversion using live exchange rates (with local cache and offline support).
 - Select the exchange-rate API source from Settings, with automatic primary/fallback behavior.
-- Encyclopedia entries for fiat currencies: names, symbols, regions, descriptions and images.
+- Encyclopedia entries for fiat currencies: names, symbols, regions, descriptions, and usage-region flags.
 - Search currencies by name, code, or ISO 4217 numeric code, with clear-search support.
 - Light / Dark / System theme selection persisted in app settings.
 - English, Simplified Chinese, and Traditional Chinese language selection in Settings.
@@ -105,8 +105,10 @@ Users can toggle the exchange-rate API source in Settings by choosing automatic 
 
 ## Assets
 
-- Store app branding under `assets/branding/`, currency icons under `assets/icons/`, and encyclopedia data under `assets/encyclopedia/`.
-- Ensure `pubspec.yaml` includes the assets entries before running the app.
+- Store app branding under `assets/branding/` and encyclopedia data under `assets/encyclopedia/`.
+- The encyclopedia uses `country_flags` for country and regional flags. Euro uses the European Union flag.
+- The original project-authored icons for XAF, XCD, XCG, XOF, and XPF remain bundled as circular currency-specific icons.
+- Ensure `pubspec.yaml` includes the asset entries before running the app.
 
 Country flags in the encyclopedia use the [`country_flags`](https://pub.dev/packages/country_flags) Flutter package (MIT License). The package acknowledges the [`flag-icons`](https://github.com/lipis/flag-icons) project for the bundled SVG flag artwork.
 
@@ -153,4 +155,4 @@ flutter test
 
 ---
 
-**Note:** Keep `pubspec.yaml` and `assets/` synchronized when adding icons or images.
+**Note:** Keep `pubspec.yaml` and `assets/` synchronized when adding branding, flag, or currency-specific icon assets.

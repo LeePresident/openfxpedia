@@ -6,7 +6,6 @@ import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 import '../services/exchange_client.dart';
 import '../services/cache_service.dart';
 import '../models/currency.dart';
-import '../generated/icon_asset.dart' as generated_icons;
 import '../widgets/region_flag.dart' show regionCountryCode;
 import 'observability.dart';
 
@@ -108,7 +107,6 @@ class CurrencyCatalogService {
         isoNumeric: meta != null ? meta['iso_numeric'] as String? : null,
         name: name,
         symbol: symbol,
-        iconAsset: _iconAssetPath(e.key),
         regions: regions,
         regionCodes: regionCodes,
         description: description,
@@ -131,12 +129,6 @@ class CurrencyCatalogService {
   String _capitalize(String s) {
     if (s.isEmpty) return s;
     return s[0].toUpperCase() + s.substring(1);
-  }
-
-  String? _iconAssetPath(String isoCode) {
-    final key = isoCode.toLowerCase();
-    return generated_icons.iconAsset[key] ??
-        generated_icons.iconAsset['generic'];
   }
 
   bool _isFiatCurrency(String code) {

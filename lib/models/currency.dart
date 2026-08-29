@@ -3,7 +3,6 @@
   final String? isoNumeric;
   final String name;
   final String? symbol;
-  final String? iconAsset;
   final List<String> regions;
   final List<String?> regionCodes;
   final String? description;
@@ -13,7 +12,6 @@
     this.isoNumeric,
     required this.name,
     this.symbol,
-    this.iconAsset,
     this.regions = const [],
     this.regionCodes = const [],
     this.description,
@@ -24,7 +22,6 @@
         isoNumeric: m['iso_numeric'] as String?,
         name: m['name'] as String,
         symbol: m['symbol'] as String?,
-        iconAsset: m['icon_asset'] as String?,
         regions: (m['regions'] as List<dynamic>?)?.cast<String>() ?? [],
         regionCodes:
             (m['region_codes'] as List<dynamic>?)?.cast<String?>() ?? const [],
@@ -36,7 +33,6 @@
         'iso_numeric': isoNumeric,
         'name': name,
         'symbol': symbol,
-        'icon_asset': iconAsset,
         'regions': regions,
         'region_codes': regionCodes,
         'description': description,

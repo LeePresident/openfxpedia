@@ -1,5 +1,6 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 const Map<String, String> _regionCountryCodes = {
   'Hong Kong': 'HK',
@@ -93,6 +94,21 @@ const Map<String, String> _regionCountryCodes = {
   'Wallis and Futuna': 'WF',
 };
 
+const Map<String, String> _currencyFlagCodes = {
+  'EUR': 'EU',
+};
+
+const Set<String> _originalCurrencyIconCodes = {
+  'XAF',
+  'XCD',
+  'XCG',
+  'XOF',
+  'XPF',
+};
+
+String? currencyFlagCode(String currencyCode) =>
+    _currencyFlagCodes[currencyCode.toUpperCase()];
+
 String? regionCountryCode(String region) {
   final baseName = region.split(' (').first.trim();
   return _regionCountryCodes[region] ??
@@ -110,6 +126,76 @@ Widget buildRegionFlag(String region, {String? regionCode}) {
       width: 24,
       height: 16,
       child: CountryFlag.fromCountryCode(code),
+    ),
+  );
+}
+
+Widget buildCurrencyFlag({
+  required String currencyCode,
+  required List<String> regions,
+  required List<String?> regionCodes,
+  double width = 40,
+  double height = 40,
+}) {
+  final normalizedCurrencyCode = currencyCode.toUpperCase();
+  if (_originalCurrencyIconCodes.contains(normalizedCurrencyCode)) {
+    return ClipOval(
+      child: SvgPicture.asset(
+        'assets/icons/${currencyCode.toLowerCase()}.svg',
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  final overrideCode = currencyFlagCode(currencyCode);
+  if (overrideCode != null) {
+    final flag = normalizedCurrencyCode == 'EUR'
+        ? CountryFlag.fromCurrencyCode(
+            currencyCode,
+            theme: ImageTheme(
+              width: width,
+              height: height,
+              shape: const Circle(),
+            ),
+          )
+        : CountryFlag.fromCountryCode(
+            overrideCode,
+            theme: ImageTheme(
+              width: width,
+              height: height,
+              shape: const Circle(),
+            ),
+          );
+    return flag;
+  }
+
+  String? regionFlagCode;
+  for (var index = 0; index < regions.length; index++) {
+    final candidate = index < regionCodes.length
+        ? regionCodes[index]
+        : regionCountryCode(regions[index]);
+    if (candidate != null && candidate.isNotEmpty) {
+      regionFlagCode = candidate;
+      break;
+    }
+  }
+
+  if (regionFlagCode == null) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: const Center(child: Icon(Icons.public, size: 20)),
+    );
+  }
+
+  return CountryFlag.fromCountryCode(
+    regionFlagCode,
+    theme: ImageTheme(
+      width: width,
+      height: height,
+      shape: const Circle(),
     ),
   );
 }

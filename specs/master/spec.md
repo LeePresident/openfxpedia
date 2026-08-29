@@ -91,14 +91,14 @@ A user manages a shortlist of frequently used currencies.
 	- **UI Note**: Currency selection interfaces will include both a compact dropdown for quick picks and a searchable text field with filtered results to make selection convenient on all form factors.
 
 ### Key Entities
-- **Currency**: { `iso_code`, `name`, `symbol`, `icon_asset`, `regions`, `description` }
+- **Currency**: { `iso_code`, `name`, `symbol`, `regions`, `description` }
 - **ExchangeRate**: { `base_currency`, `target_currency`, `rate`, `timestamp`, `source` }
 - **UserPreference**: { `favorites`: list of `iso_code`, `default_currency`, `cache_policy` }
 
 ## Success Criteria
 - Users can complete a single currency conversion (select source, target, enter amount, view result) within 2 steps and the app displays the converted amount and rate timestamp.
 - 95% of conversion requests return a displayed result within 2 seconds on a modern Android device and a Windows desktop with network connectivity.
-- The encyclopedia displays image + metadata for at least 90% of the app’s supported currencies (or a clear placeholder when an image is unavailable).
+- The encyclopedia displays a usage-region flag + metadata for at least 90% of the app’s supported currencies (or a clear neutral placeholder when no country flag is available).
 - Offline mode: when offline, users can still convert using cached rates and are notified that rates are cached; at least 80% of recent conversions succeed using cached rates.
 
 ## Non-Functional Considerations (assumptions)

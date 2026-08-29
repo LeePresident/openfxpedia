@@ -34,7 +34,11 @@ flutter:
   assets:
     - LICENSE
     - assets/branding/
-    - assets/icons/
+    - assets/icons/xaf.svg
+    - assets/icons/xcd.svg
+    - assets/icons/xcg.svg
+    - assets/icons/xof.svg
+    - assets/icons/xpf.svg
     - assets/data/fiat_currencies.json
     - assets/data/fiat_currency_overlays/
     - assets/data/changelog_entries.json

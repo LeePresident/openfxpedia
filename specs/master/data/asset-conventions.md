@@ -1,5 +1,5 @@
 # Asset Naming Conventions
 
-- Icons: `assets/icons/{iso_lower}.svg` (e.g., `assets/icons/usd.svg`)
+- App branding: `assets/branding/`
 - Raster images: `assets/images/{purpose}/{name}.png`
 - Keep file names lowercase and use hyphens for separators.

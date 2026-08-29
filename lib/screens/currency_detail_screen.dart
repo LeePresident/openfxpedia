@@ -1,5 +1,4 @@
 ﻿import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../models/currency.dart';
@@ -22,7 +21,7 @@ class CurrencyDetailScreen extends StatelessWidget {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: Text('${l10n.detail_convert} ${currency.isoCode}'),
+          title: Text('${l10n.detail_convert} ${currency.name}'),
           content: Text(l10n.detail_currency_prompt),
           actions: [
             TextButton(
@@ -92,7 +91,13 @@ class CurrencyDetailScreen extends StatelessWidget {
                 Center(
                   child: Hero(
                     tag: 'currency_icon_${currency.isoCode}',
-                    child: _DetailCurrencyIcon(currency: currency),
+                    child: buildCurrencyFlag(
+                      currencyCode: currency.isoCode,
+                      regions: currency.regions,
+                      regionCodes: currency.regionCodes,
+                      width: 80,
+                      height: 80,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -126,7 +131,7 @@ class CurrencyDetailScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     icon: const Icon(Icons.swap_horiz),
-                    label: Text('${l10n.detail_convert} ${currency.isoCode}'),
+                    label: Text('${l10n.detail_convert} ${currency.name}'),
                     onPressed: () => _showConvertChoiceDialog(context, state),
                   ),
                 ),
@@ -135,48 +140,6 @@ class CurrencyDetailScreen extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _DetailCurrencyIcon extends StatelessWidget {
-  final Currency currency;
-
-  const _DetailCurrencyIcon({required this.currency});
-
-  @override
-  Widget build(BuildContext context) {
-    if (currency.iconAsset != null && currency.iconAsset!.isNotEmpty) {
-      return SizedBox(
-        width: 80,
-        height: 80,
-        child: ClipOval(
-          child: SvgPicture.asset(
-            currency.iconAsset!,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-            placeholderBuilder: (_) => _fallbackTextIcon(),
-          ),
-        ),
-      );
-    }
-
-    return _fallbackTextIcon();
-  }
-
-  Widget _fallbackTextIcon() {
-    return CircleAvatar(
-      radius: 40,
-      child: Text(
-        currency.isoCode.length >= 2
-            ? currency.isoCode.substring(0, 2)
-            : currency.isoCode,
-        style: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
     );
   }
 }

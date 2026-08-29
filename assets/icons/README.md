@@ -1,8 +1,10 @@
-Place bundled currency icons (SVG/PNG) in this folder.
-Naming convention: use ISO code lowercase, e.g. `usd.svg`, `eur.png`.
+Most currency identity is represented with usage-region flags from the
+`country_flags` package. The original project-authored icons for XAF, XCD, XCG,
+XOF, and XPF are the only currency-specific icons bundled with the app.
+
+Do not add new currency icon images here unless the app's currency presentation
+policy is intentionally being changed.
 
 Copyright and licensing:
-- Icons in this folder are original project-authored placeholders.
-- Do not copy logos, flags, or third-party artwork unless license compatibility
-	has been verified and attribution requirements are documented.
-- Keep generated/local placeholders as the default to avoid copyright risk.
+- The five bundled icons are project-authored placeholders. Other files in this
+  folder are legacy placeholders and are not included in the Flutter asset bundle.

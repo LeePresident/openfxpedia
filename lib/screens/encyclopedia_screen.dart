@@ -1,9 +1,9 @@
 ﻿import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/app_state.dart';
 import '../models/currency.dart';
+import '../widgets/region_flag.dart';
 import 'currency_detail_screen.dart';
 
 class EncyclopediaScreen extends StatefulWidget {
@@ -99,7 +99,11 @@ class _CurrencyTile extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final isFav = state.isFavorite(currency.isoCode);
     return ListTile(
-      leading: _CurrencyIcon(currency: currency),
+      leading: buildCurrencyFlag(
+        currencyCode: currency.isoCode,
+        regions: currency.regions,
+        regionCodes: currency.regionCodes,
+      ),
       title: Text(currency.isoCode),
       subtitle: Text(currency.name),
       trailing: IconButton(
@@ -113,43 +117,6 @@ class _CurrencyTile extends StatelessWidget {
         MaterialPageRoute(
           builder: (_) => CurrencyDetailScreen(currency: currency),
         ),
-      ),
-    );
-  }
-}
-
-class _CurrencyIcon extends StatelessWidget {
-  final Currency currency;
-  const _CurrencyIcon({required this.currency});
-
-  @override
-  Widget build(BuildContext context) {
-    if (currency.iconAsset != null && currency.iconAsset!.isNotEmpty) {
-      return SizedBox(
-        width: 40,
-        height: 40,
-        child: ClipOval(
-          child: SvgPicture.asset(
-            currency.iconAsset!,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-            placeholderBuilder: (_) => _fallbackTextIcon(currency),
-          ),
-        ),
-      );
-    }
-
-    return _fallbackTextIcon(currency);
-  }
-
-  Widget _fallbackTextIcon(Currency currency) {
-    return CircleAvatar(
-      child: Text(
-        currency.isoCode.length >= 2
-            ? currency.isoCode.substring(0, 2)
-            : currency.isoCode,
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
       ),
     );
   }

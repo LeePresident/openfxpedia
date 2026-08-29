@@ -58,7 +58,7 @@ class ConverterScreen extends StatelessWidget {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: Text('${l10n.converter_currency_title}: ${currency.isoCode}'),
+          title: Text('${l10n.converter_currency_title}: ${currency.name}'),
           content: Text(l10n.converter_currency_prompt),
           actions: [
             TextButton(
