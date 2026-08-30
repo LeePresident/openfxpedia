@@ -346,6 +346,42 @@ abstract class AppLocalizations {
   /// **'No currencies found.'**
   String get encyclopedia_not_found;
 
+  /// Tooltip for the currency sorting menu.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort currencies'**
+  String get encyclopedia_sort;
+
+  /// Sort currencies by ISO code in ascending order.
+  ///
+  /// In en, this message translates to:
+  /// **'Code (A-Z)'**
+  String get encyclopedia_sort_code_ascending;
+
+  /// Sort currencies by ISO code in descending order.
+  ///
+  /// In en, this message translates to:
+  /// **'Code (Z-A)'**
+  String get encyclopedia_sort_code_descending;
+
+  /// Sort currencies by name in ascending order.
+  ///
+  /// In en, this message translates to:
+  /// **'Name (A-Z)'**
+  String get encyclopedia_sort_name_ascending;
+
+  /// Sort currencies by name in descending order.
+  ///
+  /// In en, this message translates to:
+  /// **'Name (Z-A)'**
+  String get encyclopedia_sort_name_descending;
+
+  /// Tooltip for toggling the favorites-only filter.
+  ///
+  /// In en, this message translates to:
+  /// **'Show favorites only'**
+  String get encyclopedia_favorites_only;
+
   /// Label for adding currency to favorites.
   ///
   /// In en, this message translates to:

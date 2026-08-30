@@ -132,6 +132,24 @@ class AppLocalizationsZh extends AppLocalizations {
   String get encyclopedia_not_found => '未找到货币。';
 
   @override
+  String get encyclopedia_sort => 'Sort currencies';
+
+  @override
+  String get encyclopedia_sort_code_ascending => 'Code (A-Z)';
+
+  @override
+  String get encyclopedia_sort_code_descending => 'Code (Z-A)';
+
+  @override
+  String get encyclopedia_sort_name_ascending => 'Name (A-Z)';
+
+  @override
+  String get encyclopedia_sort_name_descending => 'Name (Z-A)';
+
+  @override
+  String get encyclopedia_favorites_only => '仅显示收藏';
+
+  @override
   String get favorites_add => '加入收藏';
 
   @override
@@ -378,6 +396,24 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get encyclopedia_not_found => '未找到货币。';
 
   @override
+  String get encyclopedia_sort => '排序货币';
+
+  @override
+  String get encyclopedia_sort_code_ascending => '代码（A-Z）';
+
+  @override
+  String get encyclopedia_sort_code_descending => '代码（Z-A）';
+
+  @override
+  String get encyclopedia_sort_name_ascending => '名称（A-Z）';
+
+  @override
+  String get encyclopedia_sort_name_descending => '名称（Z-A）';
+
+  @override
+  String get encyclopedia_favorites_only => '仅显示收藏';
+
+  @override
   String get favorites_add => '加入收藏';
 
   @override
@@ -622,6 +658,24 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get encyclopedia_not_found => '找不到貨幣。';
+
+  @override
+  String get encyclopedia_sort => '排序貨幣';
+
+  @override
+  String get encyclopedia_sort_code_ascending => '代碼（A-Z）';
+
+  @override
+  String get encyclopedia_sort_code_descending => '代碼（Z-A）';
+
+  @override
+  String get encyclopedia_sort_name_ascending => '名稱（A-Z）';
+
+  @override
+  String get encyclopedia_sort_name_descending => '名稱（Z-A）';
+
+  @override
+  String get encyclopedia_favorites_only => '僅顯示收藏';
 
   @override
   String get favorites_add => '加入收藏';

@@ -34,6 +34,12 @@ void main() {
                 'USD': {
                   'name': '美元',
                 },
+                'EUR': {
+                  'name': '欧元',
+                },
+                'JPY': {
+                  'name': '日元',
+                },
               },
             }),
           },
@@ -74,6 +80,17 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('美元'), findsOneWidget);
+
+      await tester.tap(find.byTooltip('排序货币'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('名称（A-Z）'));
+      await tester.pumpAndSettle();
+
+      expect(
+        (tester.widget<ListTile>(find.byType(ListTile).first).title as Text)
+            .data,
+        'USD',
+      );
 
       await tester.tap(find.text('USD'));
       await tester.pumpAndSettle();

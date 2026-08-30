@@ -164,6 +164,10 @@
     "@encyclopedia_not_found": {
         "description": "未找到匹配货币时的消息。"
     },
+    "encyclopedia_favorites_only": "仅显示收藏",
+    "@encyclopedia_favorites_only": {
+        "description": "切换仅显示收藏筛选器的工具提示。"
+    },
     "favorites_add": "加入收藏",
     "@favorites_add": {
         "description": "将货币添加到收藏的标签。"

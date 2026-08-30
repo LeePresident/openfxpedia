@@ -164,6 +164,30 @@
     "@encyclopedia_not_found": {
         "description": "未找到符合貨幣時的訊息。"
     },
+    "encyclopedia_sort": "排序貨幣",
+    "@encyclopedia_sort": {
+        "description": "貨幣排序選單的工具提示。"
+    },
+    "encyclopedia_sort_code_ascending": "代碼（A-Z）",
+    "@encyclopedia_sort_code_ascending": {
+        "description": "依 ISO 代碼遞增排列貨幣。"
+    },
+    "encyclopedia_sort_code_descending": "代碼（Z-A）",
+    "@encyclopedia_sort_code_descending": {
+        "description": "依 ISO 代碼遞減排列貨幣。"
+    },
+    "encyclopedia_sort_name_ascending": "名稱（A-Z）",
+    "@encyclopedia_sort_name_ascending": {
+        "description": "依名稱遞增排列貨幣。"
+    },
+    "encyclopedia_sort_name_descending": "名稱（Z-A）",
+    "@encyclopedia_sort_name_descending": {
+        "description": "依名稱遞減排列貨幣。"
+    },
+    "encyclopedia_favorites_only": "僅顯示收藏",
+    "@encyclopedia_favorites_only": {
+        "description": "切換僅顯示收藏篩選器的工具提示。"
+    },
     "favorites_add": "加入收藏",
     "@favorites_add": {
         "description": "將貨幣新增到收藏的標籤。"

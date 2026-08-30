@@ -164,6 +164,30 @@
     "@encyclopedia_not_found": {
         "description": "Message when no currencies match the search."
     },
+    "encyclopedia_sort": "Sort currencies",
+    "@encyclopedia_sort": {
+        "description": "Tooltip for the currency sorting menu."
+    },
+    "encyclopedia_sort_code_ascending": "Code (A-Z)",
+    "@encyclopedia_sort_code_ascending": {
+        "description": "Sort currencies by ISO code in ascending order."
+    },
+    "encyclopedia_sort_code_descending": "Code (Z-A)",
+    "@encyclopedia_sort_code_descending": {
+        "description": "Sort currencies by ISO code in descending order."
+    },
+    "encyclopedia_sort_name_ascending": "Name (A-Z)",
+    "@encyclopedia_sort_name_ascending": {
+        "description": "Sort currencies by name in ascending order."
+    },
+    "encyclopedia_sort_name_descending": "Name (Z-A)",
+    "@encyclopedia_sort_name_descending": {
+        "description": "Sort currencies by name in descending order."
+    },
+    "encyclopedia_favorites_only": "Show favorites only",
+    "@encyclopedia_favorites_only": {
+        "description": "Tooltip for toggling the favorites-only filter."
+    },
     "favorites_add": "Add to favorites",
     "@favorites_add": {
         "description": "Label for adding currency to favorites."

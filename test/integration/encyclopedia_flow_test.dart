@@ -146,6 +146,33 @@ void main() {
 
     expect(find.text('USD'), findsOneWidget);
     expect(find.text('EUR'), findsOneWidget);
+    expect(
+      (tester.widget<ListTile>(find.byType(ListTile).first).title as Text).data,
+      'EUR',
+    );
+
+    await tester.tap(find.byTooltip('Sort currencies'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Name (Z-A)'));
+    await tester.pumpAndSettle();
+
+    expect(
+      (tester.widget<ListTile>(find.byType(ListTile).first).title as Text).data,
+      'USD',
+    );
+
+    await tester.tap(find.byTooltip('Add to favorites').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Show favorites only'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(ListTile), findsOneWidget);
+    expect(find.text('USD'), findsOneWidget);
+    expect(find.text('EUR'), findsNothing);
+    expect(find.text('JPY'), findsNothing);
+
+    await tester.tap(find.byTooltip('Show favorites only'));
+    await tester.pumpAndSettle();
 
     await tester.enterText(find.byType(TextField).first, '392');
     await tester.pumpAndSettle();

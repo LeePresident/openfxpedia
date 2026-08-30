@@ -135,6 +135,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get encyclopedia_not_found => 'No currencies found.';
 
   @override
+  String get encyclopedia_sort => 'Sort currencies';
+
+  @override
+  String get encyclopedia_sort_code_ascending => 'Code (A-Z)';
+
+  @override
+  String get encyclopedia_sort_code_descending => 'Code (Z-A)';
+
+  @override
+  String get encyclopedia_sort_name_ascending => 'Name (A-Z)';
+
+  @override
+  String get encyclopedia_sort_name_descending => 'Name (Z-A)';
+
+  @override
+  String get encyclopedia_favorites_only => 'Show favorites only';
+
+  @override
   String get favorites_add => 'Add to favorites';
 
   @override
