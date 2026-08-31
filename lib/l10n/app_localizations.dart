@@ -193,13 +193,13 @@ abstract class AppLocalizations {
   /// Label for viewing changelogs.
   ///
   /// In en, this message translates to:
-  /// **'Changelogs'**
+  /// **'Change log'**
   String get settings_changelogs;
 
   /// Subtitle explaining the changelogs feature.
   ///
   /// In en, this message translates to:
-  /// **'View concise changelogs for all versions'**
+  /// **'View a concise change log for every version'**
   String get settings_changelogs_subtitle;
 
   /// Label for license information.

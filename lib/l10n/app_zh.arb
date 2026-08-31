@@ -110,19 +110,19 @@
     },
     "converter_from": "从",
     "@converter_from": {
-        "description": "'来源'货币字段的标签。"
+        "description": "'来源'货币栏位的标签。"
     },
     "converter_to": "到",
     "@converter_to": {
-        "description": "'目标'货币字段的标签。"
+        "description": "'目标'货币栏位的标签。"
     },
     "converter_from_hint": "来源货币…",
     "@converter_from_hint": {
-        "description": "'来源'货币输入字段的提示文本。"
+        "description": "'来源'货币输入栏位的提示文本。"
     },
     "converter_to_hint": "目标货币…",
     "@converter_to_hint": {
-        "description": "'目标'货币输入字段的提示文本。"
+        "description": "'目标'货币输入栏位的提示文本。"
     },
     "converter_swap": "交换货币",
     "@converter_swap": {
@@ -132,9 +132,9 @@
     "@converter_choose_pair": {
         "description": "提示用户选择货币的消息。"
     },
-    "converter_currency_prompt": "要将这枚货币填入哪个字段？",
+    "converter_currency_prompt": "要将此货币填入哪个？",
     "@converter_currency_prompt": {
-        "description": "提示选择要填充的字段。"
+        "description": "提示选择要填充的栏位。"
     },
     "converter_cancel": "取消",
     "@converter_cancel": {
@@ -142,15 +142,15 @@
     },
     "converter_from_field": "从",
     "@converter_from_field": {
-        "description": "货币选择对话框中'来源'字段的标签。"
+        "description": "货币选择对话框中'来源'栏位的标签。"
     },
     "converter_to_field": "到",
     "@converter_to_field": {
-        "description": "货币选择对话框中'目标'字段的标签。"
+        "description": "货币选择对话框中'目标'栏位的标签。"
     },
     "amount_label": "金额",
     "@amount_label": {
-        "description": "金额输入字段的标签。"
+        "description": "金额输入栏位的标签。"
     },
     "encyclopedia_currency_title": "货币百科",
     "@encyclopedia_currency_title": {
@@ -158,7 +158,7 @@
     },
     "encyclopedia_search": "搜索货币…",
     "@encyclopedia_search": {
-        "description": "货币搜索字段的提示文本。"
+        "description": "货币搜索栏位的提示文本。"
     },
     "encyclopedia_not_found": "未找到货币。",
     "@encyclopedia_not_found": {
@@ -182,15 +182,15 @@
     },
     "detail_from_field": "从",
     "@detail_from_field": {
-        "description": "详情视图中'来源'字段的标签。"
+        "description": "详情视图中'来源'栏位的标签。"
     },
     "detail_to_field": "到",
     "@detail_to_field": {
-        "description": "详情视图中'目标'字段的标签。"
+        "description": "详情视图中'目标'栏位的标签。"
     },
-    "detail_currency_prompt": "要将这枚货币填入哪个字段？",
+    "detail_currency_prompt": "要将此货币填入哪个栏位？",
     "@detail_currency_prompt": {
-        "description": "详情视图中的字段选择提示。"
+        "description": "详情视图中的栏位选择提示。"
     },
     "detail_remove_favorite": "移出收藏",
     "@detail_remove_favorite": {
@@ -224,7 +224,7 @@
     "@detail_show_more_regions": {
         "description": "展开完整的货币使用地区列表。"
     },
-    "detail_show_less_regions": "显示较少",
+    "detail_show_less_regions": "收起",
     "@detail_show_less_regions": {
         "description": "收起货币使用地区列表。"
     },
@@ -324,7 +324,7 @@
     "@error_network_unavailable": {
         "description": "网络不可用时的错误消息。"
     },
-    "error_service_unavailable": "无法连接更新服务，请稍后再试。",
+    "error_service_unavailable": "无法连接远程服务，请稍后再试。",
     "@error_service_unavailable": {
         "description": "服务不可用时的错误消息。"
     },

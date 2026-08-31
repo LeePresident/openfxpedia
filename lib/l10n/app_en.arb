@@ -60,11 +60,11 @@
     "@settings_check_updates": {
         "description": "Label for checking updates option."
     },
-    "settings_changelogs": "Changelogs",
+    "settings_changelogs": "Change log",
     "@settings_changelogs": {
         "description": "Label for viewing changelogs."
     },
-    "settings_changelogs_subtitle": "View concise changelogs for all versions",
+    "settings_changelogs_subtitle": "View a concise change log for every version",
     "@settings_changelogs_subtitle": {
         "description": "Subtitle explaining the changelogs feature."
     },

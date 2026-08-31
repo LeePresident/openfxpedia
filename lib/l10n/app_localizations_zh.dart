@@ -108,7 +108,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get converter_choose_pair => '请选择来源和目标货币以开始转换。';
 
   @override
-  String get converter_currency_prompt => '要将这枚货币填入哪个字段？';
+  String get converter_currency_prompt => '要将此货币填入哪个？';
 
   @override
   String get converter_cancel => '取消';
@@ -165,7 +165,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get detail_to_field => '到';
 
   @override
-  String get detail_currency_prompt => '要将这枚货币填入哪个字段？';
+  String get detail_currency_prompt => '要将此货币填入哪个栏位？';
 
   @override
   String get detail_remove_favorite => '移出收藏';
@@ -192,7 +192,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get detail_show_more_regions => '显示更多';
 
   @override
-  String get detail_show_less_regions => '显示较少';
+  String get detail_show_less_regions => '收起';
 
   @override
   String get detail_description => '说明';
@@ -259,7 +259,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get error_network_unavailable => '网络错误—无法连接到服务器。请检查您的网络连接后重试。';
 
   @override
-  String get error_service_unavailable => '无法连接更新服务，请稍后再试。';
+  String get error_service_unavailable => '无法连接远程服务，请稍后再试。';
 
   @override
   String get error_generic => '发生错误，请重试。';
@@ -372,7 +372,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get converter_choose_pair => '请选择来源和目标货币以开始转换。';
 
   @override
-  String get converter_currency_prompt => '要将这枚货币填入哪个字段？';
+  String get converter_currency_prompt => '要将此货币填入哪个栏位？';
 
   @override
   String get converter_cancel => '取消';
@@ -429,7 +429,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get detail_to_field => '到';
 
   @override
-  String get detail_currency_prompt => '要将这枚货币填入哪个字段？';
+  String get detail_currency_prompt => '要将此货币填入哪个栏位？';
 
   @override
   String get detail_remove_favorite => '移出收藏';
@@ -456,7 +456,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get detail_show_more_regions => '显示更多';
 
   @override
-  String get detail_show_less_regions => '显示较少';
+  String get detail_show_less_regions => '收起';
 
   @override
   String get detail_description => '说明';
@@ -523,7 +523,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get error_network_unavailable => '网络错误—无法连接到服务器。请检查您的网络连接后重试。';
 
   @override
-  String get error_service_unavailable => '无法连接更新服务，请稍后再试。';
+  String get error_service_unavailable => '无法连接远程服务，请稍后再试。';
 
   @override
   String get error_generic => '发生错误，请重试。';
@@ -636,7 +636,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get converter_choose_pair => '請選擇來源與目標貨幣以開始轉換。';
 
   @override
-  String get converter_currency_prompt => '要將這個貨幣填入哪個欄位？';
+  String get converter_currency_prompt => '要將此貨幣填入哪個欄位？';
 
   @override
   String get converter_cancel => '取消';
@@ -693,7 +693,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get detail_to_field => '到';
 
   @override
-  String get detail_currency_prompt => '要將這個貨幣填入哪個欄位？';
+  String get detail_currency_prompt => '要將此貨幣填入哪個欄位？';
 
   @override
   String get detail_remove_favorite => '移出收藏';
@@ -720,7 +720,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get detail_show_more_regions => '顯示更多';
 
   @override
-  String get detail_show_less_regions => '顯示較少';
+  String get detail_show_less_regions => '收起';
 
   @override
   String get detail_description => '簡介';
@@ -784,10 +784,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get rate_info_disclaimer => '匯率僅供參考，請以實際報價為準。';
 
   @override
-  String get error_network_unavailable => '網絡錯誤—無法連線到伺服器。請檢查您的網路連線後重試。';
+  String get error_network_unavailable => '網絡錯誤—無法連線到伺服器。請檢查您的網絡連線後重試。';
 
   @override
-  String get error_service_unavailable => '無法連線更新服務，請稍後再試。';
+  String get error_service_unavailable => '無法連線遠端服務，請稍後再試。';
 
   @override
   String get error_generic => '發生錯誤，請重試。';

@@ -54,11 +54,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_check_updates => 'Check updates';
 
   @override
-  String get settings_changelogs => 'Changelogs';
+  String get settings_changelogs => 'Change log';
 
   @override
   String get settings_changelogs_subtitle =>
-      'View concise changelogs for all versions';
+      'View a concise change log for every version';
 
   @override
   String get settings_license => 'License';
