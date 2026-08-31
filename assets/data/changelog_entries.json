@@ -1,5 +1,40 @@
 [
     {
+        "version": "v1.0.4",
+        "date": "2026-08-31",
+        "summary": "Added richer region details, encyclopedia sorting and filtering, and more reliable Windows launch and installation behavior.",
+        "highlights": [
+            "Added region flags and expandable region lists to currency details, with reliable flag display in Chinese locales.",
+            "Added currency sorting by code or name and a favorites-only encyclopedia filter.",
+            "Improved duplicate-launch handling and the Windows installer flow when OpenFXpedia is already running.",
+            "Simplified currency asset conventions and polished localized interface and changelog text."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.4",
+                "date": "2026-08-31",
+                "summary": "新增更丰富的地区详情、百科排序和筛选功能，并提升 Windows 启动和安装的可靠性。",
+                "highlights": [
+                    "在货币详情中新增地区旗帜和可展开的地区列表，并确保中文语言环境下可靠显示旗帜",
+                    "新增按代码或名称排序货币以及仅显示收藏的百科筛选功能",
+                    "改进重复启动处理，以及 OpenFXpedia 正在运行时的 Windows 安装流程",
+                    "简化货币资源规范，并优化本地化界面和更新日志文本"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.4",
+                "date": "2026-08-31",
+                "summary": "新增更豐富的地區詳情、百科排序和篩選功能，並提升 Windows 啟動和安裝的可靠性。",
+                "highlights": [
+                    "在貨幣詳情中新增地區旗幟和可展開的地區列表，並確保中文語言環境下可靠顯示旗幟",
+                    "新增依代碼或名稱排序貨幣以及僅顯示收藏的百科篩選功能",
+                    "改進重複啟動處理，以及 OpenFXpedia 正在執行時的 Windows 安裝流程",
+                    "簡化貨幣資源規範，並最佳化在地化介面和更新紀錄文字"
+                ]
+            }
+        }
+    },
+    {
         "version": "v1.0.3",
         "date": "2026-08-09",
         "summary": "Added API selection, improved update safety, and enhanced currency search.",

@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.4] - 2026-08-31
+
+- Added region flags and expandable region lists to currency details, with reliable flag display in Chinese locales.
+- Added currency sorting by code or name and a favorites-only encyclopedia filter.
+- Improved duplicate-launch handling and the Windows installer flow when OpenFXpedia is already running.
+- Simplified currency asset conventions and polished localized interface and changelog text.
+
 ## [1.0.3] - 2026-08-09
 
 - Added an exchange-rate API selection setting with safer conversion request handling.
