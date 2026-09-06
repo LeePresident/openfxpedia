@@ -164,6 +164,26 @@
     "@encyclopedia_not_found": {
         "description": "未找到匹配货币时的消息。"
     },
+    "encyclopedia_sort": "排序货币",
+    "@encyclopedia_sort": {
+        "description": "货币排序菜单的工具提示。"
+    },
+    "encyclopedia_sort_code_ascending": "代码（A-Z）",
+    "@encyclopedia_sort_code_ascending": {
+        "description": "按 ISO 代码升序排列货币。"
+    },
+    "encyclopedia_sort_code_descending": "代码（Z-A）",
+    "@encyclopedia_sort_code_descending": {
+        "description": "按 ISO 代码降序排列货币。"
+    },
+    "encyclopedia_sort_name_ascending": "名称（A-Z）",
+    "@encyclopedia_sort_name_ascending": {
+        "description": "按名称升序排列货币。"
+    },
+    "encyclopedia_sort_name_descending": "名称（Z-A）",
+    "@encyclopedia_sort_name_descending": {
+        "description": "按名称降序排列货币。"
+    },
     "encyclopedia_favorites_only": "仅显示收藏",
     "@encyclopedia_favorites_only": {
         "description": "切换仅显示收藏筛选器的工具提示。"

@@ -275,7 +275,7 @@ class AppState extends ChangeNotifier {
         return 'Hans';
     }
 
-    return null;
+    return 'Hant';
   }
 
   Locale? _matchSupportedLocale(

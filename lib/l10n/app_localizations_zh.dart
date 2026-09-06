@@ -132,19 +132,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get encyclopedia_not_found => '未找到货币。';
 
   @override
-  String get encyclopedia_sort => 'Sort currencies';
+  String get encyclopedia_sort => '排序货币';
 
   @override
-  String get encyclopedia_sort_code_ascending => 'Code (A-Z)';
+  String get encyclopedia_sort_code_ascending => '代码（A-Z）';
 
   @override
-  String get encyclopedia_sort_code_descending => 'Code (Z-A)';
+  String get encyclopedia_sort_code_descending => '代码（Z-A）';
 
   @override
-  String get encyclopedia_sort_name_ascending => 'Name (A-Z)';
+  String get encyclopedia_sort_name_ascending => '名称（A-Z）';
 
   @override
-  String get encyclopedia_sort_name_descending => 'Name (Z-A)';
+  String get encyclopedia_sort_name_descending => '名称（Z-A）';
 
   @override
   String get encyclopedia_favorites_only => '仅显示收藏';
