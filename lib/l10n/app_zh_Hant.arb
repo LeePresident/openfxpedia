@@ -1,8 +1,16 @@
 {
     "@@locale": "zh_Hant",
-    "appTitle": "外匯百科",
+    "appTitle": "OpenFXpedia",
     "@appTitle": {
         "description": "應用程式的標題。"
+    },
+    "startup_loading": "正在載入貨幣和快取匯率",
+    "@startup_loading": {
+        "description": "應用程式資料載入期間啟動畫面顯示的狀態。"
+    },
+    "startup_error_title": "啟動失敗",
+    "@startup_error_title": {
+        "description": "應用程式初始化失敗時顯示的標題。"
     },
     "settings_language": "語言",
     "@settings_language": {

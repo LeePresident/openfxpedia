@@ -9,7 +9,13 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => '外汇百科';
+  String get appTitle => 'OpenFXpedia';
+
+  @override
+  String get startup_loading => '正在加载货币和缓存汇率';
+
+  @override
+  String get startup_error_title => '启动失败';
 
   @override
   String get settings_language => '语言';
@@ -273,7 +279,13 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   AppLocalizationsZhHans() : super('zh_Hans');
 
   @override
-  String get appTitle => '外汇百科';
+  String get appTitle => 'OpenFXpedia';
+
+  @override
+  String get startup_loading => '正在加载货币和缓存汇率';
+
+  @override
+  String get startup_error_title => '启动失败';
 
   @override
   String get settings_language => '语言';
@@ -537,7 +549,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   AppLocalizationsZhHant() : super('zh_Hant');
 
   @override
-  String get appTitle => '外匯百科';
+  String get appTitle => 'OpenFXpedia';
+
+  @override
+  String get startup_loading => '正在載入貨幣和快取匯率';
+
+  @override
+  String get startup_error_title => '啟動失敗';
 
   @override
   String get settings_language => '語言';

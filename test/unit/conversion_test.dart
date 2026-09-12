@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:openfxpedia/models/cached_rate_snapshot.dart';
 import 'package:openfxpedia/models/exchange_rate.dart';
 import 'package:openfxpedia/services/conversion_service.dart';
 import 'package:openfxpedia/services/exchange_api_source.dart';
@@ -98,15 +99,24 @@ class _StubCacheService extends CacheService {
   Future<void> init() async {}
 
   @override
-  ({Map<String, double>? rates, DateTime? timestamp, bool stale})
-      getCachedRates(
+  CachedRateSnapshot getCachedRates(
     String base, {
     int ttlHours = 12,
   }) {
     if (_storedRates == null) {
-      return (rates: null, timestamp: null, stale: true);
+      return const CachedRateSnapshot(
+        rates: null,
+        timestamp: null,
+        source: null,
+        isStale: true,
+      );
     }
-    return (rates: _storedRates, timestamp: _storedTimestamp, stale: _stale);
+    return CachedRateSnapshot(
+      rates: _storedRates,
+      timestamp: _storedTimestamp,
+      source: _storedSource,
+      isStale: _stale,
+    );
   }
 
   @override
@@ -121,23 +131,23 @@ class _StubCacheService extends CacheService {
   }
 
   @override
-  ({
-    Map<String, double>? rates,
-    DateTime? timestamp,
-    String? source,
-    bool stale
-  }) getCachedRateSnapshot(
+  CachedRateSnapshot getCachedRateSnapshot(
     String base, {
     int ttlHours = 12,
   }) {
     if (_storedRates == null) {
-      return (rates: null, timestamp: null, source: null, stale: true);
+      return const CachedRateSnapshot(
+        rates: null,
+        timestamp: null,
+        source: null,
+        isStale: true,
+      );
     }
-    return (
+    return CachedRateSnapshot(
       rates: _storedRates,
       timestamp: _storedTimestamp,
       source: _storedSource,
-      stale: _stale,
+      isStale: _stale,
     );
   }
 

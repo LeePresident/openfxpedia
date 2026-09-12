@@ -4,6 +4,14 @@
     "@appTitle": {
         "description": "The title of the application."
     },
+    "startup_loading": "Loading currencies and cached rates",
+    "@startup_loading": {
+        "description": "Status shown on the startup logo screen while app data loads."
+    },
+    "startup_error_title": "Startup failed",
+    "@startup_error_title": {
+        "description": "Title shown when application initialization fails."
+    },
     "settings_language": "Language",
     "@settings_language": {
         "description": "Label for language settings option."

@@ -2,11 +2,17 @@ import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import '../core/config.dart';
+import '../models/cached_catalog.dart';
+import '../models/cached_rate_snapshot.dart';
 
 class CacheService {
   late Box<String> _ratesBox;
   late Box<String> _currenciesBox;
   late Box<String> _prefsBox;
+
+  static bool _compactWhenWasteful(int entries, int deletedEntries) {
+    return entries > 0 && deletedEntries > 20 && deletedEntries / entries > 0.2;
+  }
 
   bool _initialized = false;
 
@@ -14,9 +20,18 @@ class CacheService {
     if (_initialized) return;
     final supportDirectory = await getApplicationSupportDirectory();
     Hive.init(supportDirectory.path);
-    _ratesBox = await Hive.openBox<String>(AppConfig.ratesBoxName);
-    _currenciesBox = await Hive.openBox<String>(AppConfig.currenciesBoxName);
-    _prefsBox = await Hive.openBox<String>(AppConfig.prefsBoxName);
+    _ratesBox = await Hive.openBox<String>(
+      AppConfig.ratesBoxName,
+      compactionStrategy: _compactWhenWasteful,
+    );
+    _currenciesBox = await Hive.openBox<String>(
+      AppConfig.currenciesBoxName,
+      compactionStrategy: _compactWhenWasteful,
+    );
+    _prefsBox = await Hive.openBox<String>(
+      AppConfig.prefsBoxName,
+      compactionStrategy: _compactWhenWasteful,
+    );
     _initialized = true;
   }
 
@@ -42,18 +57,18 @@ class CacheService {
     await putRateSnapshot(base, rates, timestamp);
   }
 
-  ({
-    Map<String, double>? rates,
-    DateTime? timestamp,
-    String? source,
-    bool stale
-  }) getCachedRateSnapshot(
+  CachedRateSnapshot getCachedRateSnapshot(
     String base, {
     int ttlHours = AppConfig.rateTtlHours,
   }) {
     final raw = _ratesBox.get(base.toLowerCase());
     if (raw == null) {
-      return (rates: null, timestamp: null, source: null, stale: true);
+      return const CachedRateSnapshot(
+        rates: null,
+        timestamp: null,
+        source: null,
+        isStale: true,
+      );
     }
 
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
@@ -64,24 +79,24 @@ class CacheService {
     final rates = (decoded['rates'] as Map<String, dynamic>).map(
       (k, v) => MapEntry(k, (v as num).toDouble()),
     );
-    return (
+    return CachedRateSnapshot(
       rates: rates,
       timestamp: timestamp,
       source: decoded['source'] as String?,
-      stale: stale,
+      isStale: stale,
     );
   }
 
-  ({Map<String, double>? rates, DateTime? timestamp, bool stale})
-      getCachedRates(
+  CachedRateSnapshot getCachedRates(
     String base, {
     int ttlHours = AppConfig.rateTtlHours,
   }) {
     final cached = getCachedRateSnapshot(base, ttlHours: ttlHours);
-    return (
+    return CachedRateSnapshot(
       rates: cached.rates,
       timestamp: cached.timestamp,
-      stale: cached.stale,
+      source: cached.source,
+      isStale: cached.isStale,
     );
   }
 
@@ -96,12 +111,17 @@ class CacheService {
     await _currenciesBox.put('catalog', payload);
   }
 
-  ({Map<String, String>? catalog, DateTime? timestamp, bool stale})
-      getCachedCatalog({
+  CachedCatalog getCachedCatalog({
     int ttlHours = AppConfig.catalogTtlHours,
   }) {
     final raw = _currenciesBox.get('catalog');
-    if (raw == null) return (catalog: null, timestamp: null, stale: true);
+    if (raw == null) {
+      return const CachedCatalog(
+        catalog: null,
+        timestamp: null,
+        isStale: true,
+      );
+    }
 
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final timestamp = DateTime.parse(decoded['timestamp'] as String);
@@ -110,7 +130,11 @@ class CacheService {
 
     final catalog = (decoded['catalog'] as Map<String, dynamic>)
         .map((k, v) => MapEntry(k, v.toString()));
-    return (catalog: catalog, timestamp: timestamp, stale: stale);
+    return CachedCatalog(
+      catalog: catalog,
+      timestamp: timestamp,
+      isStale: stale,
+    );
   }
 
   Future<void> putFavorites(List<String> favorites) async {

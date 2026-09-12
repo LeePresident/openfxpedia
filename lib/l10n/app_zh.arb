@@ -1,8 +1,16 @@
 {
     "@@locale": "zh",
-    "appTitle": "外汇百科",
+    "appTitle": "OpenFXpedia",
     "@appTitle": {
         "description": "应用程序的标题。"
+    },
+    "startup_loading": "正在加载货币和缓存汇率",
+    "@startup_loading": {
+        "description": "应用数据加载期间启动标志页面显示的状态。"
+    },
+    "startup_error_title": "启动失败",
+    "@startup_error_title": {
+        "description": "应用初始化失败时显示的标题。"
     },
     "settings_language": "语言",
     "@settings_language": {

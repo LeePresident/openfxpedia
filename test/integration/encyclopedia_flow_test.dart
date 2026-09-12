@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/models/cached_catalog.dart';
+import 'package:openfxpedia/models/cached_rate_snapshot.dart';
 import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/providers/app_state.dart';
 import 'package:openfxpedia/screens/encyclopedia_screen.dart';
@@ -50,9 +52,12 @@ class _StubCacheService extends CacheService {
   Future<void> putString(String key, String value) async {}
 
   @override
-  ({Map<String, String>? catalog, DateTime? timestamp, bool stale})
-      getCachedCatalog({int ttlHours = 12}) {
-    return (catalog: null, timestamp: null, stale: true);
+  CachedCatalog getCachedCatalog({int ttlHours = 12}) {
+    return const CachedCatalog(
+      catalog: null,
+      timestamp: null,
+      isStale: true,
+    );
   }
 
   @override
@@ -62,12 +67,16 @@ class _StubCacheService extends CacheService {
   ) async {}
 
   @override
-  ({Map<String, double>? rates, DateTime? timestamp, bool stale})
-      getCachedRates(
+  CachedRateSnapshot getCachedRates(
     String base, {
     int ttlHours = 12,
   }) {
-    return (rates: null, timestamp: null, stale: true);
+    return const CachedRateSnapshot(
+      rates: null,
+      timestamp: null,
+      source: null,
+      isStale: true,
+    );
   }
 
   @override

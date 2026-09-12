@@ -106,6 +106,18 @@ abstract class AppLocalizations {
   /// **'OpenFXpedia'**
   String get appTitle;
 
+  /// Status shown on the startup logo screen while app data loads.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading currencies and cached rates'**
+  String get startup_loading;
+
+  /// Title shown when application initialization fails.
+  ///
+  /// In en, this message translates to:
+  /// **'Startup failed'**
+  String get startup_error_title;
+
   /// Label for language settings option.
   ///
   /// In en, this message translates to:

@@ -12,6 +12,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'OpenFXpedia';
 
   @override
+  String get startup_loading => 'Loading currencies and cached rates';
+
+  @override
+  String get startup_error_title => 'Startup failed';
+
+  @override
   String get settings_language => 'Language';
 
   @override

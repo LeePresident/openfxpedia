@@ -1,4 +1,6 @@
 ﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:openfxpedia/models/cached_catalog.dart';
+import 'package:openfxpedia/models/cached_rate_snapshot.dart';
 import 'package:openfxpedia/services/cache_service.dart';
 import 'package:openfxpedia/services/favorites_service.dart';
 
@@ -22,18 +24,25 @@ class _StubCacheService extends CacheService {
   Future<void> init() async {}
 
   @override
-  ({Map<String, String>? catalog, DateTime? timestamp, bool stale})
-      getCachedCatalog({int ttlHours = 12}) {
-    return (catalog: null, timestamp: null, stale: true);
+  CachedCatalog getCachedCatalog({int ttlHours = 12}) {
+    return const CachedCatalog(
+      catalog: null,
+      timestamp: null,
+      isStale: true,
+    );
   }
 
   @override
-  ({Map<String, double>? rates, DateTime? timestamp, bool stale})
-      getCachedRates(
+  CachedRateSnapshot getCachedRates(
     String base, {
     int ttlHours = 12,
   }) {
-    return (rates: null, timestamp: null, stale: true);
+    return const CachedRateSnapshot(
+      rates: null,
+      timestamp: null,
+      source: null,
+      isStale: true,
+    );
   }
 }
 

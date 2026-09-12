@@ -10,6 +10,19 @@ Current release: `1.0.3`
 
 - Spec & tasks: `specs/master`
 
+## Architecture
+
+The application keeps UI orchestration in providers and domain/data work in services:
+
+- `CurrencyCatalogService` builds the localized `Currency` models used by the encyclopedia.
+- `CurrencyCatalogRepository` owns remote catalog retrieval, cache persistence, TTL handling, and offline fallback.
+- `CurrencyMetadataLoader` loads the bundled fiat whitelist and metadata from `assets/data/fiat_currencies.json`.
+- `CurrencyOverlayLoader` loads locale-specific encyclopedia overlays from `assets/data/fiat_currency_overlays/`.
+- `CurrencyLocalizer` applies overlay values and records field-level English fallback events.
+- `CacheService` owns persisted rates, catalog data, favorites, and preferences through Hive.
+
+The catalog loaders cache data within their service instance. The catalog service retains only the active localized currency list, while the repository preserves the existing cached and offline behavior.
+
 ## Features
 
 - Fast currency conversion using live exchange rates (with local cache and offline support).
@@ -120,12 +133,29 @@ Country flags in the encyclopedia use the [`country_flags`](https://pub.dev/pack
 flutter test
 ```
 
+- Run static analysis with:
+
+```powershell
+flutter analyze
+```
+
+- Run focused catalog and conversion checks with:
+
+```powershell
+flutter test test/widget/encyclopedia_locale_test.dart
+flutter test test/integration/encyclopedia_flow_test.dart
+flutter test test/unit/conversion_test.dart
+```
+
 ## Localization Notes
 
 - Update `lib/l10n/app_en.arb` first when adding a new string.
 - Keep `lib/l10n/app_zh_Hans.arb` and `lib/l10n/app_zh_Hant.arb` aligned with the English key set.
 - `lib/l10n/app_zh.arb` is the neutral Chinese fallback source for the `zh` locale family.
-- Regenerate the localization output after ARB changes.
+- `OpenFXpedia` is a product name and remains unchanged in every locale.
+- Regenerate the checked-in localization output after ARB changes with `flutter gen-l10n`, then run `dart format lib/l10n`.
+
+The startup screen is rendered by Flutter so its loading status and startup errors can use the selected locale. Windows keeps this Flutter-rendered screen visible while the app initializes; Android uses the native splash until Flutter is ready and then removes it.
 
 ## VS Code
 

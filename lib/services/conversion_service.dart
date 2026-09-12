@@ -49,7 +49,7 @@ class ConversionService {
     final cached = _cache.getCachedRateSnapshot(b);
     final freshCacheHasRequestedRate = cached.rates?.containsKey(t) ?? false;
     final canUseFreshPreferredCache = cached.rates != null &&
-        !cached.stale &&
+        !cached.isStale &&
         _matchesPreferredSource(cached.source) &&
         freshCacheHasRequestedRate;
 

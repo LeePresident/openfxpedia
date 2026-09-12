@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'l10n/app_localizations.dart';
@@ -16,9 +17,40 @@ import 'services/refresh_scheduler.dart';
 
 Future<void> main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: binding);
+  if (defaultTargetPlatform == TargetPlatform.windows) {
+    PaintingBinding.shaderWarmUp = const _OpenFXShaderWarmUp();
+  } else {
+    FlutterNativeSplash.preserve(widgetsBinding: binding);
+  }
 
   runApp(const _BootstrapApp());
+}
+
+class _OpenFXShaderWarmUp extends ShaderWarmUp {
+  const _OpenFXShaderWarmUp();
+
+  @override
+  Future<void> warmUpOnCanvas(Canvas canvas) async {
+    const gradientRect = Rect.fromLTWH(0, 0, 256, 256);
+    final gradientPaint = Paint()
+      ..shader = const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Color(0xFFF7F9FC), Color(0xFFE4EAF2)],
+      ).createShader(gradientRect);
+    canvas.drawRect(gradientRect, gradientPaint);
+
+    final shadowPaint = Paint()
+      ..color = const Color(0x14000000)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 14);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        const Rect.fromLTWH(32, 32, 192, 192),
+        const Radius.circular(32),
+      ),
+      shadowPaint,
+    );
+  }
 }
 
 class _BootstrapApp extends StatefulWidget {
@@ -70,7 +102,9 @@ class _BootstrapAppState extends State<_BootstrapApp> {
         return;
       }
 
-      FlutterNativeSplash.remove();
+      if (defaultTargetPlatform != TargetPlatform.windows) {
+        FlutterNativeSplash.remove();
+      }
 
       setState(() {
         _appState = appState;
@@ -81,7 +115,9 @@ class _BootstrapAppState extends State<_BootstrapApp> {
         return;
       }
 
-      FlutterNativeSplash.remove();
+      if (defaultTargetPlatform != TargetPlatform.windows) {
+        FlutterNativeSplash.remove();
+      }
 
       setState(() {
         _startupError = error;
@@ -119,6 +155,14 @@ class _BootstrapAppState extends State<_BootstrapApp> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       themeMode: ThemeMode.system,
       theme: _buildLightTheme(),
       darkTheme: _buildDarkTheme(),
@@ -182,7 +226,7 @@ class _StartupSplashScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                'Loading currencies and cached rates',
+                AppLocalizations.of(context).startup_loading,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: scheme.onSurfaceVariant,
                 ),
@@ -229,7 +273,7 @@ class _StartupErrorScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Startup failed',
+                  AppLocalizations.of(context).startup_error_title,
                   style: theme.textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
