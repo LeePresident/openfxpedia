@@ -5,6 +5,7 @@ import 'exchange_api_exception.dart';
 import 'exchange_api_source.dart';
 import 'exchange_observability.dart';
 import 'exchange_provider.dart';
+import 'error_classifier.dart';
 import 'frankfurter_provider.dart';
 
 export 'exchange_api_exception.dart';
@@ -78,7 +79,7 @@ class ExchangeClient {
         source: _primaryProvider.sourceId,
         status: 'failed',
         base: normalizedBase,
-        failureReason: error.toString(),
+        failureReason: ErrorClassifier.codeFor(error),
       );
     }
 
@@ -107,7 +108,7 @@ class ExchangeClient {
         source: _fallbackProvider.sourceId,
         status: 'failed',
         base: normalizedBase,
-        failureReason: error.toString(),
+        failureReason: ErrorClassifier.codeFor(error),
       );
       rethrow;
     }
@@ -141,7 +142,7 @@ class ExchangeClient {
         source: provider.sourceId,
         status: 'failed',
         base: base,
-        failureReason: error.toString(),
+        failureReason: ErrorClassifier.codeFor(error),
       );
       rethrow;
     }

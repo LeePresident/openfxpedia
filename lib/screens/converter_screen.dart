@@ -120,7 +120,7 @@ class ConverterScreen extends StatelessWidget {
                       ? const CircularProgressIndicator()
                       : Text(state.errorCode != null
                           ? _localizedErrorForCode(l10n, state.errorCode!)
-                          : 'Loading currencies...'),
+                          : l10n.startup_loading),
                 )
               : SingleChildScrollView(
                   padding: const EdgeInsets.all(16.0),

@@ -4,7 +4,7 @@
 
 OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (flags, symbols, regions, and descriptions). The app targets Windows (desktop) and Android.
 
-Current release: `1.0.3`
+Current release: `1.0.4`
 
 ## Quick Links
 
@@ -37,7 +37,7 @@ The catalog loaders cache data within their service instance. The catalog servic
 ## Prerequisites
 
 - Flutter SDK (stable channel)
-- Windows: enable desktop support (`flutter config --enable-windows-desktop`)
+- Windows: Visual Studio Build Tools with the Desktop development with C++ workload; enable desktop support with `flutter config --enable-windows-desktop`
 - Windows release installer: NSIS (`makensis` must be on PATH)
 - Android: Android SDK + emulator or device
 - Recommended: run `flutter doctor` to verify environment
@@ -115,6 +115,18 @@ dart run tool/conversion_benchmark.dart --samples 100 --threshold-ms 2000
 The app fetches live exchange rates from Frankfurter first and falls back to exchange-api only when the primary source is unavailable, times out, or cannot provide the requested rate. The CDN JSON remains the canonical source for currency metadata. The repository also maintains a curated whitelist asset at `assets/data/fiat_currencies.json` that ships with richer metadata used by the encyclopedia.
 
 Users can toggle the exchange-rate API source in Settings by choosing automatic selection, Frankfurter, or exchange-api.
+
+## Privacy
+
+OpenFXpedia does not require an account and does not collect names, email addresses, payment information, contacts, location, camera, microphone, or advertising identifiers. The app does not include analytics, advertising, crash-reporting, or user-tracking SDKs.
+
+The app makes HTTPS requests to the configured exchange-rate and currency-catalog providers listed above. These requests include the selected currency codes needed to retrieve rates and catalog data. The app also contacts the OpenFXpedia GitHub repository when the user checks for updates. The external providers and GitHub may receive normal connection metadata such as an IP address according to their own privacy policies.
+
+Rates and currency catalog data are cached locally for offline use. Favorites and app preferences are also stored locally. These Hive data boxes are encrypted with a randomly generated key stored in the app-support directory. Encryption protects the app's stored data from casual inspection, but the key is stored locally rather than in a hardware-backed vault, so it does not protect data on a device that is already compromised or unlocked by an attacker.
+
+To delete locally stored rates, catalog data, favorites, and preferences, open **Settings** and choose **Clear local data**. Clearing local data retains the encryption key so any future cached data remains encrypted. Uninstalling the app removes its application data according to the operating system's normal uninstall behavior.
+
+The Android app requests only the `INTERNET` permission. Network communication uses HTTPS, and update artifacts are downloaded only after their GitHub release URL and SHA-256 digest have been checked against the GitHub release metadata. This detects wrong or corrupted downloads; it is not an independent publisher signature, so a compromised release source remains outside the app's trust boundary. No personal data is intentionally included in exchange-rate requests or update checks.
 
 ## Assets
 

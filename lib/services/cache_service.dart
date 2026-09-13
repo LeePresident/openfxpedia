@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import '../core/config.dart';
@@ -15,24 +18,140 @@ class CacheService {
   }
 
   bool _initialized = false;
+  late Directory _supportDirectory;
 
   Future<void> init() async {
     if (_initialized) return;
     final supportDirectory = await getApplicationSupportDirectory();
+    _supportDirectory = supportDirectory;
     Hive.init(supportDirectory.path);
-    _ratesBox = await Hive.openBox<String>(
-      AppConfig.ratesBoxName,
-      compactionStrategy: _compactWhenWasteful,
+    final encryptionKey = await _loadEncryptionKey(supportDirectory);
+    final openedBoxes = <Box<String>>[];
+    try {
+      _ratesBox = await _openEncryptedBox(
+        AppConfig.encryptedRatesBoxName,
+        AppConfig.ratesBoxName,
+        encryptionKey,
+      );
+      openedBoxes.add(_ratesBox);
+      _currenciesBox = await _openEncryptedBox(
+        AppConfig.encryptedCurrenciesBoxName,
+        AppConfig.currenciesBoxName,
+        encryptionKey,
+      );
+      openedBoxes.add(_currenciesBox);
+      _prefsBox = await _openEncryptedBox(
+        AppConfig.encryptedPrefsBoxName,
+        AppConfig.prefsBoxName,
+        encryptionKey,
+      );
+      openedBoxes.add(_prefsBox);
+      _initialized = true;
+    } catch (_) {
+      for (final box in openedBoxes) {
+        if (box.isOpen) await box.close();
+      }
+      rethrow;
+    }
+  }
+
+  Future<List<int>> _loadEncryptionKey(Directory supportDirectory) async {
+    final keyFile = File(
+      '${supportDirectory.path}${Platform.pathSeparator}${AppConfig.hiveEncryptionKeyFileName}',
     );
-    _currenciesBox = await Hive.openBox<String>(
-      AppConfig.currenciesBoxName,
-      compactionStrategy: _compactWhenWasteful,
+    if (await keyFile.exists()) {
+      return base64Url.decode(await keyFile.readAsString());
+    }
+
+    final key = List<int>.generate(32, (_) => Random.secure().nextInt(256));
+    await keyFile.writeAsString(base64UrlEncode(Uint8List.fromList(key)));
+    return key;
+  }
+
+  Future<Box<String>> _openEncryptedBox(
+    String name,
+    String legacyName,
+    List<int> encryptionKey,
+  ) async {
+    final cipher = HiveAesCipher(encryptionKey);
+    try {
+      final encryptedBox = await Hive.openBox<String>(
+        name,
+        encryptionCipher: cipher,
+        compactionStrategy: _compactWhenWasteful,
+      );
+      if (encryptedBox.isEmpty && await _boxFileExists(legacyName)) {
+        await _migrateLegacyBox(encryptedBox, legacyName, cipher);
+      }
+      return encryptedBox;
+    } on HiveError {
+      if (!await _boxFileExists(legacyName)) rethrow;
+      final legacyValues = await _readLegacyValues(legacyName, cipher);
+      final encryptedBox = await Hive.openBox<String>(
+        name,
+        encryptionCipher: cipher,
+        compactionStrategy: _compactWhenWasteful,
+      );
+      for (final entry in legacyValues.entries) {
+        await encryptedBox.put(entry.key, entry.value);
+      }
+      await _deleteLegacyBox(legacyName);
+      return encryptedBox;
+    }
+  }
+
+  Future<void> _migrateLegacyBox(
+    Box<String> encryptedBox,
+    String legacyName,
+    HiveAesCipher cipher,
+  ) async {
+    final legacyValues = await _readLegacyValues(legacyName, cipher);
+    try {
+      for (final entry in legacyValues.entries) {
+        await encryptedBox.put(entry.key, entry.value);
+      }
+      await _deleteLegacyBox(legacyName);
+    } catch (_) {
+      await encryptedBox.clear();
+      await encryptedBox.compact();
+      rethrow;
+    }
+  }
+
+  Future<Map<dynamic, dynamic>> _readLegacyValues(
+    String legacyName,
+    HiveAesCipher cipher,
+  ) async {
+    Box<String>? legacyBox;
+    try {
+      legacyBox = await Hive.openBox<String>(legacyName);
+    } on HiveError {
+      legacyBox = await Hive.openBox<String>(
+        legacyName,
+        encryptionCipher: cipher,
+      );
+    }
+    final values = Map<dynamic, dynamic>.from(legacyBox.toMap());
+    await legacyBox.close();
+    return values;
+  }
+
+  Future<bool> _boxFileExists(String name) async {
+    final hiveFile = File(
+      '${_supportDirectory.path}${Platform.pathSeparator}$name.hive',
     );
-    _prefsBox = await Hive.openBox<String>(
-      AppConfig.prefsBoxName,
-      compactionStrategy: _compactWhenWasteful,
+    return hiveFile.exists();
+  }
+
+  Future<void> _deleteLegacyBox(String name) async {
+    final hiveFile = File(
+      '${_supportDirectory.path}${Platform.pathSeparator}$name.hive',
     );
-    _initialized = true;
+    final lockFile = File(
+      '${_supportDirectory.path}${Platform.pathSeparator}$name.lock',
+    );
+    if (await hiveFile.exists()) await hiveFile.delete();
+    if (await lockFile.exists()) await lockFile.delete();
   }
 
   Future<void> putRateSnapshot(
@@ -163,6 +282,18 @@ class CacheService {
   }
 
   String? getLocaleCode() => getString(AppConfig.localeKey);
+
+  Future<void> clearAll() async {
+    await _ratesBox.clear();
+    await _ratesBox.compact();
+    await _currenciesBox.clear();
+    await _currenciesBox.compact();
+    await _prefsBox.clear();
+    await _prefsBox.compact();
+    await _deleteLegacyBox(AppConfig.ratesBoxName);
+    await _deleteLegacyBox(AppConfig.currenciesBoxName);
+    await _deleteLegacyBox(AppConfig.prefsBoxName);
+  }
 
   Future<void> close() async {
     await _ratesBox.close();

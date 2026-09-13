@@ -69,6 +69,27 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settings_license => '许可';
 
   @override
+  String get settings_clear_local_data => '清除本地数据';
+
+  @override
+  String get settings_clear_local_data_subtitle => '删除缓存汇率、货币目录、收藏和偏好设置';
+
+  @override
+  String get settings_clear_local_data_title => '清除本地数据？';
+
+  @override
+  String get settings_clear_local_data_message => '这将从此设备删除缓存汇率、货币目录、收藏和偏好设置。';
+
+  @override
+  String get settings_clear_local_data_confirm => '清除数据';
+
+  @override
+  String get settings_clear_local_data_done => '本地数据已清除';
+
+  @override
+  String get settings_clear_local_data_failed => '无法清除本地数据';
+
+  @override
   String get settings_select_theme => '选择主题';
 
   @override
@@ -339,6 +360,27 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get settings_license => '许可';
 
   @override
+  String get settings_clear_local_data => '清除本地数据';
+
+  @override
+  String get settings_clear_local_data_subtitle => '删除缓存汇率、货币目录、收藏和偏好设置';
+
+  @override
+  String get settings_clear_local_data_title => '清除本地数据？';
+
+  @override
+  String get settings_clear_local_data_message => '这将从此设备删除缓存汇率、货币目录、收藏和偏好设置。';
+
+  @override
+  String get settings_clear_local_data_confirm => '清除数据';
+
+  @override
+  String get settings_clear_local_data_done => '本地数据已清除';
+
+  @override
+  String get settings_clear_local_data_failed => '无法清除本地数据';
+
+  @override
   String get settings_select_theme => '选择主题';
 
   @override
@@ -607,6 +649,27 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get settings_license => '授權';
+
+  @override
+  String get settings_clear_local_data => '清除本機資料';
+
+  @override
+  String get settings_clear_local_data_subtitle => '刪除快取匯率、貨幣目錄、收藏和偏好設定';
+
+  @override
+  String get settings_clear_local_data_title => '清除本機資料？';
+
+  @override
+  String get settings_clear_local_data_message => '這將從此裝置刪除快取匯率、貨幣目錄、收藏和偏好設定。';
+
+  @override
+  String get settings_clear_local_data_confirm => '清除資料';
+
+  @override
+  String get settings_clear_local_data_done => '本機資料已清除';
+
+  @override
+  String get settings_clear_local_data_failed => '無法清除本機資料';
 
   @override
   String get settings_select_theme => '選擇主題';

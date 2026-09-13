@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import 'error_classifier.dart';
+
 class ExchangeObservability {
   static final List<Map<String, String>> _events = [];
 
@@ -22,7 +24,7 @@ class ExchangeObservability {
       'base': base,
     };
     if (failureReason != null && failureReason.isNotEmpty) {
-      event['failure_reason'] = failureReason;
+      event['failure_code'] = ErrorClassifier.codeFor(failureReason);
     }
     _events.add(event);
 

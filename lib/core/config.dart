@@ -1,4 +1,4 @@
-﻿class AppConfig {
+class AppConfig {
   AppConfig._();
 
   static const String frankfurterApiBase = 'https://api.frankfurter.dev/v2';
@@ -25,6 +25,11 @@
   static const String ratesBoxName = 'rates';
   static const String currenciesBoxName = 'currencies';
   static const String prefsBoxName = 'prefs';
+  static const String encryptedRatesBoxName = 'rates_encrypted';
+  static const String encryptedCurrenciesBoxName = 'currencies_encrypted';
+  static const String encryptedPrefsBoxName = 'prefs_encrypted';
+  static const String hiveEncryptionKeyFileName =
+      'openfxpedia_hive_encryption_key';
 
   static const String favoritesKey = 'favorites';
   static const String defaultBaseCurrencyKey = 'default_base';

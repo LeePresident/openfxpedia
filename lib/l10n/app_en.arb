@@ -80,6 +80,34 @@
     "@settings_license": {
         "description": "Label for license information."
     },
+    "settings_clear_local_data": "Clear local data",
+    "@settings_clear_local_data": {
+        "description": "Label for clearing local data."
+    },
+    "settings_clear_local_data_subtitle": "Delete cached rates, catalog data, favorites, and preferences",
+    "@settings_clear_local_data_subtitle": {
+        "description": "Explains the data removed."
+    },
+    "settings_clear_local_data_title": "Clear local data?",
+    "@settings_clear_local_data_title": {
+        "description": "Clear-data confirmation title."
+    },
+    "settings_clear_local_data_message": "This deletes cached rates, catalog data, favorites, and preferences from this device.",
+    "@settings_clear_local_data_message": {
+        "description": "Clear-data confirmation message."
+    },
+    "settings_clear_local_data_confirm": "Clear data",
+    "@settings_clear_local_data_confirm": {
+        "description": "Clear-data confirmation action."
+    },
+    "settings_clear_local_data_done": "Local data cleared",
+    "@settings_clear_local_data_done": {
+        "description": "Clear-data completion message."
+    },
+    "settings_clear_local_data_failed": "Could not clear local data",
+    "@settings_clear_local_data_failed": {
+        "description": "Clear-data failure message."
+    },
     "settings_select_theme": "Select theme",
     "@settings_select_theme": {
         "description": "Dialog title for selecting a theme."

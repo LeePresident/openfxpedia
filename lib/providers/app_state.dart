@@ -6,6 +6,7 @@ import '../models/exchange_rate.dart';
 import '../services/cache_service.dart';
 import '../services/conversion_service.dart';
 import '../services/currency_catalog.dart';
+import '../services/error_classifier.dart';
 import '../services/exchange_api_source.dart';
 import '../services/favorites_service.dart';
 
@@ -79,7 +80,7 @@ class AppState extends ChangeNotifier {
         .toList();
   }
 
-  Future<void> initialize() async {
+  Future<bool> initialize() async {
     _setLoading();
     try {
       await _loadLocale();
@@ -90,8 +91,10 @@ class AppState extends ChangeNotifier {
       );
       _favoritesService.load();
       _setIdle();
+      return true;
     } catch (e) {
       _setError(e.toString());
+      return false;
     }
   }
 
@@ -375,6 +378,25 @@ class AppState extends ChangeNotifier {
 
   bool isFavorite(String isoCode) => _favoritesService.isFavorite(isoCode);
 
+  Future<void> clearLocalData() async {
+    await _cacheService.clearAll();
+    _favoritesService.load();
+    _conversionRequestSequence++;
+    _baseCurrency = null;
+    _targetCurrency = null;
+    _convertedAmount = null;
+    _lastRate = null;
+    _rateFromCache = false;
+    _errorMessage = null;
+    _errorCode = null;
+    notifyListeners();
+
+    final initialized = await initialize();
+    if (!initialized) {
+      throw StateError('Currency catalog reload failed');
+    }
+  }
+
   void _setLoading() {
     _loadingState = LoadingState.loading;
     _errorMessage = null;
@@ -388,10 +410,8 @@ class AppState extends ChangeNotifier {
   }
 
   void _setError(String message) {
-    // Keep the original technical message in logs for debugging
-    // and show a concise, layman-friendly message to users.
     final friendly = _friendlyMessageFor(message);
-    debugPrint('Error (technical): $message');
+    debugPrint('Error code: ${ErrorClassifier.codeFor(message)}');
 
     _loadingState = LoadingState.error;
     _errorMessage = friendly;

@@ -220,6 +220,48 @@ abstract class AppLocalizations {
   /// **'License'**
   String get settings_license;
 
+  /// Label for clearing local data.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear local data'**
+  String get settings_clear_local_data;
+
+  /// Explains the data removed.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete cached rates, catalog data, favorites, and preferences'**
+  String get settings_clear_local_data_subtitle;
+
+  /// Clear-data confirmation title.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear local data?'**
+  String get settings_clear_local_data_title;
+
+  /// Clear-data confirmation message.
+  ///
+  /// In en, this message translates to:
+  /// **'This deletes cached rates, catalog data, favorites, and preferences from this device.'**
+  String get settings_clear_local_data_message;
+
+  /// Clear-data confirmation action.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear data'**
+  String get settings_clear_local_data_confirm;
+
+  /// Clear-data completion message.
+  ///
+  /// In en, this message translates to:
+  /// **'Local data cleared'**
+  String get settings_clear_local_data_done;
+
+  /// Clear-data failure message.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not clear local data'**
+  String get settings_clear_local_data_failed;
+
   /// Dialog title for selecting a theme.
   ///
   /// In en, this message translates to:

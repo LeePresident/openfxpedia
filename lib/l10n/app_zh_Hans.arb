@@ -80,6 +80,34 @@
     "@settings_license": {
         "description": "许可信息的标签。"
     },
+    "settings_clear_local_data": "清除本地数据",
+    "@settings_clear_local_data": {
+        "description": "清除本地数据的标签。"
+    },
+    "settings_clear_local_data_subtitle": "删除缓存汇率、货币目录、收藏和偏好设置",
+    "@settings_clear_local_data_subtitle": {
+        "description": "说明会删除的内容。"
+    },
+    "settings_clear_local_data_title": "清除本地数据？",
+    "@settings_clear_local_data_title": {
+        "description": "确认对话框标题。"
+    },
+    "settings_clear_local_data_message": "这将从此设备删除缓存汇率、货币目录、收藏和偏好设置。",
+    "@settings_clear_local_data_message": {
+        "description": "确认对话框说明。"
+    },
+    "settings_clear_local_data_confirm": "清除数据",
+    "@settings_clear_local_data_confirm": {
+        "description": "确认清除操作。"
+    },
+    "settings_clear_local_data_done": "本地数据已清除",
+    "@settings_clear_local_data_done": {
+        "description": "清除完成提示。"
+    },
+    "settings_clear_local_data_failed": "无法清除本地数据",
+    "@settings_clear_local_data_failed": {
+        "description": "清除失败提示。"
+    },
     "settings_select_theme": "选择主题",
     "@settings_select_theme": {
         "description": "选择主题的对话框标题。"

@@ -70,6 +70,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_license => 'License';
 
   @override
+  String get settings_clear_local_data => 'Clear local data';
+
+  @override
+  String get settings_clear_local_data_subtitle =>
+      'Delete cached rates, catalog data, favorites, and preferences';
+
+  @override
+  String get settings_clear_local_data_title => 'Clear local data?';
+
+  @override
+  String get settings_clear_local_data_message =>
+      'This deletes cached rates, catalog data, favorites, and preferences from this device.';
+
+  @override
+  String get settings_clear_local_data_confirm => 'Clear data';
+
+  @override
+  String get settings_clear_local_data_done => 'Local data cleared';
+
+  @override
+  String get settings_clear_local_data_failed => 'Could not clear local data';
+
+  @override
   String get settings_select_theme => 'Select theme';
 
   @override

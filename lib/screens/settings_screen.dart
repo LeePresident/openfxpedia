@@ -4,14 +4,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:open_filex/open_filex.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../core/config.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/app_state.dart';
 import '../services/exchange_api_source.dart';
+import '../services/error_classifier.dart';
+import '../services/update_service.dart';
 import 'changelog_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -23,6 +25,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late Future<PackageInfo> _pkgInfo;
+  final UpdateService _updateService = UpdateService();
   bool _checking = false;
 
   @override
@@ -52,29 +55,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
           final shouldDownload = await _confirmUpdateDownload(latestVersion);
           if (!shouldDownload) return;
 
-          final assetUrl = _releaseAssetUrlForDevice(
+          final assetName = _preferredUpdateAssetName(latestVersion);
+          final artifact = _updateService.verifiedAsset(
             latestRelease,
-            latestVersion,
+            assetName ?? '',
           );
-          if (assetUrl == null || assetUrl.isEmpty) {
+          if (assetName == null || artifact == null) {
             _showMessage(l10n.update_asset_not_found);
             return;
           }
 
-          final opened = await launchUrl(
-            Uri.parse(assetUrl),
-            mode: LaunchMode.externalApplication,
+          final file = await _updateService.downloadVerifiedAsset(
+            uri: artifact.uri,
+            assetName: assetName,
+            digest: artifact.digest,
           );
-          if (!opened) {
-            _showMessage(l10n.update_open_download_failed);
-          }
+          await OpenFilex.open(file.path);
         }
       }
     } catch (e) {
       if (!mounted) return;
 
-      // Log technical details for developers, but show a concise message to users.
-      debugPrint('Update check failed: $e');
+      debugPrint('Update check failed: ${ErrorClassifier.codeFor(e)}');
       _showMessage(_friendlyUpdateError(e));
     } finally {
       if (mounted) {
@@ -231,6 +233,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     appState.exchangeApiSource, l10n)),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => _showExchangeApiSourceDialog(appState),
+              ),
+              ListTile(
+                title: Text(l10n.settings_clear_local_data),
+                subtitle: Text(l10n.settings_clear_local_data_subtitle),
+                trailing: const Icon(Icons.delete_outline),
+                onTap: () => _confirmClearLocalData(appState),
               ),
               ListTile(
                 title: Text(l10n.settings_app_version),
@@ -416,6 +424,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (chosen != null) await state.setExchangeApiSource(chosen);
   }
 
+  Future<void> _confirmClearLocalData(AppState state) async {
+    final l10n = AppLocalizations.of(context);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text(l10n.settings_clear_local_data_title),
+          content: Text(l10n.settings_clear_local_data_message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: Text(l10n.converter_cancel),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(dialogContext).pop(true),
+              child: Text(l10n.settings_clear_local_data_confirm),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed != true || !mounted) return;
+    try {
+      await state.clearLocalData();
+      if (mounted) _showMessage(l10n.settings_clear_local_data_done);
+    } catch (_) {
+      if (mounted) _showMessage(l10n.settings_clear_local_data_failed);
+    }
+  }
+
   String? _preferredUpdateAssetName(String latestVersion) {
     if (Platform.isWindows) {
       return 'openfxpedia_${latestVersion}_setup.exe';
@@ -423,26 +462,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     if (Platform.isAndroid) {
       return 'openfxpedia_$latestVersion.apk';
-    }
-
-    return null;
-  }
-
-  String? _releaseAssetUrlForDevice(
-    Map<String, dynamic>? release,
-    String latestVersion,
-  ) {
-    final assetName = _preferredUpdateAssetName(latestVersion);
-    if (assetName == null || release == null) return null;
-
-    final assets = release['assets'];
-    if (assets is List) {
-      for (final asset in assets) {
-        if (asset is Map<String, dynamic> && asset['name'] == assetName) {
-          final url = asset['browser_download_url'] as String?;
-          if (url != null && url.isNotEmpty) return url;
-        }
-      }
     }
 
     return null;

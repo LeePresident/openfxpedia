@@ -33,5 +33,6 @@
         "**/.flutter-plugins": true,
         "**/.flutter-plugins-dependencies": true,
         "**/build": false
-    }
+    },
+    "cmake.sourceDirectory": "C:/Repo/openfxpedia/windows"
 }
