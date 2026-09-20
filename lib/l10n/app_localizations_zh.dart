@@ -225,6 +225,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get detail_description => '说明';
 
   @override
+  String get detail_coins => '硬币';
+
+  @override
+  String get detail_banknotes => '纸币';
+
+  @override
+  String get detail_pab_no_banknotes => '没有巴波亚纸币；改用美元纸币';
+
+  @override
+  String get detail_sos_no_coins => '索马里先令硬币目前不流通';
+
+  @override
+  String get detail_vnd_no_coins => '越南盾硬币目前不流通';
+
+  @override
   String get detail_convert => '转换';
 
   @override
@@ -516,6 +531,21 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get detail_description => '说明';
 
   @override
+  String get detail_coins => '硬币';
+
+  @override
+  String get detail_banknotes => '纸币';
+
+  @override
+  String get detail_pab_no_banknotes => '没有巴波亚纸币；改用美元纸币';
+
+  @override
+  String get detail_sos_no_coins => '索马里先令硬币目前不流通';
+
+  @override
+  String get detail_vnd_no_coins => '越南盾硬币目前不流通';
+
+  @override
   String get detail_convert => '转换';
 
   @override
@@ -805,6 +835,21 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get detail_description => '簡介';
+
+  @override
+  String get detail_coins => '硬幣';
+
+  @override
+  String get detail_banknotes => '紙幣';
+
+  @override
+  String get detail_pab_no_banknotes => '沒有巴波亞紙幣；改用美元紙幣';
+
+  @override
+  String get detail_sos_no_coins => '索馬利先令硬幣目前不流通';
+
+  @override
+  String get detail_vnd_no_coins => '越南盾硬幣目前不流通';
 
   @override
   String get detail_convert => '轉換';

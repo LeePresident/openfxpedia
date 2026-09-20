@@ -532,6 +532,36 @@ abstract class AppLocalizations {
   /// **'Description'**
   String get detail_description;
 
+  /// Label for coin denominations in detail view.
+  ///
+  /// In en, this message translates to:
+  /// **'Coins'**
+  String get detail_coins;
+
+  /// Label for banknote denominations in detail view.
+  ///
+  /// In en, this message translates to:
+  /// **'Banknotes'**
+  String get detail_banknotes;
+
+  /// Message explaining that Panama uses US dollar banknotes instead of Balboa banknotes.
+  ///
+  /// In en, this message translates to:
+  /// **'No Balboa banknotes; US dollar banknotes are used instead'**
+  String get detail_pab_no_banknotes;
+
+  /// Message explaining that Somali Shilling coins do not currently circulate.
+  ///
+  /// In en, this message translates to:
+  /// **'No Somali Shilling coins currently circulate'**
+  String get detail_sos_no_coins;
+
+  /// Message explaining that Vietnamese đồng coins do not currently circulate.
+  ///
+  /// In en, this message translates to:
+  /// **'No Vietnamese đồng coins currently circulate'**
+  String get detail_vnd_no_coins;
+
   /// Label for convert button in detail view.
   ///
   /// In en, this message translates to:

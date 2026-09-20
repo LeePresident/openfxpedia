@@ -87,6 +87,8 @@ class CurrencyCatalogService {
         regions: regions,
         regionCodes: regionCodes,
         description: description,
+        coins: meta?.coins ?? const [],
+        banknotes: meta?.banknotes ?? const [],
       );
     }).toList()
       ..sort((a, b) => a.isoCode.compareTo(b.isoCode));

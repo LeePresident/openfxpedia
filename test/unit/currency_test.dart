@@ -13,10 +13,16 @@ void main() {
         'iso_code': 'ALL',
         'iso_numeric': '008',
         'name': 'Albanian Lek',
+        'coins': ['1 lek'],
+        'banknotes': ['100 lek'],
       });
 
       expect(currency.isoNumeric, '008');
       expect(currency.toMap()['iso_numeric'], '008');
+      expect(currency.coins, ['1 lek']);
+      expect(currency.banknotes, ['100 lek']);
+      expect(currency.toMap()['coins'], ['1 lek']);
+      expect(currency.toMap()['banknotes'], ['100 lek']);
     });
 
     test('allows currencies without an ISO numeric code', () {

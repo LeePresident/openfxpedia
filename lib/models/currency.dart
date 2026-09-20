@@ -1,4 +1,4 @@
-﻿class Currency {
+class Currency {
   final String isoCode;
   final String? isoNumeric;
   final String name;
@@ -6,6 +6,8 @@
   final List<String> regions;
   final List<String?> regionCodes;
   final String? description;
+  final List<String> coins;
+  final List<String> banknotes;
 
   Currency({
     required this.isoCode,
@@ -15,6 +17,8 @@
     this.regions = const [],
     this.regionCodes = const [],
     this.description,
+    this.coins = const [],
+    this.banknotes = const [],
   });
 
   factory Currency.fromMap(Map<String, dynamic> m) => Currency(
@@ -26,6 +30,9 @@
         regionCodes:
             (m['region_codes'] as List<dynamic>?)?.cast<String?>() ?? const [],
         description: m['description'] as String?,
+        coins: (m['coins'] as List<dynamic>?)?.cast<String>() ?? const [],
+        banknotes:
+            (m['banknotes'] as List<dynamic>?)?.cast<String>() ?? const [],
       );
 
   Map<String, dynamic> toMap() => {
@@ -36,5 +43,7 @@
         'regions': regions,
         'region_codes': regionCodes,
         'description': description,
+        'coins': coins,
+        'banknotes': banknotes,
       };
 }

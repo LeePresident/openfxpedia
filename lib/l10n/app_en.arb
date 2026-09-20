@@ -288,6 +288,26 @@
     "@detail_description": {
         "description": "Label for currency description."
     },
+    "detail_coins": "Coins",
+    "@detail_coins": {
+        "description": "Label for coin denominations in detail view."
+    },
+    "detail_banknotes": "Banknotes",
+    "@detail_banknotes": {
+        "description": "Label for banknote denominations in detail view."
+    },
+    "detail_pab_no_banknotes": "No Balboa banknotes; US dollar banknotes are used instead",
+    "@detail_pab_no_banknotes": {
+        "description": "Message explaining that Panama uses US dollar banknotes instead of Balboa banknotes."
+    },
+    "detail_sos_no_coins": "No Somali Shilling coins currently circulate",
+    "@detail_sos_no_coins": {
+        "description": "Message explaining that Somali Shilling coins do not currently circulate."
+    },
+    "detail_vnd_no_coins": "No Vietnamese đồng coins currently circulate",
+    "@detail_vnd_no_coins": {
+        "description": "Message explaining that Vietnamese đồng coins do not currently circulate."
+    },
     "detail_convert": "Convert",
     "@detail_convert": {
         "description": "Label for convert button in detail view."

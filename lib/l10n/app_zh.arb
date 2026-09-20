@@ -288,6 +288,26 @@
     "@detail_description": {
         "description": "货币说明的标签。"
     },
+    "detail_coins": "硬币",
+    "@detail_coins": {
+        "description": "详情视图中硬币面额的标签。"
+    },
+    "detail_banknotes": "纸币",
+    "@detail_banknotes": {
+        "description": "详情视图中纸币面额的标签。"
+    },
+    "detail_pab_no_banknotes": "没有巴波亚纸币；改用美元纸币",
+    "@detail_pab_no_banknotes": {
+        "description": "说明巴拿马没有巴波亚纸币，而是使用美元纸币。"
+    },
+    "detail_sos_no_coins": "索马里先令硬币目前不流通",
+    "@detail_sos_no_coins": {
+        "description": "说明索马里先令硬币目前不流通。"
+    },
+    "detail_vnd_no_coins": "越南盾硬币目前不流通",
+    "@detail_vnd_no_coins": {
+        "description": "说明越南盾硬币目前不流通。"
+    },
     "detail_convert": "转换",
     "@detail_convert": {
         "description": "详情视图中转换按钮的标签。"

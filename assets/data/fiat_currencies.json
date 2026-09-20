@@ -7,7 +7,25 @@
         "regions": [
             "United Arab Emirates"
         ],
-        "description": "Official currency of the United Arab Emirates. Symbol will be updated after Unicode release."
+        "description": "Official currency of the United Arab Emirates. Symbol will be updated after Unicode release.",
+        "coins": [
+            "1 fils",
+            "5 fils",
+            "10 fils",
+            "25 fils",
+            "50 fils",
+            "AED1"
+        ],
+        "banknotes": [
+            "AED5",
+            "AED10",
+            "AED20",
+            "AED50",
+            "AED100",
+            "AED200",
+            "AED500",
+            "AED1000"
+        ]
     },
     {
         "iso_code": "AFN",
@@ -17,7 +35,25 @@
         "regions": [
             "Afghanistan"
         ],
-        "description": "Official currency of Afghanistan."
+        "description": "Official currency of Afghanistan.",
+        "coins": [
+            "AFN1",
+            "AFN2",
+            "AFN5",
+            "AFN10",
+            "AFN20",
+            "AFN50"
+        ],
+        "banknotes": [
+            "AFN1",
+            "AFN5",
+            "AFN10",
+            "AFN20",
+            "AFN50",
+            "AFN100",
+            "AFN500",
+            "AFN1000"
+        ]
     },
     {
         "iso_code": "ALL",
@@ -27,7 +63,22 @@
         "regions": [
             "Albania"
         ],
-        "description": "Official currency of Albania."
+        "description": "Official currency of Albania.",
+        "coins": [
+            "1 lek",
+            "5 lek",
+            "10 lek",
+            "20 lek",
+            "50 lek",
+            "100 lek"
+        ],
+        "banknotes": [
+            "200 lek",
+            "500 lek",
+            "1000 lek",
+            "2000 lek",
+            "5000 lek"
+        ]
     },
     {
         "iso_code": "AMD",
@@ -37,7 +88,24 @@
         "regions": [
             "Armenia"
         ],
-        "description": "Official currency of Armenia."
+        "description": "Official currency of Armenia.",
+        "coins": [
+            "AMD10",
+            "AMD20",
+            "AMD50",
+            "AMD100",
+            "AMD200",
+            "AMD500"
+        ],
+        "banknotes": [
+            "AMD1000",
+            "AMD2000",
+            "AMD5000",
+            "AMD10000",
+            "AMD20000",
+            "AMD50000",
+            "AMD100000"
+        ]
     },
     {
         "iso_code": "AOA",
@@ -47,7 +115,29 @@
         "regions": [
             "Angola"
         ],
-        "description": "Official currency of Angola."
+        "description": "Official currency of Angola.",
+        "coins": [
+            "10 cêntimos",
+            "20 cêntimos",
+            "50 cêntimos",
+            "AOA1",
+            "AOA2",
+            "AOA5",
+            "AOA10",
+            "AOA20",
+            "AOA50"
+        ],
+        "banknotes": [
+            "AOA50",
+            "AOA100",
+            "AOA200",
+            "AOA500",
+            "AOA1000",
+            "AOA2000",
+            "AOA5000",
+            "AOA10000",
+            "AOA20000"
+        ]
     },
     {
         "iso_code": "ARS",
@@ -57,7 +147,19 @@
         "regions": [
             "Argentina"
         ],
-        "description": "Official currency of Argentina."
+        "description": "Official currency of Argentina.",
+        "coins": [
+            "$1",
+            "$2",
+            "$5",
+            "$10"
+        ],
+        "banknotes": [
+            "$1,000",
+            "$2,000",
+            "$10,000",
+            "$20,000"
+        ]
     },
     {
         "iso_code": "AUD",
@@ -74,7 +176,22 @@
             "Norfolk Island",
             "Tuvalu"
         ],
-        "description": "Official currency of Australia (and its territories), Kiribati, Nauru and Tuvalu."
+        "description": "Official currency of Australia (and its territories), Kiribati, Nauru and Tuvalu.",
+        "coins": [
+            "5c",
+            "10c",
+            "20c",
+            "50c",
+            "$1",
+            "$2"
+        ],
+        "banknotes": [
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "AWG",
@@ -84,7 +201,24 @@
         "regions": [
             "Aruba"
         ],
-        "description": "Official currency of Aruba, a constituent country of the Kingdom of the Netherlands."
+        "description": "Official currency of Aruba, a constituent country of the Kingdom of the Netherlands.",
+        "coins": [
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "Aƒ1",
+            "Aƒ2.50",
+            "Aƒ5"
+        ],
+        "banknotes": [
+            "Aƒ10",
+            "Aƒ25",
+            "Aƒ50",
+            "Aƒ100",
+            "Aƒ200",
+            "Aƒ500"
+        ]
     },
     {
         "iso_code": "AZN",
@@ -94,7 +228,24 @@
         "regions": [
             "Azerbaijan"
         ],
-        "description": "Official currency of Azerbaijan."
+        "description": "Official currency of Azerbaijan.",
+        "coins": [
+            "1 qəpik",
+            "3 qəpik",
+            "5 qəpik",
+            "10 qəpik",
+            "20 qəpik",
+            "50 qəpik"
+        ],
+        "banknotes": [
+            "AZN1",
+            "AZN5",
+            "AZN10",
+            "AZN20",
+            "AZN50",
+            "AZN100",
+            "AZN200"
+        ]
     },
     {
         "iso_code": "BAM",
@@ -104,7 +255,23 @@
         "regions": [
             "Bosnia and Herzegovina"
         ],
-        "description": "Currency of Bosnia and Herzegovina, pegged at 1.95583:1 to the Euro."
+        "description": "Currency of Bosnia and Herzegovina, pegged at 1.95583:1 to the Euro.",
+        "coins": [
+            "5 feninga",
+            "10 feninga",
+            "20 feninga",
+            "50 feninga",
+            "KM1",
+            "KM2",
+            "KM5"
+        ],
+        "banknotes": [
+            "KM10",
+            "KM20",
+            "KM50",
+            "KM100",
+            "KM200"
+        ]
     },
     {
         "iso_code": "BBD",
@@ -114,7 +281,22 @@
         "regions": [
             "Barbados"
         ],
-        "description": "Official currency of Barbados."
+        "description": "Official currency of Barbados.",
+        "coins": [
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "BBD1"
+        ],
+        "banknotes": [
+            "BBD2",
+            "BBD5",
+            "BBD10",
+            "BBD20",
+            "BBD50",
+            "BBD100"
+        ]
     },
     {
         "iso_code": "BDT",
@@ -124,7 +306,28 @@
         "regions": [
             "Bangladesh"
         ],
-        "description": "Official currency of Bangladesh."
+        "description": "Official currency of Bangladesh.",
+        "coins": [
+            "1 poisha",
+            "5 poisha",
+            "10 poisha",
+            "25 poisha",
+            "50 poisha",
+            "BDT1",
+            "BDT2",
+            "BDT5"
+        ],
+        "banknotes": [
+            "BDT2",
+            "BDT5",
+            "BDT10",
+            "BDT20",
+            "BDT50",
+            "BDT100",
+            "BDT200",
+            "BDT500",
+            "BDT1000"
+        ]
     },
     {
         "iso_code": "BHD",
@@ -134,7 +337,21 @@
         "regions": [
             "Bahrain"
         ],
-        "description": "Official currency of Bahrain."
+        "description": "Official currency of Bahrain.",
+        "coins": [
+            "5 fils",
+            "10 fils",
+            "25 fils",
+            "50 fils",
+            "100 fils"
+        ],
+        "banknotes": [
+            "BD0.5",
+            "BD1",
+            "BD5",
+            "BD10",
+            "BD20"
+        ]
     },
     {
         "iso_code": "BIF",
@@ -144,7 +361,21 @@
         "regions": [
             "Burundi"
         ],
-        "description": "Official currency of Burundi."
+        "description": "Official currency of Burundi.",
+        "coins": [
+            "BIF1",
+            "BIF5",
+            "BIF10",
+            "BIF50",
+            "BIF100"
+        ],
+        "banknotes": [
+            "BIF500",
+            "BIF1000",
+            "BIF2000",
+            "BIF5000",
+            "BIF10000"
+        ]
     },
     {
         "iso_code": "BMD",
@@ -154,7 +385,24 @@
         "regions": [
             "Bermuda"
         ],
-        "description": "Official currency of Bermuda, pegged at parity with the US Dollar."
+        "description": "Official currency of Bermuda, pegged at parity with the US Dollar.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "$1",
+            "$2"
+        ],
+        "banknotes": [
+            "$2",
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "BND",
@@ -164,7 +412,26 @@
         "regions": [
             "Brunei"
         ],
-        "description": "Official currency of Brunei. Interchangeable with the Singapore Dollar at par."
+        "description": "Official currency of Brunei. Interchangeable with the Singapore Dollar at par.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "20 cents",
+            "50 cents",
+            "B$1"
+        ],
+        "banknotes": [
+            "B$1",
+            "B$5",
+            "B$10",
+            "B$25",
+            "B$50",
+            "B$100",
+            "B$500",
+            "B$1000",
+            "B$10000"
+        ]
     },
     {
         "iso_code": "BOB",
@@ -174,7 +441,22 @@
         "regions": [
             "Bolivia"
         ],
-        "description": "Official currency of Bolivia."
+        "description": "Official currency of Bolivia.",
+        "coins": [
+            "10 centavos",
+            "20 centavos",
+            "50 centavos",
+            "Bs1",
+            "Bs2",
+            "Bs5"
+        ],
+        "banknotes": [
+            "Bs10",
+            "Bs20",
+            "Bs50",
+            "Bs100",
+            "Bs200"
+        ]
     },
     {
         "iso_code": "BRL",
@@ -184,7 +466,23 @@
         "regions": [
             "Brazil"
         ],
-        "description": "Official currency of Brazil."
+        "description": "Official currency of Brazil.",
+        "coins": [
+            "5c",
+            "10c",
+            "25c",
+            "50c",
+            "R$1"
+        ],
+        "banknotes": [
+            "R$2",
+            "R$5",
+            "R$10",
+            "R$20",
+            "R$50",
+            "R$100",
+            "R$200"
+        ]
     },
     {
         "iso_code": "BSD",
@@ -194,7 +492,31 @@
         "regions": [
             "Bahamas"
         ],
-        "description": "Official currency of the Bahamas, pegged at parity with the US Dollar."
+        "description": "Official currency of the Bahamas, pegged at parity with the US Dollar.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "15 cents",
+            "25 cents",
+            "50 cents",
+            "$1",
+            "$2",
+            "$5"
+        ],
+        "banknotes": [
+            "$1",
+            "$3",
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100",
+            "$200",
+            "$250",
+            "$500",
+            "$1000"
+        ]
     },
     {
         "iso_code": "BTN",
@@ -204,7 +526,25 @@
         "regions": [
             "Bhutan"
         ],
-        "description": "Official currency of Bhutan, pegged at parity with the Indian Rupee."
+        "description": "Official currency of Bhutan, pegged at parity with the Indian Rupee.",
+        "coins": [
+            "5 chhertum",
+            "10 chhertum",
+            "20 chhertum",
+            "25 chhertum",
+            "50 chhertum",
+            "Nu.1"
+        ],
+        "banknotes": [
+            "Nu.1",
+            "Nu.5",
+            "Nu.10",
+            "Nu.20",
+            "Nu.50",
+            "Nu.100",
+            "Nu.500",
+            "Nu.1000"
+        ]
     },
     {
         "iso_code": "BWP",
@@ -214,7 +554,23 @@
         "regions": [
             "Botswana"
         ],
-        "description": "Official currency of Botswana."
+        "description": "Official currency of Botswana.",
+        "coins": [
+            "5 thebe",
+            "10 thebe",
+            "25 thebe",
+            "50 thebe",
+            "P1",
+            "P2",
+            "P5"
+        ],
+        "banknotes": [
+            "P10",
+            "P20",
+            "P50",
+            "P100",
+            "P200"
+        ]
     },
     {
         "iso_code": "BYN",
@@ -224,7 +580,26 @@
         "regions": [
             "Belarus"
         ],
-        "description": "Official currency of Belarus."
+        "description": "Official currency of Belarus.",
+        "coins": [
+            "1 kapiejka",
+            "2 kapiejki",
+            "5 kapiejka",
+            "10 kapiejka",
+            "20 kapiejka",
+            "50 kapiejka",
+            "BYN1",
+            "BYN2"
+        ],
+        "banknotes": [
+            "BYN5",
+            "BYN10",
+            "BYN20",
+            "BYN50",
+            "BYN100",
+            "BYN200",
+            "BYN500"
+        ]
     },
     {
         "iso_code": "BZD",
@@ -234,7 +609,23 @@
         "regions": [
             "Belize"
         ],
-        "description": "Official currency of Belize, pegged at 2:1 to the US Dollar."
+        "description": "Official currency of Belize, pegged at 2:1 to the US Dollar.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "$1"
+        ],
+        "banknotes": [
+            "$2",
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "CAD",
@@ -244,7 +635,22 @@
         "regions": [
             "Canada"
         ],
-        "description": "Official currency of Canada."
+        "description": "Official currency of Canada.",
+        "coins": [
+            "5c",
+            "10c",
+            "25c",
+            "50c",
+            "$1",
+            "$2"
+        ],
+        "banknotes": [
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "CDF",
@@ -254,7 +660,22 @@
         "regions": [
             "Democratic Republic of the Congo"
         ],
-        "description": "Official currency of the Democratic Republic of the Congo."
+        "description": "Official currency of the Democratic Republic of the Congo.",
+        "coins": [
+            "CDF10",
+            "CDF20",
+            "CDF50",
+            "CDF100",
+            "CDF200",
+            "CDF500"
+        ],
+        "banknotes": [
+            "CDF500",
+            "CDF1000",
+            "CDF5000",
+            "CDF10000",
+            "CDF20000"
+        ]
     },
     {
         "iso_code": "CHF",
@@ -265,7 +686,24 @@
             "Switzerland",
             "Liechtenstein"
         ],
-        "description": "Official currency of Switzerland and Liechtenstein. Considered a safe-haven currency."
+        "description": "Official currency of Switzerland and Liechtenstein. Considered a safe-haven currency.",
+        "coins": [
+            "5c",
+            "10c",
+            "20c",
+            "50c",
+            "CHF1",
+            "CHF2",
+            "CHF5"
+        ],
+        "banknotes": [
+            "CHF10",
+            "CHF20",
+            "CHF50",
+            "CHF100",
+            "CHF200",
+            "CHF1000"
+        ]
     },
     {
         "iso_code": "CLP",
@@ -275,7 +713,20 @@
         "regions": [
             "Chile"
         ],
-        "description": "Official currency of Chile."
+        "description": "Official currency of Chile.",
+        "coins": [
+            "$10",
+            "$50",
+            "$100",
+            "$500"
+        ],
+        "banknotes": [
+            "$1000",
+            "$2000",
+            "$5000",
+            "$10000",
+            "$20000"
+        ]
     },
     {
         "iso_code": "CNY",
@@ -285,7 +736,22 @@
         "regions": [
             "China"
         ],
-        "description": "Official currency of China (Mainland), also known as the Renminbi (RMB) in Chinese."
+        "description": "Official currency of China (Mainland), also known as the Renminbi (RMB) in Chinese.",
+        "coins": [
+            "¥0.01",
+            "¥0.05",
+            "¥0.10",
+            "¥0.50",
+            "¥1"
+        ],
+        "banknotes": [
+            "¥1",
+            "¥5",
+            "¥10",
+            "¥20",
+            "¥50",
+            "¥100"
+        ]
     },
     {
         "iso_code": "COP",
@@ -295,7 +761,22 @@
         "regions": [
             "Colombia"
         ],
-        "description": "Official currency of Colombia."
+        "description": "Official currency of Colombia.",
+        "coins": [
+            "$50",
+            "$100",
+            "$200",
+            "$500",
+            "$1,000"
+        ],
+        "banknotes": [
+            "$2,000",
+            "$5,000",
+            "$10,000",
+            "$20,000",
+            "$50,000",
+            "$100,000"
+        ]
     },
     {
         "iso_code": "CRC",
@@ -305,7 +786,23 @@
         "regions": [
             "Costa Rica"
         ],
-        "description": "Official currency of Costa Rica."
+        "description": "Official currency of Costa Rica.",
+        "coins": [
+            "₡5",
+            "₡10",
+            "₡25",
+            "₡50",
+            "₡100",
+            "₡500"
+        ],
+        "banknotes": [
+            "₡1000",
+            "₡2000",
+            "₡5000",
+            "₡10000",
+            "₡20000",
+            "₡50000"
+        ]
     },
     {
         "iso_code": "CUP",
@@ -315,7 +812,27 @@
         "regions": [
             "Cuba"
         ],
-        "description": "Official currency of Cuba."
+        "description": "Official currency of Cuba.",
+        "coins": [
+            "1 centavo",
+            "5 centavos",
+            "10 centavos",
+            "20 centavos",
+            "CUP1",
+            "CUP3"
+        ],
+        "banknotes": [
+            "CUP1",
+            "CUP3",
+            "CUP5",
+            "CUP10",
+            "CUP20",
+            "CUP50",
+            "CUP100",
+            "CUP200",
+            "CUP500",
+            "CUP1000"
+        ]
     },
     {
         "iso_code": "CVE",
@@ -325,7 +842,27 @@
         "regions": [
             "Cape Verde"
         ],
-        "description": "Official currency of Cape Verde, pegged at 110.265:1 to the Euro."
+        "description": "Official currency of Cape Verde, pegged at 110.265:1 to the Euro.",
+        "coins": [
+            "1 centavo",
+            "5 centavos",
+            "10 centavos",
+            "20 centavos",
+            "50 centavos",
+            "$1",
+            "$2.50",
+            "$5",
+            "$10",
+            "$20"
+        ],
+        "banknotes": [
+            "CVE200",
+            "CVE500",
+            "CVE1000",
+            "CVE2000",
+            "CVE2500",
+            "CVE5000"
+        ]
     },
     {
         "iso_code": "CZK",
@@ -335,7 +872,23 @@
         "regions": [
             "Czech Republic"
         ],
-        "description": "Official currency of the Czech Republic."
+        "description": "Official currency of the Czech Republic.",
+        "coins": [
+            "Kč1",
+            "Kč2",
+            "Kč5",
+            "Kč10",
+            "Kč20",
+            "Kč50"
+        ],
+        "banknotes": [
+            "Kč100",
+            "Kč200",
+            "Kč500",
+            "Kč1000",
+            "Kč2000",
+            "Kč5000"
+        ]
     },
     {
         "iso_code": "DJF",
@@ -345,7 +898,23 @@
         "regions": [
             "Djibouti"
         ],
-        "description": "Official currency of Djibouti, pegged at 177.721:1 to the US Dollar."
+        "description": "Official currency of Djibouti, pegged at 177.721:1 to the US Dollar.",
+        "coins": [
+            "DJF1",
+            "DJF2",
+            "DJF5",
+            "DJF10",
+            "DJF20",
+            "DJF50",
+            "DJF100",
+            "DJF500"
+        ],
+        "banknotes": [
+            "DJF1000",
+            "DJF2000",
+            "DJF5000",
+            "DJF10000"
+        ]
     },
     {
         "iso_code": "DKK",
@@ -357,7 +926,21 @@
             "Faroe Islands",
             "Greenland"
         ],
-        "description": "Official currency of Denmark, the Faroe Islands (Faroese króna is the localized version), and Greenland."
+        "description": "Official currency of Denmark, the Faroe Islands (Faroese króna is the localized version), and Greenland.",
+        "coins": [
+            "50 øre",
+            "1 kr",
+            "2 kr",
+            "5 kr",
+            "10 kr",
+            "20 kr"
+        ],
+        "banknotes": [
+            "50 kr",
+            "100 kr",
+            "200 kr",
+            "500 kr"
+        ]
     },
     {
         "iso_code": "DOP",
@@ -367,7 +950,25 @@
         "regions": [
             "Dominican Republic"
         ],
-        "description": "Official currency of the Dominican Republic."
+        "description": "Official currency of the Dominican Republic.",
+        "coins": [
+            "1 centavo",
+            "5 centavos",
+            "10 centavos",
+            "25 centavos",
+            "RD$1",
+            "RD$5",
+            "RD$10"
+        ],
+        "banknotes": [
+            "RD$20",
+            "RD$50",
+            "RD$100",
+            "RD$200",
+            "RD$500",
+            "RD$1000",
+            "RD$2000"
+        ]
     },
     {
         "iso_code": "DZD",
@@ -377,7 +978,23 @@
         "regions": [
             "Algeria"
         ],
-        "description": "Official currency of Algeria."
+        "description": "Official currency of Algeria.",
+        "coins": [
+            "DZD1",
+            "DZD2",
+            "DZD5",
+            "DZD10",
+            "DZD20",
+            "DZD50",
+            "DZD100",
+            "DZD200"
+        ],
+        "banknotes": [
+            "DZD200",
+            "DZD500",
+            "DZD1000",
+            "DZD2000"
+        ]
     },
     {
         "iso_code": "EGP",
@@ -387,7 +1004,21 @@
         "regions": [
             "Egypt"
         ],
-        "description": "Official currency of Egypt."
+        "description": "Official currency of Egypt.",
+        "coins": [
+            "25 PT",
+            "50 PT",
+            "E£1"
+        ],
+        "banknotes": [
+            "E£1",
+            "E£5",
+            "E£10",
+            "E£20",
+            "E£50",
+            "E£100",
+            "E£200"
+        ]
     },
     {
         "iso_code": "ERN",
@@ -397,7 +1028,23 @@
         "regions": [
             "Eritrea"
         ],
-        "description": "Official currency of Eritrea."
+        "description": "Official currency of Eritrea.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "ERN1"
+        ],
+        "banknotes": [
+            "ERN1",
+            "ERN5",
+            "ERN10",
+            "ERN20",
+            "ERN50",
+            "ERN100"
+        ]
     },
     {
         "iso_code": "ETB",
@@ -407,7 +1054,23 @@
         "regions": [
             "Ethiopia"
         ],
-        "description": "Official currency of Ethiopia."
+        "description": "Official currency of Ethiopia.",
+        "coins": [
+            "1 santim",
+            "5 santim",
+            "10 santim",
+            "25 santim",
+            "50 santim",
+            "ETB1"
+        ],
+        "banknotes": [
+            "ETB1",
+            "ETB5",
+            "ETB10",
+            "ETB50",
+            "ETB100",
+            "ETB200"
+        ]
     },
     {
         "iso_code": "EUR",
@@ -442,7 +1105,25 @@
             "Slovenia",
             "Spain"
         ],
-        "description": "Official currency of the Eurozone, which includes 21 EU member states, and some non-EU countries."
+        "description": "Official currency of the Eurozone, which includes 21 EU member states, and some non-EU countries.",
+        "coins": [
+            "€0.01",
+            "€0.02",
+            "€0.05",
+            "€0.10",
+            "€0.20",
+            "€0.50",
+            "€1",
+            "€2"
+        ],
+        "banknotes": [
+            "€5",
+            "€10",
+            "€20",
+            "€50",
+            "€100",
+            "€200"
+        ]
     },
     {
         "iso_code": "FJD",
@@ -452,7 +1133,22 @@
         "regions": [
             "Fiji"
         ],
-        "description": "Official currency of Fiji."
+        "description": "Official currency of Fiji.",
+        "coins": [
+            "5 cents",
+            "10 cents",
+            "20 cents",
+            "50 cents",
+            "FJ$1",
+            "FJ$2"
+        ],
+        "banknotes": [
+            "FJ$5",
+            "FJ$10",
+            "FJ$20",
+            "FJ$50",
+            "FJ$100"
+        ]
     },
     {
         "iso_code": "FKP",
@@ -462,7 +1158,23 @@
         "regions": [
             "Falkland Islands"
         ],
-        "description": "Official currency of the Falkland Islands, pegged at parity to the British Pound."
+        "description": "Official currency of the Falkland Islands, pegged at parity to the British Pound.",
+        "coins": [
+            "1p",
+            "2p",
+            "5p",
+            "10p",
+            "20p",
+            "50p",
+            "£1",
+            "£2"
+        ],
+        "banknotes": [
+            "£5",
+            "£10",
+            "£20",
+            "£50"
+        ]
     },
     {
         "iso_code": "GBP",
@@ -475,7 +1187,23 @@
             "Guernsey",
             "Isle of Man"
         ],
-        "description": "Official currency of the United Kingdom"
+        "description": "Official currency of the United Kingdom",
+        "coins": [
+            "1p",
+            "2p",
+            "5p",
+            "10p",
+            "20p",
+            "50p",
+            "£1",
+            "£2"
+        ],
+        "banknotes": [
+            "£5",
+            "£10",
+            "£20",
+            "£50"
+        ]
     },
     {
         "iso_code": "GEL",
@@ -485,7 +1213,25 @@
         "regions": [
             "Georgia"
         ],
-        "description": "Official currency of Georgia."
+        "description": "Official currency of Georgia.",
+        "coins": [
+            "1 თეთრი",
+            "2 თეთრი",
+            "5 თეთრი",
+            "10 თეთრი",
+            "20 თეთრი",
+            "50 თეთრი",
+            "GEL1",
+            "GEL2"
+        ],
+        "banknotes": [
+            "GEL5",
+            "GEL10",
+            "GEL20",
+            "GEL50",
+            "GEL100",
+            "GEL200"
+        ]
     },
     {
         "iso_code": "GHS",
@@ -495,7 +1241,24 @@
         "regions": [
             "Ghana"
         ],
-        "description": "Official currency of Ghana."
+        "description": "Official currency of Ghana.",
+        "coins": [
+            "1 pesewa",
+            "5 pesewas",
+            "10 pesewas",
+            "20 pesewas",
+            "50 pesewas",
+            "GH₵1",
+            "GH₵2"
+        ],
+        "banknotes": [
+            "GH₵5",
+            "GH₵10",
+            "GH₵20",
+            "GH₵50",
+            "GH₵100",
+            "GH₵200"
+        ]
     },
     {
         "iso_code": "GIP",
@@ -505,7 +1268,24 @@
         "regions": [
             "Gibraltar"
         ],
-        "description": "Official currency of Gibraltar, pegged at parity with the British Pound."
+        "description": "Official currency of Gibraltar, pegged at parity with the British Pound.",
+        "coins": [
+            "1p",
+            "2p",
+            "5p",
+            "10p",
+            "20p",
+            "50p",
+            "£1",
+            "£2"
+        ],
+        "banknotes": [
+            "£5",
+            "£10",
+            "£20",
+            "£50",
+            "£100"
+        ]
     },
     {
         "iso_code": "GMD",
@@ -515,7 +1295,25 @@
         "regions": [
             "Gambia"
         ],
-        "description": "Official currency of the Gambia."
+        "description": "Official currency of the Gambia.",
+        "coins": [
+            "1 butut",
+            "5 bututs",
+            "10 bututs",
+            "25 bututs",
+            "50 bututs",
+            "GMD1",
+            "GMD5"
+        ],
+        "banknotes": [
+            "GMD5",
+            "GMD10",
+            "GMD20",
+            "GMD50",
+            "GMD100",
+            "GMD200",
+            "GMD500"
+        ]
     },
     {
         "iso_code": "GNF",
@@ -525,7 +1323,23 @@
         "regions": [
             "Guinea"
         ],
-        "description": "Official currency of Guinea."
+        "description": "Official currency of Guinea.",
+        "coins": [
+            "GNF1",
+            "GNF5",
+            "GNF10",
+            "GNF25",
+            "GNF50",
+            "GNF100",
+            "GNF500"
+        ],
+        "banknotes": [
+            "GNF1000",
+            "GNF2000",
+            "GNF5000",
+            "GNF10000",
+            "GNF20000"
+        ]
     },
     {
         "iso_code": "GTQ",
@@ -535,7 +1349,24 @@
         "regions": [
             "Guatemala"
         ],
-        "description": "Official currency of Guatemala, named after the quetzal bird."
+        "description": "Official currency of Guatemala, named after the quetzal bird.",
+        "coins": [
+            "1 centavo",
+            "5 centavos",
+            "10 centavos",
+            "25 centavos",
+            "50 centavos",
+            "Q1"
+        ],
+        "banknotes": [
+            "Q1",
+            "Q5",
+            "Q10",
+            "Q20",
+            "Q50",
+            "Q100",
+            "Q200"
+        ]
     },
     {
         "iso_code": "GYD",
@@ -545,7 +1376,24 @@
         "regions": [
             "Guyana"
         ],
-        "description": "Official currency of Guyana."
+        "description": "Official currency of Guyana.",
+        "coins": [
+            "G$1",
+            "G$5",
+            "G$10",
+            "G$25",
+            "G$50",
+            "G$100"
+        ],
+        "banknotes": [
+            "G$20",
+            "G$50",
+            "G$100",
+            "G$500",
+            "G$1000",
+            "G$2000",
+            "G$5000"
+        ]
     },
     {
         "iso_code": "HKD",
@@ -555,7 +1403,24 @@
         "regions": [
             "Hong Kong"
         ],
-        "description": "Official currency of Hong Kong, pegged at 7.75-7.85:1 to the US Dollar."
+        "description": "Official currency of Hong Kong, pegged at 7.75-7.85:1 to the US Dollar.",
+        "coins": [
+            "10c",
+            "20c",
+            "50c",
+            "HK$1",
+            "HK$2",
+            "HK$5",
+            "HK$10"
+        ],
+        "banknotes": [
+            "HK$10",
+            "HK$20",
+            "HK$50",
+            "HK$100",
+            "HK$500",
+            "HK$1000"
+        ]
     },
     {
         "iso_code": "HNL",
@@ -565,7 +1430,29 @@
         "regions": [
             "Honduras"
         ],
-        "description": "Official currency of Honduras."
+        "description": "Official currency of Honduras.",
+        "coins": [
+            "1 centavo",
+            "2 centavos",
+            "5 centavos",
+            "10 centavos",
+            "20 centavos",
+            "50 centavos",
+            "L1",
+            "L2",
+            "L5"
+        ],
+        "banknotes": [
+            "L1",
+            "L2",
+            "L5",
+            "L10",
+            "L20",
+            "L50",
+            "L100",
+            "L200",
+            "L500"
+        ]
     },
     {
         "iso_code": "HTG",
@@ -575,7 +1462,27 @@
         "regions": [
             "Haiti"
         ],
-        "description": "Official currency of Haiti."
+        "description": "Official currency of Haiti.",
+        "coins": [
+            "5 centimes",
+            "10 centimes",
+            "20 centimes",
+            "50 centimes",
+            "G1",
+            "G5",
+            "G10",
+            "G20"
+        ],
+        "banknotes": [
+            "G10",
+            "G20",
+            "G25",
+            "G50",
+            "G100",
+            "G250",
+            "G500",
+            "G1000"
+        ]
     },
     {
         "iso_code": "HUF",
@@ -585,7 +1492,23 @@
         "regions": [
             "Hungary"
         ],
-        "description": "Official currency of Hungary."
+        "description": "Official currency of Hungary.",
+        "coins": [
+            "Ft5",
+            "Ft10",
+            "Ft20",
+            "Ft50",
+            "Ft100",
+            "Ft200"
+        ],
+        "banknotes": [
+            "Ft500",
+            "Ft1000",
+            "Ft2000",
+            "Ft5000",
+            "Ft10000",
+            "Ft20000"
+        ]
     },
     {
         "iso_code": "IDR",
@@ -595,7 +1518,22 @@
         "regions": [
             "Indonesia"
         ],
-        "description": "Official currency of Indonesia."
+        "description": "Official currency of Indonesia.",
+        "coins": [
+            "Rp100",
+            "Rp200",
+            "Rp500",
+            "Rp1000"
+        ],
+        "banknotes": [
+            "Rp1000",
+            "Rp2000",
+            "Rp5000",
+            "Rp10000",
+            "Rp20000",
+            "Rp50000",
+            "Rp100000"
+        ]
     },
     {
         "iso_code": "ILS",
@@ -605,7 +1543,21 @@
         "regions": [
             "Israel"
         ],
-        "description": "Official currency of Israel."
+        "description": "Official currency of Israel.",
+        "coins": [
+            "10 agorot",
+            "₪0.5",
+            "₪1",
+            "₪2",
+            "₪5",
+            "₪10"
+        ],
+        "banknotes": [
+            "₪20",
+            "₪50",
+            "₪100",
+            "₪200"
+        ]
     },
     {
         "iso_code": "INR",
@@ -615,7 +1567,22 @@
         "regions": [
             "India"
         ],
-        "description": "Official currency of India."
+        "description": "Official currency of India.",
+        "coins": [
+            "₹1",
+            "₹2",
+            "₹5",
+            "₹10",
+            "₹20"
+        ],
+        "banknotes": [
+            "₹10",
+            "₹20",
+            "₹50",
+            "₹100",
+            "₹200",
+            "₹500"
+        ]
     },
     {
         "iso_code": "IQD",
@@ -625,7 +1592,24 @@
         "regions": [
             "Iraq"
         ],
-        "description": "Official currency of Iraq."
+        "description": "Official currency of Iraq.",
+        "coins": [
+            "IQD25",
+            "IQD50",
+            "IQD100",
+            "IQD250",
+            "IQD500",
+            "IQD1000"
+        ],
+        "banknotes": [
+            "IQD250",
+            "IQD500",
+            "IQD1000",
+            "IQD5000",
+            "IQD10000",
+            "IQD25000",
+            "IQD50000"
+        ]
     },
     {
         "iso_code": "IRR",
@@ -635,7 +1619,24 @@
         "regions": [
             "Iran"
         ],
-        "description": "Official currency of Iran."
+        "description": "Official currency of Iran.",
+        "coins": [
+            "IRR500",
+            "IRR1000",
+            "IRR2000",
+            "IRR5000",
+            "IRR10000"
+        ],
+        "banknotes": [
+            "IRR10000",
+            "IRR20000",
+            "IRR50000",
+            "IRR100000",
+            "IRR200000",
+            "IRR500000",
+            "IRR1000000",
+            "IRR2000000"
+        ]
     },
     {
         "iso_code": "ISK",
@@ -645,7 +1646,21 @@
         "regions": [
             "Iceland"
         ],
-        "description": "Official currency of Iceland."
+        "description": "Official currency of Iceland.",
+        "coins": [
+            "1 kr",
+            "5 kr",
+            "10 kr",
+            "50 kr",
+            "100 kr"
+        ],
+        "banknotes": [
+            "500 kr",
+            "1000 kr",
+            "2000 kr",
+            "5000 kr",
+            "10000 kr"
+        ]
     },
     {
         "iso_code": "JMD",
@@ -655,7 +1670,22 @@
         "regions": [
             "Jamaica"
         ],
-        "description": "Official currency of Jamaica."
+        "description": "Official currency of Jamaica.",
+        "coins": [
+            "J$1",
+            "J$5",
+            "J$10",
+            "J$20"
+        ],
+        "banknotes": [
+            "J$50",
+            "J$100",
+            "J$200",
+            "J$500",
+            "J$1000",
+            "J$2000",
+            "J$5000"
+        ]
     },
     {
         "iso_code": "JOD",
@@ -665,7 +1695,23 @@
         "regions": [
             "Jordan"
         ],
-        "description": "Official currency of Jordan, pegged at 0.708/0.710:1 (buy/sell) to the US Dollar."
+        "description": "Official currency of Jordan, pegged at 0.708/0.710:1 (buy/sell) to the US Dollar.",
+        "coins": [
+            "1 qirsh",
+            "2.5 qirsh",
+            "5 qirsh",
+            "10 qirsh",
+            "25 qirsh",
+            "50 qirsh",
+            "100 qirsh"
+        ],
+        "banknotes": [
+            "JOD1",
+            "JOD5",
+            "JOD10",
+            "JOD20",
+            "JOD50"
+        ]
     },
     {
         "iso_code": "JPY",
@@ -675,7 +1721,21 @@
         "regions": [
             "Japan"
         ],
-        "description": "Official currency of Japan, one of the most traded currencies globally."
+        "description": "Official currency of Japan, one of the most traded currencies globally.",
+        "coins": [
+            "¥1",
+            "¥5",
+            "¥10",
+            "¥50",
+            "¥100",
+            "¥500"
+        ],
+        "banknotes": [
+            "¥1000",
+            "¥2000",
+            "¥5000",
+            "¥10000"
+        ]
     },
     {
         "iso_code": "KES",
@@ -685,7 +1745,23 @@
         "regions": [
             "Kenya"
         ],
-        "description": "Official currency of Kenya."
+        "description": "Official currency of Kenya.",
+        "coins": [
+            "KSh1",
+            "KSh5",
+            "KSh10",
+            "KSh20",
+            "KSh40",
+            "KSh50",
+            "KSh100"
+        ],
+        "banknotes": [
+            "KSh50",
+            "KSh100",
+            "KSh200",
+            "KSh500",
+            "KSh1000"
+        ]
     },
     {
         "iso_code": "KGS",
@@ -695,7 +1771,23 @@
         "regions": [
             "Kyrgyzstan"
         ],
-        "description": "Official currency of Kyrgyzstan."
+        "description": "Official currency of Kyrgyzstan.",
+        "coins": [
+            "KGS1",
+            "KGS3",
+            "KGS5",
+            "KGS10"
+        ],
+        "banknotes": [
+            "KGS20",
+            "KGS50",
+            "KGS100",
+            "KGS200",
+            "KGS500",
+            "KGS1000",
+            "KGS2000",
+            "KGS5000"
+        ]
     },
     {
         "iso_code": "KHR",
@@ -705,7 +1797,25 @@
         "regions": [
             "Cambodia"
         ],
-        "description": "Official currency of Cambodia."
+        "description": "Official currency of Cambodia.",
+        "coins": [
+            "KHR50",
+            "KHR100",
+            "KHR200",
+            "KHR500"
+        ],
+        "banknotes": [
+            "KHR100",
+            "KHR500",
+            "KHR1000",
+            "KHR2000",
+            "KHR5000",
+            "KHR10000",
+            "KHR15000",
+            "KHR20000",
+            "KHR50000",
+            "KHR100000"
+        ]
     },
     {
         "iso_code": "KMF",
@@ -715,7 +1825,26 @@
         "regions": [
             "Comoros"
         ],
-        "description": "Official currency of Comoros, pegged at 491.96775:1 to the Euro."
+        "description": "Official currency of Comoros, pegged at 491.96775:1 to the Euro.",
+        "coins": [
+            "KMF1",
+            "KMF2",
+            "KMF5",
+            "KMF10",
+            "KMF20",
+            "KMF25",
+            "KMF50",
+            "KMF100",
+            "KMF250",
+            "KMF500"
+        ],
+        "banknotes": [
+            "KMF500",
+            "KMF1000",
+            "KMF2000",
+            "KMF5000",
+            "KMF10000"
+        ]
     },
     {
         "iso_code": "KPW",
@@ -725,7 +1854,21 @@
         "regions": [
             "North Korea"
         ],
-        "description": "Official currency of North Korea."
+        "description": "Official currency of North Korea.",
+        "coins": [
+            "KPW1",
+            "KPW5",
+            "KPW10",
+            "KPW50",
+            "KPW100",
+            "KPW500"
+        ],
+        "banknotes": [
+            "KPW500",
+            "KPW1000",
+            "KPW2000",
+            "KPW5000"
+        ]
     },
     {
         "iso_code": "KRW",
@@ -735,7 +1878,21 @@
         "regions": [
             "South Korea"
         ],
-        "description": "Official currency of South Korea."
+        "description": "Official currency of South Korea.",
+        "coins": [
+            "₩1",
+            "₩5",
+            "₩10",
+            "₩50",
+            "₩100",
+            "₩500"
+        ],
+        "banknotes": [
+            "₩1000",
+            "₩5000",
+            "₩10000",
+            "₩50000"
+        ]
     },
     {
         "iso_code": "KWD",
@@ -745,7 +1902,22 @@
         "regions": [
             "Kuwait"
         ],
-        "description": "Official currency of Kuwait, one of the highest-valued currencies in the world. It is pegged to undisclosed currency bucket."
+        "description": "Official currency of Kuwait, one of the highest-valued currencies in the world. It is pegged to undisclosed currency bucket.",
+        "coins": [
+            "5 fils",
+            "10 fils",
+            "20 fils",
+            "50 fils",
+            "100 fils"
+        ],
+        "banknotes": [
+            "KD0.25",
+            "KD0.5",
+            "KD1",
+            "KD5",
+            "KD10",
+            "KD20"
+        ]
     },
     {
         "iso_code": "KYD",
@@ -755,7 +1927,23 @@
         "regions": [
             "Cayman Islands"
         ],
-        "description": "Official currency of the Cayman Islands, pegged at 1.2:1 to the US Dollar."
+        "description": "Official currency of the Cayman Islands, pegged at 1.2:1 to the US Dollar.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "$1"
+        ],
+        "banknotes": [
+            "$1",
+            "$5",
+            "$10",
+            "$25",
+            "$40",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "KZT",
@@ -765,7 +1953,26 @@
         "regions": [
             "Kazakhstan"
         ],
-        "description": "Official currency of Kazakhstan."
+        "description": "Official currency of Kazakhstan.",
+        "coins": [
+            "KZT1",
+            "KZT2",
+            "KZT5",
+            "KZT10",
+            "KZT20",
+            "KZT50",
+            "KZT100",
+            "KZT200"
+        ],
+        "banknotes": [
+            "KZT200",
+            "KZT500",
+            "KZT1000",
+            "KZT2000",
+            "KZT5000",
+            "KZT10000",
+            "KZT20000"
+        ]
     },
     {
         "iso_code": "LAK",
@@ -775,7 +1982,24 @@
         "regions": [
             "Laos"
         ],
-        "description": "Official currency of Laos."
+        "description": "Official currency of Laos.",
+        "coins": [
+            "LAK10",
+            "LAK20",
+            "LAK50",
+            "LAK100",
+            "LAK500",
+            "LAK1000"
+        ],
+        "banknotes": [
+            "LAK1000",
+            "LAK2000",
+            "LAK5000",
+            "LAK10000",
+            "LAK20000",
+            "LAK50000",
+            "LAK100000"
+        ]
     },
     {
         "iso_code": "LBP",
@@ -785,7 +2009,22 @@
         "regions": [
             "Lebanon"
         ],
-        "description": "Official currency of Lebanon."
+        "description": "Official currency of Lebanon.",
+        "coins": [
+            "LBP50",
+            "LBP100",
+            "LBP250",
+            "LBP500",
+            "LBP1000"
+        ],
+        "banknotes": [
+            "LBP1000",
+            "LBP5000",
+            "LBP10000",
+            "LBP20000",
+            "LBP50000",
+            "LBP100000"
+        ]
     },
     {
         "iso_code": "LKR",
@@ -795,7 +2034,24 @@
         "regions": [
             "Sri Lanka"
         ],
-        "description": "Official currency of Sri Lanka."
+        "description": "Official currency of Sri Lanka.",
+        "coins": [
+            "රු1",
+            "රු2",
+            "රු5",
+            "රු10",
+            "රු20",
+            "රු50"
+        ],
+        "banknotes": [
+            "රු20",
+            "රු50",
+            "රු100",
+            "රු500",
+            "රු1000",
+            "රු2000",
+            "රු5000"
+        ]
     },
     {
         "iso_code": "LRD",
@@ -805,7 +2061,21 @@
         "regions": [
             "Liberia"
         ],
-        "description": "Official currency of Liberia."
+        "description": "Official currency of Liberia.",
+        "coins": [
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "$1"
+        ],
+        "banknotes": [
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "LSL",
@@ -815,7 +2085,23 @@
         "regions": [
             "Lesotho"
         ],
-        "description": "Official currency of Lesotho, pegged at parity with the South African Rand."
+        "description": "Official currency of Lesotho, pegged at parity with the South African Rand.",
+        "coins": [
+            "5 lisente",
+            "10 lisente",
+            "20 lisente",
+            "50 lisente",
+            "L1",
+            "L2",
+            "L5"
+        ],
+        "banknotes": [
+            "L10",
+            "L20",
+            "L50",
+            "L100",
+            "L200"
+        ]
     },
     {
         "iso_code": "LYD",
@@ -825,7 +2111,19 @@
         "regions": [
             "Libya"
         ],
-        "description": "Official currency of Libya."
+        "description": "Official currency of Libya.",
+        "coins": [
+            "LYD0.25",
+            "LYD0.5",
+            "LYD1"
+        ],
+        "banknotes": [
+            "LYD1",
+            "LYD5",
+            "LYD10",
+            "LYD20",
+            "LYD50"
+        ]
     },
     {
         "iso_code": "MAD",
@@ -836,7 +2134,20 @@
             "Morocco",
             "Western Sahara"
         ],
-        "description": "Official currency of Morocco."
+        "description": "Official currency of Morocco.",
+        "coins": [
+            "DH0.5",
+            "DH1",
+            "DH2",
+            "DH5",
+            "DH10"
+        ],
+        "banknotes": [
+            "DH20",
+            "DH50",
+            "DH100",
+            "DH200"
+        ]
     },
     {
         "iso_code": "MDL",
@@ -846,7 +2157,29 @@
         "regions": [
             "Moldova"
         ],
-        "description": "Official currency of Moldova."
+        "description": "Official currency of Moldova.",
+        "coins": [
+            "1 ban",
+            "5 bani",
+            "10 bani",
+            "25 bani",
+            "50 bani",
+            "MDL1",
+            "MDL2",
+            "MDL5",
+            "MDL10"
+        ],
+        "banknotes": [
+            "MDL1",
+            "MDL5",
+            "MDL10",
+            "MDL20",
+            "MDL50",
+            "MDL100",
+            "MDL200",
+            "MDL500",
+            "MDL1000"
+        ]
     },
     {
         "iso_code": "MGA",
@@ -856,7 +2189,27 @@
         "regions": [
             "Madagascar"
         ],
-        "description": "Official currency of Madagascar."
+        "description": "Official currency of Madagascar.",
+        "coins": [
+            "MGA1",
+            "MGA2",
+            "MGA4",
+            "MGA5",
+            "MGA10",
+            "MGA20",
+            "MGA50",
+            "MGA100"
+        ],
+        "banknotes": [
+            "MGA100",
+            "MGA200",
+            "MGA500",
+            "MGA1000",
+            "MGA2000",
+            "MGA5000",
+            "MGA10000",
+            "MGA20000"
+        ]
     },
     {
         "iso_code": "MKD",
@@ -866,7 +2219,23 @@
         "regions": [
             "North Macedonia"
         ],
-        "description": "Official currency of North Macedonia."
+        "description": "Official currency of North Macedonia.",
+        "coins": [
+            "1 denar",
+            "2 denari",
+            "5 denari",
+            "10 denari",
+            "50 denari"
+        ],
+        "banknotes": [
+            "MKD10",
+            "MKD50",
+            "MKD100",
+            "MKD200",
+            "MKD500",
+            "MKD1000",
+            "MKD2000"
+        ]
     },
     {
         "iso_code": "MMK",
@@ -876,7 +2245,24 @@
         "regions": [
             "Myanmar"
         ],
-        "description": "Official currency of Myanmar."
+        "description": "Official currency of Myanmar.",
+        "coins": [
+            "MMK1",
+            "MMK5",
+            "MMK10",
+            "MMK50",
+            "MMK100"
+        ],
+        "banknotes": [
+            "MMK50",
+            "MMK100",
+            "MMK200",
+            "MMK500",
+            "MMK1000",
+            "MMK5000",
+            "MMK10000",
+            "MMK20000"
+        ]
     },
     {
         "iso_code": "MNT",
@@ -886,7 +2272,22 @@
         "regions": [
             "Mongolia"
         ],
-        "description": "Official currency of Mongolia."
+        "description": "Official currency of Mongolia.",
+        "coins": [
+            "MNT10",
+            "MNT20",
+            "MNT50",
+            "MNT100",
+            "MNT200",
+            "MNT500"
+        ],
+        "banknotes": [
+            "MNT1000",
+            "MNT5000",
+            "MNT10000",
+            "MNT20000",
+            "MNT50000"
+        ]
     },
     {
         "iso_code": "MOP",
@@ -896,7 +2297,24 @@
         "regions": [
             "Macau"
         ],
-        "description": "Official currency of Macau, pegged at 1.03:1 to the Hong Kong Dollar."
+        "description": "Official currency of Macau, pegged at 1.03:1 to the Hong Kong Dollar.",
+        "coins": [
+            "10 avos",
+            "20 avos",
+            "50 avos",
+            "MOP1",
+            "MOP2",
+            "MOP5",
+            "MOP10"
+        ],
+        "banknotes": [
+            "MOP10",
+            "MOP20",
+            "MOP50",
+            "MOP100",
+            "MOP500",
+            "MOP1000"
+        ]
     },
     {
         "iso_code": "MRU",
@@ -906,7 +2324,22 @@
         "regions": [
             "Mauritania"
         ],
-        "description": "Official currency of Mauritania."
+        "description": "Official currency of Mauritania.",
+        "coins": [
+            "MRU1/5",
+            "MRU1",
+            "MRU2",
+            "MRU5",
+            "MRU10",
+            "MRU20"
+        ],
+        "banknotes": [
+            "MRU50",
+            "MRU100",
+            "MRU200",
+            "MRU500",
+            "MRU1000"
+        ]
     },
     {
         "iso_code": "MUR",
@@ -916,7 +2349,26 @@
         "regions": [
             "Mauritius"
         ],
-        "description": "Official currency of Mauritius."
+        "description": "Official currency of Mauritius.",
+        "coins": [
+            "5 cents",
+            "10 cents",
+            "20 cents",
+            "50 cents",
+            "MUR1",
+            "MUR5",
+            "MUR10",
+            "MUR20"
+        ],
+        "banknotes": [
+            "MUR25",
+            "MUR50",
+            "MUR100",
+            "MUR200",
+            "MUR500",
+            "MUR1000",
+            "MUR2000"
+        ]
     },
     {
         "iso_code": "MVR",
@@ -926,7 +2378,25 @@
         "regions": [
             "Maldives"
         ],
-        "description": "Official currency of the Maldives."
+        "description": "Official currency of the Maldives.",
+        "coins": [
+            "1 laari",
+            "5 laari",
+            "10 laari",
+            "25 laari",
+            "50 laari",
+            "MVR1",
+            "MVR2"
+        ],
+        "banknotes": [
+            "MVR5",
+            "MVR10",
+            "MVR20",
+            "MVR50",
+            "MVR100",
+            "MVR500",
+            "MVR1000"
+        ]
     },
     {
         "iso_code": "MWK",
@@ -936,7 +2406,23 @@
         "regions": [
             "Malawi"
         ],
-        "description": "Official currency of Malawi."
+        "description": "Official currency of Malawi.",
+        "coins": [
+            "MWK1",
+            "MWK5",
+            "MWK10",
+            "MWK20",
+            "MWK50",
+            "MWK100"
+        ],
+        "banknotes": [
+            "MWK200",
+            "MWK500",
+            "MWK1000",
+            "MWK2000",
+            "MWK5000",
+            "MWK10000"
+        ]
     },
     {
         "iso_code": "MXN",
@@ -946,7 +2432,23 @@
         "regions": [
             "Mexico"
         ],
-        "description": "Official currency of Mexico."
+        "description": "Official currency of Mexico.",
+        "coins": [
+            "50c",
+            "$1",
+            "$2",
+            "$5",
+            "$10",
+            "$20"
+        ],
+        "banknotes": [
+            "$20",
+            "$50",
+            "$100",
+            "$200",
+            "$500",
+            "$1000"
+        ]
     },
     {
         "iso_code": "MYR",
@@ -956,7 +2458,21 @@
         "regions": [
             "Malaysia"
         ],
-        "description": "Official currency of Malaysia."
+        "description": "Official currency of Malaysia.",
+        "coins": [
+            "5 sen",
+            "10 sen",
+            "20 sen",
+            "50 sen"
+        ],
+        "banknotes": [
+            "RM1",
+            "RM5",
+            "RM10",
+            "RM20",
+            "RM50",
+            "RM100"
+        ]
     },
     {
         "iso_code": "MZN",
@@ -966,7 +2482,26 @@
         "regions": [
             "Mozambique"
         ],
-        "description": "Official currency of Mozambique."
+        "description": "Official currency of Mozambique.",
+        "coins": [
+            "1 centavo",
+            "5 centavos",
+            "10 centavos",
+            "20 centavos",
+            "50 centavos",
+            "MT1",
+            "MT2",
+            "MT5",
+            "MT10"
+        ],
+        "banknotes": [
+            "MT20",
+            "MT50",
+            "MT100",
+            "MT200",
+            "MT500",
+            "MT1000"
+        ]
     },
     {
         "iso_code": "NAD",
@@ -976,7 +2511,23 @@
         "regions": [
             "Namibia"
         ],
-        "description": "Official currency of Namibia, pegged at parity with the South African Rand."
+        "description": "Official currency of Namibia, pegged at parity with the South African Rand.",
+        "coins": [
+            "5 cents",
+            "10 cents",
+            "50 cents",
+            "N$1",
+            "N$2",
+            "N$5"
+        ],
+        "banknotes": [
+            "N$10",
+            "N$20",
+            "N$30",
+            "N$50",
+            "N$100",
+            "N$200"
+        ]
     },
     {
         "iso_code": "NGN",
@@ -986,7 +2537,22 @@
         "regions": [
             "Nigeria"
         ],
-        "description": "Official currency of Nigeria."
+        "description": "Official currency of Nigeria.",
+        "coins": [
+            "50 kobo",
+            "₦1",
+            "₦2"
+        ],
+        "banknotes": [
+            "₦5",
+            "₦10",
+            "₦20",
+            "₦50",
+            "₦100",
+            "₦200",
+            "₦500",
+            "₦1,000"
+        ]
     },
     {
         "iso_code": "NIO",
@@ -996,7 +2562,24 @@
         "regions": [
             "Nicaragua"
         ],
-        "description": "Official currency of Nicaragua."
+        "description": "Official currency of Nicaragua.",
+        "coins": [
+            "C$0.05",
+            "C$0.10",
+            "C$0.25",
+            "C$0.50",
+            "C$1",
+            "C$5"
+        ],
+        "banknotes": [
+            "C$10",
+            "C$20",
+            "C$50",
+            "C$100",
+            "C$200",
+            "C$500",
+            "C$1000"
+        ]
     },
     {
         "iso_code": "NOK",
@@ -1008,7 +2591,25 @@
             "Bouvet Island",
             "Svalbard and Jan Mayen"
         ],
-        "description": "Official currency of Norway."
+        "description": "Official currency of Norway.",
+        "coins": [
+            "1 øre",
+            "5 øre",
+            "10 øre",
+            "20 øre",
+            "50 øre",
+            "kr1",
+            "kr5",
+            "kr10",
+            "kr20"
+        ],
+        "banknotes": [
+            "kr50",
+            "kr100",
+            "kr200",
+            "kr500",
+            "kr1000"
+        ]
     },
     {
         "iso_code": "NPR",
@@ -1018,7 +2619,27 @@
         "regions": [
             "Nepal"
         ],
-        "description": "Official currency of Nepal, pegged at 1.6/1.6015:1 (buy/sell) to the Indian Rupee."
+        "description": "Official currency of Nepal, pegged at 1.6/1.6015:1 (buy/sell) to the Indian Rupee.",
+        "coins": [
+            "1 paisa",
+            "5 paisa",
+            "10 paisa",
+            "25 paisa",
+            "50 paisa",
+            "रु1",
+            "रु2",
+            "रु5",
+            "रु10"
+        ],
+        "banknotes": [
+            "रु5",
+            "रु10",
+            "रु20",
+            "रु50",
+            "रु100",
+            "रु500",
+            "रु1000"
+        ]
     },
     {
         "iso_code": "NZD",
@@ -1032,7 +2653,21 @@
             "Pitcairn Islands",
             "Tokelau"
         ],
-        "description": "Official currency of New Zealand and several Pacific island territories."
+        "description": "Official currency of New Zealand and several Pacific island territories.",
+        "coins": [
+            "10c",
+            "20c",
+            "50c",
+            "$1",
+            "$2"
+        ],
+        "banknotes": [
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "OMR",
@@ -1042,7 +2677,22 @@
         "regions": [
             "Oman"
         ],
-        "description": "Official currency of Oman, pegged at 0.384/0.385:1 (buy/sell) to the US Dollar."
+        "description": "Official currency of Oman, pegged at 0.384/0.385:1 (buy/sell) to the US Dollar.",
+        "coins": [
+            "5 baisa",
+            "10 baisa",
+            "25 baisa",
+            "50 baisa"
+        ],
+        "banknotes": [
+            "100 baisa",
+            "OMR0.5",
+            "OMR1",
+            "OMR5",
+            "OMR10",
+            "OMR20",
+            "OMR50"
+        ]
     },
     {
         "iso_code": "PAB",
@@ -1052,7 +2702,18 @@
         "regions": [
             "Panama"
         ],
-        "description": "Official currency of Panama, pegged at parity with the US Dollar."
+        "description": "Official currency of Panama, pegged at parity with the US Dollar.",
+        "coins": [
+            "1 centésimo",
+            "5 centésimos",
+            "10 centésimos",
+            "25 centésimos",
+            "50 centésimos",
+            "B/.1"
+        ],
+        "banknotes": [
+            "No Balboa banknotes; US dollar banknotes are used instead"
+        ]
     },
     {
         "iso_code": "PEN",
@@ -1062,7 +2723,22 @@
         "regions": [
             "Peru"
         ],
-        "description": "Official currency of Peru."
+        "description": "Official currency of Peru.",
+        "coins": [
+            "10 céntimos",
+            "20 céntimos",
+            "50 céntimos",
+            "S/1",
+            "S/2",
+            "S/5"
+        ],
+        "banknotes": [
+            "S/10",
+            "S/20",
+            "S/50",
+            "S/100",
+            "S/200"
+        ]
     },
     {
         "iso_code": "PGK",
@@ -1072,7 +2748,26 @@
         "regions": [
             "Papua New Guinea"
         ],
-        "description": "Official currency of Papua New Guinea."
+        "description": "Official currency of Papua New Guinea.",
+        "coins": [
+            "1 toea",
+            "2 toea",
+            "5 toea",
+            "10 toea",
+            "20 toea",
+            "50 toea",
+            "K1",
+            "K2"
+        ],
+        "banknotes": [
+            "K2",
+            "K5",
+            "K10",
+            "K20",
+            "K50",
+            "K100",
+            "K200"
+        ]
     },
     {
         "iso_code": "PHP",
@@ -1082,7 +2777,22 @@
         "regions": [
             "Philippines"
         ],
-        "description": "Official currency of the Philippines."
+        "description": "Official currency of the Philippines.",
+        "coins": [
+            "25¢",
+            "₱1",
+            "₱5",
+            "₱10",
+            "₱20"
+        ],
+        "banknotes": [
+            "₱20",
+            "₱50",
+            "₱100",
+            "₱200",
+            "₱500",
+            "₱1000"
+        ]
     },
     {
         "iso_code": "PKR",
@@ -1092,7 +2802,28 @@
         "regions": [
             "Pakistan"
         ],
-        "description": "Official currency of Pakistan."
+        "description": "Official currency of Pakistan.",
+        "coins": [
+            "1 paisa",
+            "2 paisa",
+            "5 paisa",
+            "10 paisa",
+            "25 paisa",
+            "50 paisa",
+            "PKR1",
+            "PKR2",
+            "PKR5",
+            "PKR10"
+        ],
+        "banknotes": [
+            "PKR10",
+            "PKR20",
+            "PKR50",
+            "PKR100",
+            "PKR500",
+            "PKR1000",
+            "PKR5000"
+        ]
     },
     {
         "iso_code": "PLN",
@@ -1102,7 +2833,26 @@
         "regions": [
             "Poland"
         ],
-        "description": "Official currency of Poland."
+        "description": "Official currency of Poland.",
+        "coins": [
+            "1 gr",
+            "2 gr",
+            "5 gr",
+            "10 gr",
+            "20 gr",
+            "50 gr",
+            "zł1",
+            "zł2",
+            "zł5"
+        ],
+        "banknotes": [
+            "zł10",
+            "zł20",
+            "zł50",
+            "zł100",
+            "zł200",
+            "zł500"
+        ]
     },
     {
         "iso_code": "PYG",
@@ -1112,7 +2862,21 @@
         "regions": [
             "Paraguay"
         ],
-        "description": "Official currency of Paraguay."
+        "description": "Official currency of Paraguay.",
+        "coins": [
+            "₲50",
+            "₲100",
+            "₲500",
+            "₲1000"
+        ],
+        "banknotes": [
+            "₲2000",
+            "₲5000",
+            "₲10000",
+            "₲20000",
+            "₲50000",
+            "₲100000"
+        ]
     },
     {
         "iso_code": "QAR",
@@ -1122,7 +2886,23 @@
         "regions": [
             "Qatar"
         ],
-        "description": "Official currency of Qatar, pegged at 3.64:1 to the US Dollar."
+        "description": "Official currency of Qatar, pegged at 3.64:1 to the US Dollar.",
+        "coins": [
+            "1 dirham",
+            "5 dirhams",
+            "10 dirhams",
+            "25 dirhams",
+            "50 dirhams"
+        ],
+        "banknotes": [
+            "QR1",
+            "QR5",
+            "QR10",
+            "QR50",
+            "QR100",
+            "QR200",
+            "QR500"
+        ]
     },
     {
         "iso_code": "RON",
@@ -1132,7 +2912,23 @@
         "regions": [
             "Romania"
         ],
-        "description": "Official currency of Romania."
+        "description": "Official currency of Romania.",
+        "coins": [
+            "1 ban",
+            "5 bani",
+            "10 bani",
+            "50 bani"
+        ],
+        "banknotes": [
+            "1 leu",
+            "5 lei",
+            "10 lei",
+            "20 lei",
+            "50 lei",
+            "100 lei",
+            "200 lei",
+            "500 lei"
+        ]
     },
     {
         "iso_code": "RSD",
@@ -1142,7 +2938,25 @@
         "regions": [
             "Serbia"
         ],
-        "description": "Official currency of Serbia."
+        "description": "Official currency of Serbia.",
+        "coins": [
+            "дин.1",
+            "дин.2",
+            "дин.5",
+            "дин.10",
+            "дин.20"
+        ],
+        "banknotes": [
+            "дин.10",
+            "дин.20",
+            "дин.50",
+            "дин.100",
+            "дин.200",
+            "дин.500",
+            "дин.1,000",
+            "дин.2,000",
+            "дин.5,000"
+        ]
     },
     {
         "iso_code": "RUB",
@@ -1152,7 +2966,23 @@
         "regions": [
             "Russia"
         ],
-        "description": "Official currency of Russia."
+        "description": "Official currency of Russia.",
+        "coins": [
+            "₽1",
+            "₽2",
+            "₽5",
+            "₽10"
+        ],
+        "banknotes": [
+            "₽10",
+            "₽50",
+            "₽100",
+            "₽200",
+            "₽500",
+            "₽1000",
+            "₽2000",
+            "₽5000"
+        ]
     },
     {
         "iso_code": "RWF",
@@ -1162,7 +2992,22 @@
         "regions": [
             "Rwanda"
         ],
-        "description": "Official currency of Rwanda."
+        "description": "Official currency of Rwanda.",
+        "coins": [
+            "RWF1",
+            "RWF5",
+            "RWF10",
+            "RWF20",
+            "RWF50",
+            "RWF100"
+        ],
+        "banknotes": [
+            "RWF500",
+            "RWF1000",
+            "RWF2000",
+            "RWF5000",
+            "RWF10000"
+        ]
     },
     {
         "iso_code": "SAR",
@@ -1172,7 +3017,23 @@
         "regions": [
             "Saudi Arabia"
         ],
-        "description": "Official currency of Saudi Arabia, pegged at 3.75:1 to the US Dollar."
+        "description": "Official currency of Saudi Arabia, pegged at 3.75:1 to the US Dollar.",
+        "coins": [
+            "1 halala",
+            "5 halalas",
+            "10 halalas",
+            "25 halalas",
+            "50 halalas",
+            "SAR1",
+            "SAR2"
+        ],
+        "banknotes": [
+            "SAR5",
+            "SAR10",
+            "SAR50",
+            "SAR100",
+            "SAR500"
+        ]
     },
     {
         "iso_code": "SBD",
@@ -1182,7 +3043,22 @@
         "regions": [
             "Solomon Islands"
         ],
-        "description": "Official currency of the Solomon Islands."
+        "description": "Official currency of the Solomon Islands.",
+        "coins": [
+            "5 cents",
+            "10 cents",
+            "20 cents",
+            "50 cents",
+            "$1",
+            "$2"
+        ],
+        "banknotes": [
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "SCR",
@@ -1192,7 +3068,23 @@
         "regions": [
             "Seychelles"
         ],
-        "description": "Official currency of Seychelles."
+        "description": "Official currency of Seychelles.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "SCR1",
+            "SCR5",
+            "SCR10"
+        ],
+        "banknotes": [
+            "SCR25",
+            "SCR50",
+            "SCR100",
+            "SCR500"
+        ]
     },
     {
         "iso_code": "SDG",
@@ -1202,7 +3094,26 @@
         "regions": [
             "Sudan"
         ],
-        "description": "Official currency of Sudan."
+        "description": "Official currency of Sudan.",
+        "coins": [
+            "SDG1",
+            "SDG5",
+            "SDG10",
+            "SDG20",
+            "SDG50"
+        ],
+        "banknotes": [
+            "SDG1",
+            "SDG2",
+            "SDG5",
+            "SDG10",
+            "SDG20",
+            "SDG50",
+            "SDG100",
+            "SDG200",
+            "SDG500",
+            "SDG1000"
+        ]
     },
     {
         "iso_code": "SEK",
@@ -1212,7 +3123,21 @@
         "regions": [
             "Sweden"
         ],
-        "description": "Official currency of Sweden."
+        "description": "Official currency of Sweden.",
+        "coins": [
+            "1 kr",
+            "2 kr",
+            "5 kr",
+            "10 kr"
+        ],
+        "banknotes": [
+            "20 kr",
+            "50 kr",
+            "100 kr",
+            "200 kr",
+            "500 kr",
+            "1000 kr"
+        ]
     },
     {
         "iso_code": "SGD",
@@ -1222,7 +3147,23 @@
         "regions": [
             "Singapore"
         ],
-        "description": "Official currency of Singapore. Interchangeable with the Brunei Dollar at par."
+        "description": "Official currency of Singapore. Interchangeable with the Brunei Dollar at par.",
+        "coins": [
+            "5c",
+            "10c",
+            "20c",
+            "50c",
+            "$1"
+        ],
+        "banknotes": [
+            "$2",
+            "$5",
+            "$10",
+            "$50",
+            "$100",
+            "$1000",
+            "$10000"
+        ]
     },
     {
         "iso_code": "SHP",
@@ -1234,7 +3175,22 @@
             "Ascension Island",
             "Tristan da Cunha"
         ],
-        "description": "Official currency of Saint Helena, Ascension Island, and Tristan da Cunha, pegged at parity to the British Pound."
+        "description": "Official currency of Saint Helena, Ascension Island, and Tristan da Cunha, pegged at parity to the British Pound.",
+        "coins": [
+            "1p",
+            "2p",
+            "5p",
+            "10p",
+            "20p",
+            "50p",
+            "£1",
+            "£2"
+        ],
+        "banknotes": [
+            "£5",
+            "£10",
+            "£20"
+        ]
     },
     {
         "iso_code": "SLE",
@@ -1244,7 +3200,20 @@
         "regions": [
             "Sierra Leone"
         ],
-        "description": "Official currency of Sierra Leone."
+        "description": "Official currency of Sierra Leone.",
+        "coins": [
+            "SLE1",
+            "SLE2",
+            "SLE5",
+            "SLE10"
+        ],
+        "banknotes": [
+            "SLE10",
+            "SLE20",
+            "SLE50",
+            "SLE100",
+            "SLE200"
+        ]
     },
     {
         "iso_code": "SOS",
@@ -1254,7 +3223,16 @@
         "regions": [
             "Somalia"
         ],
-        "description": "Official currency of Somalia."
+        "description": "Official currency of Somalia.",
+        "coins": [
+            "No Somali Shilling coins currently circulate"
+        ],
+        "banknotes": [
+            "SOS1000",
+            "SOS2000",
+            "SOS5000",
+            "SOS10000"
+        ]
     },
     {
         "iso_code": "SRD",
@@ -1264,7 +3242,25 @@
         "regions": [
             "Suriname"
         ],
-        "description": "Official currency of Suriname."
+        "description": "Official currency of Suriname.",
+        "coins": [
+            "SRD0.01",
+            "SRD0.05",
+            "SRD0.10",
+            "SRD0.25",
+            "SRD0.50",
+            "SRD1",
+            "SRD2.50",
+            "SRD5"
+        ],
+        "banknotes": [
+            "SRD5",
+            "SRD10",
+            "SRD20",
+            "SRD50",
+            "SRD100",
+            "SRD200"
+        ]
     },
     {
         "iso_code": "SSP",
@@ -1274,7 +3270,24 @@
         "regions": [
             "South Sudan"
         ],
-        "description": "Official currency of South Sudan."
+        "description": "Official currency of South Sudan.",
+        "coins": [
+            "SSP0.10",
+            "SSP0.25",
+            "SSP0.50",
+            "SSP1",
+            "SSP2",
+            "SSP5"
+        ],
+        "banknotes": [
+            "SSP5",
+            "SSP10",
+            "SSP20",
+            "SSP25",
+            "SSP50",
+            "SSP100",
+            "SSP500"
+        ]
     },
     {
         "iso_code": "STN",
@@ -1284,7 +3297,22 @@
         "regions": [
             "São Tomé and Príncipe"
         ],
-        "description": "Official currency of São Tomé and Príncipe, pegged at 24.5:1 to the Euro."
+        "description": "Official currency of São Tomé and Príncipe, pegged at 24.5:1 to the Euro.",
+        "coins": [
+            "10 cêntimos",
+            "20 cêntimos",
+            "50 cêntimos",
+            "Db1",
+            "Db2"
+        ],
+        "banknotes": [
+            "Db5",
+            "Db10",
+            "Db20",
+            "Db50",
+            "Db100",
+            "Db200"
+        ]
     },
     {
         "iso_code": "SYP",
@@ -1294,7 +3322,23 @@
         "regions": [
             "Syria"
         ],
-        "description": "Official currency of Syria."
+        "description": "Official currency of Syria.",
+        "coins": [
+            "SYP1",
+            "SYP2",
+            "SYP5",
+            "SYP10",
+            "SYP25"
+        ],
+        "banknotes": [
+            "SYP50",
+            "SYP100",
+            "SYP200",
+            "SYP500",
+            "SYP1000",
+            "SYP2000",
+            "SYP5000"
+        ]
     },
     {
         "iso_code": "SZL",
@@ -1304,7 +3348,22 @@
         "regions": [
             "Eswatini"
         ],
-        "description": "Official currency of Eswatini, pegged at parity with the South African Rand."
+        "description": "Official currency of Eswatini, pegged at parity with the South African Rand.",
+        "coins": [
+            "10 cents",
+            "20 cents",
+            "50 cents",
+            "L1",
+            "L2",
+            "L5"
+        ],
+        "banknotes": [
+            "E10",
+            "E20",
+            "E50",
+            "E100",
+            "E200"
+        ]
     },
     {
         "iso_code": "THB",
@@ -1314,7 +3373,22 @@
         "regions": [
             "Thailand"
         ],
-        "description": "Official currency of Thailand."
+        "description": "Official currency of Thailand.",
+        "coins": [
+            "25 satang",
+            "50 satang",
+            "฿1",
+            "฿2",
+            "฿5",
+            "฿10"
+        ],
+        "banknotes": [
+            "฿20",
+            "฿50",
+            "฿100",
+            "฿500",
+            "฿1000"
+        ]
     },
     {
         "iso_code": "TJS",
@@ -1324,7 +3398,28 @@
         "regions": [
             "Tajikistan"
         ],
-        "description": "Official currency of Tajikistan."
+        "description": "Official currency of Tajikistan.",
+        "coins": [
+            "1 diram",
+            "5 diram",
+            "10 diram",
+            "20 diram",
+            "25 diram",
+            "50 diram",
+            "TJS1",
+            "TJS3",
+            "TJS5"
+        ],
+        "banknotes": [
+            "TJS1",
+            "TJS5",
+            "TJS10",
+            "TJS20",
+            "TJS50",
+            "TJS100",
+            "TJS200",
+            "TJS500"
+        ]
     },
     {
         "iso_code": "TMT",
@@ -1334,7 +3429,26 @@
         "regions": [
             "Turkmenistan"
         ],
-        "description": "Official currency of Turkmenistan."
+        "description": "Official currency of Turkmenistan.",
+        "coins": [
+            "1 tenge",
+            "2 tenge",
+            "5 tenge",
+            "10 tenge",
+            "20 tenge",
+            "50 tenge",
+            "TMT1"
+        ],
+        "banknotes": [
+            "TMT1",
+            "TMT5",
+            "TMT10",
+            "TMT20",
+            "TMT50",
+            "TMT100",
+            "TMT200",
+            "TMT500"
+        ]
     },
     {
         "iso_code": "TND",
@@ -1344,7 +3458,26 @@
         "regions": [
             "Tunisia"
         ],
-        "description": "Official currency of Tunisia."
+        "description": "Official currency of Tunisia.",
+        "coins": [
+            "5 millimes",
+            "10 millimes",
+            "20 millimes",
+            "50 millimes",
+            "100 millimes",
+            "200 millimes",
+            "TND0.5",
+            "TND1",
+            "TND2",
+            "TND5"
+        ],
+        "banknotes": [
+            "TND5",
+            "TND10",
+            "TND20",
+            "TND30",
+            "TND50"
+        ]
     },
     {
         "iso_code": "TOP",
@@ -1354,7 +3487,23 @@
         "regions": [
             "Tonga"
         ],
-        "description": "Official currency of Tonga."
+        "description": "Official currency of Tonga.",
+        "coins": [
+            "5 seniti",
+            "10 seniti",
+            "20 seniti",
+            "50 seniti",
+            "T$1",
+            "T$2"
+        ],
+        "banknotes": [
+            "T$2",
+            "T$5",
+            "T$10",
+            "T$20",
+            "T$50",
+            "T$100"
+        ]
     },
     {
         "iso_code": "TRY",
@@ -1364,7 +3513,24 @@
         "regions": [
             "Turkey/Türkiye"
         ],
-        "description": "Official currency of Turkey/Türkiye."
+        "description": "Official currency of Turkey/Türkiye.",
+        "coins": [
+            "1 kuruş",
+            "5 kuruş",
+            "10 kuruş",
+            "25 kuruş",
+            "50 kuruş",
+            "₺1",
+            "₺5"
+        ],
+        "banknotes": [
+            "₺5",
+            "₺10",
+            "₺20",
+            "₺50",
+            "₺100",
+            "₺200"
+        ]
     },
     {
         "iso_code": "TTD",
@@ -1374,7 +3540,23 @@
         "regions": [
             "Trinidad and Tobago"
         ],
-        "description": "Official currency of Trinidad and Tobago."
+        "description": "Official currency of Trinidad and Tobago.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "TT$1"
+        ],
+        "banknotes": [
+            "TT$1",
+            "TT$5",
+            "TT$10",
+            "TT$25",
+            "TT$50",
+            "TT$100"
+        ]
     },
     {
         "iso_code": "TWD",
@@ -1384,7 +3566,22 @@
         "regions": [
             "Taiwan"
         ],
-        "description": "Official currency of Taiwan."
+        "description": "Official currency of Taiwan.",
+        "coins": [
+            "NT$0.5",
+            "NT$1",
+            "NT$5",
+            "NT$10",
+            "NT$20",
+            "NT$50"
+        ],
+        "banknotes": [
+            "NT$100",
+            "NT$200",
+            "NT$500",
+            "NT$1000",
+            "NT$2000"
+        ]
     },
     {
         "iso_code": "TZS",
@@ -1394,7 +3591,20 @@
         "regions": [
             "Tanzania"
         ],
-        "description": "Official currency of Tanzania."
+        "description": "Official currency of Tanzania.",
+        "coins": [
+            "TZS50",
+            "TZS100",
+            "TZS200",
+            "TZS500"
+        ],
+        "banknotes": [
+            "TZS500",
+            "TZS1000",
+            "TZS2000",
+            "TZS5000",
+            "TZS10000"
+        ]
     },
     {
         "iso_code": "UAH",
@@ -1404,7 +3614,23 @@
         "regions": [
             "Ukraine"
         ],
-        "description": "Official currency of Ukraine."
+        "description": "Official currency of Ukraine.",
+        "coins": [
+            "50 kopiyky",
+            "₴1",
+            "₴2",
+            "₴5",
+            "₴10"
+        ],
+        "banknotes": [
+            "₴20",
+            "₴50",
+            "₴100",
+            "₴200",
+            "₴500",
+            "₴1,000",
+            "₴2,000"
+        ]
     },
     {
         "iso_code": "UGX",
@@ -1414,7 +3640,22 @@
         "regions": [
             "Uganda"
         ],
-        "description": "Official currency of Uganda."
+        "description": "Official currency of Uganda.",
+        "coins": [
+            "UGX50",
+            "UGX100",
+            "UGX200",
+            "UGX500",
+            "UGX1000"
+        ],
+        "banknotes": [
+            "UGX1000",
+            "UGX2000",
+            "UGX5000",
+            "UGX10000",
+            "UGX20000",
+            "UGX50000"
+        ]
     },
     {
         "iso_code": "USD",
@@ -1441,7 +3682,24 @@
             "United States Minor Outlying Islands",
             "Zimbabwe"
         ],
-        "description": "Official currency of the United States (including its territories) and other regions. The world's primary reserve currency."
+        "description": "Official currency of the United States (including its territories) and other regions. The world's primary reserve currency.",
+        "coins": [
+            "1¢",
+            "5¢",
+            "10¢",
+            "25¢",
+            "50¢",
+            "$1"
+        ],
+        "banknotes": [
+            "$1",
+            "$2",
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "UYU",
@@ -1451,7 +3709,22 @@
         "regions": [
             "Uruguay"
         ],
-        "description": "Official currency of Uruguay."
+        "description": "Official currency of Uruguay.",
+        "coins": [
+            "$1",
+            "$2",
+            "$5",
+            "$10"
+        ],
+        "banknotes": [
+            "$20",
+            "$50",
+            "$100",
+            "$200",
+            "$500",
+            "$1,000",
+            "$2,000"
+        ]
     },
     {
         "iso_code": "UZS",
@@ -1461,7 +3734,25 @@
         "regions": [
             "Uzbekistan"
         ],
-        "description": "Official currency of Uzbekistan."
+        "description": "Official currency of Uzbekistan.",
+        "coins": [
+            "UZS50",
+            "UZS100",
+            "UZS200",
+            "UZS500",
+            "UZS1000",
+            "UZS2000",
+            "UZS5000"
+        ],
+        "banknotes": [
+            "UZS1000",
+            "UZS2000",
+            "UZS5000",
+            "UZS10000",
+            "UZS50000",
+            "UZS100000",
+            "UZS200000"
+        ]
     },
     {
         "iso_code": "VED",
@@ -1471,7 +3762,23 @@
         "regions": [
             "Venezuela"
         ],
-        "description": "One of official currencies of Venezuela."
+        "description": "One of official currencies of Venezuela.",
+        "coins": [
+            "1 céntimo",
+            "5 céntimos",
+            "10 céntimos",
+            "25 céntimos",
+            "50 céntimos",
+            "Bs.D1"
+        ],
+        "banknotes": [
+            "Bs.D5",
+            "Bs.D10",
+            "Bs.D20",
+            "Bs.D50",
+            "Bs.D100",
+            "Bs.D200"
+        ]
     },
     {
         "iso_code": "VES",
@@ -1481,7 +3788,21 @@
         "regions": [
             "Venezuela"
         ],
-        "description": "One of official currencies of Venezuela."
+        "description": "One of official currencies of Venezuela.",
+        "coins": [
+            "Bs.S0.10",
+            "Bs.S0.25",
+            "Bs.S0.50",
+            "Bs.S1"
+        ],
+        "banknotes": [
+            "Bs.S5",
+            "Bs.S10",
+            "Bs.S20",
+            "Bs.S50",
+            "Bs.S100",
+            "Bs.S200"
+        ]
     },
     {
         "iso_code": "VND",
@@ -1491,7 +3812,24 @@
         "regions": [
             "Vietnam"
         ],
-        "description": "Official currency of Vietnam."
+        "description": "Official currency of Vietnam.",
+        "coins": [
+            "No Vietnamese đồng coins currently circulate"
+        ],
+        "banknotes": [
+            "₫100",
+            "₫200",
+            "₫500",
+            "₫1000",
+            "₫2000",
+            "₫5000",
+            "₫10000",
+            "₫20000",
+            "₫50000",
+            "₫100000",
+            "₫200000",
+            "₫500000"
+        ]
     },
     {
         "iso_code": "VUV",
@@ -1501,7 +3839,24 @@
         "regions": [
             "Vanuatu"
         ],
-        "description": "Official currency of Vanuatu."
+        "description": "Official currency of Vanuatu.",
+        "coins": [
+            "1 vatu",
+            "2 vatu",
+            "5 vatu",
+            "10 vatu",
+            "20 vatu",
+            "50 vatu",
+            "VT100"
+        ],
+        "banknotes": [
+            "VT200",
+            "VT500",
+            "VT1000",
+            "VT2000",
+            "VT5000",
+            "VT10000"
+        ]
     },
     {
         "iso_code": "WST",
@@ -1511,7 +3866,21 @@
         "regions": [
             "Samoa"
         ],
-        "description": "Official currency of Samoa."
+        "description": "Official currency of Samoa.",
+        "coins": [
+            "10 sene",
+            "20 sene",
+            "50 sene",
+            "T1",
+            "T2"
+        ],
+        "banknotes": [
+            "T5",
+            "T10",
+            "T20",
+            "T50",
+            "T100"
+        ]
     },
     {
         "iso_code": "XAF",
@@ -1526,7 +3895,25 @@
             "Equatorial Guinea",
             "Gabon"
         ],
-        "description": "Official currency of 6 Central African countries, pegged at 655.957:1 to the Euro."
+        "description": "Official currency of 6 Central African countries, pegged at 655.957:1 to the Euro.",
+        "coins": [
+            "1 franc",
+            "2 francs",
+            "5 francs",
+            "10 francs",
+            "25 francs",
+            "50 francs",
+            "100 francs",
+            "200 francs",
+            "500 francs"
+        ],
+        "banknotes": [
+            "FCFA500",
+            "FCFA1000",
+            "FCFA2000",
+            "FCFA5000",
+            "FCFA10000"
+        ]
     },
     {
         "iso_code": "XCD",
@@ -1543,7 +3930,23 @@
             "Anguilla",
             "Montserrat"
         ],
-        "description": "Official currency of 8 Caribbean countries and territories, pegged at 2.7:1 to the US Dollar."
+        "description": "Official currency of 8 Caribbean countries and territories, pegged at 2.7:1 to the US Dollar.",
+        "coins": [
+            "1 cent",
+            "2 cents",
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "$1"
+        ],
+        "banknotes": [
+            "$5",
+            "$10",
+            "$20",
+            "$50",
+            "$100"
+        ]
     },
     {
         "iso_code": "XCG",
@@ -1554,7 +3957,24 @@
             "Curaçao",
             "Sint Maarten"
         ],
-        "description": "Official currency of Curaçao and Sint Maarten, the constituent countries of the Kingdom of the Netherlands, pegged at 1.79:1 to the US Dollar."
+        "description": "Official currency of Curaçao and Sint Maarten, the constituent countries of the Kingdom of the Netherlands, pegged at 1.79:1 to the US Dollar.",
+        "coins": [
+            "1 cent",
+            "5 cents",
+            "10 cents",
+            "25 cents",
+            "50 cents",
+            "ƒ1",
+            "ƒ2.50",
+            "ƒ5"
+        ],
+        "banknotes": [
+            "ƒ10",
+            "ƒ20",
+            "ƒ50",
+            "ƒ100",
+            "ƒ200"
+        ]
     },
     {
         "iso_code": "XOF",
@@ -1571,7 +3991,25 @@
             "Senegal",
             "Togo"
         ],
-        "description": "Official currency of 8 West African countries, pegged at 655.957:1 to the Euro."
+        "description": "Official currency of 8 West African countries, pegged at 655.957:1 to the Euro.",
+        "coins": [
+            "1 franc",
+            "5 francs",
+            "10 francs",
+            "25 francs",
+            "50 francs",
+            "100 francs",
+            "200 francs",
+            "250 francs",
+            "500 francs"
+        ],
+        "banknotes": [
+            "CFA500",
+            "CFA1000",
+            "CFA2000",
+            "CFA5000",
+            "CFA10000"
+        ]
     },
     {
         "iso_code": "XPF",
@@ -1583,7 +4021,23 @@
             "New Caledonia",
             "Wallis and Futuna"
         ],
-        "description": "Official currency of French territories in the Pacific, pegged at 1000:8.38 to the Euro."
+        "description": "Official currency of French territories in the Pacific, pegged at 1000:8.38 to the Euro.",
+        "coins": [
+            "1 franc",
+            "2 francs",
+            "5 francs",
+            "10 francs",
+            "20 francs",
+            "50 francs",
+            "100 francs",
+            "200 francs"
+        ],
+        "banknotes": [
+            "CFP500",
+            "CFP1000",
+            "CFP5000",
+            "CFP10000"
+        ]
     },
     {
         "iso_code": "YER",
@@ -1593,7 +4047,23 @@
         "regions": [
             "Yemen"
         ],
-        "description": "Official currency of Yemen."
+        "description": "Official currency of Yemen.",
+        "coins": [
+            "YER1",
+            "YER5",
+            "YER10",
+            "YER20",
+            "YER50",
+            "YER100"
+        ],
+        "banknotes": [
+            "YER50",
+            "YER100",
+            "YER200",
+            "YER250",
+            "YER500",
+            "YER1000"
+        ]
     },
     {
         "iso_code": "ZAR",
@@ -1606,7 +4076,22 @@
             "Namibia",
             "Eswatini"
         ],
-        "description": "Official currency of South Africa. Lesotho, Namibia, and Eswatini officially use the Rand alongside their own currencies."
+        "description": "Official currency of South Africa. Lesotho, Namibia, and Eswatini officially use the Rand alongside their own currencies.",
+        "coins": [
+            "10c",
+            "20c",
+            "50c",
+            "R1",
+            "R2",
+            "R5"
+        ],
+        "banknotes": [
+            "R10",
+            "R20",
+            "R50",
+            "R100",
+            "R200"
+        ]
     },
     {
         "iso_code": "ZMW",
@@ -1616,7 +4101,22 @@
         "regions": [
             "Zambia"
         ],
-        "description": "Official currency of Zambia."
+        "description": "Official currency of Zambia.",
+        "coins": [
+            "5 ngwee",
+            "10 ngwee",
+            "50 ngwee",
+            "ZMW1",
+            "ZMW2",
+            "ZMW5"
+        ],
+        "banknotes": [
+            "ZMW10",
+            "ZMW20",
+            "ZMW50",
+            "ZMW100",
+            "ZMW200"
+        ]
     },
     {
         "iso_code": "ZWG",
@@ -1626,6 +4126,23 @@
         "regions": [
             "Zimbabwe"
         ],
-        "description": "Official currency of Zimbabwe, used alongside the US Dollar and other foreign currencies."
+        "description": "Official currency of Zimbabwe, used alongside the US Dollar and other foreign currencies.",
+        "coins": [
+            "ZiG0.01",
+            "ZiG0.02",
+            "ZiG0.05",
+            "ZiG0.10",
+            "ZiG0.25",
+            "ZiG0.50",
+            "ZiG1",
+            "ZiG2"
+        ],
+        "banknotes": [
+            "ZiG10",
+            "ZiG20",
+            "ZiG50",
+            "ZiG100",
+            "ZiG200"
+        ]
     }
 ]

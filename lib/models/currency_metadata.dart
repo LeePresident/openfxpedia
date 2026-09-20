@@ -5,6 +5,8 @@ class CurrencyMetadata {
   final String? symbol;
   final List<String> regions;
   final String? description;
+  final List<String> coins;
+  final List<String> banknotes;
 
   const CurrencyMetadata({
     required this.isoCode,
@@ -13,12 +15,16 @@ class CurrencyMetadata {
     this.symbol,
     this.regions = const [],
     this.description,
+    this.coins = const [],
+    this.banknotes = const [],
   });
 
   factory CurrencyMetadata.fromJson(Map<String, dynamic> json) {
     final isoCode =
         (json['iso_code'] ?? json['iso'] ?? '').toString().toUpperCase();
     final rawRegions = json['regions'];
+    final rawCoins = json['coins'];
+    final rawBanknotes = json['banknotes'];
 
     return CurrencyMetadata(
       isoCode: isoCode,
@@ -29,6 +35,11 @@ class CurrencyMetadata {
           ? rawRegions.whereType<String>().toList()
           : const [],
       description: json['description']?.toString(),
+      coins:
+          rawCoins is List ? rawCoins.whereType<String>().toList() : const [],
+      banknotes: rawBanknotes is List
+          ? rawBanknotes.whereType<String>().toList()
+          : const [],
     );
   }
 }

@@ -231,6 +231,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get detail_description => 'Description';
 
   @override
+  String get detail_coins => 'Coins';
+
+  @override
+  String get detail_banknotes => 'Banknotes';
+
+  @override
+  String get detail_pab_no_banknotes =>
+      'No Balboa banknotes; US dollar banknotes are used instead';
+
+  @override
+  String get detail_sos_no_coins =>
+      'No Somali Shilling coins currently circulate';
+
+  @override
+  String get detail_vnd_no_coins =>
+      'No Vietnamese đồng coins currently circulate';
+
+  @override
   String get detail_convert => 'Convert';
 
   @override

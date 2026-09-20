@@ -120,6 +120,24 @@ class CurrencyDetailScreen extends StatelessWidget {
                     showMoreLabel: l10n.detail_show_more_regions,
                     showLessLabel: l10n.detail_show_less_regions,
                   ),
+                if (currency.coins.isNotEmpty)
+                  _DetailRow(
+                    label: l10n.detail_coins,
+                    value: _localizedDenominations(
+                      currency.isoCode,
+                      currency.coins,
+                      l10n,
+                    ),
+                  ),
+                if (currency.banknotes.isNotEmpty)
+                  _DetailRow(
+                    label: l10n.detail_banknotes,
+                    value: _localizedDenominations(
+                      currency.isoCode,
+                      currency.banknotes,
+                      l10n,
+                    ),
+                  ),
                 if (currency.description != null &&
                     currency.description!.isNotEmpty)
                   _DetailRow(
@@ -142,6 +160,23 @@ class CurrencyDetailScreen extends StatelessWidget {
       },
     );
   }
+}
+
+String _localizedDenominations(
+  String isoCode,
+  List<String> denominations,
+  AppLocalizations l10n,
+) {
+  if (isoCode == 'PAB' && denominations.length == 1) {
+    return l10n.detail_pab_no_banknotes;
+  }
+  if (isoCode == 'SOS' && denominations.length == 1) {
+    return l10n.detail_sos_no_coins;
+  }
+  if (isoCode == 'VND' && denominations.length == 1) {
+    return l10n.detail_vnd_no_coins;
+  }
+  return denominations.join(', ');
 }
 
 class _DetailRow extends StatelessWidget {
