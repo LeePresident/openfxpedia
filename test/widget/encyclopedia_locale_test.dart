@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' show Response;
+import 'package:http/testing.dart';
 import 'package:provider/provider.dart';
 
 import 'package:openfxpedia/l10n/app_localizations.dart';
@@ -31,6 +33,25 @@ void main() {
         cache: cache,
         bundle: _OverlayAssetBundle(
           {
+            'assets/data/fiat_currencies.json': jsonEncode([
+              {
+                'iso_code': 'USD',
+                'name': 'US Dollar',
+                'regions': ['United States'],
+                'description':
+                    'Official currency of the United States (including its territories) and other regions. The world\'s primary reserve currency.',
+              },
+              {
+                'iso_code': 'EUR',
+                'name': 'Euro',
+                'regions': ['Eurozone'],
+              },
+              {
+                'iso_code': 'JPY',
+                'name': 'Japanese Yen',
+                'regions': ['Japan'],
+              },
+            ]),
             'assets/data/fiat_currency_overlays/zh_Hans.json': jsonEncode({
               'entries': {
                 'USD': {
@@ -179,7 +200,8 @@ class _StubCacheService extends CacheService {
 }
 
 class _FakeExchangeClient extends ExchangeClient {
-  _FakeExchangeClient();
+  _FakeExchangeClient()
+      : super(httpClient: MockClient((_) async => Response('{}', 200)));
 
   @override
   Future<Map<String, String>> fetchCurrencyCatalog() async => {
