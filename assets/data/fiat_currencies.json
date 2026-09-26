@@ -8,6 +8,9 @@
             "United Arab Emirates"
         ],
         "description": "Official currency of the United Arab Emirates. Symbol will be updated after Unicode release.",
+        "major_unit": "Dirham",
+        "minor_unit": "Fils",
+        "minor_units_per_major": 100,
         "coins": [
             "1 fils",
             "5 fils",
@@ -36,6 +39,9 @@
             "Afghanistan"
         ],
         "description": "Official currency of Afghanistan.",
+        "major_unit": "Afghani",
+        "minor_unit": "Pul",
+        "minor_units_per_major": 100,
         "coins": [
             "AFN1",
             "AFN2",
@@ -64,6 +70,9 @@
             "Albania"
         ],
         "description": "Official currency of Albania.",
+        "major_unit": "Lek",
+        "minor_unit": "Qindarkë",
+        "minor_units_per_major": 100,
         "coins": [
             "1 lek",
             "5 lek",
@@ -89,6 +98,9 @@
             "Armenia"
         ],
         "description": "Official currency of Armenia.",
+        "major_unit": "Dram",
+        "minor_unit": "Luma",
+        "minor_units_per_major": 100,
         "coins": [
             "AMD10",
             "AMD20",
@@ -116,6 +128,9 @@
             "Angola"
         ],
         "description": "Official currency of Angola.",
+        "major_unit": "Kwanza",
+        "minor_unit": "Cêntimo",
+        "minor_units_per_major": 100,
         "coins": [
             "10 cêntimos",
             "20 cêntimos",
@@ -148,6 +163,9 @@
             "Argentina"
         ],
         "description": "Official currency of Argentina.",
+        "major_unit": "Peso",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "$1",
             "$2",
@@ -177,6 +195,9 @@
             "Tuvalu"
         ],
         "description": "Official currency of Australia (and its territories), Kiribati, Nauru and Tuvalu.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5c",
             "10c",
@@ -202,6 +223,9 @@
             "Aruba"
         ],
         "description": "Official currency of Aruba, a constituent country of the Kingdom of the Netherlands.",
+        "major_unit": "Florin",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5 cents",
             "10 cents",
@@ -229,6 +253,9 @@
             "Azerbaijan"
         ],
         "description": "Official currency of Azerbaijan.",
+        "major_unit": "Manat",
+        "minor_unit": "Qəpik",
+        "minor_units_per_major": 100,
         "coins": [
             "1 qəpik",
             "3 qəpik",
@@ -256,6 +283,9 @@
             "Bosnia and Herzegovina"
         ],
         "description": "Currency of Bosnia and Herzegovina, pegged at 1.95583:1 to the Euro.",
+        "major_unit": "Convertible Mark",
+        "minor_unit": "Fening",
+        "minor_units_per_major": 100,
         "coins": [
             "5 feninga",
             "10 feninga",
@@ -282,6 +312,9 @@
             "Barbados"
         ],
         "description": "Official currency of Barbados.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5 cents",
             "10 cents",
@@ -307,6 +340,9 @@
             "Bangladesh"
         ],
         "description": "Official currency of Bangladesh.",
+        "major_unit": "Taka",
+        "minor_unit": "Poisha",
+        "minor_units_per_major": 100,
         "coins": [
             "1 poisha",
             "5 poisha",
@@ -338,6 +374,9 @@
             "Bahrain"
         ],
         "description": "Official currency of Bahrain.",
+        "major_unit": "Dinar",
+        "minor_unit": "Fils",
+        "minor_units_per_major": 1000,
         "coins": [
             "5 fils",
             "10 fils",
@@ -362,6 +401,9 @@
             "Burundi"
         ],
         "description": "Official currency of Burundi.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "BIF1",
             "BIF5",
@@ -386,6 +428,9 @@
             "Bermuda"
         ],
         "description": "Official currency of Bermuda, pegged at parity with the US Dollar.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -413,6 +458,9 @@
             "Brunei"
         ],
         "description": "Official currency of Brunei. Interchangeable with the Singapore Dollar at par.",
+        "major_unit": "Dollar",
+        "minor_unit": "Sen",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -442,6 +490,9 @@
             "Bolivia"
         ],
         "description": "Official currency of Bolivia.",
+        "major_unit": "Boliviano",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "10 centavos",
             "20 centavos",
@@ -467,6 +518,9 @@
             "Brazil"
         ],
         "description": "Official currency of Brazil.",
+        "major_unit": "Real",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "5c",
             "10c",
@@ -493,6 +547,9 @@
             "Bahamas"
         ],
         "description": "Official currency of the Bahamas, pegged at parity with the US Dollar.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -527,6 +584,9 @@
             "Bhutan"
         ],
         "description": "Official currency of Bhutan, pegged at parity with the Indian Rupee.",
+        "major_unit": "Ngultrum",
+        "minor_unit": "Chetrum",
+        "minor_units_per_major": 100,
         "coins": [
             "5 chhertum",
             "10 chhertum",
@@ -555,6 +615,9 @@
             "Botswana"
         ],
         "description": "Official currency of Botswana.",
+        "major_unit": "Pula",
+        "minor_unit": "Thebe",
+        "minor_units_per_major": 100,
         "coins": [
             "5 thebe",
             "10 thebe",
@@ -581,6 +644,9 @@
             "Belarus"
         ],
         "description": "Official currency of Belarus.",
+        "major_unit": "Ruble",
+        "minor_unit": "Kopeck",
+        "minor_units_per_major": 100,
         "coins": [
             "1 kapiejka",
             "2 kapiejki",
@@ -610,6 +676,9 @@
             "Belize"
         ],
         "description": "Official currency of Belize, pegged at 2:1 to the US Dollar.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -636,6 +705,9 @@
             "Canada"
         ],
         "description": "Official currency of Canada.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5c",
             "10c",
@@ -661,6 +733,9 @@
             "Democratic Republic of the Congo"
         ],
         "description": "Official currency of the Democratic Republic of the Congo.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "CDF10",
             "CDF20",
@@ -687,6 +762,9 @@
             "Liechtenstein"
         ],
         "description": "Official currency of Switzerland and Liechtenstein. Considered a safe-haven currency.",
+        "major_unit": "Franc",
+        "minor_unit": "Rappen",
+        "minor_units_per_major": 100,
         "coins": [
             "5c",
             "10c",
@@ -714,6 +792,9 @@
             "Chile"
         ],
         "description": "Official currency of Chile.",
+        "major_unit": "Peso",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "$10",
             "$50",
@@ -737,6 +818,9 @@
             "China"
         ],
         "description": "Official currency of China (Mainland), also known as the Renminbi (RMB) in Chinese.",
+        "major_unit": "Yuan",
+        "minor_unit": "Jiao",
+        "minor_units_per_major": 10,
         "coins": [
             "¥0.01",
             "¥0.05",
@@ -762,6 +846,9 @@
             "Colombia"
         ],
         "description": "Official currency of Colombia.",
+        "major_unit": "Peso",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "$50",
             "$100",
@@ -787,6 +874,9 @@
             "Costa Rica"
         ],
         "description": "Official currency of Costa Rica.",
+        "major_unit": "Colón",
+        "minor_unit": "Céntimo",
+        "minor_units_per_major": 100,
         "coins": [
             "₡5",
             "₡10",
@@ -813,6 +903,9 @@
             "Cuba"
         ],
         "description": "Official currency of Cuba.",
+        "major_unit": "Peso",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "1 centavo",
             "5 centavos",
@@ -843,6 +936,9 @@
             "Cape Verde"
         ],
         "description": "Official currency of Cape Verde, pegged at 110.265:1 to the Euro.",
+        "major_unit": "Escudo",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "1 centavo",
             "5 centavos",
@@ -873,6 +969,9 @@
             "Czech Republic"
         ],
         "description": "Official currency of the Czech Republic.",
+        "major_unit": "Koruna",
+        "minor_unit": "Heller",
+        "minor_units_per_major": 100,
         "coins": [
             "Kč1",
             "Kč2",
@@ -899,6 +998,9 @@
             "Djibouti"
         ],
         "description": "Official currency of Djibouti, pegged at 177.721:1 to the US Dollar.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "DJF1",
             "DJF2",
@@ -927,6 +1029,9 @@
             "Greenland"
         ],
         "description": "Official currency of Denmark, the Faroe Islands (Faroese króna is the localized version), and Greenland.",
+        "major_unit": "Krone",
+        "minor_unit": "Øre",
+        "minor_units_per_major": 100,
         "coins": [
             "50 øre",
             "1 kr",
@@ -951,6 +1056,9 @@
             "Dominican Republic"
         ],
         "description": "Official currency of the Dominican Republic.",
+        "major_unit": "Peso",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "1 centavo",
             "5 centavos",
@@ -979,6 +1087,9 @@
             "Algeria"
         ],
         "description": "Official currency of Algeria.",
+        "major_unit": "Dinar",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "DZD1",
             "DZD2",
@@ -1005,6 +1116,9 @@
             "Egypt"
         ],
         "description": "Official currency of Egypt.",
+        "major_unit": "Pound",
+        "minor_unit": "Piastre",
+        "minor_units_per_major": 100,
         "coins": [
             "25 PT",
             "50 PT",
@@ -1029,6 +1143,9 @@
             "Eritrea"
         ],
         "description": "Official currency of Eritrea.",
+        "major_unit": "Nakfa",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -1055,6 +1172,9 @@
             "Ethiopia"
         ],
         "description": "Official currency of Ethiopia.",
+        "major_unit": "Birr",
+        "minor_unit": "Santim",
+        "minor_units_per_major": 100,
         "coins": [
             "1 santim",
             "5 santim",
@@ -1106,6 +1226,9 @@
             "Spain"
         ],
         "description": "Official currency of the Eurozone, which includes 21 EU member states, and some non-EU countries.",
+        "major_unit": "euro",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "€0.01",
             "€0.02",
@@ -1134,6 +1257,9 @@
             "Fiji"
         ],
         "description": "Official currency of Fiji.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5 cents",
             "10 cents",
@@ -1159,6 +1285,9 @@
             "Falkland Islands"
         ],
         "description": "Official currency of the Falkland Islands, pegged at parity to the British Pound.",
+        "major_unit": "Pound",
+        "minor_unit": "Penny",
+        "minor_units_per_major": 100,
         "coins": [
             "1p",
             "2p",
@@ -1188,6 +1317,9 @@
             "Isle of Man"
         ],
         "description": "Official currency of the United Kingdom",
+        "major_unit": "Pound Sterling",
+        "minor_unit": "Penny",
+        "minor_units_per_major": 100,
         "coins": [
             "1p",
             "2p",
@@ -1214,6 +1346,9 @@
             "Georgia"
         ],
         "description": "Official currency of Georgia.",
+        "major_unit": "Lari",
+        "minor_unit": "Tetri",
+        "minor_units_per_major": 100,
         "coins": [
             "1 თეთრი",
             "2 თეთრი",
@@ -1242,6 +1377,9 @@
             "Ghana"
         ],
         "description": "Official currency of Ghana.",
+        "major_unit": "Cedi",
+        "minor_unit": "Pesewa",
+        "minor_units_per_major": 100,
         "coins": [
             "1 pesewa",
             "5 pesewas",
@@ -1269,6 +1407,9 @@
             "Gibraltar"
         ],
         "description": "Official currency of Gibraltar, pegged at parity with the British Pound.",
+        "major_unit": "Pound",
+        "minor_unit": "Penny",
+        "minor_units_per_major": 100,
         "coins": [
             "1p",
             "2p",
@@ -1296,6 +1437,9 @@
             "Gambia"
         ],
         "description": "Official currency of the Gambia.",
+        "major_unit": "Dalasi",
+        "minor_unit": "Butut",
+        "minor_units_per_major": 100,
         "coins": [
             "1 butut",
             "5 bututs",
@@ -1324,6 +1468,9 @@
             "Guinea"
         ],
         "description": "Official currency of Guinea.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "GNF1",
             "GNF5",
@@ -1350,6 +1497,9 @@
             "Guatemala"
         ],
         "description": "Official currency of Guatemala, named after the quetzal bird.",
+        "major_unit": "Quetzal",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "1 centavo",
             "5 centavos",
@@ -1377,6 +1527,9 @@
             "Guyana"
         ],
         "description": "Official currency of Guyana.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "G$1",
             "G$5",
@@ -1404,6 +1557,9 @@
             "Hong Kong"
         ],
         "description": "Official currency of Hong Kong, pegged at 7.75-7.85:1 to the US Dollar.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "10c",
             "20c",
@@ -1431,6 +1587,9 @@
             "Honduras"
         ],
         "description": "Official currency of Honduras.",
+        "major_unit": "Lempira",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "1 centavo",
             "2 centavos",
@@ -1463,6 +1622,9 @@
             "Haiti"
         ],
         "description": "Official currency of Haiti.",
+        "major_unit": "Gourde",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "5 centimes",
             "10 centimes",
@@ -1493,6 +1655,9 @@
             "Hungary"
         ],
         "description": "Official currency of Hungary.",
+        "major_unit": "Forint",
+        "minor_unit": "Fillér",
+        "minor_units_per_major": 100,
         "coins": [
             "Ft5",
             "Ft10",
@@ -1519,6 +1684,9 @@
             "Indonesia"
         ],
         "description": "Official currency of Indonesia.",
+        "major_unit": "Rupiah",
+        "minor_unit": "Sen",
+        "minor_units_per_major": 100,
         "coins": [
             "Rp100",
             "Rp200",
@@ -1544,6 +1712,9 @@
             "Israel"
         ],
         "description": "Official currency of Israel.",
+        "major_unit": "Shekel",
+        "minor_unit": "Agora",
+        "minor_units_per_major": 100,
         "coins": [
             "10 agorot",
             "₪0.5",
@@ -1568,6 +1739,9 @@
             "India"
         ],
         "description": "Official currency of India.",
+        "major_unit": "Rupee",
+        "minor_unit": "Paisa",
+        "minor_units_per_major": 100,
         "coins": [
             "₹1",
             "₹2",
@@ -1593,6 +1767,9 @@
             "Iraq"
         ],
         "description": "Official currency of Iraq.",
+        "major_unit": "Dinar",
+        "minor_unit": "Fils",
+        "minor_units_per_major": 1000,
         "coins": [
             "IQD25",
             "IQD50",
@@ -1620,6 +1797,9 @@
             "Iran"
         ],
         "description": "Official currency of Iran.",
+        "major_unit": "Rial",
+        "minor_unit": "Dinar",
+        "minor_units_per_major": 100,
         "coins": [
             "IRR500",
             "IRR1000",
@@ -1647,6 +1827,9 @@
             "Iceland"
         ],
         "description": "Official currency of Iceland.",
+        "major_unit": "Króna",
+        "minor_unit": "Eyrir",
+        "minor_units_per_major": 100,
         "coins": [
             "1 kr",
             "5 kr",
@@ -1671,6 +1854,9 @@
             "Jamaica"
         ],
         "description": "Official currency of Jamaica.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "J$1",
             "J$5",
@@ -1696,6 +1882,9 @@
             "Jordan"
         ],
         "description": "Official currency of Jordan, pegged at 0.708/0.710:1 (buy/sell) to the US Dollar.",
+        "major_unit": "Dinar",
+        "minor_unit": "Piastre",
+        "minor_units_per_major": 100,
         "coins": [
             "1 qirsh",
             "2.5 qirsh",
@@ -1722,6 +1911,9 @@
             "Japan"
         ],
         "description": "Official currency of Japan, one of the most traded currencies globally.",
+        "major_unit": "yen",
+        "minor_unit": "Sen",
+        "minor_units_per_major": 100,
         "coins": [
             "¥1",
             "¥5",
@@ -1746,6 +1938,9 @@
             "Kenya"
         ],
         "description": "Official currency of Kenya.",
+        "major_unit": "Shilling",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "KSh1",
             "KSh5",
@@ -1772,6 +1967,9 @@
             "Kyrgyzstan"
         ],
         "description": "Official currency of Kyrgyzstan.",
+        "major_unit": "Som",
+        "minor_unit": "Tyiyn",
+        "minor_units_per_major": 100,
         "coins": [
             "KGS1",
             "KGS3",
@@ -1798,6 +1996,9 @@
             "Cambodia"
         ],
         "description": "Official currency of Cambodia.",
+        "major_unit": "Riel",
+        "minor_unit": "Sen",
+        "minor_units_per_major": 100,
         "coins": [
             "KHR50",
             "KHR100",
@@ -1826,6 +2027,9 @@
             "Comoros"
         ],
         "description": "Official currency of Comoros, pegged at 491.96775:1 to the Euro.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "KMF1",
             "KMF2",
@@ -1855,6 +2059,9 @@
             "North Korea"
         ],
         "description": "Official currency of North Korea.",
+        "major_unit": "Won",
+        "minor_unit": "Chon",
+        "minor_units_per_major": 100,
         "coins": [
             "KPW1",
             "KPW5",
@@ -1879,6 +2086,9 @@
             "South Korea"
         ],
         "description": "Official currency of South Korea.",
+        "major_unit": "Won",
+        "minor_unit": "Jeon",
+        "minor_units_per_major": 100,
         "coins": [
             "₩1",
             "₩5",
@@ -1903,6 +2113,9 @@
             "Kuwait"
         ],
         "description": "Official currency of Kuwait, one of the highest-valued currencies in the world. It is pegged to undisclosed currency bucket.",
+        "major_unit": "Dinar",
+        "minor_unit": "Fils",
+        "minor_units_per_major": 1000,
         "coins": [
             "5 fils",
             "10 fils",
@@ -1928,6 +2141,9 @@
             "Cayman Islands"
         ],
         "description": "Official currency of the Cayman Islands, pegged at 1.2:1 to the US Dollar.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -1954,6 +2170,9 @@
             "Kazakhstan"
         ],
         "description": "Official currency of Kazakhstan.",
+        "major_unit": "Tenge",
+        "minor_unit": "Tıyn",
+        "minor_units_per_major": 100,
         "coins": [
             "KZT1",
             "KZT2",
@@ -1983,6 +2202,9 @@
             "Laos"
         ],
         "description": "Official currency of Laos.",
+        "major_unit": "Kip",
+        "minor_unit": "Att",
+        "minor_units_per_major": 100,
         "coins": [
             "LAK10",
             "LAK20",
@@ -2010,6 +2232,9 @@
             "Lebanon"
         ],
         "description": "Official currency of Lebanon.",
+        "major_unit": "Pound",
+        "minor_unit": "Piastre",
+        "minor_units_per_major": 100,
         "coins": [
             "LBP50",
             "LBP100",
@@ -2035,6 +2260,9 @@
             "Sri Lanka"
         ],
         "description": "Official currency of Sri Lanka.",
+        "major_unit": "Rupee",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "රු1",
             "රු2",
@@ -2062,6 +2290,9 @@
             "Liberia"
         ],
         "description": "Official currency of Liberia.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5 cents",
             "10 cents",
@@ -2086,6 +2317,9 @@
             "Lesotho"
         ],
         "description": "Official currency of Lesotho, pegged at parity with the South African Rand.",
+        "major_unit": "Loti",
+        "minor_unit": "Sente",
+        "minor_units_per_major": 100,
         "coins": [
             "5 lisente",
             "10 lisente",
@@ -2112,6 +2346,9 @@
             "Libya"
         ],
         "description": "Official currency of Libya.",
+        "major_unit": "Dinar",
+        "minor_unit": "Dirham",
+        "minor_units_per_major": 1000,
         "coins": [
             "LYD0.25",
             "LYD0.5",
@@ -2135,6 +2372,9 @@
             "Western Sahara"
         ],
         "description": "Official currency of Morocco.",
+        "major_unit": "Dirham",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "DH0.5",
             "DH1",
@@ -2158,6 +2398,9 @@
             "Moldova"
         ],
         "description": "Official currency of Moldova.",
+        "major_unit": "Leu",
+        "minor_unit": "Ban",
+        "minor_units_per_major": 100,
         "coins": [
             "1 ban",
             "5 bani",
@@ -2190,6 +2433,9 @@
             "Madagascar"
         ],
         "description": "Official currency of Madagascar.",
+        "major_unit": "Ariary",
+        "minor_unit": "Iraimbilanja",
+        "minor_units_per_major": 5,
         "coins": [
             "MGA1",
             "MGA2",
@@ -2220,6 +2466,9 @@
             "North Macedonia"
         ],
         "description": "Official currency of North Macedonia.",
+        "major_unit": "Denar",
+        "minor_unit": "Deni",
+        "minor_units_per_major": 100,
         "coins": [
             "1 denar",
             "2 denari",
@@ -2246,6 +2495,9 @@
             "Myanmar"
         ],
         "description": "Official currency of Myanmar.",
+        "major_unit": "Kyat",
+        "minor_unit": "Pya",
+        "minor_units_per_major": 100,
         "coins": [
             "MMK1",
             "MMK5",
@@ -2273,6 +2525,9 @@
             "Mongolia"
         ],
         "description": "Official currency of Mongolia.",
+        "major_unit": "Tugrik",
+        "minor_unit": "Möngö",
+        "minor_units_per_major": 100,
         "coins": [
             "MNT10",
             "MNT20",
@@ -2298,6 +2553,9 @@
             "Macau"
         ],
         "description": "Official currency of Macau, pegged at 1.03:1 to the Hong Kong Dollar.",
+        "major_unit": "Pataca",
+        "minor_unit": "Avo",
+        "minor_units_per_major": 100,
         "coins": [
             "10 avos",
             "20 avos",
@@ -2325,6 +2583,9 @@
             "Mauritania"
         ],
         "description": "Official currency of Mauritania.",
+        "major_unit": "Ouguiya",
+        "minor_unit": "Khoums",
+        "minor_units_per_major": 5,
         "coins": [
             "MRU1/5",
             "MRU1",
@@ -2350,6 +2611,9 @@
             "Mauritius"
         ],
         "description": "Official currency of Mauritius.",
+        "major_unit": "Rupee",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5 cents",
             "10 cents",
@@ -2379,6 +2643,9 @@
             "Maldives"
         ],
         "description": "Official currency of the Maldives.",
+        "major_unit": "Rufiyaa",
+        "minor_unit": "Laari",
+        "minor_units_per_major": 100,
         "coins": [
             "1 laari",
             "5 laari",
@@ -2407,6 +2674,9 @@
             "Malawi"
         ],
         "description": "Official currency of Malawi.",
+        "major_unit": "Kwacha",
+        "minor_unit": "Tambala",
+        "minor_units_per_major": 100,
         "coins": [
             "MWK1",
             "MWK5",
@@ -2433,6 +2703,9 @@
             "Mexico"
         ],
         "description": "Official currency of Mexico.",
+        "major_unit": "Peso",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "50c",
             "$1",
@@ -2459,6 +2732,9 @@
             "Malaysia"
         ],
         "description": "Official currency of Malaysia.",
+        "major_unit": "Ringgit",
+        "minor_unit": "Sen",
+        "minor_units_per_major": 100,
         "coins": [
             "5 sen",
             "10 sen",
@@ -2483,6 +2759,9 @@
             "Mozambique"
         ],
         "description": "Official currency of Mozambique.",
+        "major_unit": "Metical",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "1 centavo",
             "5 centavos",
@@ -2512,6 +2791,9 @@
             "Namibia"
         ],
         "description": "Official currency of Namibia, pegged at parity with the South African Rand.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5 cents",
             "10 cents",
@@ -2538,6 +2820,9 @@
             "Nigeria"
         ],
         "description": "Official currency of Nigeria.",
+        "major_unit": "Naira",
+        "minor_unit": "Kobo",
+        "minor_units_per_major": 100,
         "coins": [
             "50 kobo",
             "₦1",
@@ -2563,6 +2848,9 @@
             "Nicaragua"
         ],
         "description": "Official currency of Nicaragua.",
+        "major_unit": "Córdoba",
+        "minor_unit": "Centavo",
+        "minor_units_per_major": 100,
         "coins": [
             "C$0.05",
             "C$0.10",
@@ -2592,6 +2880,9 @@
             "Svalbard and Jan Mayen"
         ],
         "description": "Official currency of Norway.",
+        "major_unit": "Krone",
+        "minor_unit": "Øre",
+        "minor_units_per_major": 100,
         "coins": [
             "1 øre",
             "5 øre",
@@ -2620,6 +2911,9 @@
             "Nepal"
         ],
         "description": "Official currency of Nepal, pegged at 1.6/1.6015:1 (buy/sell) to the Indian Rupee.",
+        "major_unit": "Rupee",
+        "minor_unit": "Paisa",
+        "minor_units_per_major": 100,
         "coins": [
             "1 paisa",
             "5 paisa",
@@ -2654,6 +2948,9 @@
             "Tokelau"
         ],
         "description": "Official currency of New Zealand and several Pacific island territories.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "10c",
             "20c",
@@ -2678,6 +2975,9 @@
             "Oman"
         ],
         "description": "Official currency of Oman, pegged at 0.384/0.385:1 (buy/sell) to the US Dollar.",
+        "major_unit": "Rial",
+        "minor_unit": "Baisa",
+        "minor_units_per_major": 1000,
         "coins": [
             "5 baisa",
             "10 baisa",
@@ -2703,6 +3003,9 @@
             "Panama"
         ],
         "description": "Official currency of Panama, pegged at parity with the US Dollar.",
+        "major_unit": "Balboa",
+        "minor_unit": "Centésimo",
+        "minor_units_per_major": 100,
         "coins": [
             "1 centésimo",
             "5 centésimos",
@@ -2724,6 +3027,9 @@
             "Peru"
         ],
         "description": "Official currency of Peru.",
+        "major_unit": "Sol",
+        "minor_unit": "Céntimo",
+        "minor_units_per_major": 100,
         "coins": [
             "10 céntimos",
             "20 céntimos",
@@ -2749,6 +3055,9 @@
             "Papua New Guinea"
         ],
         "description": "Official currency of Papua New Guinea.",
+        "major_unit": "Kina",
+        "minor_unit": "Toea",
+        "minor_units_per_major": 100,
         "coins": [
             "1 toea",
             "2 toea",
@@ -2778,6 +3087,9 @@
             "Philippines"
         ],
         "description": "Official currency of the Philippines.",
+        "major_unit": "Peso",
+        "minor_unit": "Sentimo",
+        "minor_units_per_major": 100,
         "coins": [
             "25¢",
             "₱1",
@@ -2803,6 +3115,9 @@
             "Pakistan"
         ],
         "description": "Official currency of Pakistan.",
+        "major_unit": "Rupee",
+        "minor_unit": "Paisa",
+        "minor_units_per_major": 100,
         "coins": [
             "1 paisa",
             "2 paisa",
@@ -2834,6 +3149,9 @@
             "Poland"
         ],
         "description": "Official currency of Poland.",
+        "major_unit": "Złoty",
+        "minor_unit": "Grosz",
+        "minor_units_per_major": 100,
         "coins": [
             "1 gr",
             "2 gr",
@@ -2863,6 +3181,9 @@
             "Paraguay"
         ],
         "description": "Official currency of Paraguay.",
+        "major_unit": "Guarani",
+        "minor_unit": "Céntimo",
+        "minor_units_per_major": 100,
         "coins": [
             "₲50",
             "₲100",
@@ -2887,6 +3208,9 @@
             "Qatar"
         ],
         "description": "Official currency of Qatar, pegged at 3.64:1 to the US Dollar.",
+        "major_unit": "Rial",
+        "minor_unit": "Dirham",
+        "minor_units_per_major": 100,
         "coins": [
             "1 dirham",
             "5 dirhams",
@@ -2913,6 +3237,9 @@
             "Romania"
         ],
         "description": "Official currency of Romania.",
+        "major_unit": "Leu",
+        "minor_unit": "Ban",
+        "minor_units_per_major": 100,
         "coins": [
             "1 ban",
             "5 bani",
@@ -2939,6 +3266,9 @@
             "Serbia"
         ],
         "description": "Official currency of Serbia.",
+        "major_unit": "Dinar",
+        "minor_unit": "Para",
+        "minor_units_per_major": 100,
         "coins": [
             "дин.1",
             "дин.2",
@@ -2967,6 +3297,9 @@
             "Russia"
         ],
         "description": "Official currency of Russia.",
+        "major_unit": "Ruble",
+        "minor_unit": "Kopeck",
+        "minor_units_per_major": 100,
         "coins": [
             "₽1",
             "₽2",
@@ -2993,6 +3326,9 @@
             "Rwanda"
         ],
         "description": "Official currency of Rwanda.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "RWF1",
             "RWF5",
@@ -3018,6 +3354,9 @@
             "Saudi Arabia"
         ],
         "description": "Official currency of Saudi Arabia, pegged at 3.75:1 to the US Dollar.",
+        "major_unit": "Riyal",
+        "minor_unit": "Halala",
+        "minor_units_per_major": 100,
         "coins": [
             "1 halala",
             "5 halalas",
@@ -3044,6 +3383,9 @@
             "Solomon Islands"
         ],
         "description": "Official currency of the Solomon Islands.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5 cents",
             "10 cents",
@@ -3069,6 +3411,9 @@
             "Seychelles"
         ],
         "description": "Official currency of Seychelles.",
+        "major_unit": "Rupee",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -3095,6 +3440,9 @@
             "Sudan"
         ],
         "description": "Official currency of Sudan.",
+        "major_unit": "Pound",
+        "minor_unit": "Piastre",
+        "minor_units_per_major": 100,
         "coins": [
             "SDG1",
             "SDG5",
@@ -3124,6 +3472,9 @@
             "Sweden"
         ],
         "description": "Official currency of Sweden.",
+        "major_unit": "Krona",
+        "minor_unit": "Öre",
+        "minor_units_per_major": 100,
         "coins": [
             "1 kr",
             "2 kr",
@@ -3148,6 +3499,9 @@
             "Singapore"
         ],
         "description": "Official currency of Singapore. Interchangeable with the Brunei Dollar at par.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "5c",
             "10c",
@@ -3176,6 +3530,9 @@
             "Tristan da Cunha"
         ],
         "description": "Official currency of Saint Helena, Ascension Island, and Tristan da Cunha, pegged at parity to the British Pound.",
+        "major_unit": "Pound",
+        "minor_unit": "Penny",
+        "minor_units_per_major": 100,
         "coins": [
             "1p",
             "2p",
@@ -3201,6 +3558,9 @@
             "Sierra Leone"
         ],
         "description": "Official currency of Sierra Leone.",
+        "major_unit": "Leone",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "SLE1",
             "SLE2",
@@ -3224,6 +3584,9 @@
             "Somalia"
         ],
         "description": "Official currency of Somalia.",
+        "major_unit": "Shilling",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "No Somali Shilling coins currently circulate"
         ],
@@ -3243,6 +3606,9 @@
             "Suriname"
         ],
         "description": "Official currency of Suriname.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "SRD0.01",
             "SRD0.05",
@@ -3271,6 +3637,9 @@
             "South Sudan"
         ],
         "description": "Official currency of South Sudan.",
+        "major_unit": "Pound",
+        "minor_unit": "Piaster",
+        "minor_units_per_major": 100,
         "coins": [
             "SSP0.10",
             "SSP0.25",
@@ -3298,6 +3667,9 @@
             "São Tomé and Príncipe"
         ],
         "description": "Official currency of São Tomé and Príncipe, pegged at 24.5:1 to the Euro.",
+        "major_unit": "Dobra",
+        "minor_unit": "Cêntimo",
+        "minor_units_per_major": 100,
         "coins": [
             "10 cêntimos",
             "20 cêntimos",
@@ -3323,6 +3695,9 @@
             "Syria"
         ],
         "description": "Official currency of Syria.",
+        "major_unit": "Pound",
+        "minor_unit": "Piastre",
+        "minor_units_per_major": 100,
         "coins": [
             "SYP1",
             "SYP2",
@@ -3349,6 +3724,9 @@
             "Eswatini"
         ],
         "description": "Official currency of Eswatini, pegged at parity with the South African Rand.",
+        "major_unit": "Lilangeni",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "10 cents",
             "20 cents",
@@ -3374,6 +3752,9 @@
             "Thailand"
         ],
         "description": "Official currency of Thailand.",
+        "major_unit": "Baht",
+        "minor_unit": "Satang",
+        "minor_units_per_major": 100,
         "coins": [
             "25 satang",
             "50 satang",
@@ -3399,6 +3780,9 @@
             "Tajikistan"
         ],
         "description": "Official currency of Tajikistan.",
+        "major_unit": "Somoni",
+        "minor_unit": "Diram",
+        "minor_units_per_major": 100,
         "coins": [
             "1 diram",
             "5 diram",
@@ -3430,6 +3814,9 @@
             "Turkmenistan"
         ],
         "description": "Official currency of Turkmenistan.",
+        "major_unit": "Manat",
+        "minor_unit": "Tenge",
+        "minor_units_per_major": 100,
         "coins": [
             "1 tenge",
             "2 tenge",
@@ -3459,6 +3846,9 @@
             "Tunisia"
         ],
         "description": "Official currency of Tunisia.",
+        "major_unit": "Dinar",
+        "minor_unit": "Millime",
+        "minor_units_per_major": 1000,
         "coins": [
             "5 millimes",
             "10 millimes",
@@ -3488,6 +3878,9 @@
             "Tonga"
         ],
         "description": "Official currency of Tonga.",
+        "major_unit": "Paʻanga",
+        "minor_unit": "Seniti",
+        "minor_units_per_major": 100,
         "coins": [
             "5 seniti",
             "10 seniti",
@@ -3514,6 +3907,9 @@
             "Turkey/Türkiye"
         ],
         "description": "Official currency of Turkey/Türkiye.",
+        "major_unit": "Lira",
+        "minor_unit": "Kuruş",
+        "minor_units_per_major": 100,
         "coins": [
             "1 kuruş",
             "5 kuruş",
@@ -3541,6 +3937,9 @@
             "Trinidad and Tobago"
         ],
         "description": "Official currency of Trinidad and Tobago.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -3567,6 +3966,9 @@
             "Taiwan"
         ],
         "description": "Official currency of Taiwan.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "NT$0.5",
             "NT$1",
@@ -3592,6 +3994,9 @@
             "Tanzania"
         ],
         "description": "Official currency of Tanzania.",
+        "major_unit": "Shilling",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "TZS50",
             "TZS100",
@@ -3615,6 +4020,9 @@
             "Ukraine"
         ],
         "description": "Official currency of Ukraine.",
+        "major_unit": "Hryvnia",
+        "minor_unit": "Kopeck",
+        "minor_units_per_major": 100,
         "coins": [
             "50 kopiyky",
             "₴1",
@@ -3641,6 +4049,9 @@
             "Uganda"
         ],
         "description": "Official currency of Uganda.",
+        "major_unit": "Shilling",
+        "minor_unit": null,
+        "minor_units_per_major": null,
         "coins": [
             "UGX50",
             "UGX100",
@@ -3683,6 +4094,9 @@
             "Zimbabwe"
         ],
         "description": "Official currency of the United States (including its territories) and other regions. The world's primary reserve currency.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1¢",
             "5¢",
@@ -3710,6 +4124,9 @@
             "Uruguay"
         ],
         "description": "Official currency of Uruguay.",
+        "major_unit": "Peso",
+        "minor_unit": "Centésimo",
+        "minor_units_per_major": 100,
         "coins": [
             "$1",
             "$2",
@@ -3735,6 +4152,9 @@
             "Uzbekistan"
         ],
         "description": "Official currency of Uzbekistan.",
+        "major_unit": "Sum",
+        "minor_unit": "Tiyin",
+        "minor_units_per_major": 100,
         "coins": [
             "UZS50",
             "UZS100",
@@ -3763,6 +4183,9 @@
             "Venezuela"
         ],
         "description": "One of official currencies of Venezuela.",
+        "major_unit": "Bolívar Digital",
+        "minor_unit": "Céntimo",
+        "minor_units_per_major": 100,
         "coins": [
             "1 céntimo",
             "5 céntimos",
@@ -3789,6 +4212,9 @@
             "Venezuela"
         ],
         "description": "One of official currencies of Venezuela.",
+        "major_unit": "Bolívar Soberano",
+        "minor_unit": "Céntimo",
+        "minor_units_per_major": 100,
         "coins": [
             "Bs.S0.10",
             "Bs.S0.25",
@@ -3813,6 +4239,9 @@
             "Vietnam"
         ],
         "description": "Official currency of Vietnam.",
+        "major_unit": "Đồng",
+        "minor_unit": "Hào",
+        "minor_units_per_major": 10,
         "coins": [
             "No Vietnamese đồng coins currently circulate"
         ],
@@ -3840,6 +4269,9 @@
             "Vanuatu"
         ],
         "description": "Official currency of Vanuatu.",
+        "major_unit": "Vatu",
+        "minor_unit": null,
+        "minor_units_per_major": null,
         "coins": [
             "1 vatu",
             "2 vatu",
@@ -3867,6 +4299,9 @@
             "Samoa"
         ],
         "description": "Official currency of Samoa.",
+        "major_unit": "Tālā",
+        "minor_unit": "Sene",
+        "minor_units_per_major": 100,
         "coins": [
             "10 sene",
             "20 sene",
@@ -3896,6 +4331,9 @@
             "Gabon"
         ],
         "description": "Official currency of 6 Central African countries, pegged at 655.957:1 to the Euro.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "1 franc",
             "2 francs",
@@ -3931,6 +4369,9 @@
             "Montserrat"
         ],
         "description": "Official currency of 8 Caribbean countries and territories, pegged at 2.7:1 to the US Dollar.",
+        "major_unit": "Dollar",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "2 cents",
@@ -3958,6 +4399,9 @@
             "Sint Maarten"
         ],
         "description": "Official currency of Curaçao and Sint Maarten, the constituent countries of the Kingdom of the Netherlands, pegged at 1.79:1 to the US Dollar.",
+        "major_unit": "Guilder",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "1 cent",
             "5 cents",
@@ -3992,6 +4436,9 @@
             "Togo"
         ],
         "description": "Official currency of 8 West African countries, pegged at 655.957:1 to the Euro.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "1 franc",
             "5 francs",
@@ -4022,6 +4469,9 @@
             "Wallis and Futuna"
         ],
         "description": "Official currency of French territories in the Pacific, pegged at 1000:8.38 to the Euro.",
+        "major_unit": "Franc",
+        "minor_unit": "Centime",
+        "minor_units_per_major": 100,
         "coins": [
             "1 franc",
             "2 francs",
@@ -4048,6 +4498,9 @@
             "Yemen"
         ],
         "description": "Official currency of Yemen.",
+        "major_unit": "Rial",
+        "minor_unit": "Fils",
+        "minor_units_per_major": 100,
         "coins": [
             "YER1",
             "YER5",
@@ -4077,6 +4530,9 @@
             "Eswatini"
         ],
         "description": "Official currency of South Africa. Lesotho, Namibia, and Eswatini officially use the Rand alongside their own currencies.",
+        "major_unit": "Rand",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "10c",
             "20c",
@@ -4102,6 +4558,9 @@
             "Zambia"
         ],
         "description": "Official currency of Zambia.",
+        "major_unit": "Kwacha",
+        "minor_unit": "Ngwee",
+        "minor_units_per_major": 100,
         "coins": [
             "5 ngwee",
             "10 ngwee",
@@ -4127,6 +4586,9 @@
             "Zimbabwe"
         ],
         "description": "Official currency of Zimbabwe, used alongside the US Dollar and other foreign currencies.",
+        "major_unit": "ZiG",
+        "minor_unit": "Cent",
+        "minor_units_per_major": 100,
         "coins": [
             "ZiG0.01",
             "ZiG0.02",

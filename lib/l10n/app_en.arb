@@ -296,6 +296,34 @@
     "@detail_banknotes": {
         "description": "Label for banknote denominations in detail view."
     },
+    "detail_units": "Units",
+    "@detail_units": {
+        "description": "Label for major and minor currency units in detail view."
+    },
+    "detail_unit_summary": "{majorUnit} / {minorUnit} (1:{ratio})",
+    "@detail_unit_summary": {
+        "description": "Major unit, minor unit, and minor-units-per-major ratio.",
+        "placeholders": {
+            "majorUnit": {
+                "type": "String"
+            },
+            "minorUnit": {
+                "type": "String"
+            },
+            "ratio": {
+                "type": "int"
+            }
+        }
+    },
+    "detail_unit_summary_no_minor": "{majorUnit} (no minor unit)",
+    "@detail_unit_summary_no_minor": {
+        "description": "Major currency unit when the currency has no minor unit.",
+        "placeholders": {
+            "majorUnit": {
+                "type": "String"
+            }
+        }
+    },
     "detail_pab_no_banknotes": "No Balboa banknotes; US dollar banknotes are used instead",
     "@detail_pab_no_banknotes": {
         "description": "Message explaining that Panama uses US dollar banknotes instead of Balboa banknotes."

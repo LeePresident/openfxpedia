@@ -231,13 +231,26 @@ class AppLocalizationsZh extends AppLocalizations {
   String get detail_banknotes => '纸币';
 
   @override
-  String get detail_pab_no_banknotes => '没有巴波亚纸币；改用美元纸币';
+  String get detail_units => '货币单位';
 
   @override
-  String get detail_sos_no_coins => '索马里先令硬币目前不流通';
+  String detail_unit_summary(String majorUnit, String minorUnit, int ratio) {
+    return '$majorUnit / $minorUnit（1:$ratio）';
+  }
 
   @override
-  String get detail_vnd_no_coins => '越南盾硬币目前不流通';
+  String detail_unit_summary_no_minor(String majorUnit) {
+    return '$majorUnit（无辅单位）';
+  }
+
+  @override
+  String get detail_pab_no_banknotes => '巴波亚不设纸币；使用美元纸币';
+
+  @override
+  String get detail_sos_no_coins => '索马里先令不设硬币';
+
+  @override
+  String get detail_vnd_no_coins => '越南盾不设硬币';
 
   @override
   String get detail_convert => '转换';
@@ -537,13 +550,26 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get detail_banknotes => '纸币';
 
   @override
-  String get detail_pab_no_banknotes => '没有巴波亚纸币；改用美元纸币';
+  String get detail_units => '货币单位';
 
   @override
-  String get detail_sos_no_coins => '索马里先令硬币目前不流通';
+  String detail_unit_summary(String majorUnit, String minorUnit, int ratio) {
+    return '$majorUnit / $minorUnit（1:$ratio）';
+  }
 
   @override
-  String get detail_vnd_no_coins => '越南盾硬币目前不流通';
+  String detail_unit_summary_no_minor(String majorUnit) {
+    return '$majorUnit（无辅单位）';
+  }
+
+  @override
+  String get detail_pab_no_banknotes => '巴波亚不设纸币；使用美元纸币';
+
+  @override
+  String get detail_sos_no_coins => '索马里先令不设硬币';
+
+  @override
+  String get detail_vnd_no_coins => '越南盾不设硬币';
 
   @override
   String get detail_convert => '转换';
@@ -843,13 +869,26 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get detail_banknotes => '紙幣';
 
   @override
-  String get detail_pab_no_banknotes => '沒有巴波亞紙幣；改用美元紙幣';
+  String get detail_units => '貨幣單位';
 
   @override
-  String get detail_sos_no_coins => '索馬利先令硬幣目前不流通';
+  String detail_unit_summary(String majorUnit, String minorUnit, int ratio) {
+    return '$majorUnit / $minorUnit（1:$ratio）';
+  }
 
   @override
-  String get detail_vnd_no_coins => '越南盾硬幣目前不流通';
+  String detail_unit_summary_no_minor(String majorUnit) {
+    return '$majorUnit（無輔助單位）';
+  }
+
+  @override
+  String get detail_pab_no_banknotes => '巴波亞不設紙幣；使用美元紙幣';
+
+  @override
+  String get detail_sos_no_coins => '索馬利先令不設硬幣';
+
+  @override
+  String get detail_vnd_no_coins => '越南盾不設硬幣';
 
   @override
   String get detail_convert => '轉換';

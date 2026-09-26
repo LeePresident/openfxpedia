@@ -78,6 +78,42 @@ class CurrencyCatalogService {
         baseValue: meta?.description,
         overlayEntry: overlayEntry,
       );
+      final majorUnit = meta?.majorUnit == null
+          ? null
+          : localizer.resolveField(
+              isoCode: iso,
+              field: 'major_unit',
+              baseValue: meta!.majorUnit,
+              overlayEntry: overlayEntry,
+            );
+      final minorUnit = meta?.minorUnit == null
+          ? null
+          : localizer.resolveField(
+              isoCode: iso,
+              field: 'minor_unit',
+              baseValue: meta!.minorUnit,
+              overlayEntry: overlayEntry,
+            );
+      final coinsWithMajorUnit = localizer.localizeDenominations(
+        denominations: meta?.coins ?? const [],
+        baseUnit: meta?.majorUnit,
+        localizedUnit: majorUnit,
+      );
+      final coins = localizer.localizeDenominations(
+        denominations: coinsWithMajorUnit,
+        baseUnit: meta?.minorUnit,
+        localizedUnit: minorUnit,
+      );
+      final banknotesWithMajorUnit = localizer.localizeDenominations(
+        denominations: meta?.banknotes ?? const [],
+        baseUnit: meta?.majorUnit,
+        localizedUnit: majorUnit,
+      );
+      final banknotes = localizer.localizeDenominations(
+        denominations: banknotesWithMajorUnit,
+        baseUnit: meta?.minorUnit,
+        localizedUnit: minorUnit,
+      );
 
       return Currency(
         isoCode: iso,
@@ -87,8 +123,11 @@ class CurrencyCatalogService {
         regions: regions,
         regionCodes: regionCodes,
         description: description,
-        coins: meta?.coins ?? const [],
-        banknotes: meta?.banknotes ?? const [],
+        coins: coins,
+        banknotes: banknotes,
+        majorUnit: majorUnit?.isEmpty ?? true ? null : majorUnit,
+        minorUnit: minorUnit?.isEmpty ?? true ? null : minorUnit,
+        minorUnitsPerMajor: meta?.minorUnitsPerMajor,
       );
     }).toList()
       ..sort((a, b) => a.isoCode.compareTo(b.isoCode));

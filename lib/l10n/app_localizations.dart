@@ -544,6 +544,24 @@ abstract class AppLocalizations {
   /// **'Banknotes'**
   String get detail_banknotes;
 
+  /// Label for major and minor currency units in detail view.
+  ///
+  /// In en, this message translates to:
+  /// **'Units'**
+  String get detail_units;
+
+  /// Major unit, minor unit, and minor-units-per-major ratio.
+  ///
+  /// In en, this message translates to:
+  /// **'{majorUnit} / {minorUnit} (1:{ratio})'**
+  String detail_unit_summary(String majorUnit, String minorUnit, int ratio);
+
+  /// Major currency unit when the currency has no minor unit.
+  ///
+  /// In en, this message translates to:
+  /// **'{majorUnit} (no minor unit)'**
+  String detail_unit_summary_no_minor(String majorUnit);
+
   /// Message explaining that Panama uses US dollar banknotes instead of Balboa banknotes.
   ///
   /// In en, this message translates to:

@@ -104,6 +104,13 @@ class AppState extends ChangeNotifier {
     convert();
   }
 
+  void setBaseCurrencyAndAmount(Currency currency, double amount) {
+    _baseCurrency = currency;
+    _inputAmount = amount;
+    notifyListeners();
+    convert();
+  }
+
   void setTargetCurrency(Currency currency) {
     _targetCurrency = currency;
     notifyListeners();

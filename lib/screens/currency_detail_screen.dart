@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../models/currency.dart';
@@ -112,6 +112,20 @@ class CurrencyDetailScreen extends StatelessWidget {
                 if (currency.symbol != null)
                   _DetailRow(
                       label: l10n.detail_symbol, value: currency.symbol!),
+                if (currency.majorUnit != null)
+                  _DetailRow(
+                    label: l10n.detail_units,
+                    value: currency.minorUnit != null &&
+                            currency.minorUnitsPerMajor != null
+                        ? l10n.detail_unit_summary(
+                            currency.majorUnit!,
+                            currency.minorUnit!,
+                            currency.minorUnitsPerMajor!,
+                          )
+                        : l10n.detail_unit_summary_no_minor(
+                            currency.majorUnit!,
+                          ),
+                  ),
                 if (currency.regions.isNotEmpty)
                   _RegionsDetailRow(
                     label: l10n.detail_regions,
@@ -121,22 +135,28 @@ class CurrencyDetailScreen extends StatelessWidget {
                     showLessLabel: l10n.detail_show_less_regions,
                   ),
                 if (currency.coins.isNotEmpty)
-                  _DetailRow(
+                  _DenominationsDetailRow(
                     label: l10n.detail_coins,
-                    value: _localizedDenominations(
+                    denominations: currency.coins,
+                    message: _nonInteractiveDenominationMessage(
                       currency.isoCode,
                       currency.coins,
                       l10n,
                     ),
+                    onSelected: (denomination) =>
+                        _selectDenomination(context, state, denomination),
                   ),
                 if (currency.banknotes.isNotEmpty)
-                  _DetailRow(
+                  _DenominationsDetailRow(
                     label: l10n.detail_banknotes,
-                    value: _localizedDenominations(
+                    denominations: currency.banknotes,
+                    message: _nonInteractiveDenominationMessage(
                       currency.isoCode,
                       currency.banknotes,
                       l10n,
                     ),
+                    onSelected: (denomination) =>
+                        _selectDenomination(context, state, denomination),
                   ),
                 if (currency.description != null &&
                     currency.description!.isNotEmpty)
@@ -160,9 +180,69 @@ class CurrencyDetailScreen extends StatelessWidget {
       },
     );
   }
+
+  void _selectDenomination(
+    BuildContext context,
+    AppState state,
+    String denomination,
+  ) {
+    final amount = _denominationAmount(currency, denomination);
+    if (amount == null) return;
+
+    state.setBaseCurrencyAndAmount(currency, amount);
+    state.setSelectedTab(0);
+    Navigator.pop(context);
+  }
 }
 
-String _localizedDenominations(
+double? _denominationAmount(Currency currency, String denomination) {
+  final fraction = RegExp(r'(\d+)\s*[/⁄]\s*(\d+)').firstMatch(denomination);
+  final amountMatch = fraction == null
+      ? RegExp(r'\d+(?:,\d{3})*(?:\.\d+)?').firstMatch(denomination)
+      : null;
+  final amount = fraction != null
+      ? double.parse(fraction.group(1)!) / double.parse(fraction.group(2)!)
+      : double.tryParse(amountMatch?.group(0)?.replaceAll(',', '') ?? '');
+  if (amount == null) return null;
+
+  if (_isMinorUnitDenomination(currency, denomination) &&
+      currency.minorUnitsPerMajor != null &&
+      currency.minorUnitsPerMajor! > 0) {
+    return amount / currency.minorUnitsPerMajor!;
+  }
+  return amount;
+}
+
+bool _isMinorUnitDenomination(Currency currency, String denomination) {
+  final minorUnit = currency.minorUnit;
+  if (minorUnit == null || minorUnit.isEmpty) return false;
+
+  const aliases = <String, List<String>>{
+    'grosz': ['gr'],
+    'kopeck': ['kapiejka', 'kapiejki', 'kopiyky'],
+    'piastre': ['pt', 'qirsh'],
+    'sen': ['cent'],
+  };
+  final normalizedUnit = minorUnit.toLowerCase();
+  if (RegExp(r'\d\s*(?:c|¢)$', caseSensitive: false).hasMatch(denomination)) {
+    return true;
+  }
+  if (RegExp(r'\d\s*p$', caseSensitive: false).hasMatch(denomination)) {
+    return true;
+  }
+
+  final terms = [
+    minorUnit,
+    ...?aliases[normalizedUnit],
+  ].map(RegExp.escape).join('|');
+  return RegExp(
+    '(?<![\\p{L}\\p{N}])(?:$terms)s?(?![\\p{L}\\p{N}])',
+    caseSensitive: false,
+    unicode: true,
+  ).hasMatch(denomination);
+}
+
+String? _nonInteractiveDenominationMessage(
   String isoCode,
   List<String> denominations,
   AppLocalizations l10n,
@@ -176,7 +256,58 @@ String _localizedDenominations(
   if (isoCode == 'VND' && denominations.length == 1) {
     return l10n.detail_vnd_no_coins;
   }
-  return denominations.join(', ');
+  return null;
+}
+
+class _DenominationsDetailRow extends StatelessWidget {
+  final String label;
+  final List<String> denominations;
+  final String? message;
+  final ValueChanged<String> onSelected;
+
+  const _DenominationsDetailRow({
+    required this.label,
+    required this.denominations,
+    required this.message,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(label, style: Theme.of(context).textTheme.labelLarge),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: message != null
+                ? Text(message!)
+                : Wrap(
+                    spacing: 2,
+                    runSpacing: 2,
+                    children: [
+                      for (final denomination in denominations)
+                        TextButton(
+                          onPressed: () => onSelected(denomination),
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            minimumSize: const Size(0, 36),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          child: Text(denomination),
+                        ),
+                    ],
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _DetailRow extends StatelessWidget {

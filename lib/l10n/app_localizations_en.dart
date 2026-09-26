@@ -237,6 +237,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get detail_banknotes => 'Banknotes';
 
   @override
+  String get detail_units => 'Units';
+
+  @override
+  String detail_unit_summary(String majorUnit, String minorUnit, int ratio) {
+    return '$majorUnit / $minorUnit (1:$ratio)';
+  }
+
+  @override
+  String detail_unit_summary_no_minor(String majorUnit) {
+    return '$majorUnit (no minor unit)';
+  }
+
+  @override
   String get detail_pab_no_banknotes =>
       'No Balboa banknotes; US dollar banknotes are used instead';
 

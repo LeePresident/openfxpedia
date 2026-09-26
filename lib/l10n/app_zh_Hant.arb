@@ -296,17 +296,45 @@
     "@detail_banknotes": {
         "description": "詳情檢視中紙幣面額的標籤。"
     },
-    "detail_pab_no_banknotes": "沒有巴波亞紙幣；改用美元紙幣",
+    "detail_units": "貨幣單位",
+    "@detail_units": {
+        "description": "詳情檢視中主單位和輔單位的標籤。"
+    },
+    "detail_unit_summary": "{majorUnit} / {minorUnit}（1:{ratio}）",
+    "@detail_unit_summary": {
+        "description": "主要貨幣單位、次要貨幣單位及換算比例。",
+        "placeholders": {
+            "majorUnit": {
+                "type": "String"
+            },
+            "minorUnit": {
+                "type": "String"
+            },
+            "ratio": {
+                "type": "int"
+            }
+        }
+    },
+    "detail_unit_summary_no_minor": "{majorUnit}（無輔助單位）",
+    "@detail_unit_summary_no_minor": {
+        "description": "貨幣沒有輔助單位時顯示的主貨幣單位。",
+        "placeholders": {
+            "majorUnit": {
+                "type": "String"
+            }
+        }
+    },
+    "detail_pab_no_banknotes": "巴波亞不設紙幣；使用美元紙幣",
     "@detail_pab_no_banknotes": {
-        "description": "說明巴拿馬沒有巴波亞紙幣，而是使用美元紙幣。"
+        "description": "說明巴拿馬不設巴波亞紙幣，而是使用美元紙幣。"
     },
-    "detail_sos_no_coins": "索馬利先令硬幣目前不流通",
+    "detail_sos_no_coins": "索馬利先令不設硬幣",
     "@detail_sos_no_coins": {
-        "description": "說明索馬利先令硬幣目前不流通。"
+        "description": "說明索馬利先令不設硬幣。"
     },
-    "detail_vnd_no_coins": "越南盾硬幣目前不流通",
+    "detail_vnd_no_coins": "越南盾不設硬幣",
     "@detail_vnd_no_coins": {
-        "description": "說明越南盾硬幣目前不流通。"
+        "description": "說明越南盾不設硬幣。"
     },
     "detail_convert": "轉換",
     "@detail_convert": {

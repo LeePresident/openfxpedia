@@ -8,6 +8,9 @@ class Currency {
   final String? description;
   final List<String> coins;
   final List<String> banknotes;
+  final String? majorUnit;
+  final String? minorUnit;
+  final int? minorUnitsPerMajor;
 
   Currency({
     required this.isoCode,
@@ -19,6 +22,9 @@ class Currency {
     this.description,
     this.coins = const [],
     this.banknotes = const [],
+    this.majorUnit,
+    this.minorUnit,
+    this.minorUnitsPerMajor,
   });
 
   factory Currency.fromMap(Map<String, dynamic> m) => Currency(
@@ -33,6 +39,9 @@ class Currency {
         coins: (m['coins'] as List<dynamic>?)?.cast<String>() ?? const [],
         banknotes:
             (m['banknotes'] as List<dynamic>?)?.cast<String>() ?? const [],
+        majorUnit: m['major_unit'] as String?,
+        minorUnit: m['minor_unit'] as String?,
+        minorUnitsPerMajor: m['minor_units_per_major'] as int?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -45,5 +54,8 @@ class Currency {
         'description': description,
         'coins': coins,
         'banknotes': banknotes,
+        'major_unit': majorUnit,
+        'minor_unit': minorUnit,
+        'minor_units_per_major': minorUnitsPerMajor,
       };
 }

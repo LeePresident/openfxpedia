@@ -29,6 +29,22 @@ class _AmountInputState extends State<AmountInput> {
   }
 
   @override
+  void didUpdateWidget(covariant AmountInput oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialValue == widget.initialValue ||
+        double.tryParse(_controller.text) == widget.initialValue ||
+        (_controller.text.isEmpty && widget.initialValue == 0)) {
+      return;
+    }
+
+    final text = widget.initialValue.toString();
+    _controller.value = TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();

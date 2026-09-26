@@ -7,6 +7,9 @@ class CurrencyMetadata {
   final String? description;
   final List<String> coins;
   final List<String> banknotes;
+  final String? majorUnit;
+  final String? minorUnit;
+  final int? minorUnitsPerMajor;
 
   const CurrencyMetadata({
     required this.isoCode,
@@ -17,6 +20,9 @@ class CurrencyMetadata {
     this.description,
     this.coins = const [],
     this.banknotes = const [],
+    this.majorUnit,
+    this.minorUnit,
+    this.minorUnitsPerMajor,
   });
 
   factory CurrencyMetadata.fromJson(Map<String, dynamic> json) {
@@ -40,6 +46,9 @@ class CurrencyMetadata {
       banknotes: rawBanknotes is List
           ? rawBanknotes.whereType<String>().toList()
           : const [],
+      majorUnit: json['major_unit']?.toString(),
+      minorUnit: json['minor_unit']?.toString(),
+      minorUnitsPerMajor: (json['minor_units_per_major'] as num?)?.toInt(),
     );
   }
 }

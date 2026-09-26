@@ -3,6 +3,8 @@
     "entries": {
         "AED": {
             "name": "阿聯酋迪拉姆",
+            "major_unit": "迪拉姆",
+            "minor_unit": "費爾斯",
             "regions": [
                 "阿聯酋"
             ],
@@ -10,6 +12,8 @@
         },
         "AFN": {
             "name": "阿富汗尼",
+            "major_unit": "阿富汗尼",
+            "minor_unit": "普爾",
             "regions": [
                 "阿富汗"
             ],
@@ -17,6 +21,8 @@
         },
         "ALL": {
             "name": "阿爾巴尼亞列克",
+            "major_unit": "列克",
+            "minor_unit": "昆達爾克",
             "regions": [
                 "阿爾巴尼亞"
             ],
@@ -24,6 +30,8 @@
         },
         "AMD": {
             "name": "亞美尼亞德拉姆",
+            "major_unit": "德拉姆",
+            "minor_unit": "盧馬",
             "regions": [
                 "亞美尼亞"
             ],
@@ -31,6 +39,8 @@
         },
         "AOA": {
             "name": "安哥拉寬扎",
+            "major_unit": "寬扎",
+            "minor_unit": "分",
             "regions": [
                 "安哥拉"
             ],
@@ -38,6 +48,8 @@
         },
         "ARS": {
             "name": "阿根廷比索",
+            "major_unit": "比索",
+            "minor_unit": "分",
             "regions": [
                 "阿根廷"
             ],
@@ -45,6 +57,8 @@
         },
         "AUD": {
             "name": "澳元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "澳洲",
                 "聖誕島",
@@ -59,6 +73,8 @@
         },
         "AWG": {
             "name": "阿魯巴弗羅林",
+            "major_unit": "弗羅林",
+            "minor_unit": "分",
             "regions": [
                 "阿魯巴"
             ],
@@ -66,6 +82,8 @@
         },
         "AZN": {
             "name": "阿塞拜疆馬納特",
+            "major_unit": "馬納特",
+            "minor_unit": "戈比",
             "regions": [
                 "阿塞拜疆"
             ],
@@ -73,6 +91,8 @@
         },
         "BAM": {
             "name": "波斯尼亞和黑塞哥維那可兌換馬克",
+            "major_unit": "可兌換馬克",
+            "minor_unit": "芬尼",
             "regions": [
                 "波斯尼亞和黑塞哥維那"
             ],
@@ -80,6 +100,8 @@
         },
         "BBD": {
             "name": "巴巴多斯元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "巴巴多斯"
             ],
@@ -87,6 +109,8 @@
         },
         "BDT": {
             "name": "孟加拉塔卡",
+            "major_unit": "塔卡",
+            "minor_unit": "派薩",
             "regions": [
                 "孟加拉"
             ],
@@ -94,6 +118,8 @@
         },
         "BHD": {
             "name": "巴林第納爾",
+            "major_unit": "第納爾",
+            "minor_unit": "費爾斯",
             "regions": [
                 "巴林"
             ],
@@ -101,6 +127,8 @@
         },
         "BIF": {
             "name": "布隆迪法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "布隆迪"
             ],
@@ -108,6 +136,8 @@
         },
         "BMD": {
             "name": "百慕大元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "百慕大"
             ],
@@ -115,6 +145,8 @@
         },
         "BND": {
             "name": "汶萊元",
+            "major_unit": "元",
+            "minor_unit": "仙",
             "regions": [
                 "汶萊"
             ],
@@ -122,6 +154,8 @@
         },
         "BOB": {
             "name": "玻利維亞諾",
+            "major_unit": "玻利維亞諾",
+            "minor_unit": "分",
             "regions": [
                 "玻利維亞"
             ],
@@ -129,6 +163,8 @@
         },
         "BRL": {
             "name": "巴西雷亞爾",
+            "major_unit": "雷亞爾",
+            "minor_unit": "分",
             "regions": [
                 "巴西"
             ],
@@ -136,6 +172,8 @@
         },
         "BSD": {
             "name": "巴哈馬元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "巴哈馬"
             ],
@@ -143,6 +181,8 @@
         },
         "BTN": {
             "name": "不丹努爾特魯姆",
+            "major_unit": "努扎姆",
+            "minor_unit": "切特魯姆",
             "regions": [
                 "不丹"
             ],
@@ -150,6 +190,8 @@
         },
         "BWP": {
             "name": "博茨瓦納普拉",
+            "major_unit": "普拉",
+            "minor_unit": "特貝",
             "regions": [
                 "博茨瓦納"
             ],
@@ -157,6 +199,8 @@
         },
         "BYN": {
             "name": "白俄羅斯盧布",
+            "major_unit": "盧布",
+            "minor_unit": "戈比",
             "regions": [
                 "白俄羅斯"
             ],
@@ -164,6 +208,8 @@
         },
         "BZD": {
             "name": "伯利茲元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "伯利茲"
             ],
@@ -171,6 +217,8 @@
         },
         "CAD": {
             "name": "加拿大元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "加拿大"
             ],
@@ -178,6 +226,8 @@
         },
         "CDF": {
             "name": "剛果法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "剛果民主共和國"
             ],
@@ -185,6 +235,8 @@
         },
         "CHF": {
             "name": "瑞士法郎",
+            "major_unit": "法郎",
+            "minor_unit": "拉彭",
             "regions": [
                 "瑞士",
                 "列支敦士登"
@@ -193,6 +245,8 @@
         },
         "CLP": {
             "name": "智利比索",
+            "major_unit": "比索",
+            "minor_unit": "分",
             "regions": [
                 "智利"
             ],
@@ -200,6 +254,8 @@
         },
         "CNY": {
             "name": "人民幣",
+            "major_unit": "元",
+            "minor_unit": "角",
             "regions": [
                 "中國"
             ],
@@ -207,6 +263,8 @@
         },
         "COP": {
             "name": "哥倫比亞比索",
+            "major_unit": "比索",
+            "minor_unit": "分",
             "regions": [
                 "哥倫比亞"
             ],
@@ -214,6 +272,8 @@
         },
         "CRC": {
             "name": "哥斯達黎加科朗",
+            "major_unit": "科朗",
+            "minor_unit": "分",
             "regions": [
                 "哥斯達黎加"
             ],
@@ -221,6 +281,8 @@
         },
         "CUP": {
             "name": "古巴比索",
+            "major_unit": "比索",
+            "minor_unit": "分",
             "regions": [
                 "古巴"
             ],
@@ -228,6 +290,8 @@
         },
         "CVE": {
             "name": "佛得角埃斯庫多",
+            "major_unit": "埃斯庫多",
+            "minor_unit": "分",
             "regions": [
                 "佛得角"
             ],
@@ -235,6 +299,8 @@
         },
         "CZK": {
             "name": "捷克克朗",
+            "major_unit": "克朗",
+            "minor_unit": "赫勒爾",
             "regions": [
                 "捷克"
             ],
@@ -242,6 +308,8 @@
         },
         "DJF": {
             "name": "吉布提法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "吉布提"
             ],
@@ -249,6 +317,8 @@
         },
         "DKK": {
             "name": "丹麥克朗",
+            "major_unit": "克朗",
+            "minor_unit": "厄爾",
             "regions": [
                 "丹麥",
                 "法羅群島",
@@ -258,6 +328,8 @@
         },
         "DOP": {
             "name": "多米尼加比索",
+            "major_unit": "比索",
+            "minor_unit": "分",
             "regions": [
                 "多米尼加"
             ],
@@ -265,6 +337,8 @@
         },
         "DZD": {
             "name": "阿爾及利亞第納爾",
+            "major_unit": "第納爾",
+            "minor_unit": "生丁",
             "regions": [
                 "阿爾及利亞"
             ],
@@ -272,6 +346,8 @@
         },
         "EGP": {
             "name": "埃及鎊",
+            "major_unit": "鎊",
+            "minor_unit": "皮阿斯特",
             "regions": [
                 "埃及"
             ],
@@ -279,6 +355,8 @@
         },
         "ERN": {
             "name": "厄立特里亞納克法",
+            "major_unit": "納克法",
+            "minor_unit": "分",
             "regions": [
                 "厄立特里亞"
             ],
@@ -286,6 +364,8 @@
         },
         "ETB": {
             "name": "埃塞俄比亞比爾",
+            "major_unit": "比爾",
+            "minor_unit": "桑蒂姆",
             "regions": [
                 "埃塞俄比亞"
             ],
@@ -293,6 +373,8 @@
         },
         "EUR": {
             "name": "歐元",
+            "major_unit": "歐元",
+            "minor_unit": "歐分",
             "regions": [
                 "安道爾",
                 "奧地利",
@@ -325,6 +407,8 @@
         },
         "FJD": {
             "name": "斐濟元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "斐濟"
             ],
@@ -332,6 +416,8 @@
         },
         "FKP": {
             "name": "福克蘭群島鎊",
+            "major_unit": "鎊",
+            "minor_unit": "便士",
             "regions": [
                 "福克蘭群島"
             ],
@@ -339,6 +425,8 @@
         },
         "GBP": {
             "name": "英鎊",
+            "major_unit": "英鎊",
+            "minor_unit": "便士",
             "regions": [
                 "英國",
                 "澤西島",
@@ -349,6 +437,8 @@
         },
         "GEL": {
             "name": "格魯吉亞拉里",
+            "major_unit": "拉里",
+            "minor_unit": "特特里",
             "regions": [
                 "格魯吉亞"
             ],
@@ -356,6 +446,8 @@
         },
         "GHS": {
             "name": "加納塞地",
+            "major_unit": "塞地",
+            "minor_unit": "佩塞瓦",
             "regions": [
                 "加納"
             ],
@@ -363,6 +455,8 @@
         },
         "GIP": {
             "name": "直布羅陀鎊",
+            "major_unit": "鎊",
+            "minor_unit": "便士",
             "regions": [
                 "直布羅陀"
             ],
@@ -370,6 +464,8 @@
         },
         "GMD": {
             "name": "岡比亞達拉西",
+            "major_unit": "達拉西",
+            "minor_unit": "布圖特",
             "regions": [
                 "岡比亞"
             ],
@@ -377,6 +473,8 @@
         },
         "GNF": {
             "name": "幾內亞法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "幾內亞"
             ],
@@ -384,6 +482,8 @@
         },
         "GTQ": {
             "name": "危地馬拉格查爾",
+            "major_unit": "格查爾",
+            "minor_unit": "分",
             "regions": [
                 "危地馬拉"
             ],
@@ -391,6 +491,8 @@
         },
         "GYD": {
             "name": "圭亞那元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "圭亞那"
             ],
@@ -398,6 +500,8 @@
         },
         "HKD": {
             "name": "港元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "香港"
             ],
@@ -405,6 +509,8 @@
         },
         "HNL": {
             "name": "洪都拉斯倫皮拉",
+            "major_unit": "倫皮拉",
+            "minor_unit": "分",
             "regions": [
                 "洪都拉斯"
             ],
@@ -412,6 +518,8 @@
         },
         "HTG": {
             "name": "海地古德",
+            "major_unit": "古德",
+            "minor_unit": "生丁",
             "regions": [
                 "海地"
             ],
@@ -419,6 +527,8 @@
         },
         "HUF": {
             "name": "匈牙利福林",
+            "major_unit": "福林",
+            "minor_unit": "菲勒",
             "regions": [
                 "匈牙利"
             ],
@@ -426,6 +536,8 @@
         },
         "IDR": {
             "name": "印尼盾",
+            "major_unit": "印尼盾",
+            "minor_unit": "仙",
             "regions": [
                 "印尼"
             ],
@@ -433,6 +545,8 @@
         },
         "ILS": {
             "name": "以色列新謝克爾",
+            "major_unit": "謝克爾",
+            "minor_unit": "阿哥拉",
             "regions": [
                 "以色列"
             ],
@@ -440,6 +554,8 @@
         },
         "INR": {
             "name": "印度盧比",
+            "major_unit": "盧比",
+            "minor_unit": "派薩",
             "regions": [
                 "印度"
             ],
@@ -447,6 +563,8 @@
         },
         "IQD": {
             "name": "伊拉克第納爾",
+            "major_unit": "第納爾",
+            "minor_unit": "費爾斯",
             "regions": [
                 "伊拉克"
             ],
@@ -454,6 +572,8 @@
         },
         "IRR": {
             "name": "伊朗里亞爾",
+            "major_unit": "里亞爾",
+            "minor_unit": "第納爾",
             "regions": [
                 "伊朗"
             ],
@@ -461,6 +581,8 @@
         },
         "ISK": {
             "name": "冰島克朗",
+            "major_unit": "克朗",
+            "minor_unit": "埃里爾",
             "regions": [
                 "冰島"
             ],
@@ -468,6 +590,8 @@
         },
         "JMD": {
             "name": "牙買加元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "牙買加"
             ],
@@ -475,6 +599,8 @@
         },
         "JOD": {
             "name": "約旦第納爾",
+            "major_unit": "第納爾",
+            "minor_unit": "皮阿斯特",
             "regions": [
                 "約旦"
             ],
@@ -482,6 +608,8 @@
         },
         "JPY": {
             "name": "日圓",
+            "major_unit": "日圓",
+            "minor_unit": "錢",
             "regions": [
                 "日本"
             ],
@@ -489,6 +617,8 @@
         },
         "KES": {
             "name": "肯尼亞先令",
+            "major_unit": "先令",
+            "minor_unit": "分",
             "regions": [
                 "肯尼亞"
             ],
@@ -496,6 +626,8 @@
         },
         "KGS": {
             "name": "吉爾吉斯斯坦索姆",
+            "major_unit": "索姆",
+            "minor_unit": "提因",
             "regions": [
                 "吉爾吉斯斯坦"
             ],
@@ -503,6 +635,8 @@
         },
         "KHR": {
             "name": "柬埔寨瑞爾",
+            "major_unit": "瑞爾",
+            "minor_unit": "仙",
             "regions": [
                 "柬埔寨"
             ],
@@ -510,6 +644,8 @@
         },
         "KMF": {
             "name": "科摩羅法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "科摩羅"
             ],
@@ -517,6 +653,8 @@
         },
         "KPW": {
             "name": "朝鮮圓",
+            "major_unit": "韓元",
+            "minor_unit": "錢",
             "regions": [
                 "朝鮮"
             ],
@@ -524,6 +662,8 @@
         },
         "KRW": {
             "name": "韓元",
+            "major_unit": "韓元",
+            "minor_unit": "錢",
             "regions": [
                 "韓國"
             ],
@@ -531,6 +671,8 @@
         },
         "KWD": {
             "name": "科威特第納爾",
+            "major_unit": "第納爾",
+            "minor_unit": "費爾斯",
             "regions": [
                 "科威特"
             ],
@@ -538,6 +680,8 @@
         },
         "KYD": {
             "name": "開曼群島元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "開曼群島"
             ],
@@ -545,6 +689,8 @@
         },
         "KZT": {
             "name": "哈薩克斯坦堅戈",
+            "major_unit": "堅戈",
+            "minor_unit": "提因",
             "regions": [
                 "哈薩克斯坦"
             ],
@@ -552,6 +698,8 @@
         },
         "LAK": {
             "name": "老撾基普",
+            "major_unit": "基普",
+            "minor_unit": "阿特",
             "regions": [
                 "老撾"
             ],
@@ -559,6 +707,8 @@
         },
         "LBP": {
             "name": "黎巴嫩鎊",
+            "major_unit": "鎊",
+            "minor_unit": "皮阿斯特",
             "regions": [
                 "黎巴嫩"
             ],
@@ -566,6 +716,8 @@
         },
         "LKR": {
             "name": "斯里蘭卡盧比",
+            "major_unit": "盧比",
+            "minor_unit": "分",
             "regions": [
                 "斯里蘭卡"
             ],
@@ -573,6 +725,8 @@
         },
         "LRD": {
             "name": "利比里亞元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "利比里亞"
             ],
@@ -580,6 +734,8 @@
         },
         "LSL": {
             "name": "萊索托洛蒂",
+            "major_unit": "洛蒂",
+            "minor_unit": "森特",
             "regions": [
                 "萊索托"
             ],
@@ -587,6 +743,8 @@
         },
         "LYD": {
             "name": "利比亞第納爾",
+            "major_unit": "第納爾",
+            "minor_unit": "迪拉姆",
             "regions": [
                 "利比亞"
             ],
@@ -594,6 +752,8 @@
         },
         "MAD": {
             "name": "摩洛哥迪拉姆",
+            "major_unit": "迪拉姆",
+            "minor_unit": "生丁",
             "regions": [
                 "摩洛哥",
                 "西撒哈拉"
@@ -602,6 +762,8 @@
         },
         "MDL": {
             "name": "摩爾多瓦列伊",
+            "major_unit": "列伊",
+            "minor_unit": "巴尼",
             "regions": [
                 "摩爾多瓦"
             ],
@@ -609,6 +771,8 @@
         },
         "MGA": {
             "name": "馬達加斯加阿里亞",
+            "major_unit": "阿里亞里",
+            "minor_unit": "伊萊姆比蘭賈",
             "regions": [
                 "馬達加斯加"
             ],
@@ -616,6 +780,8 @@
         },
         "MKD": {
             "name": "馬其頓德納爾",
+            "major_unit": "德納爾",
+            "minor_unit": "德尼",
             "regions": [
                 "北馬其頓"
             ],
@@ -623,6 +789,8 @@
         },
         "MMK": {
             "name": "緬甸元",
+            "major_unit": "緬元",
+            "minor_unit": "派亞",
             "regions": [
                 "緬甸"
             ],
@@ -630,6 +798,8 @@
         },
         "MNT": {
             "name": "蒙古圖格里克",
+            "major_unit": "圖格里克",
+            "minor_unit": "蒙戈",
             "regions": [
                 "蒙古"
             ],
@@ -637,6 +807,8 @@
         },
         "MOP": {
             "name": "澳門元",
+            "major_unit": "澳門元",
+            "minor_unit": "阿沃",
             "regions": [
                 "澳門"
             ],
@@ -644,6 +816,8 @@
         },
         "MRU": {
             "name": "毛里塔尼亞烏吉亞",
+            "major_unit": "烏吉亞",
+            "minor_unit": "庫姆斯",
             "regions": [
                 "毛里塔尼亞"
             ],
@@ -651,6 +825,8 @@
         },
         "MUR": {
             "name": "毛里求斯盧比",
+            "major_unit": "盧比",
+            "minor_unit": "分",
             "regions": [
                 "毛里求斯"
             ],
@@ -658,6 +834,8 @@
         },
         "MVR": {
             "name": "馬爾代夫盧比",
+            "major_unit": "拉菲亞",
+            "minor_unit": "拉里",
             "regions": [
                 "馬爾代夫"
             ],
@@ -665,6 +843,8 @@
         },
         "MWK": {
             "name": "馬拉維克瓦查",
+            "major_unit": "克瓦查",
+            "minor_unit": "坦巴拉",
             "regions": [
                 "馬拉維"
             ],
@@ -672,6 +852,8 @@
         },
         "MXN": {
             "name": "墨西哥比索",
+            "major_unit": "比索",
+            "minor_unit": "分",
             "regions": [
                 "墨西哥"
             ],
@@ -679,6 +861,8 @@
         },
         "MYR": {
             "name": "馬來西亞令吉",
+            "major_unit": "令吉",
+            "minor_unit": "仙",
             "regions": [
                 "馬來西亞"
             ],
@@ -686,6 +870,8 @@
         },
         "MZN": {
             "name": "莫桑比克梅蒂卡爾",
+            "major_unit": "梅蒂卡爾",
+            "minor_unit": "分",
             "regions": [
                 "莫桑比克"
             ],
@@ -693,6 +879,8 @@
         },
         "NAD": {
             "name": "納米比亞元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "納米比亞"
             ],
@@ -700,6 +888,8 @@
         },
         "NGN": {
             "name": "尼日利亞奈拉",
+            "major_unit": "奈拉",
+            "minor_unit": "科博",
             "regions": [
                 "尼日利亞"
             ],
@@ -707,6 +897,8 @@
         },
         "NIO": {
             "name": "尼加拉瓜科多巴",
+            "major_unit": "科多巴",
+            "minor_unit": "分",
             "regions": [
                 "尼加拉瓜"
             ],
@@ -714,6 +906,8 @@
         },
         "NOK": {
             "name": "挪威克朗",
+            "major_unit": "克朗",
+            "minor_unit": "厄爾",
             "regions": [
                 "挪威",
                 "布韋島",
@@ -723,6 +917,8 @@
         },
         "NPR": {
             "name": "尼泊爾盧比",
+            "major_unit": "盧比",
+            "minor_unit": "派薩",
             "regions": [
                 "尼泊爾"
             ],
@@ -730,6 +926,8 @@
         },
         "NZD": {
             "name": "紐西蘭元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "紐西蘭",
                 "庫克群島",
@@ -741,6 +939,8 @@
         },
         "OMR": {
             "name": "阿曼里亞爾",
+            "major_unit": "里亞爾",
+            "minor_unit": "拜薩",
             "regions": [
                 "阿曼"
             ],
@@ -748,6 +948,8 @@
         },
         "PAB": {
             "name": "巴拿馬巴波亞",
+            "major_unit": "巴波亞",
+            "minor_unit": "分",
             "regions": [
                 "巴拿馬"
             ],
@@ -755,6 +957,8 @@
         },
         "PEN": {
             "name": "秘魯索爾",
+            "major_unit": "索爾",
+            "minor_unit": "分",
             "regions": [
                 "秘魯"
             ],
@@ -762,6 +966,8 @@
         },
         "PGK": {
             "name": "巴布亞新幾內亞基那",
+            "major_unit": "基那",
+            "minor_unit": "托亞",
             "regions": [
                 "巴布亞新幾內亞"
             ],
@@ -769,6 +975,8 @@
         },
         "PHP": {
             "name": "菲律賓比索",
+            "major_unit": "比索",
+            "minor_unit": "森蒂莫",
             "regions": [
                 "菲律賓"
             ],
@@ -776,6 +984,8 @@
         },
         "PKR": {
             "name": "巴基斯坦盧比",
+            "major_unit": "盧比",
+            "minor_unit": "派薩",
             "regions": [
                 "巴基斯坦"
             ],
@@ -783,6 +993,8 @@
         },
         "PLN": {
             "name": "波蘭茲羅提",
+            "major_unit": "茲羅提",
+            "minor_unit": "格羅什",
             "regions": [
                 "波蘭"
             ],
@@ -790,6 +1002,8 @@
         },
         "PYG": {
             "name": "巴拉圭瓜拉尼",
+            "major_unit": "瓜拉尼",
+            "minor_unit": "分",
             "regions": [
                 "巴拉圭"
             ],
@@ -797,6 +1011,8 @@
         },
         "QAR": {
             "name": "卡塔爾里亞爾",
+            "major_unit": "里亞爾",
+            "minor_unit": "迪拉姆",
             "regions": [
                 "卡塔爾"
             ],
@@ -804,6 +1020,8 @@
         },
         "RON": {
             "name": "羅馬尼亞列伊",
+            "major_unit": "列伊",
+            "minor_unit": "巴尼",
             "regions": [
                 "羅馬尼亞"
             ],
@@ -811,6 +1029,8 @@
         },
         "RSD": {
             "name": "塞爾維亞第納爾",
+            "major_unit": "第納爾",
+            "minor_unit": "帕拉",
             "regions": [
                 "塞爾維亞"
             ],
@@ -818,6 +1038,8 @@
         },
         "RUB": {
             "name": "俄羅斯盧布",
+            "major_unit": "盧布",
+            "minor_unit": "戈比",
             "regions": [
                 "俄羅斯"
             ],
@@ -825,6 +1047,8 @@
         },
         "RWF": {
             "name": "盧旺達法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "盧旺達"
             ],
@@ -832,6 +1056,8 @@
         },
         "SAR": {
             "name": "沙特里亞爾",
+            "major_unit": "里亞爾",
+            "minor_unit": "哈拉拉",
             "regions": [
                 "沙特阿拉伯"
             ],
@@ -839,6 +1065,8 @@
         },
         "SBD": {
             "name": "所羅門群島元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "所羅門群島"
             ],
@@ -846,6 +1074,8 @@
         },
         "SCR": {
             "name": "塞舌爾盧比",
+            "major_unit": "盧比",
+            "minor_unit": "分",
             "regions": [
                 "塞舌爾"
             ],
@@ -853,6 +1083,8 @@
         },
         "SDG": {
             "name": "蘇丹磅",
+            "major_unit": "鎊",
+            "minor_unit": "皮阿斯特",
             "regions": [
                 "蘇丹"
             ],
@@ -860,6 +1092,8 @@
         },
         "SEK": {
             "name": "瑞典克朗",
+            "major_unit": "克朗",
+            "minor_unit": "厄爾",
             "regions": [
                 "瑞典"
             ],
@@ -867,6 +1101,8 @@
         },
         "SGD": {
             "name": "新加坡元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "新加坡"
             ],
@@ -874,6 +1110,8 @@
         },
         "SHP": {
             "name": "聖赫勒拿磅",
+            "major_unit": "鎊",
+            "minor_unit": "便士",
             "regions": [
                 "聖赫勒拿",
                 "阿森松島",
@@ -883,6 +1121,8 @@
         },
         "SLE": {
             "name": "塞拉利昂利昂",
+            "major_unit": "利昂",
+            "minor_unit": "分",
             "regions": [
                 "塞拉利昂"
             ],
@@ -890,6 +1130,8 @@
         },
         "SOS": {
             "name": "索馬里先令",
+            "major_unit": "先令",
+            "minor_unit": "分",
             "regions": [
                 "索馬里"
             ],
@@ -897,6 +1139,8 @@
         },
         "SRD": {
             "name": "蘇里南元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "蘇里南"
             ],
@@ -904,6 +1148,8 @@
         },
         "SSP": {
             "name": "南蘇丹磅",
+            "major_unit": "鎊",
+            "minor_unit": "皮阿斯特",
             "regions": [
                 "南蘇丹"
             ],
@@ -911,6 +1157,8 @@
         },
         "STN": {
             "name": "聖多美和普林西比多布拉",
+            "major_unit": "多布拉",
+            "minor_unit": "分",
             "regions": [
                 "聖多美和普林西比"
             ],
@@ -918,6 +1166,8 @@
         },
         "SYP": {
             "name": "敘利亞磅",
+            "major_unit": "鎊",
+            "minor_unit": "皮阿斯特",
             "regions": [
                 "敘利亞"
             ],
@@ -925,6 +1175,8 @@
         },
         "SZL": {
             "name": "斯威士蘭里蘭吉尼",
+            "major_unit": "里蘭吉尼",
+            "minor_unit": "分",
             "regions": [
                 "斯威士蘭"
             ],
@@ -932,6 +1184,8 @@
         },
         "THB": {
             "name": "泰銖",
+            "major_unit": "泰銖",
+            "minor_unit": "薩當",
             "regions": [
                 "泰國"
             ],
@@ -939,6 +1193,8 @@
         },
         "TJS": {
             "name": "塔吉克斯坦索莫尼",
+            "major_unit": "索莫尼",
+            "minor_unit": "迪拉姆",
             "regions": [
                 "塔吉克斯坦"
             ],
@@ -946,6 +1202,8 @@
         },
         "TMT": {
             "name": "土庫曼斯坦馬納特",
+            "major_unit": "馬納特",
+            "minor_unit": "坦格",
             "regions": [
                 "土庫曼斯坦"
             ],
@@ -953,6 +1211,8 @@
         },
         "TND": {
             "name": "突尼斯第納爾",
+            "major_unit": "第納爾",
+            "minor_unit": "米利姆",
             "regions": [
                 "突尼斯"
             ],
@@ -960,6 +1220,8 @@
         },
         "TOP": {
             "name": "湯加潘加",
+            "major_unit": "潘加",
+            "minor_unit": "塞尼提",
             "regions": [
                 "湯加"
             ],
@@ -967,6 +1229,8 @@
         },
         "TRY": {
             "name": "土耳其里拉",
+            "major_unit": "里拉",
+            "minor_unit": "庫魯什",
             "regions": [
                 "土耳其"
             ],
@@ -974,6 +1238,8 @@
         },
         "TTD": {
             "name": "特立尼達和多巴哥元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "特立尼達和多巴哥"
             ],
@@ -981,6 +1247,8 @@
         },
         "TWD": {
             "name": "新台幣",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "台灣"
             ],
@@ -988,6 +1256,8 @@
         },
         "TZS": {
             "name": "坦桑尼亞先令",
+            "major_unit": "先令",
+            "minor_unit": "分",
             "regions": [
                 "坦桑尼亞"
             ],
@@ -995,6 +1265,8 @@
         },
         "UAH": {
             "name": "烏克蘭格里夫納",
+            "major_unit": "格里夫納",
+            "minor_unit": "戈比",
             "regions": [
                 "烏克蘭"
             ],
@@ -1002,6 +1274,7 @@
         },
         "UGX": {
             "name": "烏干達先令",
+            "major_unit": "先令",
             "regions": [
                 "烏干達"
             ],
@@ -1009,6 +1282,8 @@
         },
         "USD": {
             "name": "美元",
+            "major_unit": "元",
+            "minor_unit": "美分",
             "regions": [
                 "美國",
                 "美屬薩摩亞",
@@ -1033,6 +1308,8 @@
         },
         "UYU": {
             "name": "烏拉圭比索",
+            "major_unit": "比索",
+            "minor_unit": "分",
             "regions": [
                 "烏拉圭"
             ],
@@ -1040,6 +1317,8 @@
         },
         "UZS": {
             "name": "烏茲別克斯坦索姆",
+            "major_unit": "蘇姆",
+            "minor_unit": "提因",
             "regions": [
                 "烏茲別克斯坦"
             ],
@@ -1047,6 +1326,8 @@
         },
         "VED": {
             "name": "委內瑞拉數碼玻利瓦爾",
+            "major_unit": "數位玻利瓦",
+            "minor_unit": "分",
             "regions": [
                 "委內瑞拉"
             ],
@@ -1054,6 +1335,8 @@
         },
         "VES": {
             "name": "委內瑞拉主權玻利瓦爾",
+            "major_unit": "主權玻利瓦",
+            "minor_unit": "分",
             "regions": [
                 "委內瑞拉"
             ],
@@ -1061,6 +1344,8 @@
         },
         "VND": {
             "name": "越南盾",
+            "major_unit": "越南盾",
+            "minor_unit": "毫",
             "regions": [
                 "越南"
             ],
@@ -1068,6 +1353,7 @@
         },
         "VUV": {
             "name": "瓦努阿圖瓦圖",
+            "major_unit": "瓦圖",
             "regions": [
                 "瓦努阿圖"
             ],
@@ -1075,6 +1361,8 @@
         },
         "WST": {
             "name": "薩摩亞塔拉",
+            "major_unit": "塔拉",
+            "minor_unit": "塞內",
             "regions": [
                 "薩摩亞"
             ],
@@ -1082,6 +1370,8 @@
         },
         "XAF": {
             "name": "中非法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "喀麥隆",
                 "中非共和國",
@@ -1094,6 +1384,8 @@
         },
         "XCD": {
             "name": "東加勒比元",
+            "major_unit": "元",
+            "minor_unit": "分",
             "regions": [
                 "安提瓜和巴布達",
                 "多米尼克",
@@ -1108,6 +1400,8 @@
         },
         "XCG": {
             "name": "加勒比盾",
+            "major_unit": "盾",
+            "minor_unit": "分",
             "regions": [
                 "庫拉索",
                 "聖馬丁"
@@ -1116,6 +1410,8 @@
         },
         "XOF": {
             "name": "西非法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "貝寧",
                 "布基納法索",
@@ -1130,6 +1426,8 @@
         },
         "XPF": {
             "name": "太平洋法郎",
+            "major_unit": "法郎",
+            "minor_unit": "生丁",
             "regions": [
                 "法屬波利尼西亞",
                 "新喀里多尼亞",
@@ -1139,6 +1437,8 @@
         },
         "YER": {
             "name": "也門里亞爾",
+            "major_unit": "里亞爾",
+            "minor_unit": "費爾斯",
             "regions": [
                 "也門"
             ],
@@ -1146,6 +1446,8 @@
         },
         "ZAR": {
             "name": "南非蘭特",
+            "major_unit": "蘭特",
+            "minor_unit": "分",
             "regions": [
                 "南非",
                 "萊索托",
@@ -1156,6 +1458,8 @@
         },
         "ZMW": {
             "name": "贊比亞克瓦查",
+            "major_unit": "克瓦查",
+            "minor_unit": "恩韋",
             "regions": [
                 "贊比亞"
             ],
@@ -1163,6 +1467,8 @@
         },
         "ZWG": {
             "name": "津巴布韋金",
+            "major_unit": "ZiG",
+            "minor_unit": "分",
             "regions": [
                 "津巴布韋"
             ],
