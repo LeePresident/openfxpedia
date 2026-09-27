@@ -4,7 +4,7 @@
 
 OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (flags, symbols, regions, and descriptions). The app targets Windows (desktop) and Android.
 
-Current release: `1.0.4`
+Current release: `1.0.5`
 
 ## Quick Links
 
@@ -28,6 +28,7 @@ The catalog loaders cache data within their service instance. The catalog servic
 - Fast currency conversion using live exchange rates (with local cache and offline support).
 - Select the exchange-rate API source from Settings, with automatic primary/fallback behavior.
 - Encyclopedia entries for fiat currencies: names, symbols, regions, descriptions, and usage-region flags.
+- Major/minor units and coin/banknote denominations, with shortcuts for converting a selected denomination.
 - Search currencies by name, code, or ISO 4217 numeric code, with clear-search support.
 - Light / Dark / System theme selection persisted in app settings.
 - English, Simplified Chinese, and Traditional Chinese language selection in Settings.
@@ -66,6 +67,8 @@ flutter run
 
 # Portable EXE output (release)
 # build/windows/portable/openfxpedia_<version>.exe
+# Portable bundle for distribution
+# build/windows/openfxpedia_<version>_portable.zip
 
 # NSIS installer output (release)
 # build/windows/installer/openfxpedia_<version>_setup.exe

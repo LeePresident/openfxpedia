@@ -80,7 +80,11 @@ try {
     }
 
     New-Item -ItemType Directory -Force -Path $installerRoot | Out-Null
+    if (Test-Path $portableRoot) {
+        Remove-Item -Recurse -Force $portableRoot
+    }
     New-Item -ItemType Directory -Force -Path $portableRoot | Out-Null
+    Copy-Item -Path (Join-Path $runnerOutputDir '*') -Destination $portableRoot -Recurse -Force
 
     if ($Mode -eq 'release') {
         $portableExeName = "openfxpedia_$appVersion.exe"
@@ -93,6 +97,9 @@ try {
     Copy-Item -Path $sourceExe -Destination $portableExe -Force
 
     if ($Mode -eq 'release') {
+        $portableArchive = Join-Path $repoRoot "build/windows/openfxpedia_${appVersion}_portable.zip"
+        Compress-Archive -Path (Join-Path $portableRoot '*') -DestinationPath $portableArchive -Force
+
         $stagingRoot = Join-Path $installerRoot 'staging'
         $installerScript = Join-Path $installerRoot "openfxpedia_${appVersion}_installer.nsi"
         $installerExe = Join-Path $installerRoot "openfxpedia_${appVersion}_setup.exe"
@@ -225,6 +232,9 @@ SectionEnd
 
     Write-Host "Windows build completed ($Mode)."
     Write-Host "Portable EXE: $portableExe"
+    if ($Mode -eq 'release') {
+        Write-Host "Portable bundle: $portableArchive"
+    }
     if ($Mode -eq 'release') {
         Write-Host "Installer: $installerExe"
     }

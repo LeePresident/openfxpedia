@@ -1,5 +1,40 @@
 [
     {
+        "version": "v1.0.5",
+        "date": "2026-09-27",
+        "summary": "Added currency unit and denomination details, converter shortcuts, and an option to clear local data.",
+        "highlights": [
+            "Added major and minor currency units and coin/banknote denominations to currency details.",
+            "Added denomination shortcuts that open the converter with the matching currency and amount.",
+            "Added a Settings action to clear locally cached rates, currency data, and saved preferences.",
+            "Improved Chinese localization, application performance, and automated test setup."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.5",
+                "date": "2026-09-27",
+                "summary": "为货币百科新增单位和硬币/纸币面额信息，并可将面额直接带入转换器。",
+                "highlights": [
+                    "货币详情新增主要单位、辅币单位以及硬币和纸币面额信息。",
+                    "点击支持的面额可将对应货币和金额带入转换器。",
+                    "设置中新增清除本地数据选项，可删除缓存汇率、货币目录和已保存的偏好设置。",
+                    "改进中文本地化、应用性能和自动化测试工作流程。"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.5",
+                "date": "2026-09-27",
+                "summary": "為貨幣百科新增單位和硬幣／紙幣面額資訊，並可將面額直接帶入轉換器。",
+                "highlights": [
+                    "貨幣詳情新增主要單位、輔幣單位以及硬幣和紙幣面額資訊。",
+                    "點選支援的面額可將對應貨幣和金額帶入轉換器。",
+                    "設定中新增清除本機資料選項，可刪除快取匯率、貨幣目錄和已儲存的偏好設定。",
+                    "改進中文在地化、應用程式效能和自動化測試工作流程。"
+                ]
+            }
+        }
+    },
+    {
         "version": "v1.0.4",
         "date": "2026-08-31",
         "summary": "Added richer region details, encyclopedia sorting and filtering, and more reliable Windows launch and installation behavior.",

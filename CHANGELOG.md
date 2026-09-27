@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.5] - 2026-09-27
+
+- Added major and minor currency units and coin/banknote denominations to currency details.
+- Added denomination shortcuts that open the converter with the matching currency and amount.
+- Added a Settings action to clear locally cached rates, currency data, and saved preferences.
+- Improved Chinese localization, application performance, and automated test setup.
+
 ## [1.0.4] - 2026-08-31
 
 - Added region flags and expandable region lists to currency details, with reliable flag display in Chinese locales.
