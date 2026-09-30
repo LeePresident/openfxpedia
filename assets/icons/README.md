@@ -1,3 +1,5 @@
+[English](README.md) | [简体中文](README.zh-Hans.md) | [繁體中文](README.zh-Hant.md)
+
 Most currency identity is represented with usage-region flags from the
 `country_flags` package. The original project-authored icons for XAF, XCD, XCG,
 XOF, and XPF are the only currency-specific icons bundled with the app.
