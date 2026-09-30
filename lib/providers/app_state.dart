@@ -1,5 +1,4 @@
 ﻿import 'package:flutter/material.dart';
-import '../l10n/app_localizations.dart';
 import '../core/config.dart';
 import '../models/currency.dart';
 import '../models/exchange_rate.dart';
@@ -9,6 +8,7 @@ import '../services/currency_catalog.dart';
 import '../services/error_classifier.dart';
 import '../services/exchange_api_source.dart';
 import '../services/favorites_service.dart';
+import '../services/locale_resolver.dart';
 
 enum LoadingState { idle, loading, error }
 
@@ -238,77 +238,8 @@ class AppState extends ChangeNotifier {
     _locale = Locale(code);
   }
 
-  Locale? _resolveSystemLocale() {
-    for (final locale in _systemLocales()) {
-      final chineseLocale = _resolveChineseLocale(locale);
-      if (chineseLocale != null) return chineseLocale;
-
-      final exactMatch =
-          _matchSupportedLocale(locale, allowLanguageOnly: false);
-      if (exactMatch != null) return exactMatch;
-
-      final languageMatch =
-          _matchSupportedLocale(locale, allowLanguageOnly: true);
-      if (languageMatch != null) return languageMatch;
-    }
-    return null;
-  }
-
-  Locale? _resolveChineseLocale(Locale locale) {
-    if (locale.languageCode != 'zh') return null;
-
-    final preferredScript = _preferredChineseScript(locale);
-    if (preferredScript == null) return null;
-
-    for (final supported in AppLocalizations.supportedLocales) {
-      if (supported.languageCode != 'zh') continue;
-      if (supported.scriptCode == preferredScript) return supported;
-    }
-
-    return null;
-  }
-
-  String? _preferredChineseScript(Locale locale) {
-    final scriptCode = locale.scriptCode;
-    if (scriptCode == 'Hans' || scriptCode == 'Hant') {
-      return scriptCode;
-    }
-
-    switch (locale.countryCode?.toUpperCase()) {
-      case 'HK':
-      case 'MO':
-      case 'TW':
-        return 'Hant';
-      case 'CN':
-      case 'SG':
-      case 'MY':
-        return 'Hans';
-    }
-
-    return 'Hant';
-  }
-
-  Locale? _matchSupportedLocale(
-    Locale locale, {
-    required bool allowLanguageOnly,
-  }) {
-    for (final supported in AppLocalizations.supportedLocales) {
-      if (locale.languageCode != supported.languageCode) continue;
-
-      final scriptsMatch = locale.scriptCode == supported.scriptCode;
-      final countriesMatch = supported.countryCode == null ||
-          locale.countryCode == null ||
-          locale.countryCode == supported.countryCode;
-
-      if (scriptsMatch && countriesMatch) return supported;
-      if (allowLanguageOnly &&
-          supported.scriptCode == null &&
-          supported.countryCode == null) {
-        return supported;
-      }
-    }
-    return null;
-  }
+  Locale? _resolveSystemLocale() =>
+      LocaleResolver.resolveSystemLocale(_systemLocales());
 
   void swapCurrencies() {
     final tmp = _baseCurrency;

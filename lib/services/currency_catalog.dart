@@ -10,6 +10,7 @@ import 'currency_metadata_loader.dart';
 import 'currency_localizer.dart';
 import 'currency_overlay_loader.dart';
 import 'currency_catalog_repository.dart';
+import 'locale_resolver.dart';
 
 class CurrencyCatalogService {
   final CurrencyCatalogRepository _repository;
@@ -36,7 +37,7 @@ class CurrencyCatalogService {
     bool forceRefresh = false,
     Locale? locale,
   }) async {
-    final localeKey = _localeKey(locale);
+    final localeKey = LocaleResolver.catalogKey(locale);
     if (!forceRefresh &&
         _currenciesLocaleKey == localeKey &&
         _currencies != null) {
@@ -152,27 +153,5 @@ class CurrencyCatalogService {
   bool _isFiatCurrency(String code) {
     final upperCode = code.toUpperCase();
     return _metadataCatalog?.codes.contains(upperCode) ?? false;
-  }
-
-  String _localeKey(Locale? locale) {
-    if (locale == null) return 'en';
-    if (locale.languageCode == 'zh') {
-      if (locale.scriptCode == 'Hans') return 'zh_Hans';
-      if (locale.scriptCode == 'Hant') return 'zh_Hant';
-
-      switch (locale.countryCode?.toUpperCase()) {
-        case 'HK':
-        case 'MO':
-        case 'TW':
-          return 'zh_Hant';
-        case 'CN':
-        case 'SG':
-        case 'MY':
-          return 'zh_Hans';
-      }
-
-      return 'zh_Hant';
-    }
-    return 'en';
   }
 }
