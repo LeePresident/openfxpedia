@@ -6,7 +6,7 @@ import 'package:openfxpedia/models/exchange_rate.dart';
 import 'package:openfxpedia/widgets/rate_info.dart';
 
 void main() {
-  testWidgets('shows provider source for live rates', (tester) async {
+  testWidgets('shows online status for non-cached rates', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: const [
@@ -31,6 +31,6 @@ void main() {
       ),
     );
 
-    expect(find.textContaining('live'), findsOneWidget);
+    expect(find.textContaining('Online'), findsOneWidget);
   });
 }

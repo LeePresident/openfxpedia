@@ -4,7 +4,7 @@
     "@appTitle": {
         "description": "應用程式的標題。"
     },
-    "startup_loading": "正在載入貨幣和快取匯率",
+    "startup_loading": "正在載入貨幣和緩存匯率",
     "@startup_loading": {
         "description": "應用程式資料載入期間啟動畫面顯示的狀態。"
     },
@@ -54,7 +54,7 @@
     },
     "settings_select_exchange_api_source": "選擇匯率 API",
     "@settings_select_exchange_api_source": {
-        "description": "選擇匯率 API 來源的對話方塊標題。"
+        "description": "選擇匯率 API 來源的對話框標題。"
     },
     "settings_exchange_api_source_auto": "自動",
     "@settings_exchange_api_source_auto": {
@@ -70,29 +70,29 @@
     },
     "settings_changelogs": "更新紀錄",
     "@settings_changelogs": {
-        "description": "檢視更新紀錄的標籤。"
+        "description": "查看更新紀錄的標籤。"
     },
     "settings_changelogs_subtitle": "查看所有版本的簡短更新紀錄",
     "@settings_changelogs_subtitle": {
         "description": "解釋更新紀錄功能的副標題。"
     },
-    "settings_license": "授權",
+    "settings_license": "許可證",
     "@settings_license": {
-        "description": "授權資訊的標籤。"
+        "description": "許可證資訊的標籤。"
     },
-    "settings_clear_local_data": "清除本機資料",
+    "settings_clear_local_data": "清除本地資料",
     "@settings_clear_local_data": {
-        "description": "清除本機資料的標籤。"
+        "description": "清除本地資料的標籤。"
     },
-    "settings_clear_local_data_subtitle": "刪除快取匯率、貨幣目錄、收藏和偏好設定",
+    "settings_clear_local_data_subtitle": "刪除緩存匯率、貨幣目錄、收藏和偏好設定",
     "@settings_clear_local_data_subtitle": {
         "description": "說明會刪除的內容。"
     },
-    "settings_clear_local_data_title": "清除本機資料？",
+    "settings_clear_local_data_title": "清除本地資料？",
     "@settings_clear_local_data_title": {
         "description": "確認對話框標題。"
     },
-    "settings_clear_local_data_message": "這將從此裝置刪除快取匯率、貨幣目錄、收藏和偏好設定。",
+    "settings_clear_local_data_message": "這將從此裝置刪除緩存匯率、貨幣目錄、收藏和偏好設定。",
     "@settings_clear_local_data_message": {
         "description": "確認對話框說明。"
     },
@@ -100,17 +100,17 @@
     "@settings_clear_local_data_confirm": {
         "description": "確認清除操作。"
     },
-    "settings_clear_local_data_done": "本機資料已清除",
+    "settings_clear_local_data_done": "本地資料已清除",
     "@settings_clear_local_data_done": {
         "description": "清除完成提示。"
     },
-    "settings_clear_local_data_failed": "無法清除本機資料",
+    "settings_clear_local_data_failed": "無法清除本地資料",
     "@settings_clear_local_data_failed": {
         "description": "清除失敗提示。"
     },
     "settings_select_theme": "選擇主題",
     "@settings_select_theme": {
-        "description": "選擇主題的對話方塊標題。"
+        "description": "選擇主題的對話框標題。"
     },
     "settings_system": "跟隨系統",
     "@settings_system": {
@@ -126,11 +126,11 @@
     },
     "settings_language_dialog_title": "選擇語言",
     "@settings_language_dialog_title": {
-        "description": "語言選擇對話方塊的標題。"
+        "description": "語言選擇對話框的標題。"
     },
     "settings_language_dialog_subtitle": "選擇應用程式語言。",
     "@settings_language_dialog_subtitle": {
-        "description": "語言選擇對話方塊的副標題。"
+        "description": "語言選擇對話框的副標題。"
     },
     "converter_currency_title": "貨幣轉換器",
     "@converter_currency_title": {
@@ -166,9 +166,9 @@
     },
     "converter_choose_pair": "請選擇來源與目標貨幣以開始轉換。",
     "@converter_choose_pair": {
-        "description": "提示使用者選擇貨幣的訊息。"
+        "description": "提示用戶選擇貨幣的訊息。"
     },
-    "converter_currency_prompt": "要將此貨幣填入哪個欄位？",
+    "converter_currency_prompt": "要將此貨幣設為來源貨幣還是目標貨幣？",
     "@converter_currency_prompt": {
         "description": "提示選擇要填充的欄位。"
     },
@@ -178,11 +178,11 @@
     },
     "converter_from_field": "從",
     "@converter_from_field": {
-        "description": "貨幣選擇對話方塊中'來源'欄位的標籤。"
+        "description": "貨幣選擇對話框中'來源'欄位的標籤。"
     },
     "converter_to_field": "到",
     "@converter_to_field": {
-        "description": "貨幣選擇對話方塊中'目標'欄位的標籤。"
+        "description": "貨幣選擇對話框中'目標'欄位的標籤。"
     },
     "amount_label": "金額",
     "@amount_label": {
@@ -234,43 +234,43 @@
     },
     "detail_cancel": "取消",
     "@detail_cancel": {
-        "description": "詳情檢視中取消按鈕的標籤。"
+        "description": "詳情頁面中取消按鈕的標籤。"
     },
     "detail_from_field": "從",
     "@detail_from_field": {
-        "description": "詳情檢視中'來源'欄位的標籤。"
+        "description": "詳情頁面中'來源'欄位的標籤。"
     },
     "detail_to_field": "到",
     "@detail_to_field": {
-        "description": "詳情檢視中'目標'欄位的標籤。"
+        "description": "詳情頁面中'目標'欄位的標籤。"
     },
-    "detail_currency_prompt": "要將此貨幣填入哪個欄位？",
+    "detail_currency_prompt": "要將此貨幣設為來源貨幣還是目標貨幣？",
     "@detail_currency_prompt": {
-        "description": "詳情檢視中的欄位選擇提示。"
+        "description": "詳情頁面中的欄位選擇提示。"
     },
     "detail_remove_favorite": "移出收藏",
     "@detail_remove_favorite": {
-        "description": "在詳情檢視中移除收藏的標籤。"
+        "description": "在詳情頁面中移除收藏的標籤。"
     },
     "detail_add_favorite": "加入收藏",
     "@detail_add_favorite": {
-        "description": "在詳情檢視中新增收藏的標籤。"
+        "description": "在詳情頁面中新增收藏的標籤。"
     },
     "detail_iso_code": "ISO 代碼",
     "@detail_iso_code": {
-        "description": "詳情檢視中 ISO 貨幣代碼的標籤。"
+        "description": "詳情頁面中 ISO 貨幣代碼的標籤。"
     },
     "detail_iso_numeric": "ISO 數字代碼",
     "@detail_iso_numeric": {
-        "description": "詳情檢視中 ISO 4217 數字貨幣代碼的標籤。"
+        "description": "詳情頁面中 ISO 4217 數字貨幣代碼的標籤。"
     },
     "detail_name": "名稱",
     "@detail_name": {
-        "description": "詳情檢視中貨幣名稱的標籤。"
+        "description": "詳情頁面中貨幣名稱的標籤。"
     },
     "detail_symbol": "符號",
     "@detail_symbol": {
-        "description": "詳情檢視中貨幣符號的標籤。"
+        "description": "詳情頁面中貨幣符號的標籤。"
     },
     "detail_regions": "地區",
     "@detail_regions": {
@@ -290,15 +290,15 @@
     },
     "detail_coins": "硬幣",
     "@detail_coins": {
-        "description": "詳情檢視中硬幣面額的標籤。"
+        "description": "詳情頁面中硬幣面額的標籤。"
     },
     "detail_banknotes": "紙幣",
     "@detail_banknotes": {
-        "description": "詳情檢視中紙幣面額的標籤。"
+        "description": "詳情頁面中紙幣面額的標籤。"
     },
     "detail_units": "貨幣單位",
     "@detail_units": {
-        "description": "詳情檢視中主單位和輔單位的標籤。"
+        "description": "詳情頁面中主單位和輔單位的標籤。"
     },
     "detail_unit_summary": "{majorUnit} / {minorUnit}（1:{ratio}）",
     "@detail_unit_summary": {
@@ -315,7 +315,7 @@
             }
         }
     },
-    "detail_unit_summary_no_minor": "{majorUnit}（無輔助單位）",
+    "detail_unit_summary_no_minor": "{majorUnit}（無輔幣單位）",
     "@detail_unit_summary_no_minor": {
         "description": "貨幣沒有輔助單位時顯示的主貨幣單位。",
         "placeholders": {
@@ -328,33 +328,33 @@
     "@detail_pab_no_banknotes": {
         "description": "說明巴拿馬不設巴波亞紙幣，而是使用美元紙幣。"
     },
-    "detail_sos_no_coins": "索馬利先令不設硬幣",
+    "detail_sos_no_coins": "索馬里先令硬幣目前已不再流通",
     "@detail_sos_no_coins": {
-        "description": "說明索馬利先令不設硬幣。"
+        "description": "說明索馬里先令硬幣目前已不再流通。"
     },
-    "detail_vnd_no_coins": "越南盾不設硬幣",
+    "detail_vnd_no_coins": "越南盾硬幣目前已不再流通",
     "@detail_vnd_no_coins": {
-        "description": "說明越南盾不設硬幣。"
+        "description": "說明越南盾硬幣目前已不再流通。"
     },
     "detail_convert": "轉換",
     "@detail_convert": {
-        "description": "詳情檢視中轉換按鈕的標籤。"
+        "description": "詳情頁面中轉換按鈕的標籤。"
     },
     "update_available": "有可用更新",
     "@update_available": {
-        "description": "更新可用對話方塊的標題。"
+        "description": "更新可用對話框的標題。"
     },
     "update_cancel": "取消",
     "@update_cancel": {
-        "description": "更新對話方塊中取消按鈕的標籤。"
+        "description": "更新對話框中取消按鈕的標籤。"
     },
     "update_download": "下載",
     "@update_download": {
-        "description": "更新對話方塊中下載按鈕的標籤。"
+        "description": "更新對話框中下載按鈕的標籤。"
     },
-    "update_download_prompt": "已有 {version} 版本可用。\n\n要從 GitHub Releases 下載適用於此裝置的 {assetName} 嗎？",
+    "update_download_prompt": "新版本 {version} 已發布。\n\n要從 GitHub Releases 下載適用於此裝置的 {assetName} 嗎？",
     "@update_download_prompt": {
-        "description": "更新下載確認對話方塊的內文。",
+        "description": "更新下載確認對話框的內文。",
         "placeholders": {
             "version": {
                 "type": "String",
@@ -400,13 +400,13 @@
     "@rate_info_refreshing": {
         "description": "正在更新匯率時顯示的訊息。"
     },
-    "rate_info_cached": "快取",
+    "rate_info_cached": "緩存",
     "@rate_info_cached": {
-        "description": "表示匯率來自快取的標籤。"
+        "description": "表示匯率來自緩存的標籤。"
     },
-    "rate_info_live": "即時",
+    "rate_info_live": "在線",
     "@rate_info_live": {
-        "description": "表示匯率是即時的標籤。"
+        "description": "表示匯率透過網絡取得而非從緩存載入的標籤。"
     },
     "rate_info_source_prefix": "來源：",
     "@rate_info_source_prefix": {
@@ -424,11 +424,11 @@
     "@rate_info_disclaimer": {
         "description": "關於匯率準確性的免責聲明。"
     },
-    "error_network_unavailable": "網絡錯誤—無法連線到伺服器。請檢查您的網絡連線後重試。",
+    "error_network_unavailable": "網絡錯誤，無法連接至服務器。請檢查您的網絡連接後重試。",
     "@error_network_unavailable": {
         "description": "網絡不可用時的錯誤訊息。"
     },
-    "error_service_unavailable": "無法連線遠端服務，請稍後再試。",
+    "error_service_unavailable": "無法連接至遠端服務，請稍後再試。",
     "@error_service_unavailable": {
         "description": "服務不可用時的錯誤訊息。"
     },

@@ -199,7 +199,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('ISO Code'), findsOneWidget);
-    expect(find.text('ISO Numeric'), findsOneWidget);
+    expect(find.text('ISO numeric code'), findsOneWidget);
     expect(find.text('392'), findsOneWidget);
     expect(find.text('JPY'), findsOneWidget);
     expect(find.text('Japanese Yen'), findsNWidgets(2));

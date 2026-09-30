@@ -4,7 +4,7 @@ This project enables Flutter localization delegates in `lib/main.dart` and curre
 - `en` (English)
 - `zh` (Traditional Chinese fallback)
 - `zh_Hans` (Simplified Chinese)
-- `zh_Hant` (Traditional Chinese)
+- `zh_Hant` (Traditional Chinese, Hong Kong usage)
 
 Localization messages are provided by `lib/l10n/app_localizations.dart` as the shared entry point, with ARB source files in this directory.
 The checked-in generated implementations are `app_localizations_en.dart` and `app_localizations_zh.dart`; the latter contains the neutral `zh`, Simplified Chinese, and Traditional Chinese implementations.

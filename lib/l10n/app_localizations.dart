@@ -199,7 +199,7 @@ abstract class AppLocalizations {
   /// Label for checking updates option.
   ///
   /// In en, this message translates to:
-  /// **'Check updates'**
+  /// **'Check for updates'**
   String get settings_check_updates;
 
   /// Label for viewing changelogs.
@@ -349,13 +349,13 @@ abstract class AppLocalizations {
   /// Message prompting user to select currencies.
   ///
   /// In en, this message translates to:
-  /// **'Choose a from and to currency to begin converting.'**
+  /// **'Select source and target currencies to start converting.'**
   String get converter_choose_pair;
 
   /// Prompt asking which field to fill with selected currency.
   ///
   /// In en, this message translates to:
-  /// **'Which field should be filled with this currency?'**
+  /// **'Use this as the source or target currency?'**
   String get converter_currency_prompt;
 
   /// Label for cancel button in converter.
@@ -469,13 +469,13 @@ abstract class AppLocalizations {
   /// Prompt in detail view for field selection.
   ///
   /// In en, this message translates to:
-  /// **'Which field should be filled with this currency?'**
+  /// **'Use this as the source or target currency?'**
   String get detail_currency_prompt;
 
   /// Label for removing favorite in detail view.
   ///
   /// In en, this message translates to:
-  /// **'Remove favorite'**
+  /// **'Remove from favorites'**
   String get detail_remove_favorite;
 
   /// Label for adding favorite in detail view.
@@ -493,7 +493,7 @@ abstract class AppLocalizations {
   /// Label for ISO 4217 numeric currency code in detail view.
   ///
   /// In en, this message translates to:
-  /// **'ISO Numeric'**
+  /// **'ISO numeric code'**
   String get detail_iso_numeric;
 
   /// Label for currency name in detail view.
@@ -607,7 +607,7 @@ abstract class AppLocalizations {
   /// Body text for the update download confirmation dialog.
   ///
   /// In en, this message translates to:
-  /// **'Version {version} is available.\n\nDownload {assetName} from GitHub releases for this device?'**
+  /// **'Version {version} is available.\n\nDownload {assetName} for this device from GitHub Releases?'**
   String update_download_prompt(String version, String assetName);
 
   /// Message shown when the app cannot determine the latest stable release version.
@@ -619,7 +619,7 @@ abstract class AppLocalizations {
   /// Message shown when no matching release asset exists for the current device.
   ///
   /// In en, this message translates to:
-  /// **'No release asset was found for this device on GitHub releases.'**
+  /// **'No download is available for this device on GitHub Releases.'**
   String get update_asset_not_found;
 
   /// Message shown when opening the external release download URL fails.
@@ -658,10 +658,10 @@ abstract class AppLocalizations {
   /// **'cached'**
   String get rate_info_cached;
 
-  /// Label indicating the rate is live.
+  /// Label indicating the rate was fetched online rather than loaded from cache.
   ///
   /// In en, this message translates to:
-  /// **'live'**
+  /// **'Online'**
   String get rate_info_live;
 
   /// Label prefix for the rate source.

@@ -24,6 +24,41 @@ import 'package:openfxpedia/services/observability.dart';
 import 'package:openfxpedia/widgets/amount_input.dart';
 
 void main() {
+  testWidgets('Traditional Chinese resources use Hong Kong terminology',
+      (tester) async {
+    final l10n = await AppLocalizations.delegate.load(
+      const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
+    );
+
+    expect(l10n.startup_loading, '正在載入貨幣和緩存匯率');
+    expect(l10n.settings_license, '許可證');
+    expect(l10n.settings_clear_local_data, '清除本地資料');
+    expect(l10n.rate_info_cached, '緩存');
+    expect(l10n.rate_info_live, '在線');
+    expect(l10n.error_network_unavailable, contains('網絡'));
+    expect(l10n.error_network_unavailable, contains('服務器'));
+    expect(l10n.detail_sos_no_coins, contains('索馬里'));
+
+    final overlay = jsonDecode(
+      await rootBundle.loadString(
+        'assets/data/fiat_currency_overlays/zh_Hant.json',
+      ),
+    ) as Map<String, dynamic>;
+    final entries = overlay['entries'] as Map<String, dynamic>;
+
+    expect(overlay['locale'], 'zh_Hant');
+    expect(entries['BND']['name'], '文萊元');
+    expect(entries['BND']['regions'], ['文萊']);
+    expect(entries['EUR']['regions'], contains('黑山'));
+    expect(entries['KPW']['name'], '朝鮮圜');
+    expect(entries['KPW']['major_unit'], '圜');
+    expect(entries['KRW']['name'], '韓圜');
+    expect(entries['NZD']['name'], '紐西蘭元');
+    expect(entries['NZD']['regions'], contains('紐西蘭'));
+    expect(entries['VED']['major_unit'], '數碼玻利瓦爾');
+    expect(entries['VES']['major_unit'], '主權玻利瓦爾');
+  });
+
   for (final example in [
     ('ILS', 'Agora', '10 agorot', 0.1),
     ('RON', 'Ban', '5 bani', 0.05),

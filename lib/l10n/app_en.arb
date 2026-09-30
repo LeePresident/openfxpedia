@@ -64,7 +64,7 @@
     "@settings_app_version": {
         "description": "Label for app version display in settings."
     },
-    "settings_check_updates": "Check updates",
+    "settings_check_updates": "Check for updates",
     "@settings_check_updates": {
         "description": "Label for checking updates option."
     },
@@ -164,11 +164,11 @@
     "@converter_swap": {
         "description": "Label for button to swap from and to currencies."
     },
-    "converter_choose_pair": "Choose a from and to currency to begin converting.",
+    "converter_choose_pair": "Select source and target currencies to start converting.",
     "@converter_choose_pair": {
         "description": "Message prompting user to select currencies."
     },
-    "converter_currency_prompt": "Which field should be filled with this currency?",
+    "converter_currency_prompt": "Use this as the source or target currency?",
     "@converter_currency_prompt": {
         "description": "Prompt asking which field to fill with selected currency."
     },
@@ -244,11 +244,11 @@
     "@detail_to_field": {
         "description": "Label for 'to' field in detail view."
     },
-    "detail_currency_prompt": "Which field should be filled with this currency?",
+    "detail_currency_prompt": "Use this as the source or target currency?",
     "@detail_currency_prompt": {
         "description": "Prompt in detail view for field selection."
     },
-    "detail_remove_favorite": "Remove favorite",
+    "detail_remove_favorite": "Remove from favorites",
     "@detail_remove_favorite": {
         "description": "Label for removing favorite in detail view."
     },
@@ -260,7 +260,7 @@
     "@detail_iso_code": {
         "description": "Label for ISO currency code in detail view."
     },
-    "detail_iso_numeric": "ISO Numeric",
+    "detail_iso_numeric": "ISO numeric code",
     "@detail_iso_numeric": {
         "description": "Label for ISO 4217 numeric currency code in detail view."
     },
@@ -352,7 +352,7 @@
     "@update_download": {
         "description": "Label for download button in update dialog."
     },
-    "update_download_prompt": "Version {version} is available.\n\nDownload {assetName} from GitHub releases for this device?",
+    "update_download_prompt": "Version {version} is available.\n\nDownload {assetName} for this device from GitHub Releases?",
     "@update_download_prompt": {
         "description": "Body text for the update download confirmation dialog.",
         "placeholders": {
@@ -370,7 +370,7 @@
     "@update_latest_release_unavailable": {
         "description": "Message shown when the app cannot determine the latest stable release version."
     },
-    "update_asset_not_found": "No release asset was found for this device on GitHub releases.",
+    "update_asset_not_found": "No download is available for this device on GitHub Releases.",
     "@update_asset_not_found": {
         "description": "Message shown when no matching release asset exists for the current device."
     },
@@ -404,9 +404,9 @@
     "@rate_info_cached": {
         "description": "Label indicating the rate is from cache."
     },
-    "rate_info_live": "live",
+    "rate_info_live": "Online",
     "@rate_info_live": {
-        "description": "Label indicating the rate is live."
+        "description": "Label indicating the rate was fetched online rather than loaded from cache."
     },
     "rate_info_source_prefix": "Source:",
     "@rate_info_source_prefix": {

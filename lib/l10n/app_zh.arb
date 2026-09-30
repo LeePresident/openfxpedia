@@ -76,7 +76,7 @@
     "@settings_changelogs_subtitle": {
         "description": "解释更新日志功能的副标题。"
     },
-    "settings_license": "许可",
+    "settings_license": "许可证",
     "@settings_license": {
         "description": "许可信息的标签。"
     },
@@ -168,7 +168,7 @@
     "@converter_choose_pair": {
         "description": "提示用户选择货币的消息。"
     },
-    "converter_currency_prompt": "要将此货币填入哪个？",
+    "converter_currency_prompt": "将此货币设为来源货币还是目标货币？",
     "@converter_currency_prompt": {
         "description": "提示选择要填充的栏位。"
     },
@@ -244,7 +244,7 @@
     "@detail_to_field": {
         "description": "详情视图中'目标'栏位的标签。"
     },
-    "detail_currency_prompt": "要将此货币填入哪个栏位？",
+    "detail_currency_prompt": "将此货币设为来源货币还是目标货币？",
     "@detail_currency_prompt": {
         "description": "详情视图中的栏位选择提示。"
     },
@@ -315,7 +315,7 @@
             }
         }
     },
-    "detail_unit_summary_no_minor": "{majorUnit}（无辅单位）",
+    "detail_unit_summary_no_minor": "{majorUnit}（无辅币单位）",
     "@detail_unit_summary_no_minor": {
         "description": "货币没有辅单位时显示的主货币单位。",
         "placeholders": {
@@ -328,13 +328,13 @@
     "@detail_pab_no_banknotes": {
         "description": "说明巴拿马不设巴波亚纸币，而是使用美元纸币。"
     },
-    "detail_sos_no_coins": "索马里先令不设硬币",
+    "detail_sos_no_coins": "索马里先令硬币目前已不再流通",
     "@detail_sos_no_coins": {
-        "description": "说明索马里先令不设硬币。"
+        "description": "说明索马里先令硬币目前已不再流通。"
     },
-    "detail_vnd_no_coins": "越南盾不设硬币",
+    "detail_vnd_no_coins": "越南盾硬币目前已不再流通",
     "@detail_vnd_no_coins": {
-        "description": "说明越南盾不设硬币。"
+        "description": "说明越南盾硬币目前已不再流通。"
     },
     "detail_convert": "转换",
     "@detail_convert": {
@@ -352,7 +352,7 @@
     "@update_download": {
         "description": "更新对话框中下载按钮的标签。"
     },
-    "update_download_prompt": "已有 {version} 版本可用。\n\n要从 GitHub Releases 下载适用于此设备的 {assetName} 吗？",
+    "update_download_prompt": "新版本 {version} 已发布。\n\n要从 GitHub Releases 下载适用于此设备的 {assetName} 吗？",
     "@update_download_prompt": {
         "description": "更新下载确认对话框的正文。",
         "placeholders": {
@@ -404,9 +404,9 @@
     "@rate_info_cached": {
         "description": "表示汇率来自缓存的标签。"
     },
-    "rate_info_live": "实时",
+    "rate_info_live": "在线",
     "@rate_info_live": {
-        "description": "表示汇率是实时的标签。"
+        "description": "表示汇率通过在线获取而非从缓存加载的标签。"
     },
     "rate_info_source_prefix": "来源：",
     "@rate_info_source_prefix": {

@@ -57,7 +57,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_app_version => 'App version';
 
   @override
-  String get settings_check_updates => 'Check updates';
+  String get settings_check_updates => 'Check for updates';
 
   @override
   String get settings_changelogs => 'Change log';
@@ -136,11 +136,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get converter_choose_pair =>
-      'Choose a from and to currency to begin converting.';
+      'Select source and target currencies to start converting.';
 
   @override
   String get converter_currency_prompt =>
-      'Which field should be filled with this currency?';
+      'Use this as the source or target currency?';
 
   @override
   String get converter_cancel => 'Cancel';
@@ -198,10 +198,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get detail_currency_prompt =>
-      'Which field should be filled with this currency?';
+      'Use this as the source or target currency?';
 
   @override
-  String get detail_remove_favorite => 'Remove favorite';
+  String get detail_remove_favorite => 'Remove from favorites';
 
   @override
   String get detail_add_favorite => 'Add to favorites';
@@ -210,7 +210,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get detail_iso_code => 'ISO Code';
 
   @override
-  String get detail_iso_numeric => 'ISO Numeric';
+  String get detail_iso_numeric => 'ISO numeric code';
 
   @override
   String get detail_name => 'Name';
@@ -275,7 +275,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String update_download_prompt(String version, String assetName) {
-    return 'Version $version is available.\n\nDownload $assetName from GitHub releases for this device?';
+    return 'Version $version is available.\n\nDownload $assetName for this device from GitHub Releases?';
   }
 
   @override
@@ -284,7 +284,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get update_asset_not_found =>
-      'No release asset was found for this device on GitHub releases.';
+      'No download is available for this device on GitHub Releases.';
 
   @override
   String get update_open_download_failed =>
@@ -309,7 +309,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rate_info_cached => 'cached';
 
   @override
-  String get rate_info_live => 'live';
+  String get rate_info_live => 'Online';
 
   @override
   String get rate_info_source_prefix => 'Source:';

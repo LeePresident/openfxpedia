@@ -66,7 +66,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settings_changelogs_subtitle => '查看所有版本的简明变更记录';
 
   @override
-  String get settings_license => '许可';
+  String get settings_license => '许可证';
 
   @override
   String get settings_clear_local_data => '清除本地数据';
@@ -135,7 +135,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get converter_choose_pair => '请选择来源和目标货币以开始转换。';
 
   @override
-  String get converter_currency_prompt => '要将此货币填入哪个？';
+  String get converter_currency_prompt => '将此货币设为来源货币还是目标货币？';
 
   @override
   String get converter_cancel => '取消';
@@ -192,7 +192,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get detail_to_field => '到';
 
   @override
-  String get detail_currency_prompt => '要将此货币填入哪个栏位？';
+  String get detail_currency_prompt => '将此货币设为来源货币还是目标货币？';
 
   @override
   String get detail_remove_favorite => '移出收藏';
@@ -240,17 +240,17 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String detail_unit_summary_no_minor(String majorUnit) {
-    return '$majorUnit（无辅单位）';
+    return '$majorUnit（无辅币单位）';
   }
 
   @override
   String get detail_pab_no_banknotes => '巴波亚不设纸币；使用美元纸币';
 
   @override
-  String get detail_sos_no_coins => '索马里先令不设硬币';
+  String get detail_sos_no_coins => '索马里先令硬币目前已不再流通';
 
   @override
-  String get detail_vnd_no_coins => '越南盾不设硬币';
+  String get detail_vnd_no_coins => '越南盾硬币目前已不再流通';
 
   @override
   String get detail_convert => '转换';
@@ -266,7 +266,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String update_download_prompt(String version, String assetName) {
-    return '已有 $version 版本可用。\n\n要从 GitHub Releases 下载适用于此设备的 $assetName 吗？';
+    return '新版本 $version 已发布。\n\n要从 GitHub Releases 下载适用于此设备的 $assetName 吗？';
   }
 
   @override
@@ -296,7 +296,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get rate_info_cached => '缓存';
 
   @override
-  String get rate_info_live => '实时';
+  String get rate_info_live => '在线';
 
   @override
   String get rate_info_source_prefix => '来源：';
@@ -385,7 +385,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get settings_changelogs_subtitle => '查看所有版本的简明变更记录';
 
   @override
-  String get settings_license => '许可';
+  String get settings_license => '许可证';
 
   @override
   String get settings_clear_local_data => '清除本地数据';
@@ -454,7 +454,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get converter_choose_pair => '请选择来源和目标货币以开始转换。';
 
   @override
-  String get converter_currency_prompt => '要将此货币填入哪个栏位？';
+  String get converter_currency_prompt => '将此货币设为来源货币还是目标货币？';
 
   @override
   String get converter_cancel => '取消';
@@ -511,7 +511,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get detail_to_field => '到';
 
   @override
-  String get detail_currency_prompt => '要将此货币填入哪个栏位？';
+  String get detail_currency_prompt => '将此货币设为来源货币还是目标货币？';
 
   @override
   String get detail_remove_favorite => '移出收藏';
@@ -559,17 +559,17 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String detail_unit_summary_no_minor(String majorUnit) {
-    return '$majorUnit（无辅单位）';
+    return '$majorUnit（无辅币单位）';
   }
 
   @override
   String get detail_pab_no_banknotes => '巴波亚不设纸币；使用美元纸币';
 
   @override
-  String get detail_sos_no_coins => '索马里先令不设硬币';
+  String get detail_sos_no_coins => '索马里先令硬币目前已不再流通';
 
   @override
-  String get detail_vnd_no_coins => '越南盾不设硬币';
+  String get detail_vnd_no_coins => '越南盾硬币目前已不再流通';
 
   @override
   String get detail_convert => '转换';
@@ -585,7 +585,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String update_download_prompt(String version, String assetName) {
-    return '已有 $version 版本可用。\n\n要从 GitHub Releases 下载适用于此设备的 $assetName 吗？';
+    return '新版本 $version 已发布。\n\n要从 GitHub Releases 下载适用于此设备的 $assetName 吗？';
   }
 
   @override
@@ -615,7 +615,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get rate_info_cached => '缓存';
 
   @override
-  String get rate_info_live => '实时';
+  String get rate_info_live => '在线';
 
   @override
   String get rate_info_source_prefix => '来源：';
@@ -650,7 +650,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get appTitle => 'OpenFXpedia';
 
   @override
-  String get startup_loading => '正在載入貨幣和快取匯率';
+  String get startup_loading => '正在載入貨幣和緩存匯率';
 
   @override
   String get startup_error_title => '啟動失敗';
@@ -704,28 +704,28 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get settings_changelogs_subtitle => '查看所有版本的簡短更新紀錄';
 
   @override
-  String get settings_license => '授權';
+  String get settings_license => '許可證';
 
   @override
-  String get settings_clear_local_data => '清除本機資料';
+  String get settings_clear_local_data => '清除本地資料';
 
   @override
-  String get settings_clear_local_data_subtitle => '刪除快取匯率、貨幣目錄、收藏和偏好設定';
+  String get settings_clear_local_data_subtitle => '刪除緩存匯率、貨幣目錄、收藏和偏好設定';
 
   @override
-  String get settings_clear_local_data_title => '清除本機資料？';
+  String get settings_clear_local_data_title => '清除本地資料？';
 
   @override
-  String get settings_clear_local_data_message => '這將從此裝置刪除快取匯率、貨幣目錄、收藏和偏好設定。';
+  String get settings_clear_local_data_message => '這將從此裝置刪除緩存匯率、貨幣目錄、收藏和偏好設定。';
 
   @override
   String get settings_clear_local_data_confirm => '清除資料';
 
   @override
-  String get settings_clear_local_data_done => '本機資料已清除';
+  String get settings_clear_local_data_done => '本地資料已清除';
 
   @override
-  String get settings_clear_local_data_failed => '無法清除本機資料';
+  String get settings_clear_local_data_failed => '無法清除本地資料';
 
   @override
   String get settings_select_theme => '選擇主題';
@@ -773,7 +773,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get converter_choose_pair => '請選擇來源與目標貨幣以開始轉換。';
 
   @override
-  String get converter_currency_prompt => '要將此貨幣填入哪個欄位？';
+  String get converter_currency_prompt => '要將此貨幣設為來源貨幣還是目標貨幣？';
 
   @override
   String get converter_cancel => '取消';
@@ -830,7 +830,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get detail_to_field => '到';
 
   @override
-  String get detail_currency_prompt => '要將此貨幣填入哪個欄位？';
+  String get detail_currency_prompt => '要將此貨幣設為來源貨幣還是目標貨幣？';
 
   @override
   String get detail_remove_favorite => '移出收藏';
@@ -878,17 +878,17 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String detail_unit_summary_no_minor(String majorUnit) {
-    return '$majorUnit（無輔助單位）';
+    return '$majorUnit（無輔幣單位）';
   }
 
   @override
   String get detail_pab_no_banknotes => '巴波亞不設紙幣；使用美元紙幣';
 
   @override
-  String get detail_sos_no_coins => '索馬利先令不設硬幣';
+  String get detail_sos_no_coins => '索馬里先令硬幣目前已不再流通';
 
   @override
-  String get detail_vnd_no_coins => '越南盾不設硬幣';
+  String get detail_vnd_no_coins => '越南盾硬幣目前已不再流通';
 
   @override
   String get detail_convert => '轉換';
@@ -904,7 +904,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String update_download_prompt(String version, String assetName) {
-    return '已有 $version 版本可用。\n\n要從 GitHub Releases 下載適用於此裝置的 $assetName 嗎？';
+    return '新版本 $version 已發布。\n\n要從 GitHub Releases 下載適用於此裝置的 $assetName 嗎？';
   }
 
   @override
@@ -931,10 +931,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get rate_info_refreshing => '正在更新匯率…';
 
   @override
-  String get rate_info_cached => '快取';
+  String get rate_info_cached => '緩存';
 
   @override
-  String get rate_info_live => '即時';
+  String get rate_info_live => '在線';
 
   @override
   String get rate_info_source_prefix => '來源：';
@@ -949,10 +949,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get rate_info_disclaimer => '匯率僅供參考，請以實際報價為準。';
 
   @override
-  String get error_network_unavailable => '網絡錯誤—無法連線到伺服器。請檢查您的網絡連線後重試。';
+  String get error_network_unavailable => '網絡錯誤，無法連接至服務器。請檢查您的網絡連接後重試。';
 
   @override
-  String get error_service_unavailable => '無法連線遠端服務，請稍後再試。';
+  String get error_service_unavailable => '無法連接至遠端服務，請稍後再試。';
 
   @override
   String get error_generic => '發生錯誤，請重試。';
