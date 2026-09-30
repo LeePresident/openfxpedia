@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../models/currency.dart';
 import '../providers/app_state.dart';
+import '../services/currency_localizer.dart';
 import '../widgets/region_flag.dart';
 
 enum _ConversionFieldChoice { from, to }
@@ -217,12 +218,6 @@ bool _isMinorUnitDenomination(Currency currency, String denomination) {
   final minorUnit = currency.minorUnit;
   if (minorUnit == null || minorUnit.isEmpty) return false;
 
-  const aliases = <String, List<String>>{
-    'grosz': ['gr'],
-    'kopeck': ['kapiejka', 'kapiejki', 'kopiyky'],
-    'piastre': ['pt', 'qirsh'],
-    'sen': ['cent'],
-  };
   final normalizedUnit = minorUnit.toLowerCase();
   if (RegExp(r'\d\s*(?:c|¢)$', caseSensitive: false).hasMatch(denomination)) {
     return true;
@@ -233,7 +228,7 @@ bool _isMinorUnitDenomination(Currency currency, String denomination) {
 
   final terms = [
     minorUnit,
-    ...?aliases[normalizedUnit],
+    ...?CurrencyLocalizer.denominationUnitAliases[normalizedUnit],
   ].map(RegExp.escape).join('|');
   return RegExp(
     '(?<![\\p{L}\\p{N}])(?:$terms)s?(?![\\p{L}\\p{N}])',

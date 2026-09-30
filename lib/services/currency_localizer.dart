@@ -3,7 +3,7 @@ import 'observability.dart';
 class CurrencyLocalizer {
   final String localeKey;
 
-  static const _denominationUnitAliases = <String, List<String>>{
+  static const denominationUnitAliases = <String, List<String>>{
     'agora': ['agorot'],
     'ban': ['bani'],
     'chetrum': ['chhertum'],
@@ -73,7 +73,7 @@ class CurrencyLocalizer {
 
     final unitTerms = [
       baseUnit,
-      ...?_denominationUnitAliases[baseUnit.toLowerCase()],
+      ...?denominationUnitAliases[baseUnit.toLowerCase()],
     ].map(RegExp.escape).join('|');
     final unitPattern = RegExp(
       '(?<![\\p{L}\\p{N}])(?:$unitTerms)s?(?![\\p{L}\\p{N}])',

@@ -24,7 +24,66 @@ import 'package:openfxpedia/services/observability.dart';
 import 'package:openfxpedia/widgets/amount_input.dart';
 
 void main() {
-  testWidgets('tapping a denomination sets source currency and amount',
+  for (final example in [
+    ('ILS', 'Agora', '10 agorot', 0.1),
+    ('RON', 'Ban', '5 bani', 0.05),
+    ('LSL', 'Sente', '5 lisente', 0.05),
+    ('BTN', 'Chetrum', '5 chhertum', 0.05),
+  ]) {
+    testWidgets('${example.$1} minor denomination sets a fractional amount',
+        (tester) async {
+      final cache = _StubCacheService();
+      final exchange = _FakeExchangeClient();
+      final state = AppState(
+        conversionService: ConversionService(client: exchange, cache: cache),
+        catalogService: CurrencyCatalogService(client: exchange, cache: cache),
+        favoritesService: FavoritesService(cache: cache),
+        cacheService: cache,
+      );
+      final currency = Currency(
+        isoCode: example.$1,
+        name: example.$1,
+        minorUnit: example.$2,
+        minorUnitsPerMajor: 100,
+        coins: [example.$3],
+      );
+
+      await tester.pumpWidget(
+        ChangeNotifierProvider<AppState>.value(
+          value: state,
+          child: MaterialApp(
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            home: Builder(
+              builder: (context) => TextButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => CurrencyDetailScreen(currency: currency),
+                  ),
+                ),
+                child: const Text('Open detail'),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Open detail'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(example.$3));
+      await tester.pumpAndSettle();
+
+      expect(state.baseCurrency?.isoCode, example.$1);
+      expect(state.inputAmount, example.$4);
+    });
+  }
+
+  testWidgets('denomination amount is reset when local data is cleared',
       (tester) async {
     final cache = _StubCacheService();
     final exchange = _FakeExchangeClient();
@@ -76,6 +135,10 @@ void main() {
                     ),
                     child: const Text('Open detail'),
                   ),
+                  TextButton(
+                    onPressed: currentState.clearLocalData,
+                    child: const Text('Clear local data'),
+                  ),
                 ],
               ),
             ),
@@ -104,6 +167,17 @@ void main() {
 
     expect(state.baseCurrency?.isoCode, 'HKD');
     expect(state.inputAmount, 0.1);
+
+    await tester.tap(find.text('Clear local data'));
+    await tester.pumpAndSettle();
+
+    expect(state.inputAmount, 0);
+    expect(state.baseCurrency, isNull);
+    expect(state.targetCurrency, isNull);
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller!.text,
+      '0.0',
+    );
   });
 
   testWidgets(
@@ -240,6 +314,11 @@ class _StubCacheService extends CacheService {
 
   @override
   Future<void> init() async {}
+
+  @override
+  Future<void> clearAll() async {
+    _favorites.clear();
+  }
 
   @override
   List<String> getFavorites() => List.unmodifiable(_favorites);

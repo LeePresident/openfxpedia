@@ -20,6 +20,7 @@ class ConversionService {
   final ExchangeClient _client;
   final CacheService _cache;
   ExchangeApiSource _preferredSource = ExchangeApiSource.auto;
+  int _cacheWriteGeneration = 0;
 
   ExchangeApiSource get preferredSource => _preferredSource;
 
@@ -33,11 +34,16 @@ class ConversionService {
     _preferredSource = source;
   }
 
+  void invalidatePendingCacheWrites() {
+    _cacheWriteGeneration++;
+  }
+
   Future<ConversionResult> convert(
     double amount,
     String base,
     String target,
   ) async {
+    final cacheWriteGeneration = _cacheWriteGeneration;
     final b = base.toLowerCase();
     final t = target.toLowerCase();
 
@@ -68,12 +74,14 @@ class ConversionService {
         rates = snapshot.rates;
         timestamp = snapshot.quotedAt;
         source = snapshot.sourceId;
-        await _cache.putRateSnapshot(
-          b,
-          rates,
-          timestamp,
-          source: snapshot.sourceId,
-        );
+        if (cacheWriteGeneration == _cacheWriteGeneration) {
+          await _cache.putRateSnapshot(
+            b,
+            rates,
+            timestamp,
+            source: snapshot.sourceId,
+          );
+        }
       } catch (_) {
         if (cached.rates != null &&
             (_matchesPreferredSource(cached.source) || cached.source == null)) {
@@ -108,16 +116,19 @@ class ConversionService {
   }
 
   Future<void> refreshRates(String base) async {
+    final cacheWriteGeneration = _cacheWriteGeneration;
     final snapshot = await _client.fetchRateSnapshotFor(
       base.toLowerCase(),
       preferredSource: _preferredSource,
     );
-    await _cache.putRateSnapshot(
-      base.toLowerCase(),
-      snapshot.rates,
-      snapshot.quotedAt,
-      source: snapshot.sourceId,
-    );
+    if (cacheWriteGeneration == _cacheWriteGeneration) {
+      await _cache.putRateSnapshot(
+        base.toLowerCase(),
+        snapshot.rates,
+        snapshot.quotedAt,
+        source: snapshot.sourceId,
+      );
+    }
   }
 
   bool _matchesPreferredSource(String? source) {

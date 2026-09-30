@@ -386,11 +386,13 @@ class AppState extends ChangeNotifier {
   bool isFavorite(String isoCode) => _favoritesService.isFavorite(isoCode);
 
   Future<void> clearLocalData() async {
+    _conversionRequestSequence++;
+    _conversionService.invalidatePendingCacheWrites();
     await _cacheService.clearAll();
     _favoritesService.load();
-    _conversionRequestSequence++;
     _baseCurrency = null;
     _targetCurrency = null;
+    _inputAmount = 0.0;
     _convertedAmount = null;
     _lastRate = null;
     _rateFromCache = false;

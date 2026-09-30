@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfxpedia/models/cached_rate_snapshot.dart';
 import 'package:openfxpedia/models/exchange_rate.dart';
@@ -12,6 +14,7 @@ class _FakeExchangeClient extends ExchangeClient {
   final Map<String, Map<String, double>> _fallbackRates;
   bool calledFetch = false;
   ExchangeApiSource? lastPreferredSource;
+  Completer<ExchangeRateSnapshot>? pendingSnapshot;
 
   _FakeExchangeClient(this._rates,
       {Map<String, Map<String, double>>? fallbackRates})
@@ -44,6 +47,7 @@ class _FakeExchangeClient extends ExchangeClient {
     String? target,
     ExchangeApiSource preferredSource = ExchangeApiSource.auto,
   }) async {
+    if (pendingSnapshot != null) return pendingSnapshot!.future;
     final normalizedBase = base.toLowerCase();
     final normalizedTarget = target?.toLowerCase();
     lastPreferredSource = preferredSource;
@@ -167,6 +171,37 @@ class _StubCacheService extends CacheService {
 
 void main() {
   group('ConversionService', () {
+    for (final refresh in [false, true]) {
+      test('invalidates pending ${refresh ? 'refresh' : 'conversion'} writes',
+          () async {
+        final pending = Completer<ExchangeRateSnapshot>();
+        final client = _FakeExchangeClient({
+          'usd': {'eur': 0.92},
+        })
+          ..pendingSnapshot = pending;
+        final cache = _StubCacheService();
+        final service = ConversionService(client: client, cache: cache);
+
+        final request = refresh
+            ? service.refreshRates('USD')
+            : service.convert(100, 'USD', 'EUR');
+        service.invalidatePendingCacheWrites();
+        pending.complete(ExchangeRateSnapshot(
+          baseCurrency: 'usd',
+          quotedAt: DateTime.utc(2026, 5, 7),
+          sourceId: 'frankfurter',
+          rates: {'eur': 0.92},
+        ));
+        await request;
+
+        expect(cache.getCachedRateSnapshot('usd').rates, isNull);
+
+        client.pendingSnapshot = null;
+        await service.convert(100, 'USD', 'EUR');
+        expect(cache.getCachedRateSnapshot('usd').rates, {'eur': 0.92});
+      });
+    }
+
     test('converts USD to EUR correctly using fresh rates', () async {
       final client = _FakeExchangeClient({
         'usd': {'eur': 0.92, 'gbp': 0.79},
