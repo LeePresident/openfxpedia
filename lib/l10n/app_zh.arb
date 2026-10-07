@@ -1,5 +1,17 @@
 {
     "@@locale": "zh",
+    "history_title": "历史汇率",
+    "history_week": "1周",
+    "history_month": "1月",
+    "history_quarter": "3月",
+    "history_unavailable": "此时间范围内没有可用的历史汇率。请尝试其他日期或汇率来源。",
+    "history_available": "采样报价：{available}/{total}",
+    "converter_date": "换算日期",
+    "converter_latest": "最新",
+    "converter_use_latest": "使用最新汇率",
+    "error_historical_unavailable": "无法加载此货币对和日期的历史汇率。请检查网络连接，或尝试其他日期或汇率来源。",
+    "rate_info_requested_date": "所选日期：{date}",
+    "rate_info_effective_date": "汇率日期：{date}",
     "appTitle": "OpenFXpedia",
     "@appTitle": {
         "description": "应用程序的标题。"

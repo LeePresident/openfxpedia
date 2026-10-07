@@ -114,13 +114,60 @@ class ExchangeClient {
     }
   }
 
+  Future<ExchangeRateSnapshot> fetchHistoricalRateSnapshotFor(
+    String base, {
+    required String target,
+    required DateTime date,
+    ExchangeApiSource preferredSource = ExchangeApiSource.auto,
+  }) async {
+    final requestedDate = DateTime.utc(date.year, date.month, date.day);
+    final now = DateTime.now();
+    if (requestedDate.isAfter(DateTime.utc(now.year, now.month, now.day))) {
+      throw ExchangeApiException('Future historical date');
+    }
+    final provider = preferredSource == ExchangeApiSource.exchangeApi
+        ? _fallbackProvider
+        : _primaryProvider;
+    try {
+      return await _fetchFromSingleProvider(
+        provider: provider,
+        base: base.toLowerCase(),
+        target: target.toLowerCase(),
+        date: requestedDate,
+      );
+    } catch (_) {
+      if (preferredSource != ExchangeApiSource.auto) rethrow;
+      return _fetchFromSingleProvider(
+        provider: _fallbackProvider,
+        base: base.toLowerCase(),
+        target: target.toLowerCase(),
+        date: requestedDate,
+      );
+    }
+  }
+
   Future<ExchangeRateSnapshot> _fetchFromSingleProvider({
     required ExchangeProvider provider,
     required String base,
     required String? target,
+    DateTime? date,
   }) async {
     try {
-      final snapshot = await provider.fetchLatestRates(base);
+      final ExchangeRateSnapshot snapshot;
+      if (date == null) {
+        snapshot = await provider.fetchLatestRates(base);
+      } else if (provider is HistoricalExchangeProvider && target != null) {
+        snapshot = await provider.fetchHistoricalRateFor(base, target, date);
+        final rate = snapshot.rates[target];
+        if (snapshot.baseCurrency != base ||
+            snapshot.quotedAt.isAfter(date) ||
+            (rate != null && (!rate.isFinite || rate <= 0))) {
+          throw ExchangeApiException('Invalid historical snapshot');
+        }
+      } else {
+        throw ExchangeApiException(
+            'Provider does not support historical rates');
+      }
       if (target != null && !snapshot.rates.containsKey(target)) {
         ExchangeObservability.recordAttempt(
           source: provider.sourceId,

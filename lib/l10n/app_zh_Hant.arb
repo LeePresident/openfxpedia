@@ -1,5 +1,17 @@
 {
     "@@locale": "zh_Hant",
+    "history_title": "歷史匯率",
+    "history_week": "1週",
+    "history_month": "1月",
+    "history_quarter": "3月",
+    "history_unavailable": "此時間範圍內沒有可用的歷史匯率。請嘗試其他日期或匯率來源。",
+    "history_available": "抽樣報價：{available}/{total}",
+    "converter_date": "換算日期",
+    "converter_latest": "最新",
+    "converter_use_latest": "使用最新匯率",
+    "error_historical_unavailable": "無法載入此貨幣對和日期的歷史匯率。請檢查網絡連線，或嘗試其他日期或匯率來源。",
+    "rate_info_requested_date": "所選日期：{date}",
+    "rate_info_effective_date": "匯率日期：{date}",
     "appTitle": "OpenFXpedia",
     "@appTitle": {
         "description": "應用程式的標題。"

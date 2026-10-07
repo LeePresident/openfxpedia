@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
 import 'package:openfxpedia/services/exchange_api_source.dart';
 import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/exchange_provider.dart';
@@ -34,6 +38,85 @@ class _FakeProvider implements ExchangeProvider {
 }
 
 void main() {
+  group('Historical requests', () {
+    test('fallback keeps the date and never calls latest endpoints', () async {
+      final requests = <Uri>[];
+      final client = ExchangeClient(httpClient: MockClient((request) async {
+        requests.add(request.url);
+        if (request.url.host == 'api.frankfurter.dev') {
+          expect(request.url.queryParameters['date'], '2024-03-10');
+          return http.Response('{}', 404);
+        }
+        if (request.url.host == 'cdn.jsdelivr.net') {
+          expect(request.url.path, contains('@2024-03-10/'));
+          return http.Response('{}', 503);
+        }
+        expect(request.url.host, '2024-03-10.currency-api.pages.dev');
+        return http.Response(
+            jsonEncode({
+              'date': '2024-03-10',
+              'usd': {'eur': 0.91},
+            }),
+            200);
+      }));
+      final snapshot = await client.fetchHistoricalRateSnapshotFor(
+        'USD',
+        target: 'EUR',
+        date: DateTime(2024, 3, 10),
+      );
+      expect(snapshot.sourceId, 'legacy');
+      expect(snapshot.quotedAt, DateTime.utc(2024, 3, 10));
+      expect(snapshot.rates, {'eur': 0.91});
+      expect(requests, hasLength(3));
+      expect(requests.any((uri) => uri.toString().contains('latest')), isFalse);
+    });
+
+    test('forced Frankfurter failure does not fall back', () async {
+      final client = ExchangeClient(httpClient: MockClient((request) async {
+        expect(request.url.host, 'api.frankfurter.dev');
+        return http.Response('{}', 404);
+      }));
+      await expectLater(
+          client.fetchHistoricalRateSnapshotFor(
+            'usd',
+            target: 'eur',
+            date: DateTime(2024, 3, 10),
+            preferredSource: ExchangeApiSource.frankfurter,
+          ),
+          throwsA(isA<ExchangeApiException>()));
+    });
+
+    test('forced Exchange API rejects future-dated or missing quotes',
+        () async {
+      for (final body in [
+        {
+          'date': '2024-03-11',
+          'usd': {'eur': 0.91}
+        },
+        {
+          'usd': {'eur': 0.91}
+        },
+        {
+          'date': '2024-03-10',
+          'usd': {'gbp': 0.8}
+        },
+      ]) {
+        final client = ExchangeClient(httpClient: MockClient((request) async {
+          expect(request.url.host, 'cdn.jsdelivr.net');
+          return http.Response(jsonEncode(body), 200);
+        }));
+        await expectLater(
+            client.fetchHistoricalRateSnapshotFor(
+              'usd',
+              target: 'eur',
+              date: DateTime(2024, 3, 10),
+              preferredSource: ExchangeApiSource.exchangeApi,
+            ),
+            throwsA(isA<ExchangeApiException>()));
+      }
+    });
+  });
+
   group('ExchangeClient primary/fallback orchestration', () {
     setUp(ExchangeObservability.clear);
 

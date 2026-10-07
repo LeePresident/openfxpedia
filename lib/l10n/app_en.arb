@@ -1,5 +1,55 @@
 {
     "@@locale": "en",
+    "history_title": "Rate history",
+    "history_week": "1W",
+    "history_month": "1M",
+    "history_quarter": "3M",
+    "history_unavailable": "No historical quotes available for this range. Try another date or rate source.",
+    "history_available": "Sampled quotes: {available}/{total}",
+    "@history_available": {
+        "placeholders": {
+            "available": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "converter_date": "Conversion date",
+    "@converter_date": {
+        "description": "Label for the historical conversion date picker."
+    },
+    "converter_latest": "Latest",
+    "@converter_latest": {
+        "description": "Default conversion mode using the latest available rates."
+    },
+    "converter_use_latest": "Use latest rates",
+    "@converter_use_latest": {
+        "description": "Action to leave historical conversion mode."
+    },
+    "error_historical_unavailable": "Historical rates could not be loaded for this currency pair and date. Check your connection or try another date or rate source.",
+    "@error_historical_unavailable": {
+        "description": "Historical lookup failed with no compatible cached rate."
+    },
+    "rate_info_requested_date": "Requested date: {date}",
+    "@rate_info_requested_date": {
+        "description": "The calendar date selected for historical conversion.",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "rate_info_effective_date": "Rate date: {date}",
+    "@rate_info_effective_date": {
+        "description": "Actual provider quote date, which may precede the requested date.",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
     "appTitle": "OpenFXpedia",
     "@appTitle": {
         "description": "The title of the application."

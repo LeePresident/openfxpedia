@@ -9,6 +9,50 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get history_title => 'Rate history';
+
+  @override
+  String get history_week => '1W';
+
+  @override
+  String get history_month => '1M';
+
+  @override
+  String get history_quarter => '3M';
+
+  @override
+  String get history_unavailable =>
+      'No historical quotes available for this range. Try another date or rate source.';
+
+  @override
+  String history_available(int available, int total) {
+    return 'Sampled quotes: $available/$total';
+  }
+
+  @override
+  String get converter_date => 'Conversion date';
+
+  @override
+  String get converter_latest => 'Latest';
+
+  @override
+  String get converter_use_latest => 'Use latest rates';
+
+  @override
+  String get error_historical_unavailable =>
+      'Historical rates could not be loaded for this currency pair and date. Check your connection or try another date or rate source.';
+
+  @override
+  String rate_info_requested_date(String date) {
+    return 'Requested date: $date';
+  }
+
+  @override
+  String rate_info_effective_date(String date) {
+    return 'Rate date: $date';
+  }
+
+  @override
   String get appTitle => 'OpenFXpedia';
 
   @override

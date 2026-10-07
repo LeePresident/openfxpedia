@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../models/currency.dart';
@@ -6,6 +7,7 @@ import '../providers/app_state.dart';
 import '../services/exchange_api_source.dart';
 import '../widgets/amount_input.dart';
 import '../widgets/rate_info.dart';
+import '../widgets/rate_history_chart.dart';
 import '../widgets/favorites_bar.dart';
 import '../widgets/search_bar.dart' as app_search;
 
@@ -20,6 +22,8 @@ class ConverterScreen extends StatelessWidget {
         return l10n.error_network_unavailable;
       case 'error_service_unavailable':
         return l10n.error_service_unavailable;
+      case 'error_historical_unavailable':
+        return l10n.error_historical_unavailable;
       default:
         return l10n.error_generic;
     }
@@ -93,6 +97,20 @@ class ConverterScreen extends StatelessWidget {
       case _FavoriteFieldChoice.to:
         state.setTargetCurrency(currency);
         break;
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context, AppState state) async {
+    final today = DateUtils.dateOnly(DateTime.now());
+    final date = await showDatePicker(
+      context: context,
+      initialDate: state.conversionDate ?? today,
+      firstDate: DateTime(1948),
+      lastDate: today,
+      helpText: AppLocalizations.of(context).converter_date,
+    );
+    if (date != null && context.mounted) {
+      await state.setConversionDate(date);
     }
   }
 
@@ -181,6 +199,28 @@ class ConverterScreen extends StatelessWidget {
                         onSelected: state.setTargetCurrency,
                       ),
                       const SizedBox(height: 16),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          OutlinedButton.icon(
+                            key: const Key('conversion-date'),
+                            onPressed: () => _selectDate(context, state),
+                            icon: const Icon(Icons.calendar_today),
+                            label: Text(
+                                '${l10n.converter_date}: ${state.conversionDate == null ? l10n.converter_latest : DateFormat.yMMMd(l10n.localeName).format(state.conversionDate!)}'),
+                          ),
+                          if (state.conversionDate != null)
+                            TextButton.icon(
+                              key: const Key('conversion-use-latest'),
+                              onPressed: () => state.setConversionDate(null),
+                              icon: const Icon(Icons.update),
+                              label: Text(l10n.converter_use_latest),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
                       Card(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
@@ -243,6 +283,7 @@ class ConverterScreen extends StatelessWidget {
                                 rate: state.lastRate,
                                 fromCache: state.rateFromCache,
                                 isLoading: isLoading,
+                                requestedDate: state.conversionDate,
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -258,26 +299,29 @@ class ConverterScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               // Localized source label under the disclaimer.
-                              Builder(builder: (ctx) {
-                                final providerLabel =
-                                    _providerLabelFor(state, l10n);
+                              if (state.lastRate != null)
+                                Builder(builder: (ctx) {
+                                  final providerLabel =
+                                      _providerLabelFor(state, l10n);
 
-                                return Text(
-                                  '${l10n.rate_info_source_prefix} $providerLabel',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .outline,
-                                      ),
-                                );
-                              }),
+                                  return Text(
+                                    '${l10n.rate_info_source_prefix} $providerLabel',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline,
+                                        ),
+                                  );
+                                }),
                             ],
                           ),
                         ),
                       ),
+                      const SizedBox(height: 16),
+                      RateHistoryChart(state: state),
                     ],
                   ),
                 ),

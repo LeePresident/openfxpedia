@@ -28,6 +28,7 @@ The catalog loaders cache data within their service instance. The catalog servic
 ## Features
 
 - Fast currency conversion using live exchange rates (with local cache and offline support).
+- Date-based conversion with historical rates, requested and actual rate dates, and a quick return to latest rates.
 - Select the exchange-rate API source from Settings, with automatic primary/fallback behavior.
 - Encyclopedia entries for fiat currencies: names, symbols, regions, descriptions, and usage-region flags.
 - Major/minor units and coin/banknote denominations, with shortcuts for converting a selected denomination.
@@ -121,6 +122,16 @@ The app fetches live exchange rates from Frankfurter first and falls back to exc
 
 Users can toggle the exchange-rate API source in Settings by choosing automatic selection, Frankfurter, or exchange-api.
 
+### Historical Conversion
+
+Open **Rate history** below the conversion result for a 1-week, 1-month, or 3-month chart ending on the selected conversion date (today in latest mode). Each range uses up to eight evenly spaced dated samples, not a complete daily series. Hover or tap a point for its actual quote date, rate per unit of the base currency, provider, and cache status. Missing quotes leave gaps; repeated quote dates are not plotted twice in a continuous segment. The chart refresh button rechecks its samples without changing the conversion result. Existing source selection and encrypted historical caching also apply to charts.
+
+Choose **Conversion date** in the converter to select a date from 1948 through today. Availability depends on the currency pair and provider; not every date in the picker has coverage. **Use latest rates** restores the default mode without changing the amount or currencies.
+
+Historical requests use Frankfurter's dated pair endpoint or Exchange API's dated archives. Automatic fallback retains the selected date, while a manually selected source never switches providers. Quotes dated after the requested day are rejected; an earlier quote returned by the provider is shown with both the requested date and actual rate date. Historical failures never substitute today's rates.
+
+Historical snapshots are stored in the existing encrypted local cache, separately by currency pair, requested date, and source selection. Past-date snapshots can be reused offline. **Refresh rates** rechecks the selected date and uses its compatible cached snapshot if the request fails. **Clear local data** also removes historical snapshots. Rates remain reference estimates, not guaranteed bank quotes or official accounting rates.
+
 ## Privacy
 
 OpenFXpedia does not require an account and does not collect names, email addresses, payment information, contacts, location, camera, microphone, or advertising identifiers. The app does not include analytics, advertising, crash-reporting, or user-tracking SDKs.
@@ -162,6 +173,7 @@ flutter analyze
 flutter test test/widget/encyclopedia_locale_test.dart
 flutter test test/integration/encyclopedia_flow_test.dart
 flutter test test/unit/conversion_test.dart
+flutter test test/widget/converter_history_test.dart
 ```
 
 ## Localization Notes

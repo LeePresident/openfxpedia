@@ -7,12 +7,14 @@ class RateInfoWidget extends StatelessWidget {
   final ExchangeRate? rate;
   final bool fromCache;
   final bool isLoading;
+  final DateTime? requestedDate;
 
   const RateInfoWidget({
     super.key,
     this.rate,
     this.fromCache = false,
     this.isLoading = false,
+    this.requestedDate,
   });
 
   @override
@@ -34,8 +36,12 @@ class RateInfoWidget extends StatelessWidget {
 
     if (rate == null) return const SizedBox.shrink();
 
-    final formatter = DateFormat.yMMMd(l10n.localeName).add_Hm();
-    final timeLabel = formatter.format(rate!.timestamp.toLocal());
+    final dateFormatter = DateFormat.yMMMd(l10n.localeName);
+    final timeLabel = requestedDate == null
+        ? DateFormat.yMMMd(l10n.localeName)
+            .add_Hm()
+            .format(rate!.timestamp.toLocal())
+        : l10n.rate_info_effective_date(dateFormatter.format(rate!.timestamp));
     final sourceLabel = fromCache ? l10n.rate_info_cached : l10n.rate_info_live;
     final rateSummary =
         '1 ${rate!.baseCurrency.toUpperCase()} = ${rate!.rate.toStringAsFixed(4)} ${rate!.targetCurrency.toUpperCase()}';
@@ -51,6 +57,13 @@ class RateInfoWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.bodySmall,
         ),
         const SizedBox(height: 4),
+        if (requestedDate != null) ...[
+          Text(
+            l10n.rate_info_requested_date(dateFormatter.format(requestedDate!)),
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+          const SizedBox(height: 4),
+        ],
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -65,8 +78,8 @@ class RateInfoWidget extends StatelessWidget {
             Flexible(
               child: Text(
                 metadata,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                maxLines: requestedDate == null ? 1 : null,
+                overflow: requestedDate == null ? TextOverflow.ellipsis : null,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),

@@ -1,4 +1,6 @@
-﻿import 'package:flutter/material.dart';
+﻿import 'dart:async';
+
+import 'package:flutter/material.dart';
 import '../core/config.dart';
 import '../models/currency.dart';
 import '../models/exchange_rate.dart';
@@ -9,6 +11,7 @@ import '../services/error_classifier.dart';
 import '../services/exchange_api_source.dart';
 import '../services/favorites_service.dart';
 import '../services/locale_resolver.dart';
+import '../services/rate_history_service.dart';
 
 enum LoadingState { idle, loading, error }
 
@@ -30,6 +33,68 @@ class AppState extends ChangeNotifier {
 
   double _inputAmount = 1.0;
   double get inputAmount => _inputAmount;
+
+  DateTime? _conversionDate;
+  DateTime? get conversionDate => _conversionDate;
+
+  bool _historyVisible = false;
+  bool get historyVisible => _historyVisible;
+  bool _historyLoading = false;
+  bool get historyLoading => _historyLoading;
+  int _historyDays = 30;
+  int get historyDays => _historyDays;
+  int _historyRequestSequence = 0;
+  String? _historyKey;
+  List<RateHistorySample> _historySamples = [];
+  List<RateHistorySample> get historySamples =>
+      List.unmodifiable(_historySamples);
+
+  void setHistoryVisible(bool visible) {
+    _historyVisible = visible;
+    if (visible) {
+      unawaited(loadHistory());
+    } else {
+      _historyRequestSequence++;
+      _historyKey = null;
+      _historyLoading = false;
+    }
+    notifyListeners();
+  }
+
+  void setHistoryDays(int days) {
+    if (![7, 30, 90].contains(days)) throw ArgumentError.value(days, 'days');
+    if (_historyDays == days) return;
+    _historyDays = days;
+    unawaited(loadHistory());
+  }
+
+  Future<void> loadHistory({bool forceRefresh = false}) async {
+    if (!_historyVisible || _baseCurrency == null || _targetCurrency == null) {
+      return;
+    }
+    final base = _baseCurrency!.isoCode;
+    final target = _targetCurrency!.isoCode;
+    final date = DateUtils.dateOnly(_conversionDate ?? DateTime.now());
+    final key = '$base:$target:$date:$_historyDays:$_exchangeApiSource';
+    if (!forceRefresh && key == _historyKey) return;
+    _historyKey = key;
+    final requestId = ++_historyRequestSequence;
+    _historySamples = [];
+    _historyLoading = true;
+    notifyListeners();
+    final samples = await RateHistoryService(_conversionService).load(
+      base: base,
+      target: target,
+      endDate: date,
+      days: _historyDays,
+      forceRefresh: forceRefresh,
+      isCancelled: () => requestId != _historyRequestSequence,
+    );
+    if (requestId != _historyRequestSequence) return;
+    _historySamples = samples;
+    _historyLoading = false;
+    notifyListeners();
+  }
 
   double? _convertedAmount;
   double? get convertedAmount => _convertedAmount;
@@ -249,22 +314,53 @@ class AppState extends ChangeNotifier {
     convert();
   }
 
-  Future<void> convert() async {
-    if (_baseCurrency == null || _targetCurrency == null) return;
+  Future<void> setConversionDate(DateTime? date) async {
+    final normalized = date == null ? null : DateUtils.dateOnly(date);
+    if (normalized != null &&
+        normalized.isAfter(DateUtils.dateOnly(DateTime.now()))) {
+      throw ArgumentError.value(date, 'date', 'Cannot select a future date');
+    }
+    if (_conversionDate == normalized) return;
+    _conversionDate = normalized;
+    await convert();
+  }
+
+  Future<void> convert({bool forceHistoricalRefresh = false}) async {
+    final requestId = ++_conversionRequestSequence;
+    unawaited(loadHistory());
+    final requestedDate = _conversionDate;
+    _convertedAmount = null;
+    _lastRate = null;
+    _rateFromCache = false;
+    _errorMessage = null;
+    _errorCode = null;
+    _loadingState = LoadingState.idle;
+    if (_baseCurrency == null || _targetCurrency == null) {
+      notifyListeners();
+      return;
+    }
     if (_inputAmount <= 0) {
       _convertedAmount = 0;
       notifyListeners();
       return;
     }
 
-    final requestId = ++_conversionRequestSequence;
+    _setLoading();
 
     try {
-      final result = await _conversionService.convert(
-        _inputAmount,
-        _baseCurrency!.isoCode,
-        _targetCurrency!.isoCode,
-      );
+      final result = requestedDate == null
+          ? await _conversionService.convert(
+              _inputAmount,
+              _baseCurrency!.isoCode,
+              _targetCurrency!.isoCode,
+            )
+          : await _conversionService.convertHistorical(
+              _inputAmount,
+              _baseCurrency!.isoCode,
+              _targetCurrency!.isoCode,
+              requestedDate,
+              forceRefresh: forceHistoricalRefresh,
+            );
 
       if (requestId != _conversionRequestSequence) {
         return;
@@ -275,18 +371,24 @@ class AppState extends ChangeNotifier {
       _rateFromCache = result.fromCache;
       _errorMessage = null;
       _errorCode = null;
+      _loadingState = LoadingState.idle;
       notifyListeners();
     } catch (e) {
       if (requestId != _conversionRequestSequence) {
         return;
       }
 
-      _setError(e.toString());
+      _setError(e.toString(),
+          code: requestedDate == null ? null : 'error_historical_unavailable');
     }
   }
 
   Future<void> refreshRates() async {
     if (_baseCurrency == null) return;
+    if (_conversionDate != null) {
+      await convert(forceHistoricalRefresh: true);
+      return;
+    }
     _setLoading();
 
     final requestId = ++_conversionRequestSequence;
@@ -318,12 +420,18 @@ class AppState extends ChangeNotifier {
 
   Future<void> clearLocalData() async {
     _conversionRequestSequence++;
+    _historyRequestSequence++;
+    _historyVisible = false;
+    _historyLoading = false;
+    _historyKey = null;
+    _historySamples = [];
     _conversionService.invalidatePendingCacheWrites();
     await _cacheService.clearAll();
     _favoritesService.load();
     _baseCurrency = null;
     _targetCurrency = null;
     _inputAmount = 0.0;
+    _conversionDate = null;
     _convertedAmount = null;
     _lastRate = null;
     _rateFromCache = false;
@@ -349,13 +457,13 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _setError(String message) {
+  void _setError(String message, {String? code}) {
     final friendly = _friendlyMessageFor(message);
     debugPrint('Error code: ${ErrorClassifier.codeFor(message)}');
 
     _loadingState = LoadingState.error;
     _errorMessage = friendly;
-    _errorCode = _errorCodeFor(message);
+    _errorCode = code ?? _errorCodeFor(message);
     notifyListeners();
   }
 
@@ -428,5 +536,12 @@ class AppState extends ChangeNotifier {
     final raw = _cacheService.getString(AppConfig.exchangeApiSourceKey);
     _exchangeApiSource = ExchangeApiSourceStorage.fromStorage(raw);
     _conversionService.setPreferredSource(_exchangeApiSource);
+  }
+
+  @override
+  void dispose() {
+    _historyRequestSequence++;
+    _conversionRequestSequence++;
+    super.dispose();
   }
 }

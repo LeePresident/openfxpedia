@@ -9,6 +9,49 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get history_title => '历史汇率';
+
+  @override
+  String get history_week => '1周';
+
+  @override
+  String get history_month => '1月';
+
+  @override
+  String get history_quarter => '3月';
+
+  @override
+  String get history_unavailable => '此时间范围内没有可用的历史汇率。请尝试其他日期或汇率来源。';
+
+  @override
+  String history_available(int available, int total) {
+    return '采样报价：$available/$total';
+  }
+
+  @override
+  String get converter_date => '换算日期';
+
+  @override
+  String get converter_latest => '最新';
+
+  @override
+  String get converter_use_latest => '使用最新汇率';
+
+  @override
+  String get error_historical_unavailable =>
+      '无法加载此货币对和日期的历史汇率。请检查网络连接，或尝试其他日期或汇率来源。';
+
+  @override
+  String rate_info_requested_date(String date) {
+    return '所选日期：$date';
+  }
+
+  @override
+  String rate_info_effective_date(String date) {
+    return '汇率日期：$date';
+  }
+
+  @override
   String get appTitle => 'OpenFXpedia';
 
   @override
@@ -328,6 +371,49 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   AppLocalizationsZhHans() : super('zh_Hans');
 
   @override
+  String get history_title => '历史汇率';
+
+  @override
+  String get history_week => '1周';
+
+  @override
+  String get history_month => '1月';
+
+  @override
+  String get history_quarter => '3月';
+
+  @override
+  String get history_unavailable => '此时间范围内没有可用的历史汇率。请尝试其他日期或汇率来源。';
+
+  @override
+  String history_available(int available, int total) {
+    return '采样报价：$available/$total';
+  }
+
+  @override
+  String get converter_date => '换算日期';
+
+  @override
+  String get converter_latest => '最新';
+
+  @override
+  String get converter_use_latest => '使用最新汇率';
+
+  @override
+  String get error_historical_unavailable =>
+      '无法加载此货币对和日期的历史汇率。请检查网络连接，或尝试其他日期或汇率来源。';
+
+  @override
+  String rate_info_requested_date(String date) {
+    return '所选日期：$date';
+  }
+
+  @override
+  String rate_info_effective_date(String date) {
+    return '汇率日期：$date';
+  }
+
+  @override
   String get appTitle => 'OpenFXpedia';
 
   @override
@@ -645,6 +731,49 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 /// The translations for Chinese, using the Han script (`zh_Hant`).
 class AppLocalizationsZhHant extends AppLocalizationsZh {
   AppLocalizationsZhHant() : super('zh_Hant');
+
+  @override
+  String get history_title => '歷史匯率';
+
+  @override
+  String get history_week => '1週';
+
+  @override
+  String get history_month => '1月';
+
+  @override
+  String get history_quarter => '3月';
+
+  @override
+  String get history_unavailable => '此時間範圍內沒有可用的歷史匯率。請嘗試其他日期或匯率來源。';
+
+  @override
+  String history_available(int available, int total) {
+    return '抽樣報價：$available/$total';
+  }
+
+  @override
+  String get converter_date => '換算日期';
+
+  @override
+  String get converter_latest => '最新';
+
+  @override
+  String get converter_use_latest => '使用最新匯率';
+
+  @override
+  String get error_historical_unavailable =>
+      '無法載入此貨幣對和日期的歷史匯率。請檢查網絡連線，或嘗試其他日期或匯率來源。';
+
+  @override
+  String rate_info_requested_date(String date) {
+    return '所選日期：$date';
+  }
+
+  @override
+  String rate_info_effective_date(String date) {
+    return '匯率日期：$date';
+  }
 
   @override
   String get appTitle => 'OpenFXpedia';

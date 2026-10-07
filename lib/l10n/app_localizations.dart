@@ -100,6 +100,78 @@ abstract class AppLocalizations {
     Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant')
   ];
 
+  /// No description provided for @history_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate history'**
+  String get history_title;
+
+  /// No description provided for @history_week.
+  ///
+  /// In en, this message translates to:
+  /// **'1W'**
+  String get history_week;
+
+  /// No description provided for @history_month.
+  ///
+  /// In en, this message translates to:
+  /// **'1M'**
+  String get history_month;
+
+  /// No description provided for @history_quarter.
+  ///
+  /// In en, this message translates to:
+  /// **'3M'**
+  String get history_quarter;
+
+  /// No description provided for @history_unavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No historical quotes available for this range. Try another date or rate source.'**
+  String get history_unavailable;
+
+  /// No description provided for @history_available.
+  ///
+  /// In en, this message translates to:
+  /// **'Sampled quotes: {available}/{total}'**
+  String history_available(int available, int total);
+
+  /// Label for the historical conversion date picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion date'**
+  String get converter_date;
+
+  /// Default conversion mode using the latest available rates.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest'**
+  String get converter_latest;
+
+  /// Action to leave historical conversion mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Use latest rates'**
+  String get converter_use_latest;
+
+  /// Historical lookup failed with no compatible cached rate.
+  ///
+  /// In en, this message translates to:
+  /// **'Historical rates could not be loaded for this currency pair and date. Check your connection or try another date or rate source.'**
+  String get error_historical_unavailable;
+
+  /// The calendar date selected for historical conversion.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested date: {date}'**
+  String rate_info_requested_date(String date);
+
+  /// Actual provider quote date, which may precede the requested date.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate date: {date}'**
+  String rate_info_effective_date(String date);
+
   /// The title of the application.
   ///
   /// In en, this message translates to:

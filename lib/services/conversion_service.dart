@@ -42,21 +42,59 @@ class ConversionService {
     double amount,
     String base,
     String target,
-  ) async {
+  ) =>
+      _convert(amount, base, target);
+
+  Future<ConversionResult> convertHistorical(
+    double amount,
+    String base,
+    String target,
+    DateTime date, {
+    bool forceRefresh = false,
+  }) =>
+      _convert(amount, base, target, date: date, forceRefresh: forceRefresh);
+
+  Future<ConversionResult> _convert(
+    double amount,
+    String base,
+    String target, {
+    DateTime? date,
+    bool forceRefresh = false,
+  }) async {
     final cacheWriteGeneration = _cacheWriteGeneration;
+    final preferredSource = _preferredSource;
     final b = base.toLowerCase();
     final t = target.toLowerCase();
+    final requestedDate =
+        date == null ? null : DateTime.utc(date.year, date.month, date.day);
+    final now = DateTime.now();
+    final today = DateTime.utc(now.year, now.month, now.day);
+    if (requestedDate != null && requestedDate.isAfter(today)) {
+      throw ExchangeApiException('Future historical date');
+    }
+    final cacheKey = requestedDate == null
+        ? b
+        : 'history:$b:$t:${requestedDate.toIso8601String().split('T').first}:${preferredSource.storageValue}';
 
     Map<String, double> rates;
     DateTime timestamp;
     bool fromCache = false;
     String source = 'cache';
 
-    final cached = _cache.getCachedRateSnapshot(b);
+    final cached = _cache.getCachedRateSnapshot(cacheKey);
+    final compatibleSource =
+        requestedDate != null && preferredSource == ExchangeApiSource.auto
+            ? cached.source == 'frankfurter' || cached.source == 'legacy'
+            : _matchesPreferredSource(cached.source, preferredSource);
+    final compatibleDate = requestedDate == null ||
+        (cached.timestamp != null && !cached.timestamp!.isAfter(requestedDate));
     final freshCacheHasRequestedRate = cached.rates?.containsKey(t) ?? false;
-    final canUseFreshPreferredCache = cached.rates != null &&
-        !cached.isStale &&
-        _matchesPreferredSource(cached.source) &&
+    final canUseFreshPreferredCache = !forceRefresh &&
+        cached.rates != null &&
+        (!cached.isStale ||
+            (requestedDate != null && requestedDate.isBefore(today))) &&
+        compatibleSource &&
+        compatibleDate &&
         freshCacheHasRequestedRate;
 
     if (canUseFreshPreferredCache) {
@@ -66,17 +104,24 @@ class ConversionService {
       source = cached.source ?? 'cache';
     } else {
       try {
-        final snapshot = await _client.fetchRateSnapshotFor(
-          b,
-          target: t,
-          preferredSource: _preferredSource,
-        );
+        final snapshot = requestedDate == null
+            ? await _client.fetchRateSnapshotFor(
+                b,
+                target: t,
+                preferredSource: preferredSource,
+              )
+            : await _client.fetchHistoricalRateSnapshotFor(
+                b,
+                target: t,
+                date: requestedDate,
+                preferredSource: preferredSource,
+              );
         rates = snapshot.rates;
         timestamp = snapshot.quotedAt;
         source = snapshot.sourceId;
         if (cacheWriteGeneration == _cacheWriteGeneration) {
           await _cache.putRateSnapshot(
-            b,
+            cacheKey,
             rates,
             timestamp,
             source: snapshot.sourceId,
@@ -84,7 +129,10 @@ class ConversionService {
         }
       } catch (_) {
         if (cached.rates != null &&
-            (_matchesPreferredSource(cached.source) || cached.source == null)) {
+            freshCacheHasRequestedRate &&
+            compatibleDate &&
+            (compatibleSource ||
+                (requestedDate == null && cached.source == null))) {
           rates = cached.rates!;
           timestamp = cached.timestamp!;
           fromCache = true;
@@ -131,14 +179,15 @@ class ConversionService {
     }
   }
 
-  bool _matchesPreferredSource(String? source) {
+  bool _matchesPreferredSource(
+      String? source, ExchangeApiSource preferredSource) {
     if (source == null) {
       return false;
     }
 
     final normalized = source.toLowerCase();
-    if (_preferredSource == ExchangeApiSource.auto ||
-        _preferredSource == ExchangeApiSource.frankfurter) {
+    if (preferredSource == ExchangeApiSource.auto ||
+        preferredSource == ExchangeApiSource.frankfurter) {
       return normalized.contains('frank');
     }
 

@@ -6,7 +6,7 @@ import '../core/config.dart';
 import 'exchange_api_exception.dart';
 import 'exchange_provider.dart';
 
-class FrankfurterProvider implements ExchangeProvider {
+class FrankfurterProvider implements HistoricalExchangeProvider {
   FrankfurterProvider({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
@@ -78,12 +78,35 @@ class FrankfurterProvider implements ExchangeProvider {
 
   @override
   Future<ExchangeRateSnapshot> fetchRateFor(String base, String target) async {
+    return _fetchPair(base, target);
+  }
+
+  @override
+  Future<ExchangeRateSnapshot> fetchHistoricalRateFor(
+    String base,
+    String target,
+    DateTime date,
+  ) async {
+    return _fetchPair(base, target, date: date);
+  }
+
+  Future<ExchangeRateSnapshot> _fetchPair(
+    String base,
+    String target, {
+    DateTime? date,
+  }) async {
     final normalizedBase = base.toLowerCase();
     final normalizedTarget = target.toLowerCase();
+    final requestedDate =
+        date == null ? null : DateTime.utc(date.year, date.month, date.day);
+    final uri = Uri.parse(
+      '${AppConfig.frankfurterApiBase}/rate/${normalizedBase.toUpperCase()}/${normalizedTarget.toUpperCase()}',
+    ).replace(
+        queryParameters: requestedDate == null
+            ? null
+            : {'date': requestedDate.toIso8601String().split('T').first});
     final response = await _httpClient.get(
-      Uri.parse(
-        '${AppConfig.frankfurterApiBase}/rate/${normalizedBase.toUpperCase()}/${normalizedTarget.toUpperCase()}',
-      ),
+      uri,
       headers: const {'Accept': 'application/json'},
     ).timeout(const Duration(seconds: 15));
 
@@ -104,9 +127,17 @@ class FrankfurterProvider implements ExchangeProvider {
     }
 
     final parsedDate = DateTime.parse(rawDate);
+    final quotedAt =
+        DateTime.utc(parsedDate.year, parsedDate.month, parsedDate.day);
+    if (quote.toLowerCase() != normalizedTarget ||
+        !rate.isFinite ||
+        rate <= 0 ||
+        (requestedDate != null && quotedAt.isAfter(requestedDate))) {
+      throw ExchangeApiException('Invalid Frankfurter pair quote');
+    }
     return ExchangeRateSnapshot(
       baseCurrency: normalizedBase,
-      quotedAt: DateTime.utc(parsedDate.year, parsedDate.month, parsedDate.day),
+      quotedAt: quotedAt,
       sourceId: sourceId,
       rates: {quote.toLowerCase(): rate.toDouble()},
     );

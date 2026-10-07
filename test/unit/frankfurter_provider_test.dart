@@ -83,6 +83,42 @@ void main() {
       expect(snapshot.quotedAt, DateTime.utc(2026, 5, 9));
     });
 
+    test('historical pair uses selected date and preserves earlier quote',
+        () async {
+      final client = _FakeHttpClient((request) async {
+        expect(request.url.path, '/v2/rate/USD/EUR');
+        expect(request.url.queryParameters['date'], '2026-05-10');
+        return http.Response(
+            jsonEncode({
+              'date': '2026-05-08',
+              'base': 'USD',
+              'quote': 'EUR',
+              'rate': 0.93,
+            }),
+            200);
+      });
+      final snapshot = await FrankfurterProvider(httpClient: client)
+          .fetchHistoricalRateFor('usd', 'eur', DateTime(2026, 5, 10));
+      expect(snapshot.quotedAt, DateTime.utc(2026, 5, 8));
+      expect(snapshot.rates, {'eur': 0.93});
+    });
+
+    test('historical pair rejects a quote after the requested date', () async {
+      final client = _FakeHttpClient((_) async => http.Response(
+          jsonEncode({
+            'date': '2026-05-11',
+            'base': 'USD',
+            'quote': 'EUR',
+            'rate': 0.93,
+          }),
+          200));
+      await expectLater(
+        FrankfurterProvider(httpClient: client)
+            .fetchHistoricalRateFor('usd', 'eur', DateTime(2026, 5, 10)),
+        throwsA(isA<ExchangeApiException>()),
+      );
+    });
+
     test('throws ExchangeApiException when rates are missing', () async {
       final client = _FakeHttpClient(
         (_) async => http.Response(
