@@ -1,4 +1,4 @@
-﻿import 'dart:math' as math;
+import 'dart:math' as math;
 import '../services/exchange_client.dart';
 import '../services/exchange_api_source.dart';
 import '../services/cache_service.dart';
@@ -45,6 +45,13 @@ class ConversionService {
   ) =>
       _convert(amount, base, target);
 
+  Future<ConversionResult> convertPrecise(
+    double amount,
+    String base,
+    String target,
+  ) =>
+      _convert(amount, base, target, roundAmount: false);
+
   Future<ConversionResult> convertHistorical(
     double amount,
     String base,
@@ -54,12 +61,21 @@ class ConversionService {
   }) =>
       _convert(amount, base, target, date: date, forceRefresh: forceRefresh);
 
+  Future<ConversionResult> convertHistoricalPrecise(
+    double amount,
+    String base,
+    String target,
+    DateTime date,
+  ) =>
+      _convert(amount, base, target, date: date, roundAmount: false);
+
   Future<ConversionResult> _convert(
     double amount,
     String base,
     String target, {
     DateTime? date,
     bool forceRefresh = false,
+    bool roundAmount = true,
   }) async {
     final cacheWriteGeneration = _cacheWriteGeneration;
     final preferredSource = _preferredSource;
@@ -148,7 +164,9 @@ class ConversionService {
       throw ExchangeApiException('No rate found for target $target');
     }
 
-    final convertedAmount = _roundToDecimals(amount * rateValue, 6);
+    final convertedAmount = roundAmount
+        ? _roundToDecimals(amount * rateValue, 6)
+        : amount * rateValue;
 
     return ConversionResult(
       amount: convertedAmount,

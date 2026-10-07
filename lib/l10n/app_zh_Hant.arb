@@ -45,6 +45,25 @@
         "description": "繁體中文語言名稱。"
     },
     "converter_title": "轉換器",
+    "calculator_title": "計算機",
+    "calculator_amount": "金額",
+    "calculator_currency": "貨幣",
+    "calculator_result_currency": "結果貨幣",
+    "calculator_total": "總計",
+    "calculator_add_entry": "新增金額",
+    "calculator_remove_entry": "移除金額",
+    "calculator_entry": "金額 {number}",
+    "@calculator_entry": {
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    },
+    "calculator_no_entries": "新增金額以計算總計。",
+    "calculator_date": "匯率日期",
+    "calculator_latest": "最新匯率",
+    "calculator_use_latest": "使用最新匯率",
     "@converter_title": {
         "description": "轉換器畫面的標題。"
     },

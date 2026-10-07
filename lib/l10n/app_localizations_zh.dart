@@ -79,6 +79,44 @@ class AppLocalizationsZh extends AppLocalizations {
   String get converter_title => '转换器';
 
   @override
+  String get calculator_title => '计算器';
+
+  @override
+  String get calculator_amount => '金额';
+
+  @override
+  String get calculator_currency => '货币';
+
+  @override
+  String get calculator_result_currency => '结果货币';
+
+  @override
+  String get calculator_total => '总计';
+
+  @override
+  String get calculator_add_entry => '添加金额';
+
+  @override
+  String get calculator_remove_entry => '移除金额';
+
+  @override
+  String calculator_entry(int number) {
+    return '金额 $number';
+  }
+
+  @override
+  String get calculator_no_entries => '添加金额以计算总计。';
+
+  @override
+  String get calculator_date => '汇率日期';
+
+  @override
+  String get calculator_latest => '最新汇率';
+
+  @override
+  String get calculator_use_latest => '使用最新汇率';
+
+  @override
   String get encyclopedia_title => '百科';
 
   @override
@@ -441,6 +479,44 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get converter_title => '转换器';
 
   @override
+  String get calculator_title => '计算器';
+
+  @override
+  String get calculator_amount => '金额';
+
+  @override
+  String get calculator_currency => '货币';
+
+  @override
+  String get calculator_result_currency => '结果货币';
+
+  @override
+  String get calculator_total => '总计';
+
+  @override
+  String get calculator_add_entry => '添加金额';
+
+  @override
+  String get calculator_remove_entry => '移除金额';
+
+  @override
+  String calculator_entry(int number) {
+    return '金额 $number';
+  }
+
+  @override
+  String get calculator_no_entries => '添加金额以计算总计。';
+
+  @override
+  String get calculator_date => '汇率日期';
+
+  @override
+  String get calculator_latest => '最新汇率';
+
+  @override
+  String get calculator_use_latest => '使用最新汇率';
+
+  @override
   String get encyclopedia_title => '百科';
 
   @override
@@ -801,6 +877,44 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get converter_title => '轉換器';
+
+  @override
+  String get calculator_title => '計算機';
+
+  @override
+  String get calculator_amount => '金額';
+
+  @override
+  String get calculator_currency => '貨幣';
+
+  @override
+  String get calculator_result_currency => '結果貨幣';
+
+  @override
+  String get calculator_total => '總計';
+
+  @override
+  String get calculator_add_entry => '新增金額';
+
+  @override
+  String get calculator_remove_entry => '移除金額';
+
+  @override
+  String calculator_entry(int number) {
+    return '金額 $number';
+  }
+
+  @override
+  String get calculator_no_entries => '新增金額以計算總計。';
+
+  @override
+  String get calculator_date => '匯率日期';
+
+  @override
+  String get calculator_latest => '最新匯率';
+
+  @override
+  String get calculator_use_latest => '使用最新匯率';
 
   @override
   String get encyclopedia_title => '百科';

@@ -226,6 +226,78 @@ abstract class AppLocalizations {
   /// **'Converter'**
   String get converter_title;
 
+  /// Title for the multi-currency calculator page.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculator'**
+  String get calculator_title;
+
+  /// No description provided for @calculator_amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get calculator_amount;
+
+  /// No description provided for @calculator_currency.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get calculator_currency;
+
+  /// No description provided for @calculator_result_currency.
+  ///
+  /// In en, this message translates to:
+  /// **'Result currency'**
+  String get calculator_result_currency;
+
+  /// No description provided for @calculator_total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get calculator_total;
+
+  /// No description provided for @calculator_add_entry.
+  ///
+  /// In en, this message translates to:
+  /// **'Add amount'**
+  String get calculator_add_entry;
+
+  /// No description provided for @calculator_remove_entry.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove amount'**
+  String get calculator_remove_entry;
+
+  /// No description provided for @calculator_entry.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount {number}'**
+  String calculator_entry(int number);
+
+  /// No description provided for @calculator_no_entries.
+  ///
+  /// In en, this message translates to:
+  /// **'Add an amount to calculate a total.'**
+  String get calculator_no_entries;
+
+  /// No description provided for @calculator_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate date'**
+  String get calculator_date;
+
+  /// No description provided for @calculator_latest.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest rates'**
+  String get calculator_latest;
+
+  /// No description provided for @calculator_use_latest.
+  ///
+  /// In en, this message translates to:
+  /// **'Use latest rates'**
+  String get calculator_use_latest;
+
   /// Title for the encyclopedia screen.
   ///
   /// In en, this message translates to:

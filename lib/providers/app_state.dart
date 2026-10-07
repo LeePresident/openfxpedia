@@ -1,7 +1,8 @@
-﻿import 'dart:async';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import '../core/config.dart';
+import '../models/calculator_entry.dart';
 import '../models/currency.dart';
 import '../models/exchange_rate.dart';
 import '../services/cache_service.dart';
@@ -22,9 +23,30 @@ class AppState extends ChangeNotifier {
   final CacheService _cacheService;
   final Iterable<Locale> Function() _systemLocales;
   int _conversionRequestSequence = 0;
+  int _calculatorRequestSequence = 0;
+  int _nextCalculatorEntryId = 0;
 
   List<Currency> _currencies = [];
   List<Currency> get currencies => _currencies;
+
+  final List<CalculatorEntry> _calculatorEntries = [];
+  List<CalculatorEntry> get calculatorEntries =>
+      List.unmodifiable(_calculatorEntries);
+  String? _calculatorOutputCurrencyCode;
+  String? get calculatorOutputCurrencyCode => _calculatorOutputCurrencyCode;
+  Currency? get calculatorOutputCurrency =>
+      _currencyForCode(_calculatorOutputCurrencyCode);
+  DateTime? _calculatorDate;
+  DateTime? get calculatorDate => _calculatorDate;
+  double? _calculatorTotal;
+  double? get calculatorTotal => _calculatorTotal;
+  final Map<int, ConversionResult> _calculatorLineResults = {};
+  Map<int, ConversionResult> get calculatorLineResults =>
+      Map.unmodifiable(_calculatorLineResults);
+  bool _calculatorLoading = false;
+  bool get calculatorLoading => _calculatorLoading;
+  String? _calculatorErrorCode;
+  String? get calculatorErrorCode => _calculatorErrorCode;
 
   Currency? _baseCurrency;
   Currency? _targetCurrency;
@@ -154,6 +176,8 @@ class AppState extends ChangeNotifier {
       _currencies = await _catalogService.getCurrencies(
         locale: _effectiveLocale,
       );
+      _initializeCalculator();
+      await calculateCalculator();
       _favoritesService.load();
       _setIdle();
       return true;
@@ -225,6 +249,7 @@ class AppState extends ChangeNotifier {
     );
 
     await convert();
+    await calculateCalculator();
   }
 
   Future<void> setLocale(Locale? locale) async {
@@ -280,7 +305,164 @@ class AppState extends ChangeNotifier {
       }
 
       notifyListeners();
+      unawaited(calculateCalculator());
     }
+  }
+
+  void _initializeCalculator() {
+    if (_currencies.isEmpty) return;
+    _calculatorOutputCurrencyCode ??=
+        _targetCurrency?.isoCode ?? _currencies.first.isoCode;
+    if (_calculatorEntries.isEmpty) {
+      _calculatorEntries.add(CalculatorEntry(
+        id: _nextCalculatorEntryId++,
+        amount: 0,
+        currencyCode: _baseCurrency?.isoCode ?? _currencies.first.isoCode,
+      ));
+    }
+  }
+
+  Currency? _currencyForCode(String? code) {
+    if (code == null) return null;
+    for (final currency in _currencies) {
+      if (currency.isoCode.toLowerCase() == code.toLowerCase()) {
+        return currency;
+      }
+    }
+    return null;
+  }
+
+  void addCalculatorEntry() {
+    final currencyCode = _calculatorOutputCurrencyCode ??
+        (_currencies.isEmpty ? null : _currencies.first.isoCode);
+    if (currencyCode == null) return;
+    _calculatorEntries.add(CalculatorEntry(
+      id: _nextCalculatorEntryId++,
+      amount: 0,
+      currencyCode: currencyCode,
+    ));
+    unawaited(calculateCalculator());
+  }
+
+  void removeCalculatorEntry(int id) {
+    _calculatorEntries.removeWhere((entry) => entry.id == id);
+    unawaited(calculateCalculator());
+  }
+
+  void setCalculatorEntryAmount(int id, double amount) {
+    if (!amount.isFinite || amount < 0) return;
+    _updateCalculatorEntry(id, (entry) => entry.copyWith(amount: amount));
+  }
+
+  void setCalculatorEntryCurrency(int id, Currency currency) {
+    _updateCalculatorEntry(
+      id,
+      (entry) => entry.copyWith(currencyCode: currency.isoCode),
+    );
+  }
+
+  void _updateCalculatorEntry(
+    int id,
+    CalculatorEntry Function(CalculatorEntry) update,
+  ) {
+    final index = _calculatorEntries.indexWhere((entry) => entry.id == id);
+    if (index < 0) return;
+    _calculatorEntries[index] = update(_calculatorEntries[index]);
+    unawaited(calculateCalculator());
+  }
+
+  void setCalculatorOutputCurrency(Currency currency) {
+    if (_calculatorOutputCurrencyCode == currency.isoCode) return;
+    _calculatorOutputCurrencyCode = currency.isoCode;
+    unawaited(calculateCalculator());
+  }
+
+  Future<void> setCalculatorDate(DateTime? date) async {
+    final normalized = date == null ? null : DateUtils.dateOnly(date);
+    if (normalized != null &&
+        normalized.isAfter(DateUtils.dateOnly(DateTime.now()))) {
+      throw ArgumentError.value(date, 'date', 'Cannot select a future date');
+    }
+    if (_calculatorDate == normalized) return;
+    _calculatorDate = normalized;
+    await calculateCalculator();
+  }
+
+  Future<void> calculateCalculator() async {
+    final requestId = ++_calculatorRequestSequence;
+    final entries = List<CalculatorEntry>.of(_calculatorEntries);
+    final target = _calculatorOutputCurrencyCode;
+    if (entries.isEmpty || target == null) {
+      _calculatorLineResults.clear();
+      _calculatorTotal = null;
+      _calculatorLoading = false;
+      _calculatorErrorCode = null;
+      notifyListeners();
+      return;
+    }
+
+    _calculatorLineResults.clear();
+    _calculatorTotal = null;
+    _calculatorLoading = true;
+    _calculatorErrorCode = null;
+    notifyListeners();
+
+    try {
+      final results = await Future.wait(entries.map((entry) async {
+        if (entry.amount == 0) return null;
+        final date = _calculatorDate;
+        return date == null
+            ? _conversionService.convertPrecise(
+                entry.amount,
+                entry.currencyCode,
+                target,
+              )
+            : _conversionService.convertHistoricalPrecise(
+                entry.amount,
+                entry.currencyCode,
+                target,
+                date,
+              );
+      }));
+
+      if (requestId != _calculatorRequestSequence) return;
+      var total = 0.0;
+      for (var index = 0; index < entries.length; index++) {
+        final result = results[index];
+        if (result == null) continue;
+        _calculatorLineResults[entries[index].id] = result;
+        total += result.amount;
+      }
+      final outputCurrency = calculatorOutputCurrency;
+      _calculatorTotal = outputCurrency == null
+          ? total
+          : _roundToCurrency(total, outputCurrency);
+      _calculatorLoading = false;
+      _calculatorErrorCode = null;
+      notifyListeners();
+    } catch (error) {
+      if (requestId != _calculatorRequestSequence) return;
+      _calculatorLoading = false;
+      _calculatorTotal = null;
+      _calculatorErrorCode = _errorCodeFor(error.toString());
+      notifyListeners();
+    }
+  }
+
+  double _roundToCurrency(double amount, Currency currency) {
+    final minorUnits = currency.minorUnitsPerMajor;
+    if (minorUnits == null || minorUnits <= 0) {
+      return _roundToPlaces(amount, 2);
+    }
+    return (amount * minorUnits).roundToDouble() / minorUnits;
+  }
+
+  double _roundToPlaces(double amount, int places) {
+    var factor = 1.0;
+    for (var index = 0; index < places; index++) {
+      factor *= 10;
+    }
+    return (amount * factor).roundToDouble() / factor;
   }
 
   Locale? get _effectiveLocale => _locale ?? _resolveSystemLocale();
@@ -420,6 +602,7 @@ class AppState extends ChangeNotifier {
 
   Future<void> clearLocalData() async {
     _conversionRequestSequence++;
+    _calculatorRequestSequence++;
     _historyRequestSequence++;
     _historyVisible = false;
     _historyLoading = false;
@@ -432,6 +615,13 @@ class AppState extends ChangeNotifier {
     _targetCurrency = null;
     _inputAmount = 0.0;
     _conversionDate = null;
+    _calculatorEntries.clear();
+    _calculatorOutputCurrencyCode = null;
+    _calculatorDate = null;
+    _calculatorLineResults.clear();
+    _calculatorTotal = null;
+    _calculatorLoading = false;
+    _calculatorErrorCode = null;
     _convertedAmount = null;
     _lastRate = null;
     _rateFromCache = false;
@@ -542,6 +732,7 @@ class AppState extends ChangeNotifier {
   void dispose() {
     _historyRequestSequence++;
     _conversionRequestSequence++;
+    _calculatorRequestSequence++;
     super.dispose();
   }
 }

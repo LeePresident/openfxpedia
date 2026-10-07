@@ -6,6 +6,7 @@ import 'l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_state.dart';
 import 'screens/converter_screen.dart';
+import 'screens/calculator_screen.dart';
 import 'screens/encyclopedia_screen.dart';
 import 'screens/settings_screen.dart';
 import 'services/cache_service.dart';
@@ -446,6 +447,7 @@ class _HomeShell extends StatefulWidget {
 class _HomeShellState extends State<_HomeShell> {
   static const _screens = [
     ConverterScreen(),
+    CalculatorScreen(),
     EncyclopediaScreen(),
     SettingsScreen(),
   ];
@@ -464,6 +466,10 @@ class _HomeShellState extends State<_HomeShell> {
               NavigationDestination(
                 icon: const Icon(Icons.currency_exchange),
                 label: l10n.converter_title,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.calculate_outlined),
+                label: l10n.calculator_title,
               ),
               NavigationDestination(
                 icon: const Icon(Icons.menu_book),

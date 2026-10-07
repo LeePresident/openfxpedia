@@ -80,6 +80,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get converter_title => 'Converter';
 
   @override
+  String get calculator_title => 'Calculator';
+
+  @override
+  String get calculator_amount => 'Amount';
+
+  @override
+  String get calculator_currency => 'Currency';
+
+  @override
+  String get calculator_result_currency => 'Result currency';
+
+  @override
+  String get calculator_total => 'Total';
+
+  @override
+  String get calculator_add_entry => 'Add amount';
+
+  @override
+  String get calculator_remove_entry => 'Remove amount';
+
+  @override
+  String calculator_entry(int number) {
+    return 'Amount $number';
+  }
+
+  @override
+  String get calculator_no_entries => 'Add an amount to calculate a total.';
+
+  @override
+  String get calculator_date => 'Rate date';
+
+  @override
+  String get calculator_latest => 'Latest rates';
+
+  @override
+  String get calculator_use_latest => 'Use latest rates';
+
+  @override
   String get encyclopedia_title => 'Encyclopedia';
 
   @override

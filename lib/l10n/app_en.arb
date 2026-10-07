@@ -86,6 +86,28 @@
     "@converter_title": {
         "description": "Title for the converter screen."
     },
+    "calculator_title": "Calculator",
+    "@calculator_title": {
+        "description": "Title for the multi-currency calculator page."
+    },
+    "calculator_amount": "Amount",
+    "calculator_currency": "Currency",
+    "calculator_result_currency": "Result currency",
+    "calculator_total": "Total",
+    "calculator_add_entry": "Add amount",
+    "calculator_remove_entry": "Remove amount",
+    "calculator_entry": "Amount {number}",
+    "@calculator_entry": {
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    },
+    "calculator_no_entries": "Add an amount to calculate a total.",
+    "calculator_date": "Rate date",
+    "calculator_latest": "Latest rates",
+    "calculator_use_latest": "Use latest rates",
     "encyclopedia_title": "Encyclopedia",
     "@encyclopedia_title": {
         "description": "Title for the encyclopedia screen."

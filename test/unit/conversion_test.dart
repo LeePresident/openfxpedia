@@ -324,6 +324,20 @@ void main() {
       expect(result.rate.targetCurrency, 'eur');
     });
 
+    test('precise conversion preserves fractional precision for aggregation',
+        () async {
+      final client = _FakeExchangeClient({
+        'usd': {'eur': 0.923456789},
+      });
+      final cache = _StubCacheService(stale: true);
+      final service = ConversionService(client: client, cache: cache);
+
+      final result = await service.convertPrecise(10, 'USD', 'EUR');
+
+      expect(result.amount, 9.23456789);
+      expect(result.rate.rate, 0.923456789);
+    });
+
     test('returns cached result when cache is fresh', () async {
       final cache = _StubCacheService(stale: false)
         .._storedRates = {'eur': 0.90}
