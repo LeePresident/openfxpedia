@@ -1,5 +1,40 @@
 [
     {
+        "version": "v1.0.6",
+        "date": "2026-10-09",
+        "summary": "Added historical exchange-rate charts and a multi-currency calculator, with improved conversion behavior and responsive layouts.",
+        "highlights": [
+            "Added date-based historical currency conversion with exchange-rate charts and a quick return to latest rates.",
+            "Added a multi-currency calculator for combining amounts in different currencies.",
+            "Improved conversion reliability, rate history handling, and calculator layouts on narrow screens.",
+            "Expanded English and Chinese localization and documentation."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.6",
+                "date": "2026-10-09",
+                "summary": "新增历史汇率图表和多币种金额计算器，并改进换算体验和小屏幕布局。",
+                "highlights": [
+                    "新增按日期查看历史汇率的功能，提供汇率图表并可快速切回最新汇率。",
+                    "新增多币种金额计算器，可合并不同货币的金额。",
+                    "改进换算可靠性、历史汇率处理和小屏幕上的计算器布局。",
+                    "扩展英语和中文本地化及文档。"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.6",
+                "date": "2026-10-09",
+                "summary": "新增歷史匯率圖表和多幣別金額計算器，並改進換算體驗和小螢幕版面配置。",
+                "highlights": [
+                    "新增依日期檢視歷史匯率的功能，提供匯率圖表並可快速切回最新匯率。",
+                    "新增多幣別金額計算器，可合併不同貨幣的金額。",
+                    "改進換算可靠性、歷史匯率處理和小螢幕上的計算器版面配置。",
+                    "擴充英語和中文在地化及文件。"
+                ]
+            }
+        }
+    },
+    {
         "version": "v1.0.5",
         "date": "2026-09-27",
         "summary": "Added currency unit and denomination details, converter shortcuts, and an option to clear local data.",

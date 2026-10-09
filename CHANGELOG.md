@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.6] - 2026-10-09
+
+- Added historical exchange-rate charts and date-based currency conversion.
+- Added a calculator for combining amounts in multiple currencies.
+- Improved conversion reliability, localization, and calculator layouts on narrow screens.
+- Expanded English and Chinese documentation.
+
 ## [1.0.5] - 2026-09-27
 
 - Added major and minor currency units and coin/banknote denominations to currency details.
