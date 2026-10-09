@@ -122,13 +122,3 @@ A user manages a shortlist of frequently used currencies.
 ---
 
 *Spec generated from user input: Build a Flutter app in Windows and Android to convert currencies based on my selection. Also include an encyclopedia for currencies with images. Use https://github.com/fawazahmed0/exchange-api.*
-
-Tooling Note
-The repository's `/speckit` tooling maps a feature branch name to the `specs/` folder (for example: branch `001-currency-converter` → `specs/001-currency-converter`). If you rename the specs folder or use a different name (for example `specs/master`), tooling that expects the original mapping may fail.
-
-Remediation options:
-- Keep the feature folder name and branch name in sync (recommended).
-- Set the environment variable `SPECIFY_FEATURE` to the specs folder name in your shell or CI environment before running `/speckit.*` commands (e.g. `powershell: $env:SPECIFY_FEATURE='master'`).
-- Create a filesystem junction from the expected folder name to the actual folder (the repo already contains a temporary junction to help automation).
-
-Update `quickstart.md` or CI to document your chosen approach so automation remains robust.

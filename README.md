@@ -10,7 +10,7 @@ Current release: `1.0.5`
 
 ## Quick Links
 
-- Spec & tasks: `specs/master`
+- Project documentation and design history: `specs/master`
 
 ## Architecture
 
@@ -188,8 +188,8 @@ The startup screen is rendered by Flutter so its loading status and startup erro
 
 ## VS Code
 
-- This repo includes `.vscode` launch and task configs to help run and debug the app on Windows and Android.
-- If you use VS Code, open the workspace root and use the Run view to launch the app.
+- Shared VS Code configuration examples are in `.vscode.example/`; copy that folder to `.vscode/` to use them. The local `.vscode/` folder is gitignored so personal settings are not committed.
+- Open the workspace root, then use the Run view to launch the app on Windows or Android.
 
 ## Troubleshooting
 
@@ -200,7 +200,7 @@ The startup screen is rendered by Flutter so its loading status and startup erro
 
 ## Contributing
 
-- Open a branch for your work and submit a PR. For feature design and tasks see `specs/master`.
+- Open a branch for your work and submit a PR. For project design context and implementation history, see `specs/master`; it contains documentation, not an active task workflow.
 - When adding or updating currency metadata, also update `assets/data/fiat_currencies.json` and include a short validation note in `specs/master/data/`.
 
 ## License

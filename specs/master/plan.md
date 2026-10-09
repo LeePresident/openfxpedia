@@ -168,9 +168,9 @@ Prerequisite: `research.md` complete
 - Minimal steps to run the app locally on Windows and Android (Flutter SDK version, required env vars, example commands).
 
 4) Agent context update
-- Run `.specify/scripts/powershell/update-agent-context.ps1 -AgentType copilot` to add new tech to agent context (Flutter, exchange-api, currency list URL).
+- Update repository-level agent guidance manually when new technologies or project conventions need to be captured.
 
-Output: `data-model.md`, `/contracts/*`, `quickstart.md`, updated agent context file.
+Output: `data-model.md`, `/contracts/*`, `quickstart.md`, and any relevant repository-level agent guidance updates.
 
 ---
 

@@ -10,7 +10,7 @@ OpenFXpedia 是一款轻量级 Flutter 应用，集货币换算与可搜索的�
 
 ## 快速链接
 
-- 规格说明与任务：`specs/master`
+- 项目文档与设计记录：`specs/master`
 
 ## 架构
 
@@ -188,8 +188,8 @@ flutter test test/widget/converter_history_test.dart
 
 ## VS Code
 
-- 仓库在 `.vscode` 中提供启动和任务配置，方便在 Windows 和 Android 上运行及调试应用。
-- 使用 VS Code 时，请打开工作区根目录，并通过“运行”视图启动应用。
+- 仓库在 `.vscode.example/` 中提供 VS Code 配置示例；将该文件夹复制为 `.vscode/` 即可使用。本地 `.vscode/` 文件夹已加入 Git 忽略，个人设置不会被提交。
+- 打开工作区根目录，然后通过“运行”视图在 Windows 或 Android 上启动应用。
 
 ## 故障排查
 
@@ -200,7 +200,7 @@ flutter test test/widget/converter_history_test.dart
 
 ## 参与贡献
 
-- 为修改创建分支并提交 PR。功能设计和任务见 `specs/master`。
+- 为修改创建分支并提交 PR。项目设计背景和实现记录见 `specs/master`；该目录存放文档，不是当前使用的任务工作流。
 - 添加或更新货币元数据时，请同步更新 `assets/data/fiat_currencies.json`，并在 `specs/master/data/` 中添加简短的验证说明。
 
 ## 许可证
