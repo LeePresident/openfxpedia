@@ -1,17 +1,71 @@
 {
     "@@locale": "zh_Hant",
     "history_title": "歷史匯率",
+    "@history_title": {
+        "description": "歷史匯率區段的標題。"
+    },
     "history_week": "1週",
+    "@history_week": {
+        "description": "選取一週匯率歷史資料的範圍選項。"
+    },
     "history_month": "1月",
+    "@history_month": {
+        "description": "選取一個月匯率歷史資料的範圍選項。"
+    },
     "history_quarter": "3月",
+    "@history_quarter": {
+        "description": "選取三個月匯率歷史資料的範圍選項。"
+    },
     "history_unavailable": "此時間範圍內沒有可用的歷史匯率。請嘗試其他日期或匯率來源。",
+    "@history_unavailable": {
+        "description": "所選時間範圍沒有歷史匯率資料時顯示的訊息。"
+    },
     "history_available": "抽樣報價：{available}/{total}",
+    "@history_available": {
+        "description": "顯示可用的歷史匯率報價數量。",
+        "placeholders": {
+            "available": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
     "converter_date": "換算日期",
+    "@converter_date": {
+        "description": "歷史換算日期選擇器的標籤。"
+    },
     "converter_latest": "最新",
+    "@converter_latest": {
+        "description": "使用最新可用匯率的預設換算模式。"
+    },
     "converter_use_latest": "使用最新匯率",
+    "@converter_use_latest": {
+        "description": "離開歷史匯率模式的操作。"
+    },
     "error_historical_unavailable": "無法載入此貨幣對和日期的歷史匯率。請檢查網絡連線，或嘗試其他日期或匯率來源。",
+    "@error_historical_unavailable": {
+        "description": "找不到相容的快取匯率且歷史匯率查詢失敗時顯示的訊息。"
+    },
     "rate_info_requested_date": "所選日期：{date}",
+    "@rate_info_requested_date": {
+        "description": "使用者選取的歷史換算日期。",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
     "rate_info_effective_date": "匯率日期：{date}",
+    "@rate_info_effective_date": {
+        "description": "實際匯率報價日期，可能早於所選日期。",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
     "appTitle": "OpenFXpedia",
     "@appTitle": {
         "description": "應用程式的標題。"
@@ -45,13 +99,37 @@
         "description": "繁體中文語言名稱。"
     },
     "converter_title": "轉換器",
+    "@converter_title": {
+        "description": "轉換器畫面的標題。"
+    },
     "calculator_title": "計算機",
+    "@calculator_title": {
+        "description": "多貨幣計算機頁面的標題。"
+    },
     "calculator_amount": "金額",
+    "@calculator_amount": {
+        "description": "計算機中金額輸入欄位的標籤。"
+    },
     "calculator_currency": "貨幣",
+    "@calculator_currency": {
+        "description": "計算機中貨幣選擇欄位的標籤。"
+    },
     "calculator_result_currency": "結果貨幣",
+    "@calculator_result_currency": {
+        "description": "計算機結果所使用貨幣的選擇欄位標籤。"
+    },
     "calculator_total": "總計",
+    "@calculator_total": {
+        "description": "計算機結果總額的標籤。"
+    },
     "calculator_add_entry": "新增金額",
+    "@calculator_add_entry": {
+        "description": "在計算機中新增金額項目的按鈕標籤。"
+    },
     "calculator_remove_entry": "移除金額",
+    "@calculator_remove_entry": {
+        "description": "從計算機移除金額項目的按鈕提示。"
+    },
     "calculator_entry": "金額 {number}",
     "@calculator_entry": {
         "placeholders": {
@@ -61,11 +139,20 @@
         }
     },
     "calculator_no_entries": "新增金額以計算總計。",
+    "@calculator_no_entries": {
+        "description": "計算機沒有金額項目時顯示的提示。"
+    },
     "calculator_date": "匯率日期",
+    "@calculator_date": {
+        "description": "計算機中選取匯率日期的日期選擇器標籤。"
+    },
     "calculator_latest": "最新匯率",
+    "@calculator_latest": {
+        "description": "計算機使用最新匯率時顯示的日期標籤。"
+    },
     "calculator_use_latest": "使用最新匯率",
-    "@converter_title": {
-        "description": "轉換器畫面的標題。"
+    "@calculator_use_latest": {
+        "description": "將計算機從歷史匯率切換回最新匯率的操作。"
     },
     "encyclopedia_title": "百科",
     "@encyclopedia_title": {

@@ -90,122 +90,115 @@ class CalculatorScreen extends StatelessWidget {
           appBar: AppBar(title: Text(l10n.calculator_title)),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 720),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.calculator_result_currency,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        const SizedBox(height: 4),
+                        app_search.CurrencySearchBar(
+                          key: const ValueKey('calculator-output-currency'),
+                          currencies: state.currencies,
+                          selectedCurrency: outputCurrency,
+                          hint: l10n.calculator_result_currency,
+                          onSelected: state.setCalculatorOutputCurrency,
+                        ),
+                        const SizedBox(height: 12),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 4,
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            Text(
-                              l10n.calculator_result_currency,
-                              style: Theme.of(context).textTheme.labelLarge,
+                            OutlinedButton.icon(
+                              onPressed: () => _selectDate(context, state),
+                              icon: const Icon(Icons.calendar_today),
+                              label: Text(dateLabel),
                             ),
-                            const SizedBox(height: 4),
-                            app_search.CurrencySearchBar(
-                              key: const ValueKey('calculator-output-currency'),
-                              currencies: state.currencies,
-                              selectedCurrency: outputCurrency,
-                              hint: l10n.calculator_result_currency,
-                              onSelected: state.setCalculatorOutputCurrency,
-                            ),
-                            const SizedBox(height: 12),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 4,
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              children: [
-                                OutlinedButton.icon(
-                                  onPressed: () => _selectDate(context, state),
-                                  icon: const Icon(Icons.calendar_today),
-                                  label: Text(dateLabel),
-                                ),
-                                if (state.calculatorDate != null)
-                                  TextButton.icon(
-                                    onPressed: () =>
-                                        state.setCalculatorDate(null),
-                                    icon: const Icon(Icons.update),
-                                    label: Text(l10n.calculator_use_latest),
-                                  ),
-                              ],
-                            ),
+                            if (state.calculatorDate != null)
+                              TextButton.icon(
+                                onPressed: () => state.setCalculatorDate(null),
+                                icon: const Icon(Icons.update),
+                                label: Text(l10n.calculator_use_latest),
+                              ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
-                    const SizedBox(height: 12),
-                    if (state.calculatorEntries.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Center(
-                          child: Text(l10n.calculator_no_entries),
-                        ),
-                      )
-                    else
-                      for (var index = 0;
-                          index < state.calculatorEntries.length;
-                          index++)
-                        _entryCard(
-                          context,
-                          state,
-                          l10n,
-                          state.calculatorEntries[index],
-                          index,
-                          outputCurrency,
-                        ),
-                    OutlinedButton.icon(
-                      onPressed: state.addCalculatorEntry,
-                      icon: const Icon(Icons.add),
-                      label: Text(l10n.calculator_add_entry),
-                    ),
-                    const SizedBox(height: 12),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              l10n.calculator_total,
-                              style: Theme.of(context).textTheme.labelLarge,
-                            ),
-                            const SizedBox(height: 6),
-                            if (state.calculatorLoading)
-                              const LinearProgressIndicator(),
-                            if (state.calculatorErrorCode != null) ...[
-                              const SizedBox(height: 8),
-                              Text(
-                                _errorFor(l10n, state.calculatorErrorCode),
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.error,
-                                ),
-                              ),
-                            ] else if (state.calculatorTotal != null &&
-                                outputCurrency != null) ...[
-                              Text(
-                                _formatAmount(
-                                  l10n,
-                                  outputCurrency,
-                                  state.calculatorTotal!,
-                                ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
-                              ),
-                            ]
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                const SizedBox(height: 12),
+                if (state.calculatorEntries.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Center(
+                      child: Text(l10n.calculator_no_entries),
+                    ),
+                  )
+                else
+                  for (var index = 0;
+                      index < state.calculatorEntries.length;
+                      index++)
+                    _entryCard(
+                      context,
+                      state,
+                      l10n,
+                      state.calculatorEntries[index],
+                      index,
+                      outputCurrency,
+                    ),
+                OutlinedButton.icon(
+                  onPressed: state.addCalculatorEntry,
+                  icon: const Icon(Icons.add),
+                  label: Text(l10n.calculator_add_entry),
+                ),
+                const SizedBox(height: 12),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.calculator_total,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        const SizedBox(height: 6),
+                        if (state.calculatorLoading)
+                          const LinearProgressIndicator(),
+                        if (state.calculatorErrorCode != null) ...[
+                          const SizedBox(height: 8),
+                          Text(
+                            _errorFor(l10n, state.calculatorErrorCode),
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                          ),
+                        ] else if (state.calculatorTotal != null &&
+                            outputCurrency != null) ...[
+                          Text(
+                            _formatAmount(
+                              l10n,
+                              outputCurrency,
+                              state.calculatorTotal!,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                        ]
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );

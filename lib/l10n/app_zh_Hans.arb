@@ -1,17 +1,71 @@
 {
     "@@locale": "zh_Hans",
     "history_title": "历史汇率",
+    "@history_title": {
+        "description": "历史汇率区域的标题。"
+    },
     "history_week": "1周",
+    "@history_week": {
+        "description": "选择一周汇率历史数据的范围选项。"
+    },
     "history_month": "1月",
+    "@history_month": {
+        "description": "选择一个月汇率历史数据的范围选项。"
+    },
     "history_quarter": "3月",
+    "@history_quarter": {
+        "description": "选择三个月汇率历史数据的范围选项。"
+    },
     "history_unavailable": "此时间范围内没有可用的历史汇率。请尝试其他日期或汇率来源。",
+    "@history_unavailable": {
+        "description": "所选时间范围没有历史汇率数据时显示的消息。"
+    },
     "history_available": "采样报价：{available}/{total}",
+    "@history_available": {
+        "description": "显示可用的历史汇率报价数量。",
+        "placeholders": {
+            "available": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
     "converter_date": "换算日期",
+    "@converter_date": {
+        "description": "历史换算日期选择器的标签。"
+    },
     "converter_latest": "最新",
+    "@converter_latest": {
+        "description": "使用最新可用汇率的默认换算模式。"
+    },
     "converter_use_latest": "使用最新汇率",
+    "@converter_use_latest": {
+        "description": "退出历史汇率模式的操作。"
+    },
     "error_historical_unavailable": "无法加载此货币对和日期的历史汇率。请检查网络连接，或尝试其他日期或汇率来源。",
+    "@error_historical_unavailable": {
+        "description": "找不到兼容的缓存汇率且历史汇率查询失败时显示的消息。"
+    },
     "rate_info_requested_date": "所选日期：{date}",
+    "@rate_info_requested_date": {
+        "description": "用户选择的历史换算日期。",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
     "rate_info_effective_date": "汇率日期：{date}",
+    "@rate_info_effective_date": {
+        "description": "实际汇率报价日期，可能早于所选日期。",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
     "appTitle": "OpenFXpedia",
     "@appTitle": {
         "description": "应用程序的标题。"
@@ -45,13 +99,37 @@
         "description": "繁体中文语言名称。"
     },
     "converter_title": "转换器",
+    "@converter_title": {
+        "description": "转换器页面的标题。"
+    },
     "calculator_title": "计算器",
+    "@calculator_title": {
+        "description": "多货币计算器页面的标题。"
+    },
     "calculator_amount": "金额",
+    "@calculator_amount": {
+        "description": "计算器中金额输入框的标签。"
+    },
     "calculator_currency": "货币",
+    "@calculator_currency": {
+        "description": "计算器中货币选择框的标签。"
+    },
     "calculator_result_currency": "结果货币",
+    "@calculator_result_currency": {
+        "description": "计算器结果所用货币选择框的标签。"
+    },
     "calculator_total": "总计",
+    "@calculator_total": {
+        "description": "计算器结果总额的标签。"
+    },
     "calculator_add_entry": "添加金额",
+    "@calculator_add_entry": {
+        "description": "在计算器中添加金额项目的按钮标签。"
+    },
     "calculator_remove_entry": "移除金额",
+    "@calculator_remove_entry": {
+        "description": "从计算器中移除金额项目的按钮提示。"
+    },
     "calculator_entry": "金额 {number}",
     "@calculator_entry": {
         "placeholders": {
@@ -61,11 +139,20 @@
         }
     },
     "calculator_no_entries": "添加金额以计算总计。",
+    "@calculator_no_entries": {
+        "description": "计算器没有金额项目时显示的提示。"
+    },
     "calculator_date": "汇率日期",
+    "@calculator_date": {
+        "description": "计算器中选择汇率日期的日期选择器标签。"
+    },
     "calculator_latest": "最新汇率",
+    "@calculator_latest": {
+        "description": "计算器使用最新汇率时显示的日期标签。"
+    },
     "calculator_use_latest": "使用最新汇率",
-    "@converter_title": {
-        "description": "转换器屏幕的标题。"
+    "@calculator_use_latest": {
+        "description": "将计算器从历史汇率切换回最新汇率的操作。"
     },
     "encyclopedia_title": "百科",
     "@encyclopedia_title": {

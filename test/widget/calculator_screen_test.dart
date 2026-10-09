@@ -165,6 +165,11 @@ void main() {
   testWidgets(
       'calculator adds entries, sums in the result currency, and keeps session state',
       (tester) async {
+    tester.view.physicalSize = const Size(1440, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     final cache = _StubCache();
     final client = _RateClient();
     final state = AppState(
@@ -181,6 +186,10 @@ void main() {
     await tester.pumpWidget(_Harness(state));
     expect(find.text('Calculator'), findsOneWidget);
     expect(state.calculatorEntries, hasLength(1));
+    expect(
+      tester.getSize(find.byType(Card).first).width,
+      greaterThan(1300),
+    );
 
     final firstEntry = state.calculatorEntries.first;
     await tester.tap(find.text('Add amount'));
