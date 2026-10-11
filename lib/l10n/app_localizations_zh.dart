@@ -150,6 +150,29 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settings_license => '许可证';
 
   @override
+  String get settings_privacy => '隐私声明';
+
+  @override
+  String get privacy_statement_no_account =>
+      'OpenFXpedia 无需注册账号，不会收集姓名、电子邮件地址、付款信息、联系人、位置、相机、麦克风或广告标识符。应用不包含分析、广告、崩溃报告或用户追踪 SDK。';
+
+  @override
+  String get privacy_statement_network =>
+      '应用通过 HTTPS 向已配置的汇率和货币目录提供方发送请求。这些请求会包含获取汇率和目录数据所需的所选货币代码。你检查更新时，应用也会连接到 OpenFXpedia 的 GitHub 仓库。外部提供方和 GitHub 可能会根据各自的隐私政策接收 IP 地址等常规连接元数据。';
+
+  @override
+  String get privacy_statement_local_storage =>
+      '汇率和货币目录数据会缓存在本地以供离线使用。收藏和应用偏好设置也保存在本地。这些 Hive 数据盒使用随机生成的密钥加密，密钥存放在应用支持目录中。加密可防止存储的数据被随意查看，但密钥存储在本地而非硬件支持的安全保险库中，因此无法保护已遭入侵或被攻击者解锁的设备上的数据。';
+
+  @override
+  String get privacy_statement_data_deletion =>
+      '如需删除本地存储的汇率、目录数据、收藏和偏好设置，请打开“设置”并选择“清除本地数据”。清除本地数据会保留加密密钥，使之后缓存的数据仍可加密。卸载应用时，操作系统会按照正常的卸载流程移除应用数据。';
+
+  @override
+  String get privacy_statement_android =>
+      'Android 应用仅请求 INTERNET 权限。网络通信使用 HTTPS；只有在 GitHub 发布文件的 URL 和 SHA-256 摘要经过 GitHub 发布元数据验证后，才会下载更新文件。这可以检测错误或损坏的下载，但并非独立的发布者签名，因此发布源遭到入侵的情形不在应用的信任保障范围内。汇率请求和更新检查不会主动包含个人数据。';
+
+  @override
   String get settings_clear_local_data => '清除本地数据';
 
   @override
@@ -550,6 +573,29 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get settings_license => '许可证';
 
   @override
+  String get settings_privacy => '隐私声明';
+
+  @override
+  String get privacy_statement_no_account =>
+      'OpenFXpedia 无需注册账号，不会收集姓名、电子邮件地址、付款信息、联系人、位置、相机、麦克风或广告标识符。应用不包含分析、广告、崩溃报告或用户追踪 SDK。';
+
+  @override
+  String get privacy_statement_network =>
+      '应用通过 HTTPS 向已配置的汇率和货币目录提供方发送请求。这些请求会包含获取汇率和目录数据所需的所选货币代码。你检查更新时，应用也会连接到 OpenFXpedia 的 GitHub 仓库。外部提供方和 GitHub 可能会根据各自的隐私政策接收 IP 地址等常规连接元数据。';
+
+  @override
+  String get privacy_statement_local_storage =>
+      '汇率和货币目录数据会缓存在本地以供离线使用。收藏和应用偏好设置也保存在本地。这些 Hive 数据盒使用随机生成的密钥加密，密钥存放在应用支持目录中。加密可防止存储的数据被随意查看，但密钥存储在本地而非硬件支持的安全保险库中，因此无法保护已遭入侵或被攻击者解锁的设备上的数据。';
+
+  @override
+  String get privacy_statement_data_deletion =>
+      '如需删除本地存储的汇率、目录数据、收藏和偏好设置，请打开“设置”并选择“清除本地数据”。清除本地数据会保留加密密钥，使之后缓存的数据仍可加密。卸载应用时，操作系统会按照正常的卸载流程移除应用数据。';
+
+  @override
+  String get privacy_statement_android =>
+      'Android 应用仅请求 INTERNET 权限。网络通信使用 HTTPS；只有在 GitHub 发布文件的 URL 和 SHA-256 摘要经过 GitHub 发布元数据验证后，才会下载更新文件。这可以检测错误或损坏的下载，但并非独立的发布者签名，因此发布源遭到入侵的情形不在应用的信任保障范围内。汇率请求和更新检查不会主动包含个人数据。';
+
+  @override
   String get settings_clear_local_data => '清除本地数据';
 
   @override
@@ -948,6 +994,29 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get settings_license => '許可證';
+
+  @override
+  String get settings_privacy => '隱私權聲明';
+
+  @override
+  String get privacy_statement_no_account =>
+      'OpenFXpedia 無需註冊帳號，不會收集姓名、電子郵件地址、付款資訊、聯絡人、位置、相機、麥克風或廣告識別碼。應用程式不包含分析、廣告、當機回報或使用者追蹤 SDK。';
+
+  @override
+  String get privacy_statement_network =>
+      '應用程式透過 HTTPS 向已設定的匯率和貨幣目錄提供者傳送請求。這些請求包含取得匯率和目錄資料所需的所選貨幣代碼。使用者檢查更新時，應用程式也會連線至 OpenFXpedia 的 GitHub 儲存庫。外部提供者和 GitHub 可能會依據各自的隱私權政策接收 IP 位址等一般連線中繼資料。';
+
+  @override
+  String get privacy_statement_local_storage =>
+      '匯率和貨幣目錄資料會快取於本機供離線使用。收藏和應用程式偏好設定也儲存在本機。這些 Hive 資料儲存盒使用隨機產生的金鑰加密，金鑰存放在應用程式支援目錄中。加密可防止儲存資料被隨意查看，但金鑰儲存在本機而非硬體支援的安全儲存空間中，因此無法保護已遭入侵或被攻擊者解鎖的裝置上的資料。';
+
+  @override
+  String get privacy_statement_data_deletion =>
+      '若要刪除本機儲存的匯率、目錄資料、收藏和偏好設定，請開啟「設定」並選擇「清除本機資料」。清除本機資料會保留加密金鑰，讓之後快取的資料繼續受到加密保護。解除安裝應用程式時，作業系統會依其正常解除安裝機制移除應用程式資料。';
+
+  @override
+  String get privacy_statement_android =>
+      'Android 應用程式僅要求 INTERNET 權限。網路通訊使用 HTTPS，只有在 GitHub 發行檔案的 URL 和 SHA-256 摘要通過 GitHub 發行中繼資料驗證後，才會下載更新檔案。這可偵測錯誤或損壞的下載，但並非獨立的發行者簽章，因此發行來源遭到入侵的情況仍不在應用程式的信任保障範圍內。匯率請求和更新檢查不會主動包含個人資料。';
 
   @override
   String get settings_clear_local_data => '清除本地資料';

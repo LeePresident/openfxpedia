@@ -208,6 +208,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ),
+              ListTile(
+                title: Text(l10n.settings_privacy),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const PrivacyPage(),
+                  ),
+                ),
+              ),
             ],
           );
         },
@@ -397,6 +406,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     return null;
+  }
+}
+
+class PrivacyPage extends StatelessWidget {
+  const PrivacyPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final paragraphs = [
+      l10n.privacy_statement_no_account,
+      l10n.privacy_statement_network,
+      l10n.privacy_statement_local_storage,
+      l10n.privacy_statement_data_deletion,
+      l10n.privacy_statement_android,
+    ];
+
+    return Scaffold(
+      appBar: AppBar(title: Text(l10n.settings_privacy)),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          for (final paragraph in paragraphs) ...[
+            Text(paragraph),
+            const SizedBox(height: 16),
+          ],
+        ],
+      ),
+    );
   }
 }
 

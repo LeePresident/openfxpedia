@@ -198,6 +198,30 @@
     "@settings_license": {
         "description": "许可信息的标签。"
     },
+    "settings_privacy": "隐私声明",
+    "@settings_privacy": {
+        "description": "查看隐私声明的标签。"
+    },
+    "privacy_statement_no_account": "OpenFXpedia 无需注册账号，不会收集姓名、电子邮件地址、付款信息、联系人、位置、相机、麦克风或广告标识符。应用不包含分析、广告、崩溃报告或用户追踪 SDK。",
+    "@privacy_statement_no_account": {
+        "description": "隐私声明中关于账号和个人数据收集的段落。"
+    },
+    "privacy_statement_network": "应用通过 HTTPS 向已配置的汇率和货币目录提供方发送请求。这些请求会包含获取汇率和目录数据所需的所选货币代码。你检查更新时，应用也会连接到 OpenFXpedia 的 GitHub 仓库。外部提供方和 GitHub 可能会根据各自的隐私政策接收 IP 地址等常规连接元数据。",
+    "@privacy_statement_network": {
+        "description": "隐私声明中关于网络请求和连接元数据的段落。"
+    },
+    "privacy_statement_local_storage": "汇率和货币目录数据会缓存在本地以供离线使用。收藏和应用偏好设置也保存在本地。这些 Hive 数据盒使用随机生成的密钥加密，密钥存放在应用支持目录中。加密可防止存储的数据被随意查看，但密钥存储在本地而非硬件支持的安全保险库中，因此无法保护已遭入侵或被攻击者解锁的设备上的数据。",
+    "@privacy_statement_local_storage": {
+        "description": "隐私声明中关于本地存储和加密数据的段落。"
+    },
+    "privacy_statement_data_deletion": "如需删除本地存储的汇率、目录数据、收藏和偏好设置，请打开“设置”并选择“清除本地数据”。清除本地数据会保留加密密钥，使之后缓存的数据仍可加密。卸载应用时，操作系统会按照正常的卸载流程移除应用数据。",
+    "@privacy_statement_data_deletion": {
+        "description": "隐私声明中关于删除本地数据的段落。"
+    },
+    "privacy_statement_android": "Android 应用仅请求 INTERNET 权限。网络通信使用 HTTPS；只有在 GitHub 发布文件的 URL 和 SHA-256 摘要经过 GitHub 发布元数据验证后，才会下载更新文件。这可以检测错误或损坏的下载，但并非独立的发布者签名，因此发布源遭到入侵的情形不在应用的信任保障范围内。汇率请求和更新检查不会主动包含个人数据。",
+    "@privacy_statement_android": {
+        "description": "隐私声明中关于 Android 权限、网络安全和更新的段落。"
+    },
     "settings_clear_local_data": "清除本地数据",
     "@settings_clear_local_data": {
         "description": "清除本地数据的标签。"

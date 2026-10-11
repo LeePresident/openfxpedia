@@ -17,6 +17,27 @@ import 'package:openfxpedia/services/favorites_service.dart';
 import 'package:openfxpedia/services/update_service.dart';
 
 void main() {
+  testWidgets('privacy statement is available from settings', (tester) async {
+    final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+    final state = _createAppState();
+    addTearDown(state.dispose);
+
+    await _pumpSettings(
+      tester,
+      state: state,
+      updateService: _FakeUpdateService(null),
+      currentVersion: '1.0.6',
+    );
+
+    await tester.ensureVisible(find.text(l10n.settings_privacy));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.settings_privacy));
+    await tester.pumpAndSettle();
+
+    expect(find.text(l10n.settings_privacy), findsOneWidget);
+    expect(find.text(l10n.privacy_statement_no_account), findsOneWidget);
+  });
+
   testWidgets(
       'cancelling an update prompt does not verify or download an asset',
       (tester) async {

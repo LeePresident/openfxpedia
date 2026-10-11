@@ -364,6 +364,42 @@ abstract class AppLocalizations {
   /// **'License'**
   String get settings_license;
 
+  /// Label for viewing the privacy statement.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy statement'**
+  String get settings_privacy;
+
+  /// Privacy statement paragraph about accounts and personal data collection.
+  ///
+  /// In en, this message translates to:
+  /// **'OpenFXpedia does not require an account and does not collect names, email addresses, payment information, contacts, location, camera, microphone, or advertising identifiers. The app does not include analytics, advertising, crash-reporting, or user-tracking SDKs.'**
+  String get privacy_statement_no_account;
+
+  /// Privacy statement paragraph about network requests and connection metadata.
+  ///
+  /// In en, this message translates to:
+  /// **'The app makes HTTPS requests to the configured exchange-rate and currency-catalog providers. These requests include the selected currency codes needed to retrieve rates and catalog data. The app also contacts the OpenFXpedia GitHub repository when you check for updates. External providers and GitHub may receive normal connection metadata such as your IP address according to their own privacy policies.'**
+  String get privacy_statement_network;
+
+  /// Privacy statement paragraph about locally stored and encrypted data.
+  ///
+  /// In en, this message translates to:
+  /// **'Rates and currency catalog data are cached locally for offline use. Favorites and app preferences are also stored locally. These Hive data boxes are encrypted with a randomly generated key stored in the app-support directory. Encryption protects stored data from casual inspection, but the key is stored locally rather than in a hardware-backed vault, so it does not protect data on a device that is already compromised or unlocked by an attacker.'**
+  String get privacy_statement_local_storage;
+
+  /// Privacy statement paragraph explaining deletion of locally stored data.
+  ///
+  /// In en, this message translates to:
+  /// **'To delete locally stored rates, catalog data, favorites, and preferences, open Settings and choose Clear local data. Clearing local data retains the encryption key so any future cached data remains encrypted. Uninstalling the app removes its application data according to the operating system\'s normal uninstall behavior.'**
+  String get privacy_statement_data_deletion;
+
+  /// Privacy statement paragraph about Android permission, network security, and updates.
+  ///
+  /// In en, this message translates to:
+  /// **'The Android app requests only the INTERNET permission. Network communication uses HTTPS, and update files are downloaded only after their GitHub release URL and SHA-256 digest have been checked against GitHub release metadata. This detects incorrect or corrupted downloads; it is not an independent publisher signature, so a compromised release source remains outside the app\'s trust boundary. No personal data is intentionally included in exchange-rate requests or update checks.'**
+  String get privacy_statement_android;
+
   /// Label for clearing local data.
   ///
   /// In en, this message translates to:

@@ -152,6 +152,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_license => 'License';
 
   @override
+  String get settings_privacy => 'Privacy statement';
+
+  @override
+  String get privacy_statement_no_account =>
+      'OpenFXpedia does not require an account and does not collect names, email addresses, payment information, contacts, location, camera, microphone, or advertising identifiers. The app does not include analytics, advertising, crash-reporting, or user-tracking SDKs.';
+
+  @override
+  String get privacy_statement_network =>
+      'The app makes HTTPS requests to the configured exchange-rate and currency-catalog providers. These requests include the selected currency codes needed to retrieve rates and catalog data. The app also contacts the OpenFXpedia GitHub repository when you check for updates. External providers and GitHub may receive normal connection metadata such as your IP address according to their own privacy policies.';
+
+  @override
+  String get privacy_statement_local_storage =>
+      'Rates and currency catalog data are cached locally for offline use. Favorites and app preferences are also stored locally. These Hive data boxes are encrypted with a randomly generated key stored in the app-support directory. Encryption protects stored data from casual inspection, but the key is stored locally rather than in a hardware-backed vault, so it does not protect data on a device that is already compromised or unlocked by an attacker.';
+
+  @override
+  String get privacy_statement_data_deletion =>
+      'To delete locally stored rates, catalog data, favorites, and preferences, open Settings and choose Clear local data. Clearing local data retains the encryption key so any future cached data remains encrypted. Uninstalling the app removes its application data according to the operating system\'s normal uninstall behavior.';
+
+  @override
+  String get privacy_statement_android =>
+      'The Android app requests only the INTERNET permission. Network communication uses HTTPS, and update files are downloaded only after their GitHub release URL and SHA-256 digest have been checked against GitHub release metadata. This detects incorrect or corrupted downloads; it is not an independent publisher signature, so a compromised release source remains outside the app\'s trust boundary. No personal data is intentionally included in exchange-rate requests or update checks.';
+
+  @override
   String get settings_clear_local_data => 'Clear local data';
 
   @override
