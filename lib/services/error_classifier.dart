@@ -7,7 +7,7 @@ class ErrorClassifier {
   static String codeFor(Object error) {
     final suppliedCode = error.toString().toLowerCase();
     if (RegExp(
-      r'^(network|timeout|invalid_response|unknown|missing_rate|exchange_api|update_integrity|update_download|update_verification|http_\d{3})$',
+      r'^(network|timeout|invalid_response|unknown|missing_rate|exchange_api|service_unavailable|update_integrity|update_download|update_verification|http_\d{3})$',
     ).hasMatch(suppliedCode)) {
       return suppliedCode;
     }
@@ -42,11 +42,16 @@ class ErrorClassifier {
         message.contains('host lookup') ||
         message.contains('network is unreachable') ||
         message.contains('connection refused') ||
-        message.contains('connection reset')) {
+        message.contains('connection reset') ||
+        (message.contains('os error') && message.contains('errno'))) {
       return 'network';
     }
     if (message.contains('format') || message.contains('json')) {
       return 'invalid_response';
+    }
+    if (message.contains('api.github.com') ||
+        message.contains('currency-api')) {
+      return 'service_unavailable';
     }
     return 'unknown';
   }

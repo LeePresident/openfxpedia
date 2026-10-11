@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:crypto/crypto.dart';
@@ -5,6 +6,16 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
 import '../core/config.dart';
+
+class LatestStableRelease {
+  const LatestStableRelease({
+    required this.version,
+    required this.data,
+  });
+
+  final String version;
+  final Map<String, dynamic> data;
+}
 
 class UpdateVerificationException implements Exception {
   const UpdateVerificationException(this.message);
@@ -27,6 +38,82 @@ class UpdateService {
       : _httpClient = httpClient ?? http.Client();
 
   final http.Client _httpClient;
+
+  Future<LatestStableRelease?> fetchLatestStableRelease() async {
+    var page = 1;
+    while (true) {
+      final pageUri = Uri.parse('${AppConfig.githubReleasesApiUrl}&page=$page');
+      final response = await _httpClient.get(
+        pageUri,
+        headers: const {'Accept': 'application/vnd.github+json'},
+      ).timeout(const Duration(seconds: 8));
+
+      if (response.statusCode != 200) {
+        throw http.ClientException(
+          'GitHub releases request failed (${response.statusCode})',
+          pageUri,
+        );
+      }
+
+      final pageItems = jsonDecode(response.body);
+      if (pageItems is! List<dynamic>) {
+        throw const FormatException('Invalid GitHub releases response');
+      }
+      if (pageItems.isEmpty) return null;
+
+      for (final item in pageItems) {
+        if (item is! Map<String, dynamic>) {
+          throw const FormatException('Invalid GitHub release entry');
+        }
+        if (item['draft'] == true || item['prerelease'] == true) continue;
+
+        final version = normalizeVersion(item['tag_name'] as String?);
+        if (version != null && version.isNotEmpty) {
+          return LatestStableRelease(version: version, data: item);
+        }
+      }
+      page++;
+    }
+  }
+
+  static String? normalizeVersion(String? raw) {
+    if (raw == null || raw.trim().isEmpty) return null;
+    var value = raw.trim();
+    if (value.startsWith('v') || value.startsWith('V')) {
+      value = value.substring(1);
+    }
+    final plus = value.indexOf('+');
+    if (plus >= 0) {
+      value = value.substring(0, plus);
+    }
+    final hyphen = value.indexOf('-');
+    if (hyphen >= 0) {
+      value = value.substring(0, hyphen);
+    }
+    if (!RegExp(r'^\d+(?:\.\d+)*$').hasMatch(value)) return null;
+    return value;
+  }
+
+  static int compareVersions(String? current, String? latest) {
+    final currentParts = (normalizeVersion(current) ?? '0.0.0').split('.');
+    final latestParts = (normalizeVersion(latest) ?? '0.0.0').split('.');
+    final maxLength = currentParts.length > latestParts.length
+        ? currentParts.length
+        : latestParts.length;
+
+    for (var index = 0; index < maxLength; index++) {
+      final currentPart = index < currentParts.length
+          ? int.tryParse(currentParts[index]) ?? 0
+          : 0;
+      final latestPart = index < latestParts.length
+          ? int.tryParse(latestParts[index]) ?? 0
+          : 0;
+      if (currentPart != latestPart) {
+        return currentPart.compareTo(latestPart);
+      }
+    }
+    return 0;
+  }
 
   VerifiedUpdateArtifact? verifiedAsset(
     Map<String, dynamic>? release,

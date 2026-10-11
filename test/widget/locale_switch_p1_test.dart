@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,6 +17,41 @@ import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/favorites_service.dart';
 
 void main() {
+  test('a stale locale catalog load cannot replace the current catalog',
+      () async {
+    final cache = InMemoryCacheService();
+    final catalog = _DelayedCatalogService(cache: cache);
+    final appState = AppState(
+      conversionService: _FakeConversionService(cache: cache),
+      catalogService: catalog,
+      favoritesService: FavoritesService(cache: cache),
+      cacheService: cache,
+      systemLocales: () => const [Locale('en')],
+    );
+    await appState.initialize();
+
+    const simplifiedChinese =
+        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans');
+    const traditionalChinese =
+        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant');
+    final simplifiedLoad = appState.setLocale(simplifiedChinese);
+    await catalog.simplifiedChineseRequested.future;
+    final traditionalLoad = appState.setLocale(traditionalChinese);
+    await catalog.traditionalChineseRequested.future;
+
+    catalog.traditionalChinese.complete(
+      [Currency(isoCode: 'USD', name: 'US Dollar - Traditional')],
+    );
+    await traditionalLoad;
+    catalog.simplifiedChinese.complete(
+      [Currency(isoCode: 'USD', name: 'US Dollar - Simplified')],
+    );
+    await simplifiedLoad;
+
+    expect(appState.locale, traditionalChinese);
+    expect(appState.currencies.single.name, 'US Dollar - Traditional');
+  });
+
   testWidgets('P1 language switch updates UI and persists selection', (
     tester,
   ) async {
@@ -232,5 +268,40 @@ class _FakeCatalogService extends CurrencyCatalogService {
     Locale? locale,
   }) async {
     return const [];
+  }
+}
+
+class _DelayedCatalogService extends CurrencyCatalogService {
+  final Completer<void> simplifiedChineseRequested = Completer<void>();
+  final Completer<void> traditionalChineseRequested = Completer<void>();
+  final Completer<List<Currency>> simplifiedChinese =
+      Completer<List<Currency>>();
+  final Completer<List<Currency>> traditionalChinese =
+      Completer<List<Currency>>();
+  var _initialLoad = true;
+
+  _DelayedCatalogService({required super.cache})
+      : super(client: ExchangeClient());
+
+  @override
+  Future<List<Currency>> getCurrencies({
+    bool forceRefresh = false,
+    Locale? locale,
+  }) {
+    if (_initialLoad) {
+      _initialLoad = false;
+      return Future.value(
+        [Currency(isoCode: 'USD', name: 'US Dollar')],
+      );
+    }
+    if (locale?.scriptCode == 'Hans') {
+      simplifiedChineseRequested.complete();
+      return simplifiedChinese.future;
+    }
+    if (locale?.scriptCode == 'Hant') {
+      traditionalChineseRequested.complete();
+      return traditionalChinese.future;
+    }
+    throw StateError('Unexpected locale: $locale');
   }
 }

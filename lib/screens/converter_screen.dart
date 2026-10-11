@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import '../l10n/app_localizations.dart';
+import '../l10n/error_messages.dart';
 import '../models/currency.dart';
 import '../providers/app_state.dart';
 import '../services/exchange_api_source.dart';
@@ -15,19 +17,6 @@ enum _FavoriteFieldChoice { from, to }
 
 class ConverterScreen extends StatelessWidget {
   const ConverterScreen({super.key});
-
-  String _localizedErrorForCode(AppLocalizations l10n, String code) {
-    switch (code) {
-      case 'error_network_unavailable':
-        return l10n.error_network_unavailable;
-      case 'error_service_unavailable':
-        return l10n.error_service_unavailable;
-      case 'error_historical_unavailable':
-        return l10n.error_historical_unavailable;
-      default:
-        return l10n.error_generic;
-    }
-  }
 
   String _providerLabelFor(AppState state, AppLocalizations l10n) {
     final providerSrc = state.lastRate?.source;
@@ -137,7 +126,7 @@ class ConverterScreen extends StatelessWidget {
                   child: isLoading
                       ? const CircularProgressIndicator()
                       : Text(state.errorCode != null
-                          ? _localizedErrorForCode(l10n, state.errorCode!)
+                          ? localizedErrorMessage(l10n, state.errorCode!)
                           : l10n.startup_loading),
                 )
               : SingleChildScrollView(
@@ -229,8 +218,7 @@ class ConverterScreen extends StatelessWidget {
                             children: [
                               if (isLoading)
                                 const Center(child: CircularProgressIndicator())
-                              else if (state.errorCode != null ||
-                                  state.errorMessage != null)
+                              else if (state.errorCode != null)
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -246,14 +234,10 @@ class ConverterScreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            // Prefer localized message via errorCode when available
-                                            state.errorCode != null
-                                                ? _localizedErrorForCode(
-                                                    AppLocalizations.of(
-                                                        context),
-                                                    state.errorCode!,
-                                                  )
-                                                : (state.errorMessage ?? ''),
+                                            localizedErrorMessage(
+                                              AppLocalizations.of(context),
+                                              state.errorCode!,
+                                            ),
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .colorScheme

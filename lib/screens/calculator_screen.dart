@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../l10n/app_localizations.dart';
+import '../l10n/error_messages.dart';
 import '../models/calculator_entry.dart';
 import '../models/currency.dart';
 import '../providers/app_state.dart';
@@ -34,17 +35,6 @@ class CalculatorScreen extends StatelessWidget {
       }
     }
     return null;
-  }
-
-  String _errorFor(AppLocalizations l10n, String? code) {
-    switch (code) {
-      case 'error_network_unavailable':
-        return l10n.error_network_unavailable;
-      case 'error_service_unavailable':
-        return l10n.error_service_unavailable;
-      default:
-        return l10n.error_generic;
-    }
   }
 
   int _decimalDigits(Currency currency) {
@@ -176,7 +166,10 @@ class CalculatorScreen extends StatelessWidget {
                         if (state.calculatorErrorCode != null) ...[
                           const SizedBox(height: 8),
                           Text(
-                            _errorFor(l10n, state.calculatorErrorCode),
+                            localizedErrorMessage(
+                              l10n,
+                              state.calculatorErrorCode!,
+                            ),
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.error,
                             ),

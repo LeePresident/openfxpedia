@@ -1,15 +1,13 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:open_filex/open_filex.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
-import '../core/config.dart';
 import '../l10n/app_localizations.dart';
+import '../l10n/error_messages.dart';
 import '../providers/app_state.dart';
 import '../services/exchange_api_source.dart';
 import '../services/error_classifier.dart';
@@ -17,7 +15,16 @@ import '../services/update_service.dart';
 import 'changelog_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({
+    super.key,
+    this.updateService,
+    this.packageInfoLoader,
+    this.updateAssetNameResolver,
+  });
+
+  final UpdateService? updateService;
+  final Future<PackageInfo> Function()? packageInfoLoader;
+  final String? Function(String version)? updateAssetNameResolver;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -25,13 +32,14 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late Future<PackageInfo> _pkgInfo;
-  final UpdateService _updateService = UpdateService();
+  late final UpdateService _updateService;
   bool _checking = false;
 
   @override
   void initState() {
     super.initState();
-    _pkgInfo = PackageInfo.fromPlatform();
+    _updateService = widget.updateService ?? UpdateService();
+    _pkgInfo = widget.packageInfoLoader?.call() ?? PackageInfo.fromPlatform();
   }
 
   Future<void> _checkForUpdates(String currentVersion) async {
@@ -39,16 +47,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (!mounted) return;
     setState(() => _checking = true);
     try {
-      final latestRelease = await _fetchLatestStableRelease();
-      final latestVersion = _normalizeVersion(
-        latestRelease?['tag_name'] as String?,
-      );
-      final current = _normalizeVersion(currentVersion);
+      final latestRelease = await _updateService.fetchLatestStableRelease();
+      final latestVersion = latestRelease?.version;
+      final current = UpdateService.normalizeVersion(currentVersion);
 
       if (latestVersion == null || latestVersion.isEmpty) {
         _showMessage(l10n.update_latest_release_unavailable);
       } else {
-        final compare = _compareSemver(current, latestVersion);
+        final compare = UpdateService.compareVersions(current, latestVersion);
         if (compare >= 0) {
           _showMessage(l10n.settings_latest_version(currentVersion));
         } else {
@@ -57,7 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           final assetName = _preferredUpdateAssetName(latestVersion);
           final artifact = _updateService.verifiedAsset(
-            latestRelease,
+            latestRelease?.data,
             assetName ?? '',
           );
           if (assetName == null || artifact == null) {
@@ -76,31 +82,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     } catch (e) {
       if (!mounted) return;
 
-      debugPrint('Update check failed: ${ErrorClassifier.codeFor(e)}');
-      _showMessage(_friendlyUpdateError(e));
+      final code = ErrorClassifier.codeFor(e);
+      debugPrint('Update check failed: $code');
+      _showMessage(localizedErrorMessage(l10n, code));
     } finally {
       if (mounted) {
         setState(() => _checking = false);
       }
     }
-  }
-
-  String _friendlyUpdateError(Object e) {
-    final l10n = AppLocalizations.of(context);
-    final lower = e.toString().toLowerCase();
-    if (lower.contains('socketexception') ||
-        lower.contains('failed host lookup') ||
-        lower.contains('host lookup') ||
-        lower.contains('network is unreachable') ||
-        lower.contains('timeout')) {
-      return l10n.error_network_unavailable;
-    }
-
-    if (lower.contains('api.github.com')) {
-      return l10n.error_service_unavailable;
-    }
-
-    return l10n.error_generic;
   }
 
   void _showMessage(String text) {
@@ -137,66 +126,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
 
     return result ?? false;
-  }
-
-  String? _normalizeVersion(String? raw) {
-    if (raw == null || raw.trim().isEmpty) return null;
-    var value = raw.trim();
-    if (value.startsWith('v') || value.startsWith('V')) {
-      value = value.substring(1);
-    }
-    final plus = value.indexOf('+');
-    if (plus >= 0) {
-      value = value.substring(0, plus);
-    }
-    final hyphen = value.indexOf('-');
-    if (hyphen >= 0) {
-      value = value.substring(0, hyphen);
-    }
-    return value;
-  }
-
-  Future<List<Map<String, dynamic>>> _fetchAllGithubReleases() async {
-    final releases = <Map<String, dynamic>>[];
-    var page = 1;
-
-    while (true) {
-      final pageUri = Uri.parse('${AppConfig.githubReleasesApiUrl}&page=$page');
-      final res = await http.get(pageUri, headers: {
-        'Accept': 'application/vnd.github+json',
-      }).timeout(const Duration(seconds: 8));
-
-      if (res.statusCode != 200) {
-        throw Exception('GitHub releases request failed (${res.statusCode})');
-      }
-
-      final pageItems = jsonDecode(res.body) as List<dynamic>;
-      if (pageItems.isEmpty) {
-        break;
-      }
-
-      releases.addAll(pageItems.cast<Map<String, dynamic>>());
-      page++;
-    }
-
-    return releases;
-  }
-
-  Future<Map<String, dynamic>?> _fetchLatestStableRelease() async {
-    final releases = await _fetchAllGithubReleases();
-    for (final release in releases) {
-      final isDraft = release['draft'] == true;
-      final isPreRelease = release['prerelease'] == true;
-      if (isDraft || isPreRelease) continue;
-
-      final tagName = release['tag_name'] as String?;
-      final normalized = _normalizeVersion(tagName);
-      if (normalized != null && normalized.isNotEmpty) {
-        return release;
-      }
-    }
-
-    return null;
   }
 
   @override
@@ -456,6 +385,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   String? _preferredUpdateAssetName(String latestVersion) {
+    final resolver = widget.updateAssetNameResolver;
+    if (resolver != null) return resolver(latestVersion);
+
     if (Platform.isWindows) {
       return 'openfxpedia_${latestVersion}_setup.exe';
     }
@@ -465,22 +397,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     return null;
-  }
-
-  int _compareSemver(String? current, String? latest) {
-    final currentParts = (current ?? '0.0.0').split('.');
-    final latestParts = (latest ?? '0.0.0').split('.');
-    final maxLen = currentParts.length > latestParts.length
-        ? currentParts.length
-        : latestParts.length;
-
-    for (var i = 0; i < maxLen; i++) {
-      final a =
-          i < currentParts.length ? int.tryParse(currentParts[i]) ?? 0 : 0;
-      final b = i < latestParts.length ? int.tryParse(latestParts[i]) ?? 0 : 0;
-      if (a != b) return a.compareTo(b);
-    }
-    return 0;
   }
 }
 

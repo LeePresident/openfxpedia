@@ -1,149 +1,96 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../core/config.dart';
 import '../models/calculator_entry.dart';
 import '../models/currency.dart';
 import '../models/exchange_rate.dart';
 import '../services/cache_service.dart';
 import '../services/conversion_service.dart';
 import '../services/currency_catalog.dart';
-import '../services/error_classifier.dart';
 import '../services/exchange_api_source.dart';
 import '../services/favorites_service.dart';
-import '../services/locale_resolver.dart';
 import '../services/rate_history_service.dart';
+import 'calculator_state.dart';
+import 'converter_state.dart';
+import 'rate_history_state.dart';
+import 'user_preferences_state.dart';
 
-enum LoadingState { idle, loading, error }
+export 'converter_state.dart' show LoadingState;
 
 class AppState extends ChangeNotifier {
   final ConversionService _conversionService;
   final CurrencyCatalogService _catalogService;
   final FavoritesService _favoritesService;
   final CacheService _cacheService;
-  final Iterable<Locale> Function() _systemLocales;
-  int _conversionRequestSequence = 0;
-  int _calculatorRequestSequence = 0;
-  int _nextCalculatorEntryId = 0;
+  int _localeRequestSequence = 0;
+  late final UserPreferencesState _preferencesState;
+  late final ConverterState _converterState;
+  late final CalculatorState _calculatorState;
+  late final RateHistoryState _rateHistoryState;
 
   List<Currency> _currencies = [];
   List<Currency> get currencies => _currencies;
 
-  final List<CalculatorEntry> _calculatorEntries = [];
-  List<CalculatorEntry> get calculatorEntries =>
-      List.unmodifiable(_calculatorEntries);
-  String? _calculatorOutputCurrencyCode;
-  String? get calculatorOutputCurrencyCode => _calculatorOutputCurrencyCode;
-  Currency? get calculatorOutputCurrency =>
-      _currencyForCode(_calculatorOutputCurrencyCode);
-  DateTime? _calculatorDate;
-  DateTime? get calculatorDate => _calculatorDate;
-  double? _calculatorTotal;
-  double? get calculatorTotal => _calculatorTotal;
-  final Map<int, ConversionResult> _calculatorLineResults = {};
+  List<CalculatorEntry> get calculatorEntries => _calculatorState.entries;
+  String? get calculatorOutputCurrencyCode =>
+      _calculatorState.outputCurrencyCode;
+  Currency? get calculatorOutputCurrency => _calculatorState.outputCurrency;
+  DateTime? get calculatorDate => _calculatorState.date;
+  double? get calculatorTotal => _calculatorState.total;
   Map<int, ConversionResult> get calculatorLineResults =>
-      Map.unmodifiable(_calculatorLineResults);
-  bool _calculatorLoading = false;
-  bool get calculatorLoading => _calculatorLoading;
-  String? _calculatorErrorCode;
-  String? get calculatorErrorCode => _calculatorErrorCode;
+      _calculatorState.lineResults;
+  bool get calculatorLoading => _calculatorState.loading;
+  String? get calculatorErrorCode => _calculatorState.errorCode;
 
-  Currency? _baseCurrency;
-  Currency? _targetCurrency;
-  Currency? get baseCurrency => _baseCurrency;
-  Currency? get targetCurrency => _targetCurrency;
+  Currency? get baseCurrency => _converterState.baseCurrency;
+  Currency? get targetCurrency => _converterState.targetCurrency;
+  double get inputAmount => _converterState.inputAmount;
+  DateTime? get conversionDate => _converterState.conversionDate;
 
-  double _inputAmount = 1.0;
-  double get inputAmount => _inputAmount;
-
-  DateTime? _conversionDate;
-  DateTime? get conversionDate => _conversionDate;
-
-  bool _historyVisible = false;
-  bool get historyVisible => _historyVisible;
-  bool _historyLoading = false;
-  bool get historyLoading => _historyLoading;
-  int _historyDays = 30;
-  int get historyDays => _historyDays;
-  int _historyRequestSequence = 0;
-  String? _historyKey;
-  List<RateHistorySample> _historySamples = [];
-  List<RateHistorySample> get historySamples =>
-      List.unmodifiable(_historySamples);
+  bool get historyVisible => _rateHistoryState.visible;
+  bool get historyLoading => _rateHistoryState.loading;
+  int get historyDays => _rateHistoryState.days;
+  List<RateHistorySample> get historySamples => _rateHistoryState.samples;
 
   void setHistoryVisible(bool visible) {
-    _historyVisible = visible;
+    _rateHistoryState.setVisible(visible);
     if (visible) {
       unawaited(loadHistory());
-    } else {
-      _historyRequestSequence++;
-      _historyKey = null;
-      _historyLoading = false;
     }
-    notifyListeners();
   }
 
   void setHistoryDays(int days) {
-    if (![7, 30, 90].contains(days)) throw ArgumentError.value(days, 'days');
-    if (_historyDays == days) return;
-    _historyDays = days;
+    if (!_rateHistoryState.setDays(days)) return;
     unawaited(loadHistory());
   }
 
   Future<void> loadHistory({bool forceRefresh = false}) async {
-    if (!_historyVisible || _baseCurrency == null || _targetCurrency == null) {
-      return;
-    }
-    final base = _baseCurrency!.isoCode;
-    final target = _targetCurrency!.isoCode;
-    final date = DateUtils.dateOnly(_conversionDate ?? DateTime.now());
-    final key = '$base:$target:$date:$_historyDays:$_exchangeApiSource';
-    if (!forceRefresh && key == _historyKey) return;
-    _historyKey = key;
-    final requestId = ++_historyRequestSequence;
-    _historySamples = [];
-    _historyLoading = true;
-    notifyListeners();
-    final samples = await RateHistoryService(_conversionService).load(
-      base: base,
-      target: target,
-      endDate: date,
-      days: _historyDays,
+    final base = _converterState.baseCurrency;
+    final target = _converterState.targetCurrency;
+    if (base == null || target == null) return;
+    await _rateHistoryState.load(
+      base: base.isoCode,
+      target: target.isoCode,
+      endDate: _converterState.conversionDate ?? DateTime.now(),
+      source: _preferencesState.exchangeApiSource,
       forceRefresh: forceRefresh,
-      isCancelled: () => requestId != _historyRequestSequence,
     );
-    if (requestId != _historyRequestSequence) return;
-    _historySamples = samples;
-    _historyLoading = false;
-    notifyListeners();
   }
 
-  double? _convertedAmount;
-  double? get convertedAmount => _convertedAmount;
-
-  ExchangeRate? _lastRate;
-  ExchangeRate? get lastRate => _lastRate;
-
-  bool _rateFromCache = false;
-  bool get rateFromCache => _rateFromCache;
-
-  LoadingState _loadingState = LoadingState.idle;
-  LoadingState get loadingState => _loadingState;
+  double? get convertedAmount => _converterState.convertedAmount;
+  ExchangeRate? get lastRate => _converterState.lastRate;
+  bool get rateFromCache => _converterState.rateFromCache;
+  LoadingState get loadingState => _converterState.loadingState;
 
   int _selectedTab = 0;
   int get selectedTab => _selectedTab;
 
-  String? _errorMessage;
-  String? get errorMessage => _errorMessage;
-  String? _errorCode;
-  String? get errorCode => _errorCode;
+  String? get errorCode => _converterState.errorCode;
 
-  ThemeMode _themeMode = ThemeMode.system;
-  ThemeMode get themeMode => _themeMode;
-  Locale? _locale;
-  Locale? get locale => _locale;
-  ExchangeApiSource _exchangeApiSource = ExchangeApiSource.auto;
-  ExchangeApiSource get exchangeApiSource => _exchangeApiSource;
+  ThemeMode get themeMode => _preferencesState.themeMode;
+  Locale? get locale => _preferencesState.locale;
+  ExchangeApiSource get exchangeApiSource =>
+      _preferencesState.exchangeApiSource;
 
   AppState({
     required ConversionService conversionService,
@@ -154,9 +101,28 @@ class AppState extends ChangeNotifier {
   })  : _conversionService = conversionService,
         _catalogService = catalogService,
         _favoritesService = favoritesService,
-        _cacheService = cacheService,
-        _systemLocales = systemLocales ??
-            (() => WidgetsBinding.instance.platformDispatcher.locales);
+        _cacheService = cacheService {
+    _preferencesState = UserPreferencesState(
+      cacheService: _cacheService,
+      systemLocales: systemLocales ??
+          (() => WidgetsBinding.instance.platformDispatcher.locales),
+      onChanged: notifyListeners,
+    );
+    _converterState = ConverterState(
+      conversionService: _conversionService,
+      onChanged: notifyListeners,
+      onHistoryRefresh: () => unawaited(loadHistory()),
+    );
+    _calculatorState = CalculatorState(
+      conversionService: _conversionService,
+      currencies: () => _currencies,
+      onChanged: notifyListeners,
+    );
+    _rateHistoryState = RateHistoryState(
+      conversionService: _conversionService,
+      onChanged: notifyListeners,
+    );
+  }
 
   List<Currency> get favoriteCurrencies {
     return _favoritesService.favorites
@@ -170,11 +136,12 @@ class AppState extends ChangeNotifier {
   Future<bool> initialize() async {
     _setLoading();
     try {
-      await _loadLocale();
-      _loadThemeMode();
-      _loadExchangeApiSource();
+      _preferencesState.load();
+      _conversionService.setPreferredSource(
+        _preferencesState.exchangeApiSource,
+      );
       _currencies = await _catalogService.getCurrencies(
-        locale: _effectiveLocale,
+        locale: _preferencesState.effectiveLocale,
       );
       _initializeCalculator();
       await calculateCalculator();
@@ -182,45 +149,34 @@ class AppState extends ChangeNotifier {
       _setIdle();
       return true;
     } catch (e) {
-      _setError(e.toString());
+      _setError(e);
       return false;
     }
   }
 
   void setBaseCurrency(Currency currency) {
-    _baseCurrency = currency;
-    notifyListeners();
-    convert();
+    _converterState.setBaseCurrency(currency);
   }
 
   void setBaseCurrencyAndAmount(Currency currency, double amount) {
-    _baseCurrency = currency;
-    _inputAmount = amount;
-    notifyListeners();
-    convert();
+    _converterState.setBaseCurrencyAndAmount(currency, amount);
   }
 
   void setTargetCurrency(Currency currency) {
-    _targetCurrency = currency;
-    notifyListeners();
-    convert();
+    _converterState.setTargetCurrency(currency);
   }
 
   void setCurrencyPair({
     required Currency baseCurrency,
     required Currency targetCurrency,
   }) {
-    _baseCurrency = baseCurrency;
-    _targetCurrency = targetCurrency;
-    notifyListeners();
-    convert();
+    _converterState.setCurrencyPair(
+      baseCurrency: baseCurrency,
+      targetCurrency: targetCurrency,
+    );
   }
 
-  void setInputAmount(double amount) {
-    _inputAmount = amount;
-    notifyListeners();
-    convert();
-  }
+  void setInputAmount(double amount) => _converterState.setInputAmount(amount);
 
   void setSelectedTab(int index) {
     if (_selectedTab == index) return;
@@ -228,81 +184,32 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setThemeMode(ThemeMode mode) async {
-    if (_themeMode == mode) return;
-    _themeMode = mode;
-    notifyListeners();
-    await _cacheService.putString(
-        AppConfig.themeModeKey, _serializeThemeMode(mode));
-  }
+  Future<void> setThemeMode(ThemeMode mode) =>
+      _preferencesState.setThemeMode(mode);
 
   Future<void> setExchangeApiSource(ExchangeApiSource source) async {
-    if (_exchangeApiSource == source) return;
-
-    _exchangeApiSource = source;
+    if (!_preferencesState.selectExchangeApiSource(source)) return;
     _conversionService.setPreferredSource(source);
-    notifyListeners();
-
-    await _cacheService.putString(
-      AppConfig.exchangeApiSourceKey,
-      source.storageValue,
-    );
+    await _preferencesState.persistExchangeApiSource();
 
     await convert();
     await calculateCalculator();
   }
 
   Future<void> setLocale(Locale? locale) async {
-    // Normalize locale to a simple code for storage: 'en', 'zh_Hans', 'zh_Hant'
-    String? code;
-    if (locale == null) {
-      code = null;
-    } else if (locale.languageCode == 'zh' && locale.scriptCode != null) {
-      code = 'zh_${locale.scriptCode}';
-    } else {
-      code = locale.languageCode;
-    }
+    if (!_preferencesState.selectLocale(locale)) return;
 
-    if ((_locale?.languageCode == locale?.languageCode) &&
-        (_locale?.scriptCode == locale?.scriptCode)) {
-      return;
-    }
+    final requestId = ++_localeRequestSequence;
+    final requestedLocale = _preferencesState.effectiveLocale;
+    await _preferencesState.persistLocale();
 
-    _locale = locale;
-    notifyListeners();
-    await _cacheService.setLocaleCode(code);
-
-    if (_currencies.isNotEmpty) {
-      // Remember previously selected currencies by ISO code so we can
-      // re-resolve them after reloading the catalog in the new locale.
-      final oldBaseIso = _baseCurrency?.isoCode;
-      final oldTargetIso = _targetCurrency?.isoCode;
-
-      _currencies = await _catalogService.getCurrencies(
-        locale: _effectiveLocale,
+    if (requestId == _localeRequestSequence && _currencies.isNotEmpty) {
+      final currencies = await _catalogService.getCurrencies(
+        locale: requestedLocale,
       );
-
-      if (_currencies.isNotEmpty) {
-        if (oldBaseIso != null) {
-          _baseCurrency = _currencies.firstWhere(
-              (c) => c.isoCode.toLowerCase() == oldBaseIso.toLowerCase(),
-              orElse: () => _baseCurrency ?? _currencies.first);
-        }
-
-        if (oldTargetIso != null) {
-          _targetCurrency = _currencies.firstWhere(
-              (c) => c.isoCode.toLowerCase() == oldTargetIso.toLowerCase(),
-              orElse: () =>
-                  _targetCurrency ??
-                  (_currencies.length > 1
-                      ? _currencies.firstWhere(
-                          (c) =>
-                              c.isoCode.toLowerCase() !=
-                              oldBaseIso?.toLowerCase(),
-                          orElse: () => _currencies.first)
-                      : _currencies.first));
-        }
-      }
+      if (requestId != _localeRequestSequence) return;
+      _currencies = currencies;
+      _converterState.updateCurrencies(_currencies);
 
       notifyListeners();
       unawaited(calculateCalculator());
@@ -310,288 +217,40 @@ class AppState extends ChangeNotifier {
   }
 
   void _initializeCalculator() {
-    if (_currencies.isEmpty) return;
-    _calculatorOutputCurrencyCode ??=
-        _targetCurrency?.isoCode ?? _currencies.first.isoCode;
-    if (_calculatorEntries.isEmpty) {
-      _calculatorEntries.add(CalculatorEntry(
-        id: _nextCalculatorEntryId++,
-        amount: 0,
-        currencyCode: _baseCurrency?.isoCode ?? _currencies.first.isoCode,
-      ));
-    }
-  }
-
-  Currency? _currencyForCode(String? code) {
-    if (code == null) return null;
-    for (final currency in _currencies) {
-      if (currency.isoCode.toLowerCase() == code.toLowerCase()) {
-        return currency;
-      }
-    }
-    return null;
-  }
-
-  void addCalculatorEntry() {
-    final currencyCode = _calculatorOutputCurrencyCode ??
-        (_currencies.isEmpty ? null : _currencies.first.isoCode);
-    if (currencyCode == null) return;
-    _calculatorEntries.add(CalculatorEntry(
-      id: _nextCalculatorEntryId++,
-      amount: 0,
-      currencyCode: currencyCode,
-    ));
-    unawaited(calculateCalculator());
-  }
-
-  void removeCalculatorEntry(int id) {
-    _calculatorEntries.removeWhere((entry) => entry.id == id);
-    unawaited(calculateCalculator());
-  }
-
-  void setCalculatorEntryAmount(int id, double amount) {
-    if (!amount.isFinite || amount < 0) return;
-    _updateCalculatorEntry(id, (entry) => entry.copyWith(amount: amount));
-  }
-
-  void setCalculatorEntryCurrency(int id, Currency currency) {
-    _updateCalculatorEntry(
-      id,
-      (entry) => entry.copyWith(currencyCode: currency.isoCode),
+    _calculatorState.initialize(
+      baseCurrency: _converterState.baseCurrency,
+      targetCurrency: _converterState.targetCurrency,
     );
   }
 
-  void _updateCalculatorEntry(
-    int id,
-    CalculatorEntry Function(CalculatorEntry) update,
-  ) {
-    final index = _calculatorEntries.indexWhere((entry) => entry.id == id);
-    if (index < 0) return;
-    _calculatorEntries[index] = update(_calculatorEntries[index]);
-    unawaited(calculateCalculator());
-  }
+  void addCalculatorEntry() => _calculatorState.addEntry();
 
-  void setCalculatorOutputCurrency(Currency currency) {
-    if (_calculatorOutputCurrencyCode == currency.isoCode) return;
-    _calculatorOutputCurrencyCode = currency.isoCode;
-    unawaited(calculateCalculator());
-  }
+  void removeCalculatorEntry(int id) => _calculatorState.removeEntry(id);
+
+  void setCalculatorEntryAmount(int id, double amount) =>
+      _calculatorState.setEntryAmount(id, amount);
+
+  void setCalculatorEntryCurrency(int id, Currency currency) =>
+      _calculatorState.setEntryCurrency(id, currency);
+
+  void setCalculatorOutputCurrency(Currency currency) =>
+      _calculatorState.setOutputCurrency(currency);
 
   Future<void> setCalculatorDate(DateTime? date) async {
-    final normalized = date == null ? null : DateUtils.dateOnly(date);
-    if (normalized != null &&
-        normalized.isAfter(DateUtils.dateOnly(DateTime.now()))) {
-      throw ArgumentError.value(date, 'date', 'Cannot select a future date');
-    }
-    if (_calculatorDate == normalized) return;
-    _calculatorDate = normalized;
-    await calculateCalculator();
+    await _calculatorState.setDate(date);
   }
 
-  Future<void> calculateCalculator() async {
-    final requestId = ++_calculatorRequestSequence;
-    final entries = List<CalculatorEntry>.of(_calculatorEntries);
-    final target = _calculatorOutputCurrencyCode;
-    if (entries.isEmpty || target == null) {
-      _calculatorLineResults.clear();
-      _calculatorTotal = null;
-      _calculatorLoading = false;
-      _calculatorErrorCode = null;
-      notifyListeners();
-      return;
-    }
+  Future<void> calculateCalculator() => _calculatorState.calculate();
 
-    _calculatorLineResults.clear();
-    _calculatorTotal = null;
-    _calculatorLoading = true;
-    _calculatorErrorCode = null;
-    notifyListeners();
+  void swapCurrencies() => _converterState.swapCurrencies();
 
-    try {
-      final results = await Future.wait(entries.map((entry) async {
-        if (entry.amount == 0) return null;
-        final date = _calculatorDate;
-        return date == null
-            ? _conversionService.convertPrecise(
-                entry.amount,
-                entry.currencyCode,
-                target,
-              )
-            : _conversionService.convertHistoricalPrecise(
-                entry.amount,
-                entry.currencyCode,
-                target,
-                date,
-              );
-      }));
+  Future<void> setConversionDate(DateTime? date) =>
+      _converterState.setConversionDate(date);
 
-      if (requestId != _calculatorRequestSequence) return;
-      var total = 0.0;
-      for (var index = 0; index < entries.length; index++) {
-        final result = results[index];
-        if (result == null) continue;
-        _calculatorLineResults[entries[index].id] = result;
-        total += result.amount;
-      }
-      final outputCurrency = calculatorOutputCurrency;
-      _calculatorTotal = outputCurrency == null
-          ? total
-          : _roundToCurrency(total, outputCurrency);
-      _calculatorLoading = false;
-      _calculatorErrorCode = null;
-      notifyListeners();
-    } catch (error) {
-      if (requestId != _calculatorRequestSequence) return;
-      _calculatorLoading = false;
-      _calculatorTotal = null;
-      _calculatorErrorCode = _errorCodeFor(error.toString());
-      notifyListeners();
-    }
-  }
+  Future<void> convert({bool forceHistoricalRefresh = false}) =>
+      _converterState.convert(forceHistoricalRefresh: forceHistoricalRefresh);
 
-  double _roundToCurrency(double amount, Currency currency) {
-    final minorUnits = currency.minorUnitsPerMajor;
-    if (minorUnits == null || minorUnits <= 0) {
-      return _roundToPlaces(amount, 2);
-    }
-    return (amount * minorUnits).roundToDouble() / minorUnits;
-  }
-
-  double _roundToPlaces(double amount, int places) {
-    var factor = 1.0;
-    for (var index = 0; index < places; index++) {
-      factor *= 10;
-    }
-    return (amount * factor).roundToDouble() / factor;
-  }
-
-  Locale? get _effectiveLocale => _locale ?? _resolveSystemLocale();
-
-  Future<void> _loadLocale() async {
-    final code = _cacheService.getLocaleCode();
-    if (code == null) {
-      _locale = _resolveSystemLocale();
-      return;
-    }
-
-    if (code.startsWith('zh_')) {
-      final parts = code.split('_');
-      if (parts.length >= 2) {
-        _locale = Locale.fromSubtags(languageCode: 'zh', scriptCode: parts[1]);
-        return;
-      }
-    }
-
-    _locale = Locale(code);
-  }
-
-  Locale? _resolveSystemLocale() =>
-      LocaleResolver.resolveSystemLocale(_systemLocales());
-
-  void swapCurrencies() {
-    final tmp = _baseCurrency;
-    _baseCurrency = _targetCurrency;
-    _targetCurrency = tmp;
-    notifyListeners();
-    convert();
-  }
-
-  Future<void> setConversionDate(DateTime? date) async {
-    final normalized = date == null ? null : DateUtils.dateOnly(date);
-    if (normalized != null &&
-        normalized.isAfter(DateUtils.dateOnly(DateTime.now()))) {
-      throw ArgumentError.value(date, 'date', 'Cannot select a future date');
-    }
-    if (_conversionDate == normalized) return;
-    _conversionDate = normalized;
-    await convert();
-  }
-
-  Future<void> convert({bool forceHistoricalRefresh = false}) async {
-    final requestId = ++_conversionRequestSequence;
-    unawaited(loadHistory());
-    final requestedDate = _conversionDate;
-    _convertedAmount = null;
-    _lastRate = null;
-    _rateFromCache = false;
-    _errorMessage = null;
-    _errorCode = null;
-    _loadingState = LoadingState.idle;
-    if (_baseCurrency == null || _targetCurrency == null) {
-      notifyListeners();
-      return;
-    }
-    if (_inputAmount <= 0) {
-      _convertedAmount = 0;
-      notifyListeners();
-      return;
-    }
-
-    _setLoading();
-
-    try {
-      final result = requestedDate == null
-          ? await _conversionService.convert(
-              _inputAmount,
-              _baseCurrency!.isoCode,
-              _targetCurrency!.isoCode,
-            )
-          : await _conversionService.convertHistorical(
-              _inputAmount,
-              _baseCurrency!.isoCode,
-              _targetCurrency!.isoCode,
-              requestedDate,
-              forceRefresh: forceHistoricalRefresh,
-            );
-
-      if (requestId != _conversionRequestSequence) {
-        return;
-      }
-
-      _convertedAmount = result.amount;
-      _lastRate = result.rate;
-      _rateFromCache = result.fromCache;
-      _errorMessage = null;
-      _errorCode = null;
-      _loadingState = LoadingState.idle;
-      notifyListeners();
-    } catch (e) {
-      if (requestId != _conversionRequestSequence) {
-        return;
-      }
-
-      _setError(e.toString(),
-          code: requestedDate == null ? null : 'error_historical_unavailable');
-    }
-  }
-
-  Future<void> refreshRates() async {
-    if (_baseCurrency == null) return;
-    if (_conversionDate != null) {
-      await convert(forceHistoricalRefresh: true);
-      return;
-    }
-    _setLoading();
-
-    final requestId = ++_conversionRequestSequence;
-
-    try {
-      await _conversionService.refreshRates(_baseCurrency!.isoCode);
-
-      if (requestId != _conversionRequestSequence) {
-        return;
-      }
-
-      _setIdle();
-      await convert();
-    } catch (e) {
-      if (requestId != _conversionRequestSequence) {
-        return;
-      }
-
-      _setError(e.toString());
-    }
-  }
+  Future<void> refreshRates() => _converterState.refreshRates();
 
   Future<void> toggleFavorite(String isoCode) async {
     await _favoritesService.toggle(isoCode);
@@ -601,32 +260,14 @@ class AppState extends ChangeNotifier {
   bool isFavorite(String isoCode) => _favoritesService.isFavorite(isoCode);
 
   Future<void> clearLocalData() async {
-    _conversionRequestSequence++;
-    _calculatorRequestSequence++;
-    _historyRequestSequence++;
-    _historyVisible = false;
-    _historyLoading = false;
-    _historyKey = null;
-    _historySamples = [];
+    _converterState.cancelPending();
+    _calculatorState.cancelPending();
+    _rateHistoryState.reset();
     _conversionService.invalidatePendingCacheWrites();
     await _cacheService.clearAll();
     _favoritesService.load();
-    _baseCurrency = null;
-    _targetCurrency = null;
-    _inputAmount = 0.0;
-    _conversionDate = null;
-    _calculatorEntries.clear();
-    _calculatorOutputCurrencyCode = null;
-    _calculatorDate = null;
-    _calculatorLineResults.clear();
-    _calculatorTotal = null;
-    _calculatorLoading = false;
-    _calculatorErrorCode = null;
-    _convertedAmount = null;
-    _lastRate = null;
-    _rateFromCache = false;
-    _errorMessage = null;
-    _errorCode = null;
+    _converterState.reset();
+    _calculatorState.reset();
     notifyListeners();
 
     final initialized = await initialize();
@@ -635,104 +276,18 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  void _setLoading() {
-    _loadingState = LoadingState.loading;
-    _errorMessage = null;
-    _errorCode = null;
-    notifyListeners();
-  }
+  void _setLoading() => _converterState.setLoading();
 
-  void _setIdle() {
-    _loadingState = LoadingState.idle;
-    notifyListeners();
-  }
+  void _setIdle() => _converterState.setIdle();
 
-  void _setError(String message, {String? code}) {
-    final friendly = _friendlyMessageFor(message);
-    debugPrint('Error code: ${ErrorClassifier.codeFor(message)}');
-
-    _loadingState = LoadingState.error;
-    _errorMessage = friendly;
-    _errorCode = code ?? _errorCodeFor(message);
-    notifyListeners();
-  }
-
-  String _friendlyMessageFor(String raw) {
-    final lower = raw.toLowerCase();
-
-    // Network/DNS related issues
-    if (lower.contains('socketexception') ||
-        lower.contains('failed host lookup') ||
-        lower.contains('host lookup') ||
-        lower.contains('network is unreachable') ||
-        (lower.contains('os error') && lower.contains('errno'))) {
-      return 'Network error — unable to reach the server. Please check your internet connection and try again.';
-    }
-
-    // Specific common cases: API or update server unreachable
-    if (lower.contains('api.github.com') || lower.contains('currency-api')) {
-      return 'Unable to reach the remote service right now. Please try again later.';
-    }
-
-    // Generic fallback: short friendly message
-    return 'Something went wrong. Please try again.';
-  }
-
-  String _errorCodeFor(String raw) {
-    final lower = raw.toLowerCase();
-    if (lower.contains('socketexception') ||
-        lower.contains('failed host lookup') ||
-        lower.contains('host lookup') ||
-        lower.contains('network is unreachable') ||
-        (lower.contains('os error') && lower.contains('errno'))) {
-      return 'error_network_unavailable';
-    }
-
-    if (lower.contains('api.github.com') || lower.contains('currency-api')) {
-      return 'error_service_unavailable';
-    }
-
-    return 'error_generic';
-  }
-
-  void _loadThemeMode() {
-    final raw = _cacheService.getString(AppConfig.themeModeKey);
-    _themeMode = _parseThemeMode(raw);
-  }
-
-  ThemeMode _parseThemeMode(String? raw) {
-    switch (raw) {
-      case 'light':
-        return ThemeMode.light;
-      case 'dark':
-        return ThemeMode.dark;
-      default:
-        return ThemeMode.system;
-    }
-  }
-
-  String _serializeThemeMode(ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.light:
-        return 'light';
-      case ThemeMode.dark:
-        return 'dark';
-      case ThemeMode.system:
-        return 'system';
-    }
-  }
-
-  void _loadExchangeApiSource() {
-    final raw = _cacheService.getString(AppConfig.exchangeApiSourceKey);
-    _exchangeApiSource = ExchangeApiSourceStorage.fromStorage(raw);
-    _conversionService.setPreferredSource(_exchangeApiSource);
-  }
+  void _setError(Object error, {String? code}) =>
+      _converterState.setError(error, code: code);
 
   @override
   void dispose() {
-    _historyRequestSequence++;
-    _conversionRequestSequence++;
-    _calculatorRequestSequence++;
+    _rateHistoryState.cancelPending();
+    _converterState.cancelPending();
+    _calculatorState.cancelPending();
     super.dispose();
   }
 }
