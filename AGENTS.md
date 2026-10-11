@@ -7,10 +7,11 @@ These instructions apply to the entire repository. Keep changes focused, preserv
 OpenFXpedia is a Flutter application for Windows and Android. It combines a currency converter with an offline-friendly currency encyclopedia.
 
 - `lib/models/`: domain data objects.
-- `lib/services/`: exchange-rate, persistence, catalog, update, and platform integrations.
-- `lib/providers/app_state.dart`: application state and orchestration.
+- `lib/services/`: exchange-rate, persistence, catalog, update, error-classification, and platform integrations.
+- `lib/providers/app_state.dart`: application state orchestration and facade for focused state controllers.
+- `lib/providers/`: converter, calculator, rate-history, and user-preference state controllers.
 - `lib/screens/` and `lib/widgets/`: user-facing Flutter UI.
-- `lib/l10n/`: ARB sources and checked-in localization output.
+- `lib/l10n/`: ARB sources, checked-in localization output, and shared error-message mapping.
 - `assets/data/`: canonical bundled currency data, locale overlays, and changelog data.
 - `test/unit/`, `test/widget/`, and `test/integration/`: tests grouped by scope.
 - `specs/`: feature specifications and historical implementation plans. Verify current code before relying on an older plan.
@@ -19,6 +20,9 @@ OpenFXpedia is a Flutter application for Windows and Android. It combines a curr
 
 - Follow existing Dart and Flutter patterns and the lints in `analysis_options.yaml`.
 - Keep business logic in services or providers rather than embedding it in widgets.
+- Keep feature-specific mutable state in its focused provider controller; use `AppState` to coordinate shared services and preserve its public facade for screens.
+- Keep update release retrieval, version handling, and asset verification in `UpdateService`; keep prompts and user interaction in the settings screen.
+- Classify technical failures into stable codes with `ErrorClassifier`, then map those codes to localized UI copy.
 - Preserve user state across theme, locale, navigation, and refresh changes.
 - Keep network access behind the existing exchange client/provider abstractions. Preserve cached and offline fallback behavior.
 - Use `CacheService` for persisted preferences and cached data. On Windows, Hive must use the application support directory rather than a potentially OneDrive-backed documents directory.
@@ -69,4 +73,3 @@ Load the relevant workflow from `.agents/skills/` when a task matches it:
 - `exchange-rate-pipeline`: providers, source selection, fallback, caching, and rate attribution.
 - `currency-catalog-maintenance`: fiat metadata, ISO codes, regions, flags, icons, and asset validation.
 - `release-preparation`: versioning, release notes, changelog data, and Windows/Android artifacts.
-

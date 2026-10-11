@@ -16,12 +16,15 @@ Current release: `1.0.6`
 
 The application keeps UI orchestration in providers and domain/data work in services:
 
+- `AppState` coordinates the application and preserves a screen-facing facade; focused controllers in `lib/providers/` own converter, calculator, rate-history, and user-preference state.
 - `CurrencyCatalogService` builds the localized `Currency` models used by the encyclopedia.
 - `CurrencyCatalogRepository` owns remote catalog retrieval, cache persistence, TTL handling, and offline fallback.
 - `CurrencyMetadataLoader` loads the bundled fiat whitelist and metadata from `assets/data/fiat_currencies.json`.
 - `CurrencyOverlayLoader` loads locale-specific encyclopedia overlays from `assets/data/fiat_currency_overlays/`.
 - `CurrencyLocalizer` applies overlay values and records field-level English fallback events.
 - `CacheService` owns persisted rates, catalog data, favorites, and preferences through Hive.
+- `UpdateService` handles GitHub release pagination, version comparison, and verified update downloads; the settings screen owns the update prompts.
+- `ErrorClassifier` converts technical failures to stable codes, and `lib/l10n/error_messages.dart` maps those codes to localized UI messages.
 
 The catalog loaders cache data within their service instance. The catalog service retains only the active localized currency list, while the repository preserves the existing cached and offline behavior.
 

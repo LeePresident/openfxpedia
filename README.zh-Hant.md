@@ -16,12 +16,15 @@ OpenFXpedia 是一款輕量級 Flutter 應用程式，結合貨幣換算與可�
 
 應用程式透過 Provider 協調介面邏輯，透過服務處理領域邏輯和資料：
 
+- `AppState` 協調整個應用程式並保留供介面使用的門面；`lib/providers/` 中的專用控制器分別管理換算器、計算器、匯率歷史和使用者偏好狀態。
 - `CurrencyCatalogService` 建立貨幣百科使用的本地化 `Currency` 模型。
 - `CurrencyCatalogRepository` 負責遠端貨幣目錄擷取、快取持久化、快取有效期限（TTL）管理和離線備援。
 - `CurrencyMetadataLoader` 從 `assets/data/fiat_currencies.json` 載入應用程式內建的法定貨幣白名單和中繼資料。
 - `CurrencyOverlayLoader` 從 `assets/data/fiat_currency_overlays/` 載入特定語言的百科覆寫資料。
 - `CurrencyLocalizer` 套用覆寫資料，並記錄個別欄位回退至英語的事件。
 - `CacheService` 透過 Hive 持久化儲存匯率、貨幣目錄資料、收藏和偏好設定。
+- `UpdateService` 負責 GitHub 發行版本分頁擷取、版本比較和更新檔案驗證下載；設定介面負責更新提示與使用者互動。
+- `ErrorClassifier` 將技術錯誤分類為穩定錯誤代碼，`lib/l10n/error_messages.dart` 再將其對應至本地化介面訊息。
 
 目錄載入器在各自的服務執行個體中快取資料。目錄服務僅保留目前語言的貨幣清單，而儲存庫層保留現有的快取和離線行為。
 
