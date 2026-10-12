@@ -13,6 +13,7 @@ class _FakeExchangeClient extends ExchangeClient {
   final Map<String, Map<String, double>> _rates;
   final Map<String, Map<String, double>> _fallbackRates;
   bool calledFetch = false;
+  int snapshotFetchCalls = 0;
   ExchangeApiSource? lastPreferredSource;
   Completer<ExchangeRateSnapshot>? pendingSnapshot;
   DateTime? lastHistoricalDate;
@@ -50,6 +51,7 @@ class _FakeExchangeClient extends ExchangeClient {
     String? target,
     ExchangeApiSource preferredSource = ExchangeApiSource.auto,
   }) async {
+    snapshotFetchCalls++;
     if (pendingSnapshot != null) return pendingSnapshot!.future;
     final normalizedBase = base.toLowerCase();
     final normalizedTarget = target?.toLowerCase();
@@ -352,6 +354,33 @@ void main() {
       expect(result.fromCache, isTrue);
       expect(client.calledFetch, isFalse);
       expect(result.amount, closeTo(45.0, 0.00001));
+    });
+
+    test('shares an in-flight latest-rate request across conversions',
+        () async {
+      final pending = Completer<ExchangeRateSnapshot>();
+      final client = _FakeExchangeClient({
+        'usd': {'eur': 0.92},
+      })
+        ..pendingSnapshot = pending;
+      final service =
+          ConversionService(client: client, cache: _StubCacheService());
+
+      final first = service.convert(10, 'USD', 'EUR');
+      final second = service.convert(20, 'USD', 'EUR');
+      await Future<void>.delayed(Duration.zero);
+
+      expect(client.snapshotFetchCalls, 1);
+      pending.complete(ExchangeRateSnapshot(
+        baseCurrency: 'usd',
+        quotedAt: DateTime.utc(2026, 5, 7),
+        sourceId: 'frankfurter',
+        rates: {'eur': 0.92},
+      ));
+
+      expect((await first).amount, 9.2);
+      expect((await second).amount, 18.4);
+      expect(client.snapshotFetchCalls, 1);
     });
 
     test('prefers live primary when fresh cache source is legacy', () async {

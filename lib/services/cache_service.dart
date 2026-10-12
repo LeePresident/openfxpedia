@@ -163,6 +163,7 @@ class CacheService {
     final payload = jsonEncode({
       'rates': rates,
       'timestamp': timestamp.toUtc().toIso8601String(),
+      'fetchedAt': DateTime.now().toUtc().toIso8601String(),
       'source': source,
     });
     await _ratesBox.put(base.toLowerCase(), payload);
@@ -192,8 +193,11 @@ class CacheService {
 
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final timestamp = DateTime.parse(decoded['timestamp'] as String);
+    final fetchedAt = decoded['fetchedAt'] == null
+        ? timestamp
+        : DateTime.parse(decoded['fetchedAt'] as String);
     final stale =
-        DateTime.now().toUtc().difference(timestamp).inHours >= ttlHours;
+        DateTime.now().toUtc().difference(fetchedAt).inHours >= ttlHours;
 
     final rates = (decoded['rates'] as Map<String, dynamic>).map(
       (k, v) => MapEntry(k, (v as num).toDouble()),
@@ -201,6 +205,7 @@ class CacheService {
     return CachedRateSnapshot(
       rates: rates,
       timestamp: timestamp,
+      fetchedAt: fetchedAt,
       source: decoded['source'] as String?,
       isStale: stale,
     );
@@ -214,6 +219,7 @@ class CacheService {
     return CachedRateSnapshot(
       rates: cached.rates,
       timestamp: cached.timestamp,
+      fetchedAt: cached.fetchedAt,
       source: cached.source,
       isStale: cached.isStale,
     );

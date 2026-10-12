@@ -14,7 +14,6 @@ import 'services/conversion_service.dart';
 import 'services/currency_catalog.dart';
 import 'services/exchange_client.dart';
 import 'services/favorites_service.dart';
-import 'services/refresh_scheduler.dart';
 
 Future<void> main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +62,6 @@ class _BootstrapApp extends StatefulWidget {
 
 class _BootstrapAppState extends State<_BootstrapApp> {
   AppState? _appState;
-  RefreshScheduler? _refreshScheduler;
   Object? _startupError;
 
   @override
@@ -74,7 +72,6 @@ class _BootstrapAppState extends State<_BootstrapApp> {
 
   @override
   void dispose() {
-    _refreshScheduler?.stop();
     _appState?.dispose();
     super.dispose();
   }
@@ -84,11 +81,6 @@ class _BootstrapAppState extends State<_BootstrapApp> {
 
     try {
       final appState = await _createAppState();
-      final refreshScheduler = RefreshScheduler(onRefresh: () {
-        Future.microtask(() => appState.refreshRates());
-      });
-      refreshScheduler.start(initialRun: true);
-
       await appState.initialize();
 
       final remainingSplashTime =
@@ -98,7 +90,6 @@ class _BootstrapAppState extends State<_BootstrapApp> {
       }
 
       if (!mounted) {
-        refreshScheduler.stop();
         appState.dispose();
         return;
       }
@@ -109,7 +100,6 @@ class _BootstrapAppState extends State<_BootstrapApp> {
 
       setState(() {
         _appState = appState;
-        _refreshScheduler = refreshScheduler;
       });
     } catch (error) {
       if (!mounted) {

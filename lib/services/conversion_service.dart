@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import '../services/exchange_client.dart';
 import '../services/exchange_api_source.dart';
 import '../services/cache_service.dart';
+import '../services/exchange_provider.dart';
 import '../models/exchange_rate.dart';
 
 class ConversionResult {
@@ -21,6 +22,7 @@ class ConversionService {
   final CacheService _cache;
   ExchangeApiSource _preferredSource = ExchangeApiSource.auto;
   int _cacheWriteGeneration = 0;
+  final Map<String, Future<ExchangeRateSnapshot>> _pendingLatestSnapshots = {};
 
   ExchangeApiSource get preferredSource => _preferredSource;
 
@@ -36,6 +38,7 @@ class ConversionService {
 
   void invalidatePendingCacheWrites() {
     _cacheWriteGeneration++;
+    _pendingLatestSnapshots.clear();
   }
 
   Future<ConversionResult> convert(
@@ -121,7 +124,7 @@ class ConversionService {
     } else {
       try {
         final snapshot = requestedDate == null
-            ? await _client.fetchRateSnapshotFor(
+            ? await _fetchLatestSnapshot(
                 b,
                 target: t,
                 preferredSource: preferredSource,
@@ -183,7 +186,7 @@ class ConversionService {
 
   Future<void> refreshRates(String base) async {
     final cacheWriteGeneration = _cacheWriteGeneration;
-    final snapshot = await _client.fetchRateSnapshotFor(
+    final snapshot = await _fetchLatestSnapshot(
       base.toLowerCase(),
       preferredSource: _preferredSource,
     );
@@ -195,6 +198,33 @@ class ConversionService {
         source: snapshot.sourceId,
       );
     }
+  }
+
+  Future<ExchangeRateSnapshot> _fetchLatestSnapshot(
+    String base, {
+    String? target,
+    required ExchangeApiSource preferredSource,
+  }) {
+    final key =
+        '${base.toLowerCase()}:${target ?? ''}:${preferredSource.storageValue}';
+    final pending = _pendingLatestSnapshots[key];
+    if (pending != null) return pending;
+
+    final request = Future<ExchangeRateSnapshot>.sync(
+      () => _client.fetchRateSnapshotFor(
+        base.toLowerCase(),
+        target: target,
+        preferredSource: preferredSource,
+      ),
+    );
+    late final Future<ExchangeRateSnapshot> trackedRequest;
+    trackedRequest = request.whenComplete(() {
+      if (identical(_pendingLatestSnapshots[key], trackedRequest)) {
+        _pendingLatestSnapshots.remove(key);
+      }
+    });
+    _pendingLatestSnapshots[key] = trackedRequest;
+    return trackedRequest;
   }
 
   bool _matchesPreferredSource(
