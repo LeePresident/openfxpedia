@@ -1,0 +1,95 @@
+name: Release builds
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  windows-release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Verify tag matches app version
+        shell: pwsh
+        run: |
+          $versionLine = Select-String -Path pubspec.yaml -Pattern '^version:\s*(\S+)$'
+          if (-not $versionLine) {
+            throw 'Unable to read version from pubspec.yaml'
+          }
+          $appVersion = $versionLine.Matches[0].Groups[1].Value.Split('+')[0]
+          $tagVersion = $env:GITHUB_REF_NAME -replace '^v', ''
+          if ($tagVersion -ne $appVersion) {
+            throw "Tag version $tagVersion does not match pubspec version $appVersion"
+          }
+
+      - name: Install NSIS
+        run: choco install nsis --yes --no-progress
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build Windows release
+        shell: pwsh
+        run: .\scripts\build_windows.ps1
+
+      - name: Upload Windows release artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: windows-release-${{ github.ref_name }}
+          path: |
+            build/windows/openfxpedia_*_portable.zip
+            build/windows/installer/openfxpedia_*_setup.exe
+          if-no-files-found: error
+
+  android-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Verify tag matches app version
+        shell: pwsh
+        run: |
+          $versionLine = Select-String -Path pubspec.yaml -Pattern '^version:\s*(\S+)$'
+          if (-not $versionLine) {
+            throw 'Unable to read version from pubspec.yaml'
+          }
+          $appVersion = $versionLine.Matches[0].Groups[1].Value.Split('+')[0]
+          $tagVersion = $env:GITHUB_REF_NAME -replace '^v', ''
+          if ($tagVersion -ne $appVersion) {
+            throw "Tag version $tagVersion does not match pubspec version $appVersion"
+          }
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build Android release
+        shell: pwsh
+        run: ./scripts/build_android.ps1
+
+      - name: Upload Android release artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-release-${{ github.ref_name }}
+          path: |
+            build/app/outputs/flutter-apk/openfxpedia_*.apk
+            build/app/outputs/flutter-apk/openfxpedia_*.apk.sha1
+          if-no-files-found: error
