@@ -257,9 +257,9 @@
             "major_unit": "元",
             "minor_unit": "角",
             "regions": [
-                "中國"
+                "中國大陸"
             ],
-            "description": "中國（大陸）的法定貨幣"
+            "description": "中國大陸的法定貨幣"
         },
         "COP": {
             "name": "哥倫比亞比索",

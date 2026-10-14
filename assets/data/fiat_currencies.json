@@ -815,9 +815,9 @@
         "name": "Chinese Yuan",
         "symbol": "¥",
         "regions": [
-            "China"
+            "Mainland China"
         ],
-        "description": "Official currency of China (Mainland), also known as the Renminbi (RMB) in Chinese.",
+        "description": "Official currency of Mainland China, also known as the Renminbi (RMB) in Chinese.",
         "major_unit": "Yuan",
         "minor_unit": "Jiao",
         "minor_units_per_major": 10,

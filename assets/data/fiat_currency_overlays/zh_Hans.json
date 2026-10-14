@@ -257,9 +257,9 @@
             "major_unit": "元",
             "minor_unit": "角",
             "regions": [
-                "中国"
+                "中国大陆"
             ],
-            "description": "中国（大陆）的法定货币"
+            "description": "中国大陆的法定货币"
         },
         "COP": {
             "name": "哥伦比亚比索",
