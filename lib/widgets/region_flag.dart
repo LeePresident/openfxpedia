@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 const Map<String, String> _regionCountryCodes = {
   'Hong Kong': 'HK',
+  'Mainland China': 'CN',
   'Macau': 'MO',
   'Macao': 'MO',
   'United States': 'US',
