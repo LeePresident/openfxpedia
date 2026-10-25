@@ -236,16 +236,10 @@ class CacheService {
     await _currenciesBox.put('catalog', payload);
   }
 
-  CachedCatalog getCachedCatalog({
-    int ttlHours = AppConfig.catalogTtlHours,
-  }) {
+  CachedCatalog getCachedCatalog({int ttlHours = AppConfig.catalogTtlHours}) {
     final raw = _currenciesBox.get('catalog');
     if (raw == null) {
-      return const CachedCatalog(
-        catalog: null,
-        timestamp: null,
-        isStale: true,
-      );
+      return const CachedCatalog(catalog: null, timestamp: null, isStale: true);
     }
 
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
@@ -253,8 +247,9 @@ class CacheService {
     final stale =
         DateTime.now().toUtc().difference(timestamp).inHours >= ttlHours;
 
-    final catalog = (decoded['catalog'] as Map<String, dynamic>)
-        .map((k, v) => MapEntry(k, v.toString()));
+    final catalog = (decoded['catalog'] as Map<String, dynamic>).map(
+      (k, v) => MapEntry(k, v.toString()),
+    );
     return CachedCatalog(
       catalog: catalog,
       timestamp: timestamp,

@@ -10,9 +10,9 @@ class CalculatorState {
     required ConversionService conversionService,
     required List<Currency> Function() currencies,
     required void Function() onChanged,
-  })  : _conversionService = conversionService,
-        _currencies = currencies,
-        _onChanged = onChanged;
+  }) : _conversionService = conversionService,
+       _currencies = currencies,
+       _onChanged = onChanged;
 
   final ConversionService _conversionService;
   final List<Currency> Function() _currencies;
@@ -45,23 +45,28 @@ class CalculatorState {
     if (currencies.isEmpty) return;
     _outputCurrencyCode ??= targetCurrency?.isoCode ?? currencies.first.isoCode;
     if (_entries.isEmpty) {
-      _entries.add(CalculatorEntry(
-        id: _nextEntryId++,
-        amount: 0,
-        currencyCode: baseCurrency?.isoCode ?? currencies.first.isoCode,
-      ));
+      _entries.add(
+        CalculatorEntry(
+          id: _nextEntryId++,
+          amount: 0,
+          currencyCode: baseCurrency?.isoCode ?? currencies.first.isoCode,
+        ),
+      );
     }
   }
 
   void addEntry() {
-    final currencyCode = _outputCurrencyCode ??
+    final currencyCode =
+        _outputCurrencyCode ??
         (_currencies().isEmpty ? null : _currencies().first.isoCode);
     if (currencyCode == null) return;
-    _entries.add(CalculatorEntry(
-      id: _nextEntryId++,
-      amount: 0,
-      currencyCode: currencyCode,
-    ));
+    _entries.add(
+      CalculatorEntry(
+        id: _nextEntryId++,
+        amount: 0,
+        currencyCode: currencyCode,
+      ),
+    );
     unawaited(calculate());
   }
 
@@ -79,10 +84,7 @@ class CalculatorState {
     _updateEntry(id, (entry) => entry.copyWith(currencyCode: currency.isoCode));
   }
 
-  void _updateEntry(
-    int id,
-    CalculatorEntry Function(CalculatorEntry) update,
-  ) {
+  void _updateEntry(int id, CalculatorEntry Function(CalculatorEntry) update) {
     final index = _entries.indexWhere((entry) => entry.id == id);
     if (index < 0) return;
     _entries[index] = update(_entries[index]);
@@ -96,8 +98,9 @@ class CalculatorState {
   }
 
   Future<void> setDate(DateTime? date) async {
-    final normalized =
-        date == null ? null : DateTime(date.year, date.month, date.day);
+    final normalized = date == null
+        ? null
+        : DateTime(date.year, date.month, date.day);
     final today = DateTime.now();
     if (normalized != null &&
         normalized.isAfter(DateTime(today.year, today.month, today.day))) {
@@ -128,22 +131,24 @@ class CalculatorState {
     _onChanged();
 
     try {
-      final results = await Future.wait(entries.map((entry) async {
-        if (entry.amount == 0) return null;
-        final date = _date;
-        return date == null
-            ? _conversionService.convertPrecise(
-                entry.amount,
-                entry.currencyCode,
-                target,
-              )
-            : _conversionService.convertHistoricalPrecise(
-                entry.amount,
-                entry.currencyCode,
-                target,
-                date,
-              );
-      }));
+      final results = await Future.wait(
+        entries.map((entry) async {
+          if (entry.amount == 0) return null;
+          final date = _date;
+          return date == null
+              ? _conversionService.convertPrecise(
+                  entry.amount,
+                  entry.currencyCode,
+                  target,
+                )
+              : _conversionService.convertHistoricalPrecise(
+                  entry.amount,
+                  entry.currencyCode,
+                  target,
+                  date,
+                );
+        }),
+      );
 
       if (requestId != _requestSequence) return;
       var total = 0.0;

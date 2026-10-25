@@ -59,17 +59,13 @@ class ConverterScreen extends StatelessWidget {
               child: Text(l10n.converter_cancel),
             ),
             OutlinedButton(
-              onPressed: () => Navigator.pop(
-                dialogContext,
-                _FavoriteFieldChoice.to,
-              ),
+              onPressed: () =>
+                  Navigator.pop(dialogContext, _FavoriteFieldChoice.to),
               child: Text(l10n.converter_to_field),
             ),
             FilledButton(
-              onPressed: () => Navigator.pop(
-                dialogContext,
-                _FavoriteFieldChoice.from,
-              ),
+              onPressed: () =>
+                  Navigator.pop(dialogContext, _FavoriteFieldChoice.from),
               child: Text(l10n.converter_from_field),
             ),
           ],
@@ -125,9 +121,11 @@ class ConverterScreen extends StatelessWidget {
               ? Center(
                   child: isLoading
                       ? const CircularProgressIndicator()
-                      : Text(state.errorCode != null
-                          ? localizedErrorMessage(l10n, state.errorCode!)
-                          : l10n.startup_loading),
+                      : Text(
+                          state.errorCode != null
+                              ? localizedErrorMessage(l10n, state.errorCode!)
+                              : l10n.startup_loading,
+                        ),
                 )
               : SingleChildScrollView(
                   padding: const EdgeInsets.all(16.0),
@@ -143,7 +141,10 @@ class ConverterScreen extends StatelessWidget {
                         FavoritesBar(
                           favorites: state.favoriteCurrencies,
                           onTap: (currency) => _showFavoriteChoiceDialog(
-                              context, state, currency),
+                            context,
+                            state,
+                            currency,
+                          ),
                         ),
                         const SizedBox(height: 16),
                       ],
@@ -170,7 +171,8 @@ class ConverterScreen extends StatelessWidget {
                           icon: const Icon(Icons.swap_vert),
                           iconSize: 32,
                           tooltip: l10n.converter_swap,
-                          onPressed: state.baseCurrency == null ||
+                          onPressed:
+                              state.baseCurrency == null ||
                                   state.targetCurrency == null
                               ? null
                               : state.swapCurrencies,
@@ -198,7 +200,8 @@ class ConverterScreen extends StatelessWidget {
                             onPressed: () => _selectDate(context, state),
                             icon: const Icon(Icons.calendar_today),
                             label: Text(
-                                '${l10n.converter_date}: ${state.conversionDate == null ? l10n.converter_latest : DateFormat.yMMMd(l10n.localeName).format(state.conversionDate!)}'),
+                              '${l10n.converter_date}: ${state.conversionDate == null ? l10n.converter_latest : DateFormat.yMMMd(l10n.localeName).format(state.conversionDate!)}',
+                            ),
                           ),
                           if (state.conversionDate != null)
                             TextButton.icon(
@@ -224,8 +227,9 @@ class ConverterScreen extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.warning_amber,
-                                      color:
-                                          Theme.of(context).colorScheme.error,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.error,
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
@@ -239,9 +243,10 @@ class ConverterScreen extends StatelessWidget {
                                               state.errorCode!,
                                             ),
                                             style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .error),
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.error,
+                                            ),
                                           ),
                                           // Technical details intentionally hidden from users.
                                         ],
@@ -256,11 +261,11 @@ class ConverterScreen extends StatelessWidget {
                                 Text(
                                   state.convertedAmount != null
                                       ? '${state.convertedAmount} '
-                                          '${state.targetCurrency?.isoCode ?? ''}'
+                                            '${state.targetCurrency?.isoCode ?? ''}'
                                       : '—',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.headlineMedium,
                                 ),
                               const SizedBox(height: 8),
                               RateInfoWidget(
@@ -272,34 +277,37 @@ class ConverterScreen extends StatelessWidget {
                               const SizedBox(height: 4),
                               Text(
                                 l10n.rate_info_disclaimer,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
+                                style: Theme.of(context).textTheme.bodySmall
                                     ?.copyWith(
-                                      color:
-                                          Theme.of(context).colorScheme.outline,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.outline,
                                       fontStyle: FontStyle.italic,
                                     ),
                               ),
                               const SizedBox(height: 4),
                               // Localized source label under the disclaimer.
                               if (state.lastRate != null)
-                                Builder(builder: (ctx) {
-                                  final providerLabel =
-                                      _providerLabelFor(state, l10n);
+                                Builder(
+                                  builder: (ctx) {
+                                    final providerLabel = _providerLabelFor(
+                                      state,
+                                      l10n,
+                                    );
 
-                                  return Text(
-                                    '${l10n.rate_info_source_prefix} $providerLabel',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .outline,
-                                        ),
-                                  );
-                                }),
+                                    return Text(
+                                      '${l10n.rate_info_source_prefix} $providerLabel',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.outline,
+                                          ),
+                                    );
+                                  },
+                                ),
                             ],
                           ),
                         ),

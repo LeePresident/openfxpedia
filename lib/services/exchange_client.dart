@@ -24,7 +24,8 @@ class ExchangeClient {
     _httpClient = resolvedHttpClient;
     _primaryProvider =
         primaryProvider ?? FrankfurterProvider(httpClient: resolvedHttpClient);
-    _fallbackProvider = fallbackProvider ??
+    _fallbackProvider =
+        fallbackProvider ??
         LegacyExchangeProvider(httpClient: resolvedHttpClient);
   }
 
@@ -166,7 +167,8 @@ class ExchangeClient {
         }
       } else {
         throw ExchangeApiException(
-            'Provider does not support historical rates');
+          'Provider does not support historical rates',
+        );
       }
       if (target != null && !snapshot.rates.containsKey(target)) {
         ExchangeObservability.recordAttempt(
@@ -207,14 +209,12 @@ class ExchangeClient {
 
   Future<Map<String, dynamic>> _getJson(String url) async {
     final uri = Uri.parse(url);
-    final response = await _httpClient.get(uri, headers: {
-      'Accept': 'application/json'
-    }).timeout(const Duration(seconds: 15));
+    final response = await _httpClient
+        .get(uri, headers: {'Accept': 'application/json'})
+        .timeout(const Duration(seconds: 15));
 
     if (response.statusCode != 200) {
-      throw ExchangeApiException(
-        'HTTP ${response.statusCode} fetching $url',
-      );
+      throw ExchangeApiException('HTTP ${response.statusCode} fetching $url');
     }
     return json.decode(response.body) as Map<String, dynamic>;
   }

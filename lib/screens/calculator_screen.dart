@@ -50,7 +50,10 @@ class CalculatorScreen extends StatelessWidget {
   }
 
   String _formatAmount(
-      AppLocalizations l10n, Currency currency, double amount) {
+    AppLocalizations l10n,
+    Currency currency,
+    double amount,
+  ) {
     return NumberFormat.currency(
       locale: l10n.localeName,
       name: currency.isoCode,
@@ -128,14 +131,14 @@ class CalculatorScreen extends StatelessWidget {
                 if (state.calculatorEntries.isEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Center(
-                      child: Text(l10n.calculator_no_entries),
-                    ),
+                    child: Center(child: Text(l10n.calculator_no_entries)),
                   )
                 else
-                  for (var index = 0;
-                      index < state.calculatorEntries.length;
-                      index++)
+                  for (
+                    var index = 0;
+                    index < state.calculatorEntries.length;
+                    index++
+                  )
                     _entryCard(
                       context,
                       state,
@@ -186,7 +189,7 @@ class CalculatorScreen extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
-                        ]
+                        ],
                       ],
                     ),
                   ),

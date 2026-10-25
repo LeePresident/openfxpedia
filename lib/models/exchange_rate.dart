@@ -14,20 +14,22 @@ class ExchangeRate {
   });
 
   factory ExchangeRate.fromMap(
-          String base, String target, Map<String, dynamic> m) =>
-      ExchangeRate(
-        baseCurrency: base,
-        targetCurrency: target,
-        rate: (m['rate'] as num).toDouble(),
-        timestamp: DateTime.parse(m['timestamp'] as String),
-        source: m['source'] as String,
-      );
+    String base,
+    String target,
+    Map<String, dynamic> m,
+  ) => ExchangeRate(
+    baseCurrency: base,
+    targetCurrency: target,
+    rate: (m['rate'] as num).toDouble(),
+    timestamp: DateTime.parse(m['timestamp'] as String),
+    source: m['source'] as String,
+  );
 
   Map<String, dynamic> toMap() => {
-        'base_currency': baseCurrency,
-        'target_currency': targetCurrency,
-        'rate': rate,
-        'timestamp': timestamp.toUtc().toIso8601String(),
-        'source': source,
-      };
+    'base_currency': baseCurrency,
+    'target_currency': targetCurrency,
+    'rate': rate,
+    'timestamp': timestamp.toUtc().toIso8601String(),
+    'source': source,
+  };
 }

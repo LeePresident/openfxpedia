@@ -10,9 +10,9 @@ class UserPreferencesState {
     required CacheService cacheService,
     required Iterable<Locale> Function() systemLocales,
     required void Function() onChanged,
-  })  : _cacheService = cacheService,
-        _systemLocales = systemLocales,
-        _onChanged = onChanged;
+  }) : _cacheService = cacheService,
+       _systemLocales = systemLocales,
+       _onChanged = onChanged;
 
   final CacheService _cacheService;
   final Iterable<Locale> Function() _systemLocales;

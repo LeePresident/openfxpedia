@@ -29,8 +29,10 @@ void main() {
 
     await state.initialize();
 
-    expect(state.locale,
-        const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'));
+    expect(
+      state.locale,
+      const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+    );
 
     await tester.pumpWidget(
       ChangeNotifierProvider.value(
@@ -115,9 +117,7 @@ class _LocaleProbePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return Scaffold(
-      body: Center(child: Text(l10n.settings_language)),
-    );
+    return Scaffold(body: Center(child: Text(l10n.settings_language)));
   }
 }
 
@@ -146,11 +146,14 @@ class _InMemoryCacheService extends CacheService {
 
 class _FakeConversionService extends ConversionService {
   _FakeConversionService({required super.cache})
-      : super(client: ExchangeClient());
+    : super(client: ExchangeClient());
 
   @override
   Future<ConversionResult> convert(
-      double amount, String base, String target) async {
+    double amount,
+    String base,
+    String target,
+  ) async {
     throw UnimplementedError('Not used by locale startup test.');
   }
 

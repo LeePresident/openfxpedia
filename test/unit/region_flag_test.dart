@@ -16,8 +16,9 @@ void main() {
     expect(currencyFlagCode('USD'), isNull);
   });
 
-  testWidgets('renders original icons for X-prefixed currencies',
-      (tester) async {
+  testWidgets('renders original icons for X-prefixed currencies', (
+    tester,
+  ) async {
     for (final currencyCode in ['XAF', 'XCD', 'XCG', 'XOF', 'XPF']) {
       await tester.pumpWidget(
         MaterialApp(
@@ -30,8 +31,11 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byType(SvgPicture), findsOneWidget,
-          reason: '$currencyCode should use its original SVG icon');
+      expect(
+        find.byType(SvgPicture),
+        findsOneWidget,
+        reason: '$currencyCode should use its original SVG icon',
+      );
     }
   });
 }

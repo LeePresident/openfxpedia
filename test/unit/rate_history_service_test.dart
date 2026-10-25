@@ -20,25 +20,29 @@ void main() {
     expect(samples.last.requestedDate, DateTime.utc(2024, 3, 31));
     expect(conversion.amounts, everyElement(1));
     expect(conversion.refreshes, everyElement(isTrue));
-    expect(samples.map((sample) => sample.quote!.rate.source),
-        everyElement('frankfurter'));
+    expect(
+      samples.map((sample) => sample.quote!.rate.source),
+      everyElement('frankfurter'),
+    );
   });
 
-  test('missing and out-of-range quotes remain gaps; actual dates survive',
-      () async {
-    final conversion = _Conversion()..withGaps = true;
-    final samples = await RateHistoryService(conversion).load(
-      base: 'USD',
-      target: 'EUR',
-      endDate: DateTime(2024, 3, 10),
-      days: 7,
-    );
-    expect(samples[0].quote, isNull);
-    expect(samples[1].quote, isNull);
-    expect(samples[2].quote, isNull);
-    expect(samples.last.quote!.rate.timestamp, DateTime.utc(2024, 3, 9));
-    expect(samples.last.quote!.fromCache, isTrue);
-  });
+  test(
+    'missing and out-of-range quotes remain gaps; actual dates survive',
+    () async {
+      final conversion = _Conversion()..withGaps = true;
+      final samples = await RateHistoryService(conversion).load(
+        base: 'USD',
+        target: 'EUR',
+        endDate: DateTime(2024, 3, 10),
+        days: 7,
+      );
+      expect(samples[0].quote, isNull);
+      expect(samples[1].quote, isNull);
+      expect(samples[2].quote, isNull);
+      expect(samples.last.quote!.rate.timestamp, DateTime.utc(2024, 3, 9));
+      expect(samples.last.quote!.fromCache, isTrue);
+    },
+  );
 
   test('cancellation stops additional dated lookups', () async {
     final conversion = _Conversion();

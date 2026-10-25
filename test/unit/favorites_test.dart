@@ -1,4 +1,4 @@
-﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:openfxpedia/models/cached_catalog.dart';
 import 'package:openfxpedia/models/cached_rate_snapshot.dart';
 import 'package:openfxpedia/services/cache_service.dart';
@@ -9,7 +9,7 @@ class _StubCacheService extends CacheService {
   int putCalls = 0;
 
   _StubCacheService({List<String>? initialFavorites})
-      : storedFavorites = List<String>.from(initialFavorites ?? []);
+    : storedFavorites = List<String>.from(initialFavorites ?? []);
 
   @override
   List<String> getFavorites() => List<String>.from(storedFavorites);
@@ -25,18 +25,11 @@ class _StubCacheService extends CacheService {
 
   @override
   CachedCatalog getCachedCatalog({int ttlHours = 12}) {
-    return const CachedCatalog(
-      catalog: null,
-      timestamp: null,
-      isStale: true,
-    );
+    return const CachedCatalog(catalog: null, timestamp: null, isStale: true);
   }
 
   @override
-  CachedRateSnapshot getCachedRates(
-    String base, {
-    int ttlHours = 12,
-  }) {
+  CachedRateSnapshot getCachedRates(String base, {int ttlHours = 12}) {
     return const CachedRateSnapshot(
       rates: null,
       timestamp: null,
@@ -109,10 +102,7 @@ void main() {
       final cache = _StubCacheService(initialFavorites: ['usd']);
       final service = FavoritesService(cache: cache)..load();
 
-      expect(
-        () => service.favorites.add('eur'),
-        throwsUnsupportedError,
-      );
+      expect(() => service.favorites.add('eur'), throwsUnsupportedError);
     });
   });
 }

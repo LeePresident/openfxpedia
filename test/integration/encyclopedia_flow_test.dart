@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -20,10 +20,10 @@ class _FakeExchangeClient extends ExchangeClient {
 
   @override
   Future<Map<String, String>> fetchCurrencyCatalog() async => {
-        'usd': 'us dollar',
-        'eur': 'euro',
-        'jpy': 'japanese yen',
-      };
+    'usd': 'us dollar',
+    'eur': 'euro',
+    'jpy': 'japanese yen',
+  };
 
   @override
   Future<Map<String, double>> fetchRatesFor(String base) async => {'usd': 1.0};
@@ -53,11 +53,7 @@ class _StubCacheService extends CacheService {
 
   @override
   CachedCatalog getCachedCatalog({int ttlHours = 12}) {
-    return const CachedCatalog(
-      catalog: null,
-      timestamp: null,
-      isStale: true,
-    );
+    return const CachedCatalog(catalog: null, timestamp: null, isStale: true);
   }
 
   @override
@@ -67,10 +63,7 @@ class _StubCacheService extends CacheService {
   ) async {}
 
   @override
-  CachedRateSnapshot getCachedRates(
-    String base, {
-    int ttlHours = 12,
-  }) {
+  CachedRateSnapshot getCachedRates(String base, {int ttlHours = 12}) {
     return const CachedRateSnapshot(
       rates: null,
       timestamp: null,
@@ -119,8 +112,9 @@ class _FakeCurrencyCatalogService extends CurrencyCatalogService {
 }
 
 void main() {
-  testWidgets('encyclopedia flow: initialize, search, open detail',
-      (tester) async {
+  testWidgets('encyclopedia flow: initialize, search, open detail', (
+    tester,
+  ) async {
     final cache = _StubCacheService();
     final exchange = _FakeExchangeClient();
     final catalog = _FakeCurrencyCatalogService(client: exchange, cache: cache);

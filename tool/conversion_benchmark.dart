@@ -42,8 +42,9 @@ void main(List<String> args) {
   stdout.writeln('Threshold: $thresholdMs ms');
 
   if (p95 > thresholdMs) {
-    stderr
-        .writeln('FAIL: p95 latency $p95 ms exceeds threshold $thresholdMs ms');
+    stderr.writeln(
+      'FAIL: p95 latency $p95 ms exceeds threshold $thresholdMs ms',
+    );
     exit(1);
   }
 

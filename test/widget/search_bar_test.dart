@@ -37,16 +37,18 @@ Widget _buildWidget({
 
 void main() {
   group('CurrencySearchBar', () {
-    testWidgets('shows compact selector with no dialog initially',
-        (tester) async {
+    testWidgets('shows compact selector with no dialog initially', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildWidget(onSelected: (_) {}));
 
       expect(find.byType(Dialog), findsNothing);
       expect(find.text('Pick'), findsOneWidget);
     });
 
-    testWidgets('opens selector dialog with search field on tap',
-        (tester) async {
+    testWidgets('opens selector dialog with search field on tap', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildWidget(onSelected: (_) {}));
 
       await tester.tap(find.byType(InkWell));
@@ -66,7 +68,9 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.enterText(
-          find.byKey(const Key('currency_search_field')), 'eu');
+        find.byKey(const Key('currency_search_field')),
+        'eu',
+      );
       await tester.pump();
 
       expect(find.text('EUR'), findsOneWidget);
@@ -82,7 +86,9 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.enterText(
-          find.byKey(const Key('currency_search_field')), '392');
+        find.byKey(const Key('currency_search_field')),
+        '392',
+      );
       await tester.pump();
 
       expect(find.text('JPY'), findsOneWidget);
@@ -91,15 +97,18 @@ void main() {
       expect(find.text('GBP'), findsNothing);
     });
 
-    testWidgets('clears the search query and restores all currencies',
-        (tester) async {
+    testWidgets('clears the search query and restores all currencies', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildWidget(onSelected: (_) {}));
 
       await tester.tap(find.byType(InkWell));
       await tester.pumpAndSettle();
 
       await tester.enterText(
-          find.byKey(const Key('currency_search_field')), '392');
+        find.byKey(const Key('currency_search_field')),
+        '392',
+      );
       await tester.pump();
 
       expect(find.byKey(const Key('currency_search_clear')), findsOneWidget);
@@ -115,8 +124,9 @@ void main() {
       }
     });
 
-    testWidgets('calls onSelected and closes dialog when item is tapped',
-        (tester) async {
+    testWidgets('calls onSelected and closes dialog when item is tapped', (
+      tester,
+    ) async {
       Currency? selected;
       await tester.pumpWidget(_buildWidget(onSelected: (c) => selected = c));
 
@@ -124,7 +134,9 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.enterText(
-          find.byKey(const Key('currency_search_field')), 'eu');
+        find.byKey(const Key('currency_search_field')),
+        'eu',
+      );
       await tester.pump();
 
       await tester.tap(find.text('EUR'));
@@ -134,8 +146,9 @@ void main() {
       expect(selected?.isoCode, 'EUR');
     });
 
-    testWidgets('closes dialog without selecting when barrier tapped',
-        (tester) async {
+    testWidgets('closes dialog without selecting when barrier tapped', (
+      tester,
+    ) async {
       Currency? selected;
       await tester.pumpWidget(_buildWidget(onSelected: (c) => selected = c));
 
@@ -149,8 +162,9 @@ void main() {
       expect(selected, isNull);
     });
 
-    testWidgets('compact selector shows selected currency label',
-        (tester) async {
+    testWidgets('compact selector shows selected currency label', (
+      tester,
+    ) async {
       final eur = Currency(isoCode: 'EUR', name: 'Euro');
       await tester.pumpWidget(_buildWidget(selected: eur, onSelected: (_) {}));
 

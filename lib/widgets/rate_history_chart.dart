@@ -47,8 +47,10 @@ class RateHistoryChart extends StatelessWidget {
               onTap: () => state.setHistoryVisible(!state.historyVisible),
               child: Container(
                 constraints: const BoxConstraints(minHeight: 48),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: colors.outlineVariant),
@@ -59,12 +61,16 @@ class RateHistoryChart extends StatelessWidget {
                     Icon(Icons.show_chart, color: colors.primary),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: Text(l10n.history_title,
-                          style: Theme.of(context).textTheme.titleMedium),
+                      child: Text(
+                        l10n.history_title,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                     ),
-                    Icon(state.historyVisible
-                        ? Icons.expand_less
-                        : Icons.expand_more),
+                    Icon(
+                      state.historyVisible
+                          ? Icons.expand_less
+                          : Icons.expand_more,
+                    ),
                   ],
                 ),
               ),
@@ -110,8 +116,10 @@ class RateHistoryChart extends StatelessWidget {
               child: Text(l10n.history_unavailable),
             )
           else ...[
-            Text('1 ${state.baseCurrency!.isoCode} / '
-                '${state.targetCurrency!.isoCode}'),
+            Text(
+              '1 ${state.baseCurrency!.isoCode} / '
+              '${state.targetCurrency!.isoCode}',
+            ),
             const SizedBox(height: 12),
             SizedBox(
               height: 220,
@@ -126,13 +134,18 @@ class RateHistoryChart extends StatelessWidget {
               spacing: 16,
               children: [
                 Text(
-                    formatter.format(state.historySamples.first.requestedDate)),
+                  formatter.format(state.historySamples.first.requestedDate),
+                ),
                 Text(formatter.format(state.historySamples.last.requestedDate)),
               ],
             ),
             const SizedBox(height: 8),
-            Text(l10n.history_available(
-                quotes.length, state.historySamples.length)),
+            Text(
+              l10n.history_available(
+                quotes.length,
+                state.historySamples.length,
+              ),
+            ),
             Wrap(
               spacing: 12,
               children: [
@@ -148,17 +161,22 @@ class RateHistoryChart extends StatelessWidget {
             ),
           ],
           const SizedBox(height: 8),
-          Text(l10n.rate_info_disclaimer,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: colors.onSurfaceVariant,
-                  )),
+          Text(
+            l10n.rate_info_disclaimer,
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: colors.onSurfaceVariant),
+          ),
         ],
       ],
     );
   }
 
-  Widget _plot(BuildContext context, List<ConversionResult> quotes,
-      String Function(ConversionResult) describe) {
+  Widget _plot(
+    BuildContext context,
+    List<ConversionResult> quotes,
+    String Function(ConversionResult) describe,
+  ) {
     final colors = Theme.of(context).colorScheme;
     final start = state.historySamples.first.requestedDate;
     final spots = <FlSpot>[];
@@ -169,10 +187,12 @@ class RateHistoryChart extends StatelessWidget {
         spots.add(FlSpot.nullSpot);
         previousDate = null;
       } else if (quote.rate.timestamp != previousDate) {
-        spots.add(FlSpot(
-          quote.rate.timestamp.difference(start).inDays.toDouble(),
-          quote.rate.rate,
-        ));
+        spots.add(
+          FlSpot(
+            quote.rate.timestamp.difference(start).inDays.toDouble(),
+            quote.rate.rate,
+          ),
+        );
         previousDate = quote.rate.timestamp;
       }
     }
@@ -191,12 +211,15 @@ class RateHistoryChart extends StatelessWidget {
         borderData: FlBorderData(show: false),
         gridData: const FlGridData(drawVerticalLine: false),
         titlesData: FlTitlesData(
-          topTitles:
-              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles:
-              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          bottomTitles:
-              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          bottomTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
           leftTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
@@ -204,10 +227,12 @@ class RateHistoryChart extends StatelessWidget {
               getTitlesWidget: (value, meta) => SideTitleWidget(
                 meta: meta,
                 child: Text(
-                    NumberFormat(
-                            '0.#####', AppLocalizations.of(context).localeName)
-                        .format(value),
-                    style: Theme.of(context).textTheme.labelSmall),
+                  NumberFormat(
+                    '0.#####',
+                    AppLocalizations.of(context).localeName,
+                  ).format(value),
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
               ),
             ),
           ),
@@ -228,11 +253,15 @@ class RateHistoryChart extends StatelessWidget {
             maxContentWidth: 240,
             getTooltipColor: (_) => colors.inverseSurface,
             getTooltipItems: (touched) => touched.map((spot) {
-              final quote = quotes.firstWhere((quote) =>
-                  quote.rate.timestamp.difference(start).inDays == spot.x &&
-                  quote.rate.rate == spot.y);
-              return LineTooltipItem(describe(quote),
-                  TextStyle(color: colors.onInverseSurface, fontSize: 12));
+              final quote = quotes.firstWhere(
+                (quote) =>
+                    quote.rate.timestamp.difference(start).inDays == spot.x &&
+                    quote.rate.rate == spot.y,
+              );
+              return LineTooltipItem(
+                describe(quote),
+                TextStyle(color: colors.onInverseSurface, fontSize: 12),
+              );
             }).toList(),
           ),
         ),

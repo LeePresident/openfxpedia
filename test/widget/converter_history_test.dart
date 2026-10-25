@@ -23,163 +23,184 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets(
-      'chart opens on demand, changes range and refreshes independently',
-      (tester) async {
-    final cache = _MemoryCache();
-    final conversion = _Conversion(cache);
-    final state = _state(cache, conversion);
-    addTearDown(state.dispose);
-    await state.initialize();
-    state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
-    await state.setConversionDate(DateTime(2024, 3, 10));
-    await tester.pumpWidget(_Harness(state));
-    await tester.pumpAndSettle();
-    expect(find.byType(LineChart), findsNothing);
-    expect(find.byIcon(Icons.expand_more), findsOneWidget);
-    expect(tester.getSize(find.byKey(const Key('history-toggle'))).height,
-        greaterThanOrEqualTo(48));
-    await tester.ensureVisible(find.byKey(const Key('history-toggle')));
-    await tester.tap(find.text('Rate history'));
-    await tester.pumpAndSettle();
-    expect(find.byIcon(Icons.expand_less), findsOneWidget);
-    expect(find.byType(LineChart), findsOneWidget);
-    expect(state.historySamples.length, 8);
-    expect(state.historySamples.last.requestedDate, DateTime.utc(2024, 3, 10));
-    await tester.ensureVisible(find.text('1W'));
-    await tester.tap(find.text('1W'));
-    await tester.pumpAndSettle();
-    expect(state.historyDays, 7);
-    expect(state.historySamples.length, 7);
-    expect(find.text('Sampled quotes: 3/7'), findsOneWidget);
-    final chart = tester.widget<LineChart>(find.byType(LineChart));
-    expect(chart.data.minY, lessThan(chart.data.maxY));
-    expect(
+    'chart opens on demand, changes range and refreshes independently',
+    (tester) async {
+      final cache = _MemoryCache();
+      final conversion = _Conversion(cache);
+      final state = _state(cache, conversion);
+      addTearDown(state.dispose);
+      await state.initialize();
+      state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
+      await state.setConversionDate(DateTime(2024, 3, 10));
+      await tester.pumpWidget(_Harness(state));
+      await tester.pumpAndSettle();
+      expect(find.byType(LineChart), findsNothing);
+      expect(find.byIcon(Icons.expand_more), findsOneWidget);
+      expect(
+        tester.getSize(find.byKey(const Key('history-toggle'))).height,
+        greaterThanOrEqualTo(48),
+      );
+      await tester.ensureVisible(find.byKey(const Key('history-toggle')));
+      await tester.tap(find.text('Rate history'));
+      await tester.pumpAndSettle();
+      expect(find.byIcon(Icons.expand_less), findsOneWidget);
+      expect(find.byType(LineChart), findsOneWidget);
+      expect(state.historySamples.length, 8);
+      expect(
+        state.historySamples.last.requestedDate,
+        DateTime.utc(2024, 3, 10),
+      );
+      await tester.ensureVisible(find.text('1W'));
+      await tester.tap(find.text('1W'));
+      await tester.pumpAndSettle();
+      expect(state.historyDays, 7);
+      expect(state.historySamples.length, 7);
+      expect(find.text('Sampled quotes: 3/7'), findsOneWidget);
+      final chart = tester.widget<LineChart>(find.byType(LineChart));
+      expect(chart.data.minY, lessThan(chart.data.maxY));
+      expect(
         chart.data.lineBarsData.single.spots
             .where((spot) => !spot.isNull())
             .length,
-        1);
-    final amount = state.convertedAmount;
-    await tester.ensureVisible(find.byKey(const Key('history-refresh')));
-    await tester.tap(find.byKey(const Key('history-refresh')));
-    await tester.pumpAndSettle();
-    expect(conversion.forceRefresh, isTrue);
-    expect(state.convertedAmount, amount);
-    final samples = state.historySamples;
-    state.setInputAmount(0);
-    await tester.pumpAndSettle();
-    expect(state.historySamples, samples);
-    expect(state.convertedAmount, 0);
-    await tester.ensureVisible(find.text('Rate history'));
-    await tester.tap(find.text('Rate history'));
-    await tester.pumpAndSettle();
-    expect(state.historyVisible, isFalse);
-    expect(find.byType(LineChart), findsNothing);
-    expect(find.byIcon(Icons.expand_more), findsOneWidget);
-    expect(tester.takeException(), isNull);
-  });
-
-  testWidgets('unavailable chart range does not replace the conversion result',
-      (tester) async {
-    final cache = _MemoryCache();
-    final conversion = _Conversion(cache);
-    final state = _state(cache, conversion);
-    addTearDown(state.dispose);
-    await state.initialize();
-    state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
-    await state.convert();
-    final amount = state.convertedAmount;
-    conversion.fail = true;
-    state.setHistoryVisible(true);
-    await tester.pumpWidget(_Harness(state));
-    await tester.pumpAndSettle();
-    expect(state.historyLoading, isFalse);
-    expect(find.byType(LineChart), findsNothing);
-    expect(
-        find.textContaining('No historical quotes available'), findsOneWidget);
-    expect(state.convertedAmount, amount);
-    expect(state.errorCode, isNull);
-    expect(tester.takeException(), isNull);
-  });
-
-  test('new range ignores old chart responses and close cancels pending work',
-      () async {
-    final cache = _MemoryCache();
-    final conversion = _Conversion(cache);
-    final state = _state(cache, conversion);
-    addTearDown(state.dispose);
-    await state.initialize();
-    state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
-    await state.setConversionDate(DateTime(2024, 3, 10));
-    conversion.holdRequests = true;
-    state.setHistoryVisible(true);
-    state.setHistoryDays(7);
-    expect(conversion.pending.length, 2);
-    conversion.holdRequests = false;
-    conversion.pending[1].complete(_result(DateTime.utc(2024, 3, 4), 0.9));
-    await Future<void>.delayed(Duration.zero);
-    expect(state.historySamples.length, 7);
-    conversion.pending[0].complete(_result(DateTime.utc(2024, 2, 10), 0.9));
-    await Future<void>.delayed(Duration.zero);
-    expect(state.historySamples.length, 7);
-    expect(state.historySamples.first.requestedDate, DateTime.utc(2024, 3, 4));
-    conversion.holdRequests = true;
-    final refresh = state.loadHistory(forceRefresh: true);
-    state.setHistoryVisible(false);
-    conversion.pending.last.complete(_result(DateTime.utc(2024, 3, 4), 0.9));
-    await refresh;
-    expect(state.historySamples, isEmpty);
-    expect(state.historyLoading, isFalse);
-    expect(conversion.pending.length, 3);
-  });
+        1,
+      );
+      final amount = state.convertedAmount;
+      await tester.ensureVisible(find.byKey(const Key('history-refresh')));
+      await tester.tap(find.byKey(const Key('history-refresh')));
+      await tester.pumpAndSettle();
+      expect(conversion.forceRefresh, isTrue);
+      expect(state.convertedAmount, amount);
+      final samples = state.historySamples;
+      state.setInputAmount(0);
+      await tester.pumpAndSettle();
+      expect(state.historySamples, samples);
+      expect(state.convertedAmount, 0);
+      await tester.ensureVisible(find.text('Rate history'));
+      await tester.tap(find.text('Rate history'));
+      await tester.pumpAndSettle();
+      expect(state.historyVisible, isFalse);
+      expect(find.byType(LineChart), findsNothing);
+      expect(find.byIcon(Icons.expand_more), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets(
-      'date picker selects history, cancels safely and returns to latest',
-      (tester) async {
-    final cache = _MemoryCache();
-    final conversion = _Conversion(cache);
-    final state = _state(cache, conversion);
-    addTearDown(state.dispose);
-    await state.initialize();
-    state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
-    state.setInputAmount(10);
-    await tester.pumpWidget(_Harness(state));
-    await tester.pumpAndSettle();
-    expect(find.text('Conversion date: Latest'), findsOneWidget);
-    await tester.tap(find.byKey(const Key('conversion-date')));
-    await tester.pumpAndSettle();
-    final picker =
-        tester.widget<DatePickerDialog>(find.byType(DatePickerDialog));
-    expect(picker.lastDate, DateUtils.dateOnly(DateTime.now()));
-    final material =
-        MaterialLocalizations.of(tester.element(find.byType(DatePickerDialog)));
-    await tester.tap(find.byTooltip(material.inputDateModeButtonLabel));
-    await tester.pumpAndSettle();
-    await tester.enterText(
+    'unavailable chart range does not replace the conversion result',
+    (tester) async {
+      final cache = _MemoryCache();
+      final conversion = _Conversion(cache);
+      final state = _state(cache, conversion);
+      addTearDown(state.dispose);
+      await state.initialize();
+      state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
+      await state.convert();
+      final amount = state.convertedAmount;
+      conversion.fail = true;
+      state.setHistoryVisible(true);
+      await tester.pumpWidget(_Harness(state));
+      await tester.pumpAndSettle();
+      expect(state.historyLoading, isFalse);
+      expect(find.byType(LineChart), findsNothing);
+      expect(
+        find.textContaining('No historical quotes available'),
+        findsOneWidget,
+      );
+      expect(state.convertedAmount, amount);
+      expect(state.errorCode, isNull);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  test(
+    'new range ignores old chart responses and close cancels pending work',
+    () async {
+      final cache = _MemoryCache();
+      final conversion = _Conversion(cache);
+      final state = _state(cache, conversion);
+      addTearDown(state.dispose);
+      await state.initialize();
+      state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
+      await state.setConversionDate(DateTime(2024, 3, 10));
+      conversion.holdRequests = true;
+      state.setHistoryVisible(true);
+      state.setHistoryDays(7);
+      expect(conversion.pending.length, 2);
+      conversion.holdRequests = false;
+      conversion.pending[1].complete(_result(DateTime.utc(2024, 3, 4), 0.9));
+      await Future<void>.delayed(Duration.zero);
+      expect(state.historySamples.length, 7);
+      conversion.pending[0].complete(_result(DateTime.utc(2024, 2, 10), 0.9));
+      await Future<void>.delayed(Duration.zero);
+      expect(state.historySamples.length, 7);
+      expect(
+        state.historySamples.first.requestedDate,
+        DateTime.utc(2024, 3, 4),
+      );
+      conversion.holdRequests = true;
+      final refresh = state.loadHistory(forceRefresh: true);
+      state.setHistoryVisible(false);
+      conversion.pending.last.complete(_result(DateTime.utc(2024, 3, 4), 0.9));
+      await refresh;
+      expect(state.historySamples, isEmpty);
+      expect(state.historyLoading, isFalse);
+      expect(conversion.pending.length, 3);
+    },
+  );
+
+  testWidgets(
+    'date picker selects history, cancels safely and returns to latest',
+    (tester) async {
+      final cache = _MemoryCache();
+      final conversion = _Conversion(cache);
+      final state = _state(cache, conversion);
+      addTearDown(state.dispose);
+      await state.initialize();
+      state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
+      state.setInputAmount(10);
+      await tester.pumpWidget(_Harness(state));
+      await tester.pumpAndSettle();
+      expect(find.text('Conversion date: Latest'), findsOneWidget);
+      await tester.tap(find.byKey(const Key('conversion-date')));
+      await tester.pumpAndSettle();
+      final picker = tester.widget<DatePickerDialog>(
+        find.byType(DatePickerDialog),
+      );
+      expect(picker.lastDate, DateUtils.dateOnly(DateTime.now()));
+      final material = MaterialLocalizations.of(
+        tester.element(find.byType(DatePickerDialog)),
+      );
+      await tester.tap(find.byTooltip(material.inputDateModeButtonLabel));
+      await tester.pumpAndSettle();
+      await tester.enterText(
         find.descendant(
-            of: find.byType(DatePickerDialog),
-            matching: find.byType(TextField)),
-        material.formatCompactDate(DateTime(2024, 3, 10)));
-    await tester.tap(find.text(material.okButtonLabel));
-    await tester.pumpAndSettle();
-    expect(state.conversionDate, DateTime(2024, 3, 10));
-    expect(find.text('Requested date: Mar 10, 2024'), findsOneWidget);
-    expect(find.textContaining('Rate date: Mar 8, 2024'), findsOneWidget);
-    expect(find.text('9.0 EUR'), findsOneWidget);
-    await tester.tap(find.byKey(const Key('conversion-date')));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(material.cancelButtonLabel));
-    await tester.pumpAndSettle();
-    expect(state.conversionDate, DateTime(2024, 3, 10));
-    await tester.tap(find.byKey(const Key('conversion-use-latest')));
-    await tester.pumpAndSettle();
-    expect(state.conversionDate, isNull);
-    expect(state.inputAmount, 10);
-    expect(state.baseCurrency!.isoCode, 'USD');
-    expect(state.targetCurrency!.isoCode, 'EUR');
-    expect(find.text('Conversion date: Latest'), findsOneWidget);
-    expect(find.textContaining('Requested date:'), findsNothing);
-    expect(tester.takeException(), isNull);
-  });
+          of: find.byType(DatePickerDialog),
+          matching: find.byType(TextField),
+        ),
+        material.formatCompactDate(DateTime(2024, 3, 10)),
+      );
+      await tester.tap(find.text(material.okButtonLabel));
+      await tester.pumpAndSettle();
+      expect(state.conversionDate, DateTime(2024, 3, 10));
+      expect(find.text('Requested date: Mar 10, 2024'), findsOneWidget);
+      expect(find.textContaining('Rate date: Mar 8, 2024'), findsOneWidget);
+      expect(find.text('9.0 EUR'), findsOneWidget);
+      await tester.tap(find.byKey(const Key('conversion-date')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(material.cancelButtonLabel));
+      await tester.pumpAndSettle();
+      expect(state.conversionDate, DateTime(2024, 3, 10));
+      await tester.tap(find.byKey(const Key('conversion-use-latest')));
+      await tester.pumpAndSettle();
+      expect(state.conversionDate, isNull);
+      expect(state.inputAmount, 10);
+      expect(state.baseCurrency!.isoCode, 'USD');
+      expect(state.targetCurrency!.isoCode, 'EUR');
+      expect(find.text('Conversion date: Latest'), findsOneWidget);
+      expect(find.textContaining('Requested date:'), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   for (final locale in [
     const Locale('en'),
@@ -187,8 +208,9 @@ void main() {
     const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
     const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
   ]) {
-    testWidgets('historical metadata and errors fit narrow layout in $locale',
-        (tester) async {
+    testWidgets('historical metadata and errors fit narrow layout in $locale', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(320, 900);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
@@ -207,16 +229,21 @@ void main() {
       state.setSelectedTab(1);
       state.setSelectedTab(0);
       await tester.pumpAndSettle();
-      final l10n =
-          AppLocalizations.of(tester.element(find.byType(ConverterScreen)));
+      final l10n = AppLocalizations.of(
+        tester.element(find.byType(ConverterScreen)),
+      );
       final formatter = DateFormat.yMMMd(l10n.localeName);
       final effectiveDate = l10n.rate_info_effective_date(
         formatter.format(DateTime.utc(2024, 3, 8)),
       );
       expect(
-          find.text(l10n.rate_info_requested_date(
-              formatter.format(DateTime(2024, 3, 10)))),
-          findsOneWidget);
+        find.text(
+          l10n.rate_info_requested_date(
+            formatter.format(DateTime(2024, 3, 10)),
+          ),
+        ),
+        findsOneWidget,
+      );
       expect(find.textContaining(effectiveDate), findsOneWidget);
       expect(state.conversionDate, DateTime(2024, 3, 10));
       expect(find.byType(LineChart), findsOneWidget);
@@ -273,21 +300,22 @@ void main() {
   });
 
   test(
-      'unavailable historical date clears old quote and reports specific error',
-      () async {
-    final cache = _MemoryCache();
-    final conversion = _Conversion(cache);
-    final state = _state(cache, conversion);
-    await state.initialize();
-    state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
-    await state.convert();
-    conversion.fail = true;
-    await state.setConversionDate(DateTime(2024, 3, 10));
-    expect(state.lastRate, isNull);
-    expect(state.convertedAmount, isNull);
-    expect(state.errorCode, 'error_historical_unavailable');
-    state.dispose();
-  });
+    'unavailable historical date clears old quote and reports specific error',
+    () async {
+      final cache = _MemoryCache();
+      final conversion = _Conversion(cache);
+      final state = _state(cache, conversion);
+      await state.initialize();
+      state.setCurrencyPair(baseCurrency: _usd, targetCurrency: _eur);
+      await state.convert();
+      conversion.fail = true;
+      await state.setConversionDate(DateTime(2024, 3, 10));
+      expect(state.lastRate, isNull);
+      expect(state.convertedAmount, isNull);
+      expect(state.errorCode, 'error_historical_unavailable');
+      state.dispose();
+    },
+  );
 }
 
 class _Harness extends StatelessWidget {
@@ -296,41 +324,42 @@ class _Harness extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider.value(
-        value: state,
-        child: Consumer<AppState>(
-            builder: (context, state, _) => MaterialApp(
-                  locale: state.locale,
-                  themeMode: state.themeMode,
-                  localizationsDelegates:
-                      AppLocalizations.localizationsDelegates,
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  home: const ConverterScreen(),
-                )),
-      );
+    value: state,
+    child: Consumer<AppState>(
+      builder: (context, state, _) => MaterialApp(
+        locale: state.locale,
+        themeMode: state.themeMode,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const ConverterScreen(),
+      ),
+    ),
+  );
 }
 
 AppState _state(_MemoryCache cache, _Conversion conversion) => AppState(
-      conversionService: conversion,
-      catalogService: _Catalog(cache),
-      favoritesService: FavoritesService(cache: cache),
-      cacheService: cache,
-      systemLocales: () => const [Locale('en')],
-    );
+  conversionService: conversion,
+  catalogService: _Catalog(cache),
+  favoritesService: FavoritesService(cache: cache),
+  cacheService: cache,
+  systemLocales: () => const [Locale('en')],
+);
 
 ConversionResult _result(DateTime date, double amount) => ConversionResult(
-      amount: amount,
-      rate: ExchangeRate(
-          baseCurrency: 'usd',
-          targetCurrency: 'eur',
-          rate: 0.9,
-          timestamp: date,
-          source: 'frankfurter'),
-      fromCache: false,
-    );
+  amount: amount,
+  rate: ExchangeRate(
+    baseCurrency: 'usd',
+    targetCurrency: 'eur',
+    rate: 0.9,
+    timestamp: date,
+    source: 'frankfurter',
+  ),
+  fromCache: false,
+);
 
 class _Conversion extends ConversionService {
   _Conversion(CacheService cache)
-      : super(client: ExchangeClient(), cache: cache);
+    : super(client: ExchangeClient(), cache: cache);
   bool holdRequests = false;
   bool fail = false;
   bool forceRefresh = false;
@@ -346,8 +375,9 @@ class _Conversion extends ConversionService {
       return completer.future;
     }
     return _result(
-        date == null ? DateTime.utc(2026, 5, 8) : DateTime.utc(2024, 3, 8),
-        amount * 0.9);
+      date == null ? DateTime.utc(2026, 5, 8) : DateTime.utc(2024, 3, 8),
+      amount * 0.9,
+    );
   }
 
   @override
@@ -371,9 +401,10 @@ class _Catalog extends CurrencyCatalogService {
   _Catalog(CacheService cache) : super(client: ExchangeClient(), cache: cache);
 
   @override
-  Future<List<Currency>> getCurrencies(
-          {bool forceRefresh = false, Locale? locale}) async =>
-      [_usd, _eur];
+  Future<List<Currency>> getCurrencies({
+    bool forceRefresh = false,
+    Locale? locale,
+  }) async => [_usd, _eur];
 }
 
 class _MemoryCache extends CacheService {

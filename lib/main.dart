@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -121,10 +121,14 @@ class _BootstrapAppState extends State<_BootstrapApp> {
     await cache.init();
 
     final exchangeClient = ExchangeClient();
-    final conversionService =
-        ConversionService(client: exchangeClient, cache: cache);
-    final catalogService =
-        CurrencyCatalogService(client: exchangeClient, cache: cache);
+    final conversionService = ConversionService(
+      client: exchangeClient,
+      cache: cache,
+    );
+    final catalogService = CurrencyCatalogService(
+      client: exchangeClient,
+      cache: cache,
+    );
     final favoritesService = FavoritesService(cache: cache);
 
     return AppState(

@@ -8,10 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import '../core/config.dart';
 
 class LatestStableRelease {
-  const LatestStableRelease({
-    required this.version,
-    required this.data,
-  });
+  const LatestStableRelease({required this.version, required this.data});
 
   final String version;
   final Map<String, dynamic> data;
@@ -35,7 +32,7 @@ class VerifiedUpdateArtifact {
 
 class UpdateService {
   UpdateService({http.Client? httpClient})
-      : _httpClient = httpClient ?? http.Client();
+    : _httpClient = httpClient ?? http.Client();
 
   final http.Client _httpClient;
 
@@ -43,10 +40,12 @@ class UpdateService {
     var page = 1;
     while (true) {
       final pageUri = Uri.parse('${AppConfig.githubReleasesApiUrl}&page=$page');
-      final response = await _httpClient.get(
-        pageUri,
-        headers: const {'Accept': 'application/vnd.github+json'},
-      ).timeout(const Duration(seconds: 8));
+      final response = await _httpClient
+          .get(
+            pageUri,
+            headers: const {'Accept': 'application/vnd.github+json'},
+          )
+          .timeout(const Duration(seconds: 8));
 
       if (response.statusCode != 200) {
         throw http.ClientException(
@@ -136,10 +135,7 @@ class UpdateService {
       final digest = asset['digest'];
       if (digest is! String || !_isSha256Digest(digest)) return null;
 
-      return VerifiedUpdateArtifact(
-        uri: uri,
-        digest: digest,
-      );
+      return VerifiedUpdateArtifact(uri: uri, digest: digest);
     }
 
     return null;
@@ -150,9 +146,9 @@ class UpdateService {
     required String assetName,
     required String digest,
   }) async {
-    final response = await _httpClient.get(uri).timeout(
-          const Duration(seconds: 60),
-        );
+    final response = await _httpClient
+        .get(uri)
+        .timeout(const Duration(seconds: 60));
     if (response.statusCode != 200) {
       throw UpdateVerificationException(
         'Update download failed (${response.statusCode})',
@@ -168,8 +164,9 @@ class UpdateService {
     }
 
     final temporaryDirectory = await getTemporaryDirectory();
-    final file =
-        File('${temporaryDirectory.path}${Platform.pathSeparator}$assetName');
+    final file = File(
+      '${temporaryDirectory.path}${Platform.pathSeparator}$assetName',
+    );
     await file.writeAsBytes(response.bodyBytes, flush: true);
     return file;
   }

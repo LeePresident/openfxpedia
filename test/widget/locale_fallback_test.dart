@@ -69,8 +69,10 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        locale:
-            const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+        locale: const Locale.fromSubtags(
+          languageCode: 'zh',
+          scriptCode: 'Hans',
+        ),
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -79,9 +81,10 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: ChangelogScreen(
-            bundle: _MapAssetBundle({
-          'assets/data/changelog_entries.json': jsonFixture,
-        })),
+          bundle: _MapAssetBundle({
+            'assets/data/changelog_entries.json': jsonFixture,
+          }),
+        ),
       ),
     );
 
@@ -92,11 +95,13 @@ void main() {
     expect(
       LocalizationObservability.events,
       anyElement(
-        predicate<Map<String, String>>((event) =>
-            event['event'] == 'localization_fallback' &&
-            event['surface'] == 'changelog' &&
-            event['locale'] == 'zh_Hans' &&
-            event['fallback'] == 'en'),
+        predicate<Map<String, String>>(
+          (event) =>
+              event['event'] == 'localization_fallback' &&
+              event['surface'] == 'changelog' &&
+              event['locale'] == 'zh_Hans' &&
+              event['fallback'] == 'en',
+        ),
       ),
     );
   });
@@ -110,10 +115,7 @@ class _UiFallbackProbe extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: Column(
-        children: [
-          Text(l10n.settings_language),
-          Text(l10n.settings_title),
-        ],
+        children: [Text(l10n.settings_language), Text(l10n.settings_title)],
       ),
     );
   }

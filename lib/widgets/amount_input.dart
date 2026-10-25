@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AmountInput extends StatefulWidget {
@@ -23,9 +23,7 @@ class _AmountInputState extends State<AmountInput> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(
-      text: widget.initialValue.toString(),
-    );
+    _controller = TextEditingController(text: widget.initialValue.toString());
   }
 
   @override

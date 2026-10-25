@@ -51,7 +51,7 @@ abstract class HistoricalExchangeProvider implements ExchangeProvider {
 
 class LegacyExchangeProvider implements HistoricalExchangeProvider {
   LegacyExchangeProvider({http.Client? httpClient})
-      : _httpClient = httpClient ?? http.Client();
+    : _httpClient = httpClient ?? http.Client();
 
   final http.Client _httpClient;
 
@@ -134,11 +134,15 @@ class LegacyExchangeProvider implements HistoricalExchangeProvider {
       throw ExchangeApiException('Invalid historical Exchange API quote');
     }
     final parsedDate = DateTime.parse(rawDate);
-    final quotedAt =
-        DateTime.utc(parsedDate.year, parsedDate.month, parsedDate.day);
+    final quotedAt = DateTime.utc(
+      parsedDate.year,
+      parsedDate.month,
+      parsedDate.day,
+    );
     if (quotedAt.isAfter(requestedDate)) {
       throw ExchangeApiException(
-          'Historical quote is after the requested date');
+        'Historical quote is after the requested date',
+      );
     }
     return ExchangeRateSnapshot(
       baseCurrency: normalizedBase,
@@ -149,10 +153,9 @@ class LegacyExchangeProvider implements HistoricalExchangeProvider {
   }
 
   Future<Map<String, dynamic>> _getJson(String url) async {
-    final response = await _httpClient.get(
-      Uri.parse(url),
-      headers: const {'Accept': 'application/json'},
-    ).timeout(const Duration(seconds: 15));
+    final response = await _httpClient
+        .get(Uri.parse(url), headers: const {'Accept': 'application/json'})
+        .timeout(const Duration(seconds: 15));
 
     if (response.statusCode != 200) {
       throw ExchangeApiException('HTTP ${response.statusCode} fetching $url');

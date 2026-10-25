@@ -98,13 +98,14 @@ class AppState extends ChangeNotifier {
     required FavoritesService favoritesService,
     required CacheService cacheService,
     Iterable<Locale> Function()? systemLocales,
-  })  : _conversionService = conversionService,
-        _catalogService = catalogService,
-        _favoritesService = favoritesService,
-        _cacheService = cacheService {
+  }) : _conversionService = conversionService,
+       _catalogService = catalogService,
+       _favoritesService = favoritesService,
+       _cacheService = cacheService {
     _preferencesState = UserPreferencesState(
       cacheService: _cacheService,
-      systemLocales: systemLocales ??
+      systemLocales:
+          systemLocales ??
           (() => WidgetsBinding.instance.platformDispatcher.locales),
       onChanged: notifyListeners,
     );
@@ -126,10 +127,12 @@ class AppState extends ChangeNotifier {
 
   List<Currency> get favoriteCurrencies {
     return _favoritesService.favorites
-        .map((code) => _currencies.firstWhere(
-              (c) => c.isoCode.toLowerCase() == code,
-              orElse: () => Currency(isoCode: code.toUpperCase(), name: code),
-            ))
+        .map(
+          (code) => _currencies.firstWhere(
+            (c) => c.isoCode.toLowerCase() == code,
+            orElse: () => Currency(isoCode: code.toUpperCase(), name: code),
+          ),
+        )
         .toList();
   }
 

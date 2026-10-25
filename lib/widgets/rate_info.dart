@@ -25,9 +25,10 @@ class RateInfoWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
-              width: 14,
-              height: 14,
-              child: CircularProgressIndicator(strokeWidth: 2)),
+            width: 14,
+            height: 14,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
           const SizedBox(width: 8),
           Text(l10n.rate_info_refreshing, style: const TextStyle(fontSize: 12)),
         ],
@@ -38,9 +39,9 @@ class RateInfoWidget extends StatelessWidget {
 
     final dateFormatter = DateFormat.yMMMd(l10n.localeName);
     final timeLabel = requestedDate == null
-        ? DateFormat.yMMMd(l10n.localeName)
-            .add_Hm()
-            .format(rate!.timestamp.toLocal())
+        ? DateFormat.yMMMd(
+            l10n.localeName,
+          ).add_Hm().format(rate!.timestamp.toLocal())
         : l10n.rate_info_effective_date(dateFormatter.format(rate!.timestamp));
     final sourceLabel = fromCache ? l10n.rate_info_cached : l10n.rate_info_live;
     final rateSummary =

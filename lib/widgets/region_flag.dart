@@ -95,9 +95,7 @@ const Map<String, String> _regionCountryCodes = {
   'Wallis and Futuna': 'WF',
 };
 
-const Map<String, String> _currencyFlagCodes = {
-  'EUR': 'EU',
-};
+const Map<String, String> _currencyFlagCodes = {'EUR': 'EU'};
 
 const Set<String> _originalCurrencyIconCodes = {
   'XAF',
@@ -193,11 +191,7 @@ Widget buildCurrencyFlag({
 
   return CountryFlag.fromCountryCode(
     regionFlagCode,
-    theme: ImageTheme(
-      width: width,
-      height: height,
-      shape: const Circle(),
-    ),
+    theme: ImageTheme(width: width, height: height, shape: const Circle()),
   );
 }
 

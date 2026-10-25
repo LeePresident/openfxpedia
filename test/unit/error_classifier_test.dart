@@ -6,21 +6,29 @@ import 'package:openfxpedia/services/update_service.dart';
 
 void main() {
   group('ErrorClassifier', () {
-    test('classifies transport and API failures without preserving details',
-        () {
-      expect(ErrorClassifier.codeFor(Exception('SocketException: secret.host')),
-          'network');
-      expect(ErrorClassifier.codeFor(Exception('OS Error: errno = 101')),
-          'network');
-      expect(
-          ErrorClassifier.codeFor(Exception('request timed out')), 'timeout');
-      expect(
-        ErrorClassifier.codeFor(
-          ExchangeApiException('HTTP 503 fetching https://private.example'),
-        ),
-        'http_503',
-      );
-    });
+    test(
+      'classifies transport and API failures without preserving details',
+      () {
+        expect(
+          ErrorClassifier.codeFor(Exception('SocketException: secret.host')),
+          'network',
+        );
+        expect(
+          ErrorClassifier.codeFor(Exception('OS Error: errno = 101')),
+          'network',
+        );
+        expect(
+          ErrorClassifier.codeFor(Exception('request timed out')),
+          'timeout',
+        );
+        expect(
+          ErrorClassifier.codeFor(
+            ExchangeApiException('HTTP 503 fetching https://private.example'),
+          ),
+          'http_503',
+        );
+      },
+    );
 
     test('classifies known remote services consistently', () {
       expect(

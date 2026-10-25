@@ -30,17 +30,13 @@ class CurrencyDetailScreen extends StatelessWidget {
               child: Text(l10n.detail_cancel),
             ),
             OutlinedButton(
-              onPressed: () => Navigator.pop(
-                dialogContext,
-                _ConversionFieldChoice.to,
-              ),
+              onPressed: () =>
+                  Navigator.pop(dialogContext, _ConversionFieldChoice.to),
               child: Text(l10n.detail_to_field),
             ),
             FilledButton(
-              onPressed: () => Navigator.pop(
-                dialogContext,
-                _ConversionFieldChoice.from,
-              ),
+              onPressed: () =>
+                  Navigator.pop(dialogContext, _ConversionFieldChoice.from),
               child: Text(l10n.detail_from_field),
             ),
           ],
@@ -103,7 +99,9 @@ class CurrencyDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 _DetailRow(
-                    label: l10n.detail_iso_code, value: currency.isoCode),
+                  label: l10n.detail_iso_code,
+                  value: currency.isoCode,
+                ),
                 if (currency.isoNumeric != null)
                   _DetailRow(
                     label: l10n.detail_iso_numeric,
@@ -112,11 +110,14 @@ class CurrencyDetailScreen extends StatelessWidget {
                 _DetailRow(label: l10n.detail_name, value: currency.name),
                 if (currency.symbol != null)
                   _DetailRow(
-                      label: l10n.detail_symbol, value: currency.symbol!),
+                    label: l10n.detail_symbol,
+                    value: currency.symbol!,
+                  ),
                 if (currency.majorUnit != null)
                   _DetailRow(
                     label: l10n.detail_units,
-                    value: currency.minorUnit != null &&
+                    value:
+                        currency.minorUnit != null &&
                             currency.minorUnitsPerMajor != null
                         ? l10n.detail_unit_summary(
                             currency.majorUnit!,
@@ -279,10 +280,7 @@ class _DetailRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 100,
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
+            child: Text(label, style: Theme.of(context).textTheme.labelLarge),
           ),
           const SizedBox(width: 8),
           Expanded(child: Text(value)),

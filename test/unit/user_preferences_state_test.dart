@@ -6,30 +6,34 @@ import 'package:openfxpedia/services/cache_service.dart';
 import 'package:openfxpedia/services/exchange_api_source.dart';
 
 void main() {
-  test('preferences persist and reload theme, source, and script locale',
-      () async {
-    final cache = _MemoryCacheService();
-    final state = _preferences(cache);
-    state.load();
+  test(
+    'preferences persist and reload theme, source, and script locale',
+    () async {
+      final cache = _MemoryCacheService();
+      final state = _preferences(cache);
+      state.load();
 
-    const traditionalChinese =
-        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant');
-    await state.setThemeMode(ThemeMode.dark);
-    expect(
-      state.selectExchangeApiSource(ExchangeApiSource.exchangeApi),
-      isTrue,
-    );
-    await state.persistExchangeApiSource();
-    expect(state.selectLocale(traditionalChinese), isTrue);
-    await state.persistLocale();
+      const traditionalChinese = Locale.fromSubtags(
+        languageCode: 'zh',
+        scriptCode: 'Hant',
+      );
+      await state.setThemeMode(ThemeMode.dark);
+      expect(
+        state.selectExchangeApiSource(ExchangeApiSource.exchangeApi),
+        isTrue,
+      );
+      await state.persistExchangeApiSource();
+      expect(state.selectLocale(traditionalChinese), isTrue);
+      await state.persistLocale();
 
-    final reloaded = _preferences(cache)..load();
+      final reloaded = _preferences(cache)..load();
 
-    expect(reloaded.themeMode, ThemeMode.dark);
-    expect(reloaded.exchangeApiSource, ExchangeApiSource.exchangeApi);
-    expect(reloaded.locale, traditionalChinese);
-    expect(reloaded.effectiveLocale, traditionalChinese);
-  });
+      expect(reloaded.themeMode, ThemeMode.dark);
+      expect(reloaded.exchangeApiSource, ExchangeApiSource.exchangeApi);
+      expect(reloaded.locale, traditionalChinese);
+      expect(reloaded.effectiveLocale, traditionalChinese);
+    },
+  );
 
   test('missing or invalid preferences use system and default values', () {
     final cache = _MemoryCacheService()
@@ -43,21 +47,23 @@ void main() {
     expect(state.effectiveLocale, const Locale('en'));
   });
 
-  test('selecting system locale clears a previously persisted locale',
-      () async {
-    final cache = _MemoryCacheService();
-    final state = _preferences(cache)..load();
+  test(
+    'selecting system locale clears a previously persisted locale',
+    () async {
+      final cache = _MemoryCacheService();
+      final state = _preferences(cache)..load();
 
-    expect(state.selectLocale(const Locale('fr')), isTrue);
-    await state.persistLocale();
-    expect(cache.getLocaleCode(), 'fr');
+      expect(state.selectLocale(const Locale('fr')), isTrue);
+      await state.persistLocale();
+      expect(cache.getLocaleCode(), 'fr');
 
-    expect(state.selectLocale(null), isTrue);
-    await state.persistLocale();
+      expect(state.selectLocale(null), isTrue);
+      await state.persistLocale();
 
-    expect(cache.getLocaleCode(), isNull);
-    expect(state.effectiveLocale, const Locale('en'));
-  });
+      expect(cache.getLocaleCode(), isNull);
+      expect(state.effectiveLocale, const Locale('en'));
+    },
+  );
 }
 
 UserPreferencesState _preferences(CacheService cache) {

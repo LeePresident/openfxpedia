@@ -73,8 +73,9 @@ void main() {
         ]),
       ]);
 
-      final release =
-          await UpdateService(httpClient: client).fetchLatestStableRelease();
+      final release = await UpdateService(
+        httpClient: client,
+      ).fetchLatestStableRelease();
 
       expect(release?.version, '1.0.6');
       expect(release?.data['tag_name'], 'v1.0.6');
@@ -94,10 +95,9 @@ void main() {
     });
 
     test('rejects failed HTTP responses and malformed release JSON', () async {
-      final failedClient = _FakeReleaseHttpClient(
-        [jsonEncode([])],
-        statusCode: 503,
-      );
+      final failedClient = _FakeReleaseHttpClient([
+        jsonEncode([]),
+      ], statusCode: 503);
       final malformedClient = _FakeReleaseHttpClient(['not-json']);
 
       await expectLater(
@@ -139,8 +139,9 @@ void main() {
       expect(
         UpdateService().verifiedAsset(
           release(
-              url:
-                  'http://github.com/LeePresident/openfxpedia/releases/download/v1.0.4/$assetName'),
+            url:
+                'http://github.com/LeePresident/openfxpedia/releases/download/v1.0.4/$assetName',
+          ),
           assetName,
         ),
         isNull,
@@ -149,10 +150,7 @@ void main() {
 
     test('rejects assets without a valid SHA-256 digest', () {
       expect(
-        UpdateService().verifiedAsset(
-          release(includeDigest: false),
-          assetName,
-        ),
+        UpdateService().verifiedAsset(release(includeDigest: false), assetName),
         isNull,
       );
       expect(
@@ -181,12 +179,14 @@ void main() {
 
     test('writes a verified download to the temporary directory', () async {
       TestWidgetsFlutterBinding.ensureInitialized();
-      const pathProviderChannel =
-          MethodChannel('plugins.flutter.io/path_provider');
+      const pathProviderChannel = MethodChannel(
+        'plugins.flutter.io/path_provider',
+      );
       final messenger =
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
-      final temporaryDirectory =
-          await Directory.systemTemp.createTemp('openfxpedia-update-test-');
+      final temporaryDirectory = await Directory.systemTemp.createTemp(
+        'openfxpedia-update-test-',
+      );
       messenger.setMockMethodCallHandler(
         pathProviderChannel,
         (call) async => temporaryDirectory.path,

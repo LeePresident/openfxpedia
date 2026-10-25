@@ -56,7 +56,7 @@ void main() {
 
 class _DeferredHistoricalConversion extends ConversionService {
   _DeferredHistoricalConversion()
-      : super(client: ExchangeClient(), cache: CacheService());
+    : super(client: ExchangeClient(), cache: CacheService());
 
   final Completer<ConversionResult> request = Completer<ConversionResult>();
   final Completer<void> requestStarted = Completer<void>();

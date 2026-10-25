@@ -14,9 +14,9 @@ class ConverterState {
     required ConversionService conversionService,
     required void Function() onChanged,
     required void Function() onHistoryRefresh,
-  })  : _conversionService = conversionService,
-        _onChanged = onChanged,
-        _onHistoryRefresh = onHistoryRefresh;
+  }) : _conversionService = conversionService,
+       _onChanged = onChanged,
+       _onHistoryRefresh = onHistoryRefresh;
 
   final ConversionService _conversionService;
   final void Function() _onChanged;

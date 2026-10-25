@@ -17,40 +17,46 @@ import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/favorites_service.dart';
 
 void main() {
-  test('a stale locale catalog load cannot replace the current catalog',
-      () async {
-    final cache = InMemoryCacheService();
-    final catalog = _DelayedCatalogService(cache: cache);
-    final appState = AppState(
-      conversionService: _FakeConversionService(cache: cache),
-      catalogService: catalog,
-      favoritesService: FavoritesService(cache: cache),
-      cacheService: cache,
-      systemLocales: () => const [Locale('en')],
-    );
-    await appState.initialize();
+  test(
+    'a stale locale catalog load cannot replace the current catalog',
+    () async {
+      final cache = InMemoryCacheService();
+      final catalog = _DelayedCatalogService(cache: cache);
+      final appState = AppState(
+        conversionService: _FakeConversionService(cache: cache),
+        catalogService: catalog,
+        favoritesService: FavoritesService(cache: cache),
+        cacheService: cache,
+        systemLocales: () => const [Locale('en')],
+      );
+      await appState.initialize();
 
-    const simplifiedChinese =
-        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans');
-    const traditionalChinese =
-        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant');
-    final simplifiedLoad = appState.setLocale(simplifiedChinese);
-    await catalog.simplifiedChineseRequested.future;
-    final traditionalLoad = appState.setLocale(traditionalChinese);
-    await catalog.traditionalChineseRequested.future;
+      const simplifiedChinese = Locale.fromSubtags(
+        languageCode: 'zh',
+        scriptCode: 'Hans',
+      );
+      const traditionalChinese = Locale.fromSubtags(
+        languageCode: 'zh',
+        scriptCode: 'Hant',
+      );
+      final simplifiedLoad = appState.setLocale(simplifiedChinese);
+      await catalog.simplifiedChineseRequested.future;
+      final traditionalLoad = appState.setLocale(traditionalChinese);
+      await catalog.traditionalChineseRequested.future;
 
-    catalog.traditionalChinese.complete(
-      [Currency(isoCode: 'USD', name: 'US Dollar - Traditional')],
-    );
-    await traditionalLoad;
-    catalog.simplifiedChinese.complete(
-      [Currency(isoCode: 'USD', name: 'US Dollar - Simplified')],
-    );
-    await simplifiedLoad;
+      catalog.traditionalChinese.complete([
+        Currency(isoCode: 'USD', name: 'US Dollar - Traditional'),
+      ]);
+      await traditionalLoad;
+      catalog.simplifiedChinese.complete([
+        Currency(isoCode: 'USD', name: 'US Dollar - Simplified'),
+      ]);
+      await simplifiedLoad;
 
-    expect(appState.locale, traditionalChinese);
-    expect(appState.currencies.single.name, 'US Dollar - Traditional');
-  });
+      expect(appState.locale, traditionalChinese);
+      expect(appState.currencies.single.name, 'US Dollar - Traditional');
+    },
+  );
 
   testWidgets('P1 language switch updates UI and persists selection', (
     tester,
@@ -141,8 +147,10 @@ class _LocaleSwitchPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(l10n.settings_language, key: const Key('language-title')),
-            Text(_describeLocale(appState.locale, l10n),
-                key: const Key('language-value')),
+            Text(
+              _describeLocale(appState.locale, l10n),
+              key: const Key('language-value'),
+            ),
             TextButton(
               onPressed: () => _showLanguageDialog(context, appState),
               child: Text(l10n.settings_language_dialog_title),
@@ -172,7 +180,9 @@ class _LocaleSwitchPage extends StatelessWidget {
               onPressed: () => Navigator.pop(
                 dialogContext,
                 const Locale.fromSubtags(
-                    languageCode: 'zh', scriptCode: 'Hans'),
+                  languageCode: 'zh',
+                  scriptCode: 'Hans',
+                ),
               ),
               child: Text(l10n.language_simplified_chinese),
             ),
@@ -180,7 +190,9 @@ class _LocaleSwitchPage extends StatelessWidget {
               onPressed: () => Navigator.pop(
                 dialogContext,
                 const Locale.fromSubtags(
-                    languageCode: 'zh', scriptCode: 'Hant'),
+                  languageCode: 'zh',
+                  scriptCode: 'Hant',
+                ),
               ),
               child: Text(l10n.language_traditional_chinese),
             ),
@@ -247,11 +259,14 @@ class InMemoryCacheService extends CacheService {
 
 class _FakeConversionService extends ConversionService {
   _FakeConversionService({required super.cache})
-      : super(client: ExchangeClient());
+    : super(client: ExchangeClient());
 
   @override
   Future<ConversionResult> convert(
-      double amount, String base, String target) async {
+    double amount,
+    String base,
+    String target,
+  ) async {
     throw UnimplementedError('Not used by locale switch test.');
   }
 
@@ -281,7 +296,7 @@ class _DelayedCatalogService extends CurrencyCatalogService {
   var _initialLoad = true;
 
   _DelayedCatalogService({required super.cache})
-      : super(client: ExchangeClient());
+    : super(client: ExchangeClient());
 
   @override
   Future<List<Currency>> getCurrencies({
@@ -290,9 +305,7 @@ class _DelayedCatalogService extends CurrencyCatalogService {
   }) {
     if (_initialLoad) {
       _initialLoad = false;
-      return Future.value(
-        [Currency(isoCode: 'USD', name: 'US Dollar')],
-      );
+      return Future.value([Currency(isoCode: 'USD', name: 'US Dollar')]);
     }
     if (locale?.scriptCode == 'Hans') {
       simplifiedChineseRequested.complete();

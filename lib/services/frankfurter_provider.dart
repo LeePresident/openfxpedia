@@ -8,7 +8,7 @@ import 'exchange_provider.dart';
 
 class FrankfurterProvider implements HistoricalExchangeProvider {
   FrankfurterProvider({http.Client? httpClient})
-      : _httpClient = httpClient ?? http.Client();
+    : _httpClient = httpClient ?? http.Client();
 
   final http.Client _httpClient;
 
@@ -18,12 +18,14 @@ class FrankfurterProvider implements HistoricalExchangeProvider {
   @override
   Future<ExchangeRateSnapshot> fetchLatestRates(String base) async {
     final normalizedBase = base.toLowerCase();
-    final response = await _httpClient.get(
-      Uri.parse(
-        '${AppConfig.frankfurterApiBase}/rates?base=${normalizedBase.toUpperCase()}',
-      ),
-      headers: const {'Accept': 'application/json'},
-    ).timeout(const Duration(seconds: 15));
+    final response = await _httpClient
+        .get(
+          Uri.parse(
+            '${AppConfig.frankfurterApiBase}/rates?base=${normalizedBase.toUpperCase()}',
+          ),
+          headers: const {'Accept': 'application/json'},
+        )
+        .timeout(const Duration(seconds: 15));
 
     if (response.statusCode != 200) {
       throw ExchangeApiException(
@@ -66,11 +68,7 @@ class FrankfurterProvider implements HistoricalExchangeProvider {
 
     return ExchangeRateSnapshot(
       baseCurrency: normalizedBase,
-      quotedAt: DateTime.utc(
-        latestDate.year,
-        latestDate.month,
-        latestDate.day,
-      ),
+      quotedAt: DateTime.utc(latestDate.year, latestDate.month, latestDate.day),
       sourceId: sourceId,
       rates: rates,
     );
@@ -97,18 +95,20 @@ class FrankfurterProvider implements HistoricalExchangeProvider {
   }) async {
     final normalizedBase = base.toLowerCase();
     final normalizedTarget = target.toLowerCase();
-    final requestedDate =
-        date == null ? null : DateTime.utc(date.year, date.month, date.day);
-    final uri = Uri.parse(
-      '${AppConfig.frankfurterApiBase}/rate/${normalizedBase.toUpperCase()}/${normalizedTarget.toUpperCase()}',
-    ).replace(
-        queryParameters: requestedDate == null
-            ? null
-            : {'date': requestedDate.toIso8601String().split('T').first});
-    final response = await _httpClient.get(
-      uri,
-      headers: const {'Accept': 'application/json'},
-    ).timeout(const Duration(seconds: 15));
+    final requestedDate = date == null
+        ? null
+        : DateTime.utc(date.year, date.month, date.day);
+    final uri =
+        Uri.parse(
+          '${AppConfig.frankfurterApiBase}/rate/${normalizedBase.toUpperCase()}/${normalizedTarget.toUpperCase()}',
+        ).replace(
+          queryParameters: requestedDate == null
+              ? null
+              : {'date': requestedDate.toIso8601String().split('T').first},
+        );
+    final response = await _httpClient
+        .get(uri, headers: const {'Accept': 'application/json'})
+        .timeout(const Duration(seconds: 15));
 
     if (response.statusCode != 200) {
       throw ExchangeApiException(
@@ -127,8 +127,11 @@ class FrankfurterProvider implements HistoricalExchangeProvider {
     }
 
     final parsedDate = DateTime.parse(rawDate);
-    final quotedAt =
-        DateTime.utc(parsedDate.year, parsedDate.month, parsedDate.day);
+    final quotedAt = DateTime.utc(
+      parsedDate.year,
+      parsedDate.month,
+      parsedDate.day,
+    );
     if (quote.toLowerCase() != normalizedTarget ||
         !rate.isFinite ||
         rate <= 0 ||

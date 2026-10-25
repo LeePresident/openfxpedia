@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfxpedia/l10n/app_localizations.dart';
@@ -6,8 +6,9 @@ import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/widgets/search_bar.dart' as app_search;
 
 void main() {
-  testWidgets('currency selector dialog exposes accessible controls',
-      (tester) async {
+  testWidgets('currency selector dialog exposes accessible controls', (
+    tester,
+  ) async {
     Currency? selected;
     await tester.pumpWidget(
       MaterialApp(

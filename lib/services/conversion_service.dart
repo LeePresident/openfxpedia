@@ -29,8 +29,8 @@ class ConversionService {
   ConversionService({
     required ExchangeClient client,
     required CacheService cache,
-  })  : _client = client,
-        _cache = cache;
+  }) : _client = client,
+       _cache = cache;
 
   void setPreferredSource(ExchangeApiSource source) {
     _preferredSource = source;
@@ -41,19 +41,14 @@ class ConversionService {
     _pendingLatestSnapshots.clear();
   }
 
-  Future<ConversionResult> convert(
-    double amount,
-    String base,
-    String target,
-  ) =>
+  Future<ConversionResult> convert(double amount, String base, String target) =>
       _convert(amount, base, target);
 
   Future<ConversionResult> convertPrecise(
     double amount,
     String base,
     String target,
-  ) =>
-      _convert(amount, base, target, roundAmount: false);
+  ) => _convert(amount, base, target, roundAmount: false);
 
   Future<ConversionResult> convertHistorical(
     double amount,
@@ -61,16 +56,14 @@ class ConversionService {
     String target,
     DateTime date, {
     bool forceRefresh = false,
-  }) =>
-      _convert(amount, base, target, date: date, forceRefresh: forceRefresh);
+  }) => _convert(amount, base, target, date: date, forceRefresh: forceRefresh);
 
   Future<ConversionResult> convertHistoricalPrecise(
     double amount,
     String base,
     String target,
     DateTime date,
-  ) =>
-      _convert(amount, base, target, date: date, roundAmount: false);
+  ) => _convert(amount, base, target, date: date, roundAmount: false);
 
   Future<ConversionResult> _convert(
     double amount,
@@ -84,8 +77,9 @@ class ConversionService {
     final preferredSource = _preferredSource;
     final b = base.toLowerCase();
     final t = target.toLowerCase();
-    final requestedDate =
-        date == null ? null : DateTime.utc(date.year, date.month, date.day);
+    final requestedDate = date == null
+        ? null
+        : DateTime.utc(date.year, date.month, date.day);
     final now = DateTime.now();
     final today = DateTime.utc(now.year, now.month, now.day);
     if (requestedDate != null && requestedDate.isAfter(today)) {
@@ -103,12 +97,14 @@ class ConversionService {
     final cached = _cache.getCachedRateSnapshot(cacheKey);
     final compatibleSource =
         requestedDate != null && preferredSource == ExchangeApiSource.auto
-            ? cached.source == 'frankfurter' || cached.source == 'legacy'
-            : _matchesPreferredSource(cached.source, preferredSource);
-    final compatibleDate = requestedDate == null ||
+        ? cached.source == 'frankfurter' || cached.source == 'legacy'
+        : _matchesPreferredSource(cached.source, preferredSource);
+    final compatibleDate =
+        requestedDate == null ||
         (cached.timestamp != null && !cached.timestamp!.isAfter(requestedDate));
     final freshCacheHasRequestedRate = cached.rates?.containsKey(t) ?? false;
-    final canUseFreshPreferredCache = !forceRefresh &&
+    final canUseFreshPreferredCache =
+        !forceRefresh &&
         cached.rates != null &&
         (!cached.isStale ||
             (requestedDate != null && requestedDate.isBefore(today))) &&
@@ -228,7 +224,9 @@ class ConversionService {
   }
 
   bool _matchesPreferredSource(
-      String? source, ExchangeApiSource preferredSource) {
+    String? source,
+    ExchangeApiSource preferredSource,
+  ) {
     if (source == null) {
       return false;
     }

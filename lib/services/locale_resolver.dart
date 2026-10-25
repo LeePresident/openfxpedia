@@ -22,12 +22,16 @@ class LocaleResolver {
         }
       }
 
-      final exactMatch =
-          _matchSupportedLocale(locale, allowLanguageOnly: false);
+      final exactMatch = _matchSupportedLocale(
+        locale,
+        allowLanguageOnly: false,
+      );
       if (exactMatch != null) return exactMatch;
 
-      final languageMatch =
-          _matchSupportedLocale(locale, allowLanguageOnly: true);
+      final languageMatch = _matchSupportedLocale(
+        locale,
+        allowLanguageOnly: true,
+      );
       if (languageMatch != null) return languageMatch;
     }
     return null;
@@ -57,7 +61,8 @@ class LocaleResolver {
       if (locale.languageCode != supported.languageCode) continue;
 
       final scriptsMatch = locale.scriptCode == supported.scriptCode;
-      final countriesMatch = supported.countryCode == null ||
+      final countriesMatch =
+          supported.countryCode == null ||
           locale.countryCode == null ||
           locale.countryCode == supported.countryCode;
 

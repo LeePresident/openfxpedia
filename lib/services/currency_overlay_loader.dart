@@ -23,8 +23,9 @@ class CurrencyOverlayLoader {
         for (final item in entries.entries) {
           final value = item.value;
           if (value is Map<String, dynamic>) {
-            overlay[item.key.toUpperCase()] =
-                value.map((key, value) => MapEntry(key.toString(), value));
+            overlay[item.key.toUpperCase()] = value.map(
+              (key, value) => MapEntry(key.toString(), value),
+            );
           }
         }
       }

@@ -36,10 +36,7 @@ void main() {
       ),
       'Hans',
     ),
-    (
-      const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Latn'),
-      'Hant',
-    ),
+    (const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Latn'), 'Hant'),
   ]) {
     test('UI and catalog agree on Chinese locale ${example.$1}', () {
       expect(
@@ -53,7 +50,7 @@ void main() {
   for (final locale in <Locale?>[
     null,
     const Locale('en'),
-    const Locale('fr')
+    const Locale('fr'),
   ]) {
     test('catalog falls back to English for $locale', () {
       expect(LocaleResolver.catalogKey(locale), 'en');

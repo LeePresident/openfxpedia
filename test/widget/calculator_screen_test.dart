@@ -73,8 +73,11 @@ class _RateClient extends ExchangeClient {
     lastHistoricalDate = date;
     return ExchangeRateSnapshot(
       baseCurrency: base.toLowerCase(),
-      quotedAt: DateTime.utc(date.year, date.month, date.day)
-          .subtract(const Duration(days: 2)),
+      quotedAt: DateTime.utc(
+        date.year,
+        date.month,
+        date.day,
+      ).subtract(const Duration(days: 2)),
       sourceId: 'frankfurter',
       rates: _rates(base),
     );
@@ -123,10 +126,7 @@ class _StubCache extends CacheService {
       );
 
   @override
-  CachedRateSnapshot getCachedRateSnapshot(
-    String base, {
-    int ttlHours = 12,
-  }) =>
+  CachedRateSnapshot getCachedRateSnapshot(String base, {int ttlHours = 12}) =>
       const CachedRateSnapshot(
         rates: null,
         timestamp: null,
@@ -157,114 +157,115 @@ class _StubCatalog extends CurrencyCatalogService {
   Future<List<Currency>> getCurrencies({
     bool forceRefresh = false,
     Locale? locale,
-  }) async =>
-      [_usd, _eur, _gbp];
+  }) async => [_usd, _eur, _gbp];
 }
 
 void main() {
   testWidgets(
-      'calculator adds entries, sums in the result currency, and keeps session state',
-      (tester) async {
-    tester.view.physicalSize = const Size(1440, 900);
-    tester.view.devicePixelRatio = 1;
-    addTearDown(tester.view.resetPhysicalSize);
-    addTearDown(tester.view.resetDevicePixelRatio);
+    'calculator adds entries, sums in the result currency, and keeps session state',
+    (tester) async {
+      tester.view.physicalSize = const Size(1440, 900);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
 
-    final cache = _StubCache();
-    final client = _RateClient();
-    final state = AppState(
-      conversionService: ConversionService(client: client, cache: cache),
-      catalogService: _StubCatalog(client: client, cache: cache),
-      favoritesService: FavoritesService(cache: cache),
-      cacheService: cache,
-      systemLocales: () => const [Locale('en')],
-    );
-    addTearDown(state.dispose);
-    await state.initialize();
-    state.setSelectedTab(1);
+      final cache = _StubCache();
+      final client = _RateClient();
+      final state = AppState(
+        conversionService: ConversionService(client: client, cache: cache),
+        catalogService: _StubCatalog(client: client, cache: cache),
+        favoritesService: FavoritesService(cache: cache),
+        cacheService: cache,
+        systemLocales: () => const [Locale('en')],
+      );
+      addTearDown(state.dispose);
+      await state.initialize();
+      state.setSelectedTab(1);
 
-    await tester.pumpWidget(_Harness(state));
-    expect(find.text('Calculator'), findsOneWidget);
-    expect(state.calculatorEntries, hasLength(1));
-    expect(
-      tester.getSize(find.byType(Card).first).width,
-      greaterThan(1300),
-    );
+      await tester.pumpWidget(_Harness(state));
+      expect(find.text('Calculator'), findsOneWidget);
+      expect(state.calculatorEntries, hasLength(1));
+      expect(tester.getSize(find.byType(Card).first).width, greaterThan(1300));
 
-    final firstEntry = state.calculatorEntries.first;
-    await tester.tap(find.text('Add amount'));
-    await tester.pumpAndSettle();
-    expect(state.calculatorEntries, hasLength(2));
-    final secondEntry = state.calculatorEntries.last;
+      final firstEntry = state.calculatorEntries.first;
+      await tester.tap(find.text('Add amount'));
+      await tester.pumpAndSettle();
+      expect(state.calculatorEntries, hasLength(2));
+      final secondEntry = state.calculatorEntries.last;
 
-    await tester.tap(find.descendant(
-      of: find.byKey(const ValueKey('calculator-output-currency')),
-      matching: find.byType(InkWell),
-    ));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('GBP'));
-    await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.byKey(const ValueKey('calculator-output-currency')),
+          matching: find.byType(InkWell),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('GBP'));
+      await tester.pumpAndSettle();
 
-    await tester.ensureVisible(
-      find.byKey(ValueKey('calculator-currency-${secondEntry.id}')),
-    );
-    await tester.tap(find.descendant(
-      of: find.byKey(ValueKey('calculator-currency-${secondEntry.id}')),
-      matching: find.byType(InkWell),
-    ));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('EUR'));
-    await tester.pumpAndSettle();
+      await tester.ensureVisible(
+        find.byKey(ValueKey('calculator-currency-${secondEntry.id}')),
+      );
+      await tester.tap(
+        find.descendant(
+          of: find.byKey(ValueKey('calculator-currency-${secondEntry.id}')),
+          matching: find.byType(InkWell),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('EUR'));
+      await tester.pumpAndSettle();
 
-    await tester.enterText(
-      find.descendant(
-        of: find.byKey(ValueKey('calculator-amount-${firstEntry.id}')),
-        matching: find.byType(TextField),
-      ),
-      '10',
-    );
-    await tester.enterText(
-      find.descendant(
-        of: find.byKey(ValueKey('calculator-amount-${secondEntry.id}')),
-        matching: find.byType(TextField),
-      ),
-      '15',
-    );
-    await tester.pumpAndSettle();
+      await tester.enterText(
+        find.descendant(
+          of: find.byKey(ValueKey('calculator-amount-${firstEntry.id}')),
+          matching: find.byType(TextField),
+        ),
+        '10',
+      );
+      await tester.enterText(
+        find.descendant(
+          of: find.byKey(ValueKey('calculator-amount-${secondEntry.id}')),
+          matching: find.byType(TextField),
+        ),
+        '15',
+      );
+      await tester.pumpAndSettle();
 
-    await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-    expect(state.calculatorTotal, 20.9);
-    expect(state.calculatorLineResults, hasLength(2));
-    expect(find.textContaining('20.90'), findsOneWidget);
+      expect(state.calculatorTotal, 20.9);
+      expect(state.calculatorLineResults, hasLength(2));
+      expect(find.textContaining('20.90'), findsOneWidget);
 
-    await state.setCalculatorDate(DateTime(2024, 3, 10));
-    await tester.pumpAndSettle();
-    expect(client.lastHistoricalDate, DateTime.utc(2024, 3, 10));
-    expect(state.conversionDate, isNull);
+      await state.setCalculatorDate(DateTime(2024, 3, 10));
+      await tester.pumpAndSettle();
+      expect(client.lastHistoricalDate, DateTime.utc(2024, 3, 10));
+      expect(state.conversionDate, isNull);
 
-    state.setSelectedTab(0);
-    await tester.pumpAndSettle();
-    expect(find.byType(CalculatorScreen), findsNothing);
-    state.setSelectedTab(1);
-    await tester.pumpAndSettle();
-    expect(find.byType(CalculatorScreen), findsOneWidget);
-    expect(state.calculatorEntries, hasLength(2));
-    expect(state.calculatorOutputCurrencyCode, 'GBP');
-    expect(state.calculatorDate, DateTime(2024, 3, 10));
+      state.setSelectedTab(0);
+      await tester.pumpAndSettle();
+      expect(find.byType(CalculatorScreen), findsNothing);
+      state.setSelectedTab(1);
+      await tester.pumpAndSettle();
+      expect(find.byType(CalculatorScreen), findsOneWidget);
+      expect(state.calculatorEntries, hasLength(2));
+      expect(state.calculatorOutputCurrencyCode, 'GBP');
+      expect(state.calculatorDate, DateTime(2024, 3, 10));
 
-    await state.setLocale(const Locale('zh'));
-    await tester.pumpAndSettle();
-    expect(state.calculatorEntries.map((entry) => entry.currencyCode), [
-      'USD',
-      'EUR',
-    ]);
-    expect(tester.takeException(), isNull);
+      await state.setLocale(const Locale('zh'));
+      await tester.pumpAndSettle();
+      expect(state.calculatorEntries.map((entry) => entry.currencyCode), [
+        'USD',
+        'EUR',
+      ]);
+      expect(tester.takeException(), isNull);
 
-    await tester.tap(find.byTooltip('移除金额').last);
-    await tester.pumpAndSettle();
-    expect(state.calculatorEntries, hasLength(1));
-  });
+      await tester.tap(find.byTooltip('移除金额').last);
+      await tester.pumpAndSettle();
+      expect(state.calculatorEntries, hasLength(1));
+    },
+  );
 }
 
 class _Harness extends StatelessWidget {

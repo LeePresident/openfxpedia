@@ -1,8 +1,4 @@
-enum ExchangeApiSource {
-  auto,
-  frankfurter,
-  exchangeApi,
-}
+enum ExchangeApiSource { auto, frankfurter, exchangeApi }
 
 extension ExchangeApiSourceStorage on ExchangeApiSource {
   String get storageValue {

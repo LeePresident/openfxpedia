@@ -12,50 +12,54 @@ import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/favorites_service.dart';
 
 void main() {
-  test('changing exchange source persists it and recalculates both features',
-      () async {
-    final cache = _MemoryCacheService();
-    final conversion = _RecordingConversionService(cache);
-    final client = ExchangeClient();
-    final state = AppState(
-      conversionService: conversion,
-      catalogService: _StubCatalogService(client: client, cache: cache),
-      favoritesService: FavoritesService(cache: cache),
-      cacheService: cache,
-      systemLocales: () => const [Locale('en')],
-    );
-    addTearDown(state.dispose);
+  test(
+    'changing exchange source persists it and recalculates both features',
+    () async {
+      final cache = _MemoryCacheService();
+      final conversion = _RecordingConversionService(cache);
+      final client = ExchangeClient();
+      final state = AppState(
+        conversionService: conversion,
+        catalogService: _StubCatalogService(client: client, cache: cache),
+        favoritesService: FavoritesService(cache: cache),
+        cacheService: cache,
+        systemLocales: () => const [Locale('en')],
+      );
+      addTearDown(state.dispose);
 
-    expect(await state.initialize(), isTrue);
-    final usd =
-        state.currencies.firstWhere((currency) => currency.isoCode == 'USD');
-    final eur =
-        state.currencies.firstWhere((currency) => currency.isoCode == 'EUR');
+      expect(await state.initialize(), isTrue);
+      final usd = state.currencies.firstWhere(
+        (currency) => currency.isoCode == 'USD',
+      );
+      final eur = state.currencies.firstWhere(
+        (currency) => currency.isoCode == 'EUR',
+      );
 
-    state.setCurrencyPair(baseCurrency: usd, targetCurrency: eur);
-    await state.convert();
-    final entry = state.calculatorEntries.single;
-    state.setCalculatorEntryAmount(entry.id, 10);
-    await state.calculateCalculator();
+      state.setCurrencyPair(baseCurrency: usd, targetCurrency: eur);
+      await state.convert();
+      final entry = state.calculatorEntries.single;
+      state.setCalculatorEntryAmount(entry.id, 10);
+      await state.calculateCalculator();
 
-    conversion.latestSources.clear();
-    conversion.preciseSources.clear();
-    await state.setExchangeApiSource(ExchangeApiSource.exchangeApi);
+      conversion.latestSources.clear();
+      conversion.preciseSources.clear();
+      await state.setExchangeApiSource(ExchangeApiSource.exchangeApi);
 
-    expect(state.exchangeApiSource, ExchangeApiSource.exchangeApi);
-    expect(
-      cache.getString(AppConfig.exchangeApiSourceKey),
-      ExchangeApiSource.exchangeApi.storageValue,
-    );
-    expect(conversion.preferredSource, ExchangeApiSource.exchangeApi);
-    expect(conversion.latestSources, [ExchangeApiSource.exchangeApi]);
-    expect(conversion.preciseSources, [ExchangeApiSource.exchangeApi]);
-  });
+      expect(state.exchangeApiSource, ExchangeApiSource.exchangeApi);
+      expect(
+        cache.getString(AppConfig.exchangeApiSourceKey),
+        ExchangeApiSource.exchangeApi.storageValue,
+      );
+      expect(conversion.preferredSource, ExchangeApiSource.exchangeApi);
+      expect(conversion.latestSources, [ExchangeApiSource.exchangeApi]);
+      expect(conversion.preciseSources, [ExchangeApiSource.exchangeApi]);
+    },
+  );
 }
 
 class _RecordingConversionService extends ConversionService {
   _RecordingConversionService(CacheService cache)
-      : super(client: ExchangeClient(), cache: cache);
+    : super(client: ExchangeClient(), cache: cache);
 
   final latestSources = <ExchangeApiSource>[];
   final preciseSources = <ExchangeApiSource>[];

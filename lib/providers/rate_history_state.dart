@@ -6,8 +6,8 @@ class RateHistoryState {
   RateHistoryState({
     required ConversionService conversionService,
     required void Function() onChanged,
-  })  : _service = RateHistoryService(conversionService),
-        _onChanged = onChanged;
+  }) : _service = RateHistoryService(conversionService),
+       _onChanged = onChanged;
 
   final RateHistoryService _service;
   final void Function() _onChanged;

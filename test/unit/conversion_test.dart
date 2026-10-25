@@ -20,9 +20,10 @@ class _FakeExchangeClient extends ExchangeClient {
   int historicalCalls = 0;
   bool historicalUnavailable = false;
 
-  _FakeExchangeClient(this._rates,
-      {Map<String, Map<String, double>>? fallbackRates})
-      : _fallbackRates = fallbackRates ?? const {};
+  _FakeExchangeClient(
+    this._rates, {
+    Map<String, Map<String, double>>? fallbackRates,
+  }) : _fallbackRates = fallbackRates ?? const {};
 
   @override
   Future<Map<String, double>> fetchRatesFor(String base) async {
@@ -102,8 +103,11 @@ class _FakeExchangeClient extends ExchangeClient {
     historicalCalls++;
     lastHistoricalDate = date;
     if (historicalUnavailable) throw ExchangeApiException('Unavailable');
-    return fetchRateSnapshotFor(base,
-        target: target, preferredSource: preferredSource);
+    return fetchRateSnapshotFor(
+      base,
+      target: target,
+      preferredSource: preferredSource,
+    );
   }
 
   @override
@@ -123,10 +127,7 @@ class _StubCacheService extends CacheService {
   Future<void> init() async {}
 
   @override
-  CachedRateSnapshot getCachedRates(
-    String base, {
-    int ttlHours = 12,
-  }) {
+  CachedRateSnapshot getCachedRates(String base, {int ttlHours = 12}) {
     if (_storedRates == null) {
       return const CachedRateSnapshot(
         rates: null,
@@ -155,10 +156,7 @@ class _StubCacheService extends CacheService {
   }
 
   @override
-  CachedRateSnapshot getCachedRateSnapshot(
-    String base, {
-    int ttlHours = 12,
-  }) {
+  CachedRateSnapshot getCachedRateSnapshot(String base, {int ttlHours = 12}) {
     if (base.startsWith('history:')) {
       return historicalSnapshots[base] ??
           const CachedRateSnapshot(
@@ -209,71 +207,98 @@ class _StubCacheService extends CacheService {
 
 void main() {
   group('Historical conversion', () {
-    test('isolates dates and latest cache, reuses past rates offline',
-        () async {
-      final client = _FakeExchangeClient({
-        'usd': {'eur': 0.92}
-      });
-      final cache = _StubCacheService(stale: false)
-        .._storedRates = {'eur': 0.5}
-        .._storedTimestamp = DateTime.now().toUtc()
-        .._storedSource = 'frankfurter';
-      final service = ConversionService(client: client, cache: cache);
-      final date = DateTime(2026, 5, 10);
-      final result = await service.convertHistorical(100, 'USD', 'EUR', date);
-      expect(result.amount, 92);
-      expect(result.fromCache, isFalse);
-      expect(client.lastHistoricalDate, DateTime.utc(2026, 5, 10));
-      expect(cache.getCachedRateSnapshot('usd').rates, {'eur': 0.5});
-      client.historicalUnavailable = true;
-      final offline = await service.convertHistorical(50, 'USD', 'EUR', date);
-      expect(offline.amount, 46);
-      expect(offline.fromCache, isTrue);
-      expect(offline.rate.timestamp, DateTime.utc(2026, 5, 7));
-      expect(client.historicalCalls, 1);
-      await expectLater(
+    test(
+      'isolates dates and latest cache, reuses past rates offline',
+      () async {
+        final client = _FakeExchangeClient({
+          'usd': {'eur': 0.92},
+        });
+        final cache = _StubCacheService(stale: false)
+          .._storedRates = {'eur': 0.5}
+          .._storedTimestamp = DateTime.now().toUtc()
+          .._storedSource = 'frankfurter';
+        final service = ConversionService(client: client, cache: cache);
+        final date = DateTime(2026, 5, 10);
+        final result = await service.convertHistorical(100, 'USD', 'EUR', date);
+        expect(result.amount, 92);
+        expect(result.fromCache, isFalse);
+        expect(client.lastHistoricalDate, DateTime.utc(2026, 5, 10));
+        expect(cache.getCachedRateSnapshot('usd').rates, {'eur': 0.5});
+        client.historicalUnavailable = true;
+        final offline = await service.convertHistorical(50, 'USD', 'EUR', date);
+        expect(offline.amount, 46);
+        expect(offline.fromCache, isTrue);
+        expect(offline.rate.timestamp, DateTime.utc(2026, 5, 7));
+        expect(client.historicalCalls, 1);
+        await expectLater(
           service.convertHistorical(100, 'USD', 'EUR', DateTime(2026, 5, 11)),
-          throwsA(isA<ExchangeApiException>()));
-      await expectLater(service.convertHistorical(100, 'USD', 'GBP', date),
-          throwsA(isA<ExchangeApiException>()));
-    });
+          throwsA(isA<ExchangeApiException>()),
+        );
+        await expectLater(
+          service.convertHistorical(100, 'USD', 'GBP', date),
+          throwsA(isA<ExchangeApiException>()),
+        );
+      },
+    );
 
-    test('refreshes selected date and falls back only to its cached quote',
-        () async {
-      final client = _FakeExchangeClient({
-        'usd': {'eur': 0.92}
-      });
-      final service =
-          ConversionService(client: client, cache: _StubCacheService());
-      final date = DateTime(2026, 5, 10);
-      await service.convertHistorical(100, 'USD', 'EUR', date);
-      final refreshed = await service.convertHistorical(100, 'USD', 'EUR', date,
-          forceRefresh: true);
-      expect(refreshed.fromCache, isFalse);
-      client.historicalUnavailable = true;
-      final offline = await service.convertHistorical(100, 'USD', 'EUR', date,
-          forceRefresh: true);
-      expect(offline.fromCache, isTrue);
-      expect(client.historicalCalls, 3);
-      service.setPreferredSource(ExchangeApiSource.exchangeApi);
-      await expectLater(service.convertHistorical(100, 'USD', 'EUR', date),
-          throwsA(isA<ExchangeApiException>()));
-    });
+    test(
+      'refreshes selected date and falls back only to its cached quote',
+      () async {
+        final client = _FakeExchangeClient({
+          'usd': {'eur': 0.92},
+        });
+        final service = ConversionService(
+          client: client,
+          cache: _StubCacheService(),
+        );
+        final date = DateTime(2026, 5, 10);
+        await service.convertHistorical(100, 'USD', 'EUR', date);
+        final refreshed = await service.convertHistorical(
+          100,
+          'USD',
+          'EUR',
+          date,
+          forceRefresh: true,
+        );
+        expect(refreshed.fromCache, isFalse);
+        client.historicalUnavailable = true;
+        final offline = await service.convertHistorical(
+          100,
+          'USD',
+          'EUR',
+          date,
+          forceRefresh: true,
+        );
+        expect(offline.fromCache, isTrue);
+        expect(client.historicalCalls, 3);
+        service.setPreferredSource(ExchangeApiSource.exchangeApi);
+        await expectLater(
+          service.convertHistorical(100, 'USD', 'EUR', date),
+          throwsA(isA<ExchangeApiException>()),
+        );
+      },
+    );
 
     test('clear-data invalidation blocks historical cache writes', () async {
       final pending = Completer<ExchangeRateSnapshot>();
       final client = _FakeExchangeClient({})..pendingSnapshot = pending;
       final cache = _StubCacheService();
       final service = ConversionService(client: client, cache: cache);
-      final request =
-          service.convertHistorical(100, 'USD', 'EUR', DateTime(2026, 5, 10));
+      final request = service.convertHistorical(
+        100,
+        'USD',
+        'EUR',
+        DateTime(2026, 5, 10),
+      );
       service.invalidatePendingCacheWrites();
-      pending.complete(ExchangeRateSnapshot(
-        baseCurrency: 'usd',
-        quotedAt: DateTime.utc(2026, 5, 8),
-        sourceId: 'frankfurter',
-        rates: {'eur': 0.92},
-      ));
+      pending.complete(
+        ExchangeRateSnapshot(
+          baseCurrency: 'usd',
+          quotedAt: DateTime.utc(2026, 5, 8),
+          sourceId: 'frankfurter',
+          rates: {'eur': 0.92},
+        ),
+      );
       await request;
       expect(cache.historicalSnapshots, isEmpty);
     });
@@ -281,34 +306,37 @@ void main() {
 
   group('ConversionService', () {
     for (final refresh in [false, true]) {
-      test('invalidates pending ${refresh ? 'refresh' : 'conversion'} writes',
-          () async {
-        final pending = Completer<ExchangeRateSnapshot>();
-        final client = _FakeExchangeClient({
-          'usd': {'eur': 0.92},
-        })
-          ..pendingSnapshot = pending;
-        final cache = _StubCacheService();
-        final service = ConversionService(client: client, cache: cache);
+      test(
+        'invalidates pending ${refresh ? 'refresh' : 'conversion'} writes',
+        () async {
+          final pending = Completer<ExchangeRateSnapshot>();
+          final client = _FakeExchangeClient({
+            'usd': {'eur': 0.92},
+          })..pendingSnapshot = pending;
+          final cache = _StubCacheService();
+          final service = ConversionService(client: client, cache: cache);
 
-        final request = refresh
-            ? service.refreshRates('USD')
-            : service.convert(100, 'USD', 'EUR');
-        service.invalidatePendingCacheWrites();
-        pending.complete(ExchangeRateSnapshot(
-          baseCurrency: 'usd',
-          quotedAt: DateTime.utc(2026, 5, 7),
-          sourceId: 'frankfurter',
-          rates: {'eur': 0.92},
-        ));
-        await request;
+          final request = refresh
+              ? service.refreshRates('USD')
+              : service.convert(100, 'USD', 'EUR');
+          service.invalidatePendingCacheWrites();
+          pending.complete(
+            ExchangeRateSnapshot(
+              baseCurrency: 'usd',
+              quotedAt: DateTime.utc(2026, 5, 7),
+              sourceId: 'frankfurter',
+              rates: {'eur': 0.92},
+            ),
+          );
+          await request;
 
-        expect(cache.getCachedRateSnapshot('usd').rates, isNull);
+          expect(cache.getCachedRateSnapshot('usd').rates, isNull);
 
-        client.pendingSnapshot = null;
-        await service.convert(100, 'USD', 'EUR');
-        expect(cache.getCachedRateSnapshot('usd').rates, {'eur': 0.92});
-      });
+          client.pendingSnapshot = null;
+          await service.convert(100, 'USD', 'EUR');
+          expect(cache.getCachedRateSnapshot('usd').rates, {'eur': 0.92});
+        },
+      );
     }
 
     test('converts USD to EUR correctly using fresh rates', () async {
@@ -326,19 +354,21 @@ void main() {
       expect(result.rate.targetCurrency, 'eur');
     });
 
-    test('precise conversion preserves fractional precision for aggregation',
-        () async {
-      final client = _FakeExchangeClient({
-        'usd': {'eur': 0.923456789},
-      });
-      final cache = _StubCacheService(stale: true);
-      final service = ConversionService(client: client, cache: cache);
+    test(
+      'precise conversion preserves fractional precision for aggregation',
+      () async {
+        final client = _FakeExchangeClient({
+          'usd': {'eur': 0.923456789},
+        });
+        final cache = _StubCacheService(stale: true);
+        final service = ConversionService(client: client, cache: cache);
 
-      final result = await service.convertPrecise(10, 'USD', 'EUR');
+        final result = await service.convertPrecise(10, 'USD', 'EUR');
 
-      expect(result.amount, 9.23456789);
-      expect(result.rate.rate, 0.923456789);
-    });
+        expect(result.amount, 9.23456789);
+        expect(result.rate.rate, 0.923456789);
+      },
+    );
 
     test('returns cached result when cache is fresh', () async {
       final cache = _StubCacheService(stale: false)
@@ -356,32 +386,37 @@ void main() {
       expect(result.amount, closeTo(45.0, 0.00001));
     });
 
-    test('shares an in-flight latest-rate request across conversions',
-        () async {
-      final pending = Completer<ExchangeRateSnapshot>();
-      final client = _FakeExchangeClient({
-        'usd': {'eur': 0.92},
-      })
-        ..pendingSnapshot = pending;
-      final service =
-          ConversionService(client: client, cache: _StubCacheService());
+    test(
+      'shares an in-flight latest-rate request across conversions',
+      () async {
+        final pending = Completer<ExchangeRateSnapshot>();
+        final client = _FakeExchangeClient({
+          'usd': {'eur': 0.92},
+        })..pendingSnapshot = pending;
+        final service = ConversionService(
+          client: client,
+          cache: _StubCacheService(),
+        );
 
-      final first = service.convert(10, 'USD', 'EUR');
-      final second = service.convert(20, 'USD', 'EUR');
-      await Future<void>.delayed(Duration.zero);
+        final first = service.convert(10, 'USD', 'EUR');
+        final second = service.convert(20, 'USD', 'EUR');
+        await Future<void>.delayed(Duration.zero);
 
-      expect(client.snapshotFetchCalls, 1);
-      pending.complete(ExchangeRateSnapshot(
-        baseCurrency: 'usd',
-        quotedAt: DateTime.utc(2026, 5, 7),
-        sourceId: 'frankfurter',
-        rates: {'eur': 0.92},
-      ));
+        expect(client.snapshotFetchCalls, 1);
+        pending.complete(
+          ExchangeRateSnapshot(
+            baseCurrency: 'usd',
+            quotedAt: DateTime.utc(2026, 5, 7),
+            sourceId: 'frankfurter',
+            rates: {'eur': 0.92},
+          ),
+        );
 
-      expect((await first).amount, 9.2);
-      expect((await second).amount, 18.4);
-      expect(client.snapshotFetchCalls, 1);
-    });
+        expect((await first).amount, 9.2);
+        expect((await second).amount, 18.4);
+        expect(client.snapshotFetchCalls, 1);
+      },
+    );
 
     test('prefers live primary when fresh cache source is legacy', () async {
       final cache = _StubCacheService(stale: false)
@@ -427,31 +462,34 @@ void main() {
       expect(result.rate.source, 'legacy');
     });
 
-    test('refreshes live rates when fresh Frankfurter cache lacks target',
-        () async {
-      final cache = _StubCacheService(stale: false)
-        .._storedRates = {'eur': 0.90}
-        .._storedTimestamp = DateTime.now().toUtc()
-        .._storedSource = 'frankfurter';
+    test(
+      'refreshes live rates when fresh Frankfurter cache lacks target',
+      () async {
+        final cache = _StubCacheService(stale: false)
+          .._storedRates = {'eur': 0.90}
+          .._storedTimestamp = DateTime.now().toUtc()
+          .._storedSource = 'frankfurter';
 
-      final client = _FakeExchangeClient({
-        'usd': {'eur': 0.92, 'gbp': 0.79},
-      });
-      final service = ConversionService(client: client, cache: cache);
+        final client = _FakeExchangeClient({
+          'usd': {'eur': 0.92, 'gbp': 0.79},
+        });
+        final service = ConversionService(client: client, cache: cache);
 
-      final result = await service.convert(50.0, 'USD', 'GBP');
+        final result = await service.convert(50.0, 'USD', 'GBP');
 
-      expect(result.fromCache, isFalse);
-      expect(client.calledFetch, isTrue);
-      expect(result.amount, closeTo(39.5, 0.00001));
-      expect(result.rate.source, 'frankfurter');
-    });
+        expect(result.fromCache, isFalse);
+        expect(client.calledFetch, isTrue);
+        expect(result.amount, closeTo(39.5, 0.00001));
+        expect(result.rate.source, 'frankfurter');
+      },
+    );
 
     test('falls back to stale cache when network fails', () async {
       final cache = _StubCacheService(stale: true)
         .._storedRates = {'eur': 0.88}
-        .._storedTimestamp =
-            DateTime.now().toUtc().subtract(const Duration(hours: 24));
+        .._storedTimestamp = DateTime.now().toUtc().subtract(
+          const Duration(hours: 24),
+        );
 
       final client = _FakeExchangeClient({});
       final service = ConversionService(client: client, cache: cache);
@@ -475,7 +513,7 @@ void main() {
 
     test('handles zero amount', () async {
       final client = _FakeExchangeClient({
-        'usd': {'eur': 0.92}
+        'usd': {'eur': 0.92},
       });
       final cache = _StubCacheService(stale: true);
       final service = ConversionService(client: client, cache: cache);
@@ -538,25 +576,27 @@ void main() {
       expect(result.rate.source, 'frankfurter');
     });
 
-    test('falls back when live primary rates miss the requested target',
-        () async {
-      final client = _FakeExchangeClient(
-        {
-          'usd': {'gbp': 0.79},
-        },
-        fallbackRates: {
-          'usd': {'eur': 0.9},
-        },
-      );
-      final cache = _StubCacheService(stale: true);
-      final service = ConversionService(client: client, cache: cache);
+    test(
+      'falls back when live primary rates miss the requested target',
+      () async {
+        final client = _FakeExchangeClient(
+          {
+            'usd': {'gbp': 0.79},
+          },
+          fallbackRates: {
+            'usd': {'eur': 0.9},
+          },
+        );
+        final cache = _StubCacheService(stale: true);
+        final service = ConversionService(client: client, cache: cache);
 
-      final result = await service.convert(100.0, 'USD', 'EUR');
+        final result = await service.convert(100.0, 'USD', 'EUR');
 
-      expect(result.fromCache, isFalse);
-      expect(result.amount, closeTo(90.0, 0.00001));
-      expect(result.rate.source, 'legacy');
-    });
+        expect(result.fromCache, isFalse);
+        expect(result.amount, closeTo(90.0, 0.00001));
+        expect(result.rate.source, 'legacy');
+      },
+    );
   });
 
   group('ExchangeRate model', () {

@@ -8,8 +8,8 @@ class CurrencyCatalogRepository {
   const CurrencyCatalogRepository({
     required ExchangeClient client,
     required CacheService cache,
-  })  : _client = client,
-        _cache = cache;
+  }) : _client = client,
+       _cache = cache;
 
   Future<Map<String, String>> load({bool forceRefresh = false}) async {
     final cached = _cache.getCachedCatalog();

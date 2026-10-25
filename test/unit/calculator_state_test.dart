@@ -9,33 +9,37 @@ import 'package:openfxpedia/services/conversion_service.dart';
 import 'package:openfxpedia/services/exchange_client.dart';
 
 void main() {
-  test('calculates line results and rounds the total to output minor units',
-      () async {
-    final currency = Currency(
-      isoCode: 'USD',
-      name: 'US Dollar',
-      minorUnitsPerMajor: 100,
-    );
-    final currencies = [currency];
-    final state = CalculatorState(
-      conversionService: _ImmediateConversion(),
-      currencies: () => currencies,
-      onChanged: () {},
-    );
-    state.initialize(baseCurrency: currency, targetCurrency: currency);
+  test(
+    'calculates line results and rounds the total to output minor units',
+    () async {
+      final currency = Currency(
+        isoCode: 'USD',
+        name: 'US Dollar',
+        minorUnitsPerMajor: 100,
+      );
+      final currencies = [currency];
+      final state = CalculatorState(
+        conversionService: _ImmediateConversion(),
+        currencies: () => currencies,
+        onChanged: () {},
+      );
+      state.initialize(baseCurrency: currency, targetCurrency: currency);
 
-    final firstEntry = state.entries.single;
-    state.setEntryAmount(firstEntry.id, 1);
-    state.addEntry();
-    final secondEntry = state.entries.last;
-    state.setEntryAmount(secondEntry.id, 1);
-    await state.calculate();
+      final firstEntry = state.entries.single;
+      state.setEntryAmount(firstEntry.id, 1);
+      state.addEntry();
+      final secondEntry = state.entries.last;
+      state.setEntryAmount(secondEntry.id, 1);
+      await state.calculate();
 
-    expect(state.total, 2.01);
-    expect(state.loading, isFalse);
-    expect(
-        state.lineResults.keys, containsAll([firstEntry.id, secondEntry.id]));
-  });
+      expect(state.total, 2.01);
+      expect(state.loading, isFalse);
+      expect(
+        state.lineResults.keys,
+        containsAll([firstEntry.id, secondEntry.id]),
+      );
+    },
+  );
 
   test('reset discards pending conversion results', () async {
     final currency = Currency(isoCode: 'USD', name: 'US Dollar');
@@ -65,45 +69,49 @@ void main() {
     expect(state.errorCode, isNull);
   });
 
-  test('conversion failures clear loading state and expose a stable error',
-      () async {
-    final currency = Currency(isoCode: 'USD', name: 'US Dollar');
-    final state = CalculatorState(
-      conversionService: _FailingConversion(),
-      currencies: () => [currency],
-      onChanged: () {},
-    );
-    state.initialize(baseCurrency: currency, targetCurrency: currency);
-    state.setEntryAmount(state.entries.single.id, 10);
+  test(
+    'conversion failures clear loading state and expose a stable error',
+    () async {
+      final currency = Currency(isoCode: 'USD', name: 'US Dollar');
+      final state = CalculatorState(
+        conversionService: _FailingConversion(),
+        currencies: () => [currency],
+        onChanged: () {},
+      );
+      state.initialize(baseCurrency: currency, targetCurrency: currency);
+      state.setEntryAmount(state.entries.single.id, 10);
 
-    await state.calculate();
+      await state.calculate();
 
-    expect(state.loading, isFalse);
-    expect(state.total, isNull);
-    expect(state.errorCode, 'network');
-  });
+      expect(state.loading, isFalse);
+      expect(state.total, isNull);
+      expect(state.errorCode, 'network');
+    },
+  );
 
-  test('future calculator dates are rejected without changing the date',
-      () async {
-    final currency = Currency(isoCode: 'USD', name: 'US Dollar');
-    final state = CalculatorState(
-      conversionService: _ImmediateConversion(),
-      currencies: () => [currency],
-      onChanged: () {},
-    );
-    state.initialize(baseCurrency: currency, targetCurrency: currency);
+  test(
+    'future calculator dates are rejected without changing the date',
+    () async {
+      final currency = Currency(isoCode: 'USD', name: 'US Dollar');
+      final state = CalculatorState(
+        conversionService: _ImmediateConversion(),
+        currencies: () => [currency],
+        onChanged: () {},
+      );
+      state.initialize(baseCurrency: currency, targetCurrency: currency);
 
-    await expectLater(
-      state.setDate(DateTime.now().add(const Duration(days: 1))),
-      throwsArgumentError,
-    );
-    expect(state.date, isNull);
-  });
+      await expectLater(
+        state.setDate(DateTime.now().add(const Duration(days: 1))),
+        throwsArgumentError,
+      );
+      expect(state.date, isNull);
+    },
+  );
 }
 
 class _ImmediateConversion extends ConversionService {
   _ImmediateConversion()
-      : super(client: ExchangeClient(), cache: CacheService());
+    : super(client: ExchangeClient(), cache: CacheService());
 
   @override
   Future<ConversionResult> convertPrecise(
@@ -122,7 +130,7 @@ class _ImmediateConversion extends ConversionService {
 
 class _DeferredConversion extends ConversionService {
   _DeferredConversion()
-      : super(client: ExchangeClient(), cache: CacheService());
+    : super(client: ExchangeClient(), cache: CacheService());
 
   final List<Completer<ConversionResult>> requests = [];
   final Completer<void> firstRequestStarted = Completer<void>();

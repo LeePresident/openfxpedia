@@ -39,53 +39,50 @@ void main() {
   });
 
   testWidgets(
-      'cancelling an update prompt does not verify or download an asset',
-      (tester) async {
+    'cancelling an update prompt does not verify or download an asset',
+    (tester) async {
+      final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+      final updateService = _FakeUpdateService(
+        const LatestStableRelease(
+          version: '1.0.7',
+          data: {'tag_name': 'v1.0.7'},
+        ),
+      );
+      final state = _createAppState();
+      addTearDown(state.dispose);
+
+      await _pumpSettings(
+        tester,
+        state: state,
+        updateService: updateService,
+        currentVersion: '1.0.6',
+      );
+      await tester.tap(find.text(l10n.settings_check_updates));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(find.text(l10n.update_available), findsOneWidget);
+      expect(
+        find.text(l10n.update_download_prompt('1.0.7', 'installer-1.0.7.exe')),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.text(l10n.update_cancel));
+      await tester.pumpAndSettle();
+
+      expect(find.text(l10n.update_available), findsNothing);
+      expect(updateService.fetchCount, 1);
+      expect(updateService.verifiedAssetCount, 0);
+      expect(updateService.downloadCount, 0);
+    },
+  );
+
+  testWidgets('an up-to-date version shows the latest-version message', (
+    tester,
+  ) async {
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
     final updateService = _FakeUpdateService(
-      const LatestStableRelease(
-        version: '1.0.7',
-        data: {'tag_name': 'v1.0.7'},
-      ),
-    );
-    final state = _createAppState();
-    addTearDown(state.dispose);
-
-    await _pumpSettings(
-      tester,
-      state: state,
-      updateService: updateService,
-      currentVersion: '1.0.6',
-    );
-    await tester.tap(find.text(l10n.settings_check_updates));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 500));
-
-    expect(find.text(l10n.update_available), findsOneWidget);
-    expect(
-      find.text(
-        l10n.update_download_prompt('1.0.7', 'installer-1.0.7.exe'),
-      ),
-      findsOneWidget,
-    );
-
-    await tester.tap(find.text(l10n.update_cancel));
-    await tester.pumpAndSettle();
-
-    expect(find.text(l10n.update_available), findsNothing);
-    expect(updateService.fetchCount, 1);
-    expect(updateService.verifiedAssetCount, 0);
-    expect(updateService.downloadCount, 0);
-  });
-
-  testWidgets('an up-to-date version shows the latest-version message',
-      (tester) async {
-    final l10n = await AppLocalizations.delegate.load(const Locale('en'));
-    final updateService = _FakeUpdateService(
-      const LatestStableRelease(
-        version: '1.0.6',
-        data: {'tag_name': 'v1.0.6'},
-      ),
+      const LatestStableRelease(version: '1.0.6', data: {'tag_name': 'v1.0.6'}),
     );
     final state = _createAppState();
     addTearDown(state.dispose);
@@ -105,8 +102,9 @@ void main() {
     expect(updateService.downloadCount, 0);
   });
 
-  testWidgets('a failed update lookup shows a localized network error',
-      (tester) async {
+  testWidgets('a failed update lookup shows a localized network error', (
+    tester,
+  ) async {
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
     final updateService = _FakeUpdateService(
       null,
@@ -129,14 +127,12 @@ void main() {
     expect(updateService.downloadCount, 0);
   });
 
-  testWidgets('a missing verified asset is reported without downloading',
-      (tester) async {
+  testWidgets('a missing verified asset is reported without downloading', (
+    tester,
+  ) async {
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
     final updateService = _FakeUpdateService(
-      const LatestStableRelease(
-        version: '1.0.7',
-        data: {'tag_name': 'v1.0.7'},
-      ),
+      const LatestStableRelease(version: '1.0.7', data: {'tag_name': 'v1.0.7'}),
       assetAvailable: false,
     );
     final state = _createAppState();
@@ -236,7 +232,8 @@ class _FakeUpdateService extends UpdateService {
     if (!assetAvailable) return null;
     return VerifiedUpdateArtifact(
       uri: Uri.parse(
-          'https://github.com/LeePresident/openfxpedia/releases/download/v1.0.7/$assetName'),
+        'https://github.com/LeePresident/openfxpedia/releases/download/v1.0.7/$assetName',
+      ),
       digest: 'sha256:${'a' * 64}',
     );
   }

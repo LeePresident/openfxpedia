@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:pinyin/pinyin.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
@@ -32,17 +32,20 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
       builder: (context, state, _) {
         final l10n = AppLocalizations.of(context);
         final all = state.currencies;
-        final filtered = (_query.isEmpty
-                ? List<Currency>.of(all)
-                : all.where((c) {
-                    final q = _query.toLowerCase();
-                    return c.isoCode.toLowerCase().contains(q) ||
-                        c.name.toLowerCase().contains(q) ||
-                        (c.isoNumeric?.contains(q) ?? false);
-                  }).toList())
-            .where((currency) =>
-                !_favoritesOnly || state.isFavorite(currency.isoCode))
-            .toList();
+        final filtered =
+            (_query.isEmpty
+                    ? List<Currency>.of(all)
+                    : all.where((c) {
+                        final q = _query.toLowerCase();
+                        return c.isoCode.toLowerCase().contains(q) ||
+                            c.name.toLowerCase().contains(q) ||
+                            (c.isoNumeric?.contains(q) ?? false);
+                      }).toList())
+                .where(
+                  (currency) =>
+                      !_favoritesOnly || state.isFavorite(currency.isoCode),
+                )
+                .toList();
         filtered.sort(
           (first, second) => _sort.compare(
             first,
@@ -57,9 +60,7 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
             title: Text(l10n.encyclopedia_currency_title),
             actions: [
               IconButton(
-                icon: Icon(
-                  _favoritesOnly ? Icons.star : Icons.star_border,
-                ),
+                icon: Icon(_favoritesOnly ? Icons.star : Icons.star_border),
                 color: _favoritesOnly ? Colors.amber : null,
                 tooltip: l10n.encyclopedia_favorites_only,
                 onPressed: () =>
@@ -93,8 +94,10 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(56),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
@@ -122,15 +125,15 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
           body: all.isEmpty
               ? const Center(child: CircularProgressIndicator())
               : filtered.isEmpty
-                  ? Center(child: Text(l10n.encyclopedia_not_found))
-                  : ListView.builder(
-                      itemExtent: 72,
-                      itemCount: filtered.length,
-                      itemBuilder: (context, index) {
-                        final currency = filtered[index];
-                        return _CurrencyTile(currency: currency, state: state);
-                      },
-                    ),
+              ? Center(child: Text(l10n.encyclopedia_not_found))
+              : ListView.builder(
+                  itemExtent: 72,
+                  itemCount: filtered.length,
+                  itemBuilder: (context, index) {
+                    final currency = filtered[index];
+                    return _CurrencyTile(currency: currency, state: state);
+                  },
+                ),
         );
       },
     );
@@ -150,21 +153,18 @@ enum _CurrencySort {
   }) {
     final comparison = switch (this) {
       _CurrencySort.codeAscending ||
-      _CurrencySort.codeDescending =>
-        first.isoCode.compareTo(second.isoCode),
+      _CurrencySort.codeDescending => first.isoCode.compareTo(second.isoCode),
       _CurrencySort.nameAscending ||
-      _CurrencySort.nameDescending =>
-        _compareNames(
-          first.name,
-          second.name,
-          useChineseCollation: useChineseCollation,
-        ),
+      _CurrencySort.nameDescending => _compareNames(
+        first.name,
+        second.name,
+        useChineseCollation: useChineseCollation,
+      ),
     };
 
     return switch (this) {
       _CurrencySort.codeDescending ||
-      _CurrencySort.nameDescending =>
-        -comparison,
+      _CurrencySort.nameDescending => -comparison,
       _ => comparison,
     };
   }
@@ -176,9 +176,10 @@ enum _CurrencySort {
   }) {
     if (!useChineseCollation) return first.compareTo(second);
 
-    return PinyinHelper.getPinyin(first, separator: '').compareTo(
-      PinyinHelper.getPinyin(second, separator: ''),
-    );
+    return PinyinHelper.getPinyin(
+      first,
+      separator: '',
+    ).compareTo(PinyinHelper.getPinyin(second, separator: ''));
   }
 }
 

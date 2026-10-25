@@ -158,8 +158,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ListTile(
                 title: Text(l10n.settings_exchange_api_source),
-                subtitle: Text(_describeExchangeApiSource(
-                    appState.exchangeApiSource, l10n)),
+                subtitle: Text(
+                  _describeExchangeApiSource(appState.exchangeApiSource, l10n),
+                ),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => _showExchangeApiSourceDialog(appState),
               ),
@@ -190,9 +191,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => ChangelogScreen(),
-                  ),
+                  MaterialPageRoute(builder: (_) => ChangelogScreen()),
                 ),
               ),
               const Divider(),
@@ -212,9 +211,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Text(l10n.settings_privacy),
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => const PrivacyPage(),
-                  ),
+                  MaterialPageRoute(builder: (_) => const PrivacyPage()),
                 ),
               ),
             ],
@@ -280,7 +277,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onPressed: () => Navigator.pop(
                 ctx,
                 const Locale.fromSubtags(
-                    languageCode: 'zh', scriptCode: 'Hant'),
+                  languageCode: 'zh',
+                  scriptCode: 'Hant',
+                ),
               ),
               child: Text(l10n.language_traditional_chinese),
             ),
@@ -288,7 +287,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onPressed: () => Navigator.pop(
                 ctx,
                 const Locale.fromSubtags(
-                    languageCode: 'zh', scriptCode: 'Hans'),
+                  languageCode: 'zh',
+                  scriptCode: 'Hans',
+                ),
               ),
               child: Text(l10n.language_simplified_chinese),
             ),
@@ -442,11 +443,7 @@ class LicensePage extends StatefulWidget {
   final String appName;
   final String version;
 
-  const LicensePage({
-    super.key,
-    required this.appName,
-    required this.version,
-  });
+  const LicensePage({super.key, required this.appName, required this.version});
 
   @override
   State<LicensePage> createState() => _LicensePageState();
@@ -464,8 +461,9 @@ class _LicensePageState extends State<LicensePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(title: Text(AppLocalizations.of(context).settings_license)),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).settings_license),
+      ),
       body: FutureBuilder<String>(
         future: _license,
         builder: (context, snapshot) {

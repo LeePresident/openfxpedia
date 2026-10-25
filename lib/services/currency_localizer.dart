@@ -81,8 +81,9 @@ class CurrencyLocalizer {
       unicode: true,
     );
     return denominations
-        .map((denomination) =>
-            denomination.replaceAll(unitPattern, localizedUnit))
+        .map(
+          (denomination) => denomination.replaceAll(unitPattern, localizedUnit),
+        )
         .toList();
   }
 
