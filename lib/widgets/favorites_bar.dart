@@ -18,10 +18,7 @@ class FavoritesBar extends StatelessWidget {
     if (favorites.isEmpty) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Text(
-          emptyMessage,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
+        child: Text(emptyMessage, style: Theme.of(context).textTheme.bodySmall),
       );
     }
     return SizedBox(
@@ -29,7 +26,7 @@ class FavoritesBar extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: favorites.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        separatorBuilder: (_, _) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
           final currency = favorites[index];
           return ActionChip(

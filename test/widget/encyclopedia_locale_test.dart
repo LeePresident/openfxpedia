@@ -24,8 +24,9 @@ import 'package:openfxpedia/services/observability.dart';
 import 'package:openfxpedia/widgets/amount_input.dart';
 
 void main() {
-  testWidgets('Traditional Chinese resources use Hong Kong terminology',
-      (tester) async {
+  testWidgets('Traditional Chinese resources use Hong Kong terminology', (
+    tester,
+  ) async {
     final l10n = await AppLocalizations.delegate.load(
       const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
     );
@@ -39,11 +40,13 @@ void main() {
     expect(l10n.error_network_unavailable, contains('服務器'));
     expect(l10n.detail_sos_no_coins, contains('索馬里'));
 
-    final overlay = jsonDecode(
-      await rootBundle.loadString(
-        'assets/data/fiat_currency_overlays/zh_Hant.json',
-      ),
-    ) as Map<String, dynamic>;
+    final overlay =
+        jsonDecode(
+              await rootBundle.loadString(
+                'assets/data/fiat_currency_overlays/zh_Hant.json',
+              ),
+            )
+            as Map<String, dynamic>;
     final entries = overlay['entries'] as Map<String, dynamic>;
 
     expect(overlay['locale'], 'zh_Hant');
@@ -65,8 +68,9 @@ void main() {
     ('LSL', 'Sente', '5 lisente', 0.05),
     ('BTN', 'Chetrum', '5 chhertum', 0.05),
   ]) {
-    testWidgets('${example.$1} minor denomination sets a fractional amount',
-        (tester) async {
+    testWidgets('${example.$1} minor denomination sets a fractional amount', (
+      tester,
+    ) async {
       final cache = _StubCacheService();
       final exchange = _FakeExchangeClient();
       final state = AppState(
@@ -118,16 +122,14 @@ void main() {
     });
   }
 
-  testWidgets('denomination amount is reset when local data is cleared',
-      (tester) async {
+  testWidgets('denomination amount is reset when local data is cleared', (
+    tester,
+  ) async {
     final cache = _StubCacheService();
     final exchange = _FakeExchangeClient();
     final state = AppState(
       conversionService: ConversionService(client: exchange, cache: cache),
-      catalogService: CurrencyCatalogService(
-        client: exchange,
-        cache: cache,
-      ),
+      catalogService: CurrencyCatalogService(client: exchange, cache: cache),
       favoritesService: FavoritesService(cache: cache),
       cacheService: cache,
     );
@@ -225,48 +227,38 @@ void main() {
       final catalog = CurrencyCatalogService(
         client: exchange,
         cache: cache,
-        bundle: _OverlayAssetBundle(
-          {
-            'assets/data/fiat_currencies.json': jsonEncode([
-              {
-                'iso_code': 'USD',
-                'name': 'US Dollar',
-                'regions': ['United States'],
-                'major_unit': 'US dollar',
-                'minor_unit': 'cent',
-                'minor_units_per_major': 100,
-                'coins': ['1 cent', 'USD1'],
-                'description':
-                    'Official currency of the United States (including its territories) and other regions. The world\'s primary reserve currency.',
-              },
-              {
-                'iso_code': 'EUR',
-                'name': 'Euro',
-                'regions': ['Eurozone'],
-              },
-              {
-                'iso_code': 'JPY',
-                'name': 'Japanese Yen',
-                'regions': ['Japan'],
-              },
-            ]),
-            'assets/data/fiat_currency_overlays/zh_Hans.json': jsonEncode({
-              'entries': {
-                'USD': {
-                  'name': '美元',
-                  'major_unit': '美元',
-                  'minor_unit': '美分',
-                },
-                'EUR': {
-                  'name': '欧元',
-                },
-                'JPY': {
-                  'name': '日元',
-                },
-              },
-            }),
-          },
-        ),
+        bundle: _OverlayAssetBundle({
+          'assets/data/fiat_currencies.json': jsonEncode([
+            {
+              'iso_code': 'USD',
+              'name': 'US Dollar',
+              'regions': ['United States'],
+              'major_unit': 'US dollar',
+              'coins': ['1 cent', 'USD1'],
+              'description':
+                  'Official currency of the United States (including its territories) and other regions. The world\'s primary reserve currency.',
+            },
+            {
+              'iso_code': 'EUR',
+              'name': 'Euro',
+              'regions': ['Eurozone'],
+              'minor_unit': null,
+              'minor_units_per_major': null,
+            },
+            {
+              'iso_code': 'JPY',
+              'name': 'Japanese Yen',
+              'regions': ['Japan'],
+            },
+          ]),
+          'assets/data/fiat_currency_overlays/zh_Hans.json': jsonEncode({
+            'entries': {
+              'USD': {'name': '美元', 'major_unit': '美元', 'minor_unit': '美分'},
+              'EUR': {'name': '欧元'},
+              'JPY': {'name': '日元'},
+            },
+          }),
+        }),
       );
       final favorites = FavoritesService(cache: cache);
       final conversion = ConversionService(client: exchange, cache: cache);
@@ -282,6 +274,20 @@ void main() {
       );
 
       await state.initialize();
+
+      final usd = state.currencies.firstWhere(
+        (currency) => currency.isoCode == 'USD',
+      );
+      expect(usd.isoNumeric, '840');
+      expect(usd.symbol, r'$');
+      expect(usd.minorUnit, '美分');
+      expect(usd.minorUnitsPerMajor, 100);
+
+      final eur = state.currencies.firstWhere(
+        (currency) => currency.isoCode == 'EUR',
+      );
+      expect(eur.minorUnit, isNull);
+      expect(eur.minorUnitsPerMajor, isNull);
 
       await tester.pumpWidget(
         ChangeNotifierProvider<AppState>.value(
@@ -331,13 +337,15 @@ void main() {
       expect(
         LocalizationObservability.events,
         anyElement(
-          predicate<Map<String, String>>((event) =>
-              event['event'] == 'localization_fallback' &&
-              event['surface'] == 'encyclopedia' &&
-              event['locale'] == 'zh_Hans' &&
-              event['fallback'] == 'en' &&
-              event['currency'] == 'USD' &&
-              event['field'] == 'description'),
+          predicate<Map<String, String>>(
+            (event) =>
+                event['event'] == 'localization_fallback' &&
+                event['surface'] == 'encyclopedia' &&
+                event['locale'] == 'zh_Hans' &&
+                event['fallback'] == 'en' &&
+                event['currency'] == 'USD' &&
+                event['field'] == 'description',
+          ),
         ),
       );
     },
@@ -373,11 +381,7 @@ class _StubCacheService extends CacheService {
 
   @override
   CachedCatalog getCachedCatalog({int ttlHours = 12}) {
-    return const CachedCatalog(
-      catalog: null,
-      timestamp: null,
-      isStale: true,
-    );
+    return const CachedCatalog(catalog: null, timestamp: null, isStale: true);
   }
 
   @override
@@ -387,10 +391,7 @@ class _StubCacheService extends CacheService {
   ) async {}
 
   @override
-  CachedRateSnapshot getCachedRates(
-    String base, {
-    int ttlHours = 12,
-  }) {
+  CachedRateSnapshot getCachedRates(String base, {int ttlHours = 12}) {
     return const CachedRateSnapshot(
       rates: null,
       timestamp: null,
@@ -409,14 +410,14 @@ class _StubCacheService extends CacheService {
 
 class _FakeExchangeClient extends ExchangeClient {
   _FakeExchangeClient()
-      : super(httpClient: MockClient((_) async => Response('{}', 200)));
+    : super(httpClient: MockClient((_) async => Response('{}', 200)));
 
   @override
   Future<Map<String, String>> fetchCurrencyCatalog() async => {
-        'usd': 'us dollar',
-        'eur': 'euro',
-        'jpy': 'japanese yen',
-      };
+    'usd': 'us dollar',
+    'eur': 'euro',
+    'jpy': 'japanese yen',
+  };
 
   @override
   Future<Map<String, double>> fetchRatesFor(String base) async => {'usd': 1.0};

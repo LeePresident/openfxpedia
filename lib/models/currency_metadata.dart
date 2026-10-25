@@ -10,6 +10,8 @@ class CurrencyMetadata {
   final String? majorUnit;
   final String? minorUnit;
   final int? minorUnitsPerMajor;
+  final bool hasMinorUnitOverride;
+  final bool hasMinorUnitsPerMajorOverride;
 
   const CurrencyMetadata({
     required this.isoCode,
@@ -23,11 +25,14 @@ class CurrencyMetadata {
     this.majorUnit,
     this.minorUnit,
     this.minorUnitsPerMajor,
+    this.hasMinorUnitOverride = false,
+    this.hasMinorUnitsPerMajorOverride = false,
   });
 
   factory CurrencyMetadata.fromJson(Map<String, dynamic> json) {
-    final isoCode =
-        (json['iso_code'] ?? json['iso'] ?? '').toString().toUpperCase();
+    final isoCode = (json['iso_code'] ?? json['iso'] ?? '')
+        .toString()
+        .toUpperCase();
     final rawRegions = json['regions'];
     final rawCoins = json['coins'];
     final rawBanknotes = json['banknotes'];
@@ -41,14 +46,17 @@ class CurrencyMetadata {
           ? rawRegions.whereType<String>().toList()
           : const [],
       description: json['description']?.toString(),
-      coins:
-          rawCoins is List ? rawCoins.whereType<String>().toList() : const [],
+      coins: rawCoins is List
+          ? rawCoins.whereType<String>().toList()
+          : const [],
       banknotes: rawBanknotes is List
           ? rawBanknotes.whereType<String>().toList()
           : const [],
       majorUnit: json['major_unit']?.toString(),
       minorUnit: json['minor_unit']?.toString(),
       minorUnitsPerMajor: (json['minor_units_per_major'] as num?)?.toInt(),
+      hasMinorUnitOverride: json.containsKey('minor_unit'),
+      hasMinorUnitsPerMajorOverride: json.containsKey('minor_units_per_major'),
     );
   }
 }

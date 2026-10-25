@@ -10,7 +10,7 @@ class ChangelogScreen extends StatefulWidget {
   final AssetBundle bundle;
 
   ChangelogScreen({super.key, AssetBundle? bundle})
-      : bundle = bundle ?? rootBundle;
+    : bundle = bundle ?? rootBundle;
 
   @override
   State<ChangelogScreen> createState() => _ChangelogScreenState();
@@ -26,8 +26,9 @@ class _ChangelogScreenState extends State<ChangelogScreen> {
   }
 
   Future<List<_ChangelogEntry>> _loadEntries() async {
-    final raw =
-        await widget.bundle.loadString('assets/data/changelog_entries.json');
+    final raw = await widget.bundle.loadString(
+      'assets/data/changelog_entries.json',
+    );
     final decoded = jsonDecode(raw) as List<dynamic>;
     return decoded
         .whereType<Map<String, dynamic>>()
@@ -66,7 +67,7 @@ class _ChangelogScreenState extends State<ChangelogScreen> {
           return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: entries.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 12),
+            separatorBuilder: (_, _) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
               final entry = entries[index].localize(localeKey);
               return Card(
@@ -135,7 +136,8 @@ class _ChangelogEntry {
       version: (json['version'] as String?)?.trim() ?? '',
       dateLabel: (json['date'] as String?)?.trim() ?? '',
       summary: (json['summary'] as String?)?.trim() ?? '',
-      highlights: (json['highlights'] as List<dynamic>?)
+      highlights:
+          (json['highlights'] as List<dynamic>?)
               ?.whereType<String>()
               .map((item) => item.trim())
               .where((item) => item.isNotEmpty)
@@ -201,7 +203,8 @@ class _LocalizedChangelog {
       version: (json['version'] as String?)?.trim() ?? '',
       dateLabel: (json['date'] as String?)?.trim() ?? '',
       summary: (json['summary'] as String?)?.trim() ?? '',
-      highlights: (json['highlights'] as List<dynamic>?)
+      highlights:
+          (json['highlights'] as List<dynamic>?)
               ?.whereType<String>()
               .map((item) => item.trim())
               .where((item) => item.isNotEmpty)

@@ -317,6 +317,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.11.0"
+  l10n_currencies:
+    dependency: transitive
+    description:
+      name: l10n_currencies
+      sha256: d91e87a3257bf38a779033d8f31dacfb65e1c046fa463a4ffac4bd3e03998e98
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  l10n_languages:
+    dependency: transitive
+    description:
+      name: l10n_languages
+      sha256: "3d963686bef94241c3f37e92c4b4945b9429df93296ee19f32ce22a21fc10d76"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -549,6 +565,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  sealed_currencies:
+    dependency: "direct main"
+    description:
+      name: sealed_currencies
+      sha256: "6795a628f901bfd04209d18f5962c95d10cbf3b9a8add3697ecf80efdd490175"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.0"
+  sealed_languages:
+    dependency: transitive
+    description:
+      name: sealed_languages
+      sha256: "86f9a9bfd059e2be6c277dab6ff46de98db526ac5ae52f6e5d3f629ea77e0f24"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.0"
   sky_engine:
     dependency: transitive
     description: flutter

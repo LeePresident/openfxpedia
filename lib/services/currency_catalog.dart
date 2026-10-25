@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
+import 'package:sealed_currencies/sealed_currencies.dart' show FiatCurrency;
 
 import '../services/cache_service.dart';
 import '../services/exchange_client.dart';
@@ -26,12 +27,9 @@ class CurrencyCatalogService {
     required ExchangeClient client,
     required CacheService cache,
     AssetBundle? bundle,
-  })  : _repository = CurrencyCatalogRepository(
-          client: client,
-          cache: cache,
-        ),
-        _metadataLoader = CurrencyMetadataLoader(bundle: bundle ?? rootBundle),
-        _overlayLoader = CurrencyOverlayLoader(bundle: bundle ?? rootBundle);
+  }) : _repository = CurrencyCatalogRepository(client: client, cache: cache),
+       _metadataLoader = CurrencyMetadataLoader(bundle: bundle ?? rootBundle),
+       _overlayLoader = CurrencyOverlayLoader(bundle: bundle ?? rootBundle);
 
   Future<List<Currency>> getCurrencies({
     bool forceRefresh = false,
@@ -53,8 +51,10 @@ class CurrencyCatalogService {
     _currencies = catalog.entries.where((e) => _isFiatCurrency(e.key)).map((e) {
       final iso = e.key.toUpperCase();
       final meta = _metadataCatalog!.metadata[iso];
+      final standardCurrency = FiatCurrency.maybeFromCode(iso);
       final overlayEntry = overlay[iso];
-      final baseName = meta?.name ?? _capitalize(e.value);
+      final baseName =
+          meta?.name ?? standardCurrency?.name ?? _capitalize(e.value);
       final name = localizer.resolveField(
         isoCode: iso,
         field: 'name',
@@ -69,8 +69,9 @@ class CurrencyCatalogService {
       );
       final regionCodes = <String?>[];
       for (var i = 0; i < regions.length; i++) {
-        final baseRegion =
-            i < (meta?.regions.length ?? 0) ? meta!.regions[i] : regions[i];
+        final baseRegion = i < (meta?.regions.length ?? 0)
+            ? meta!.regions[i]
+            : regions[i];
         regionCodes.add(regionCountryCode(baseRegion));
       }
       final description = localizer.resolveField(
@@ -87,14 +88,27 @@ class CurrencyCatalogService {
               baseValue: meta!.majorUnit,
               overlayEntry: overlayEntry,
             );
-      final minorUnit = meta?.minorUnit == null
+      final packageSubunit = standardCurrency?.subunit;
+      final minorUnitBase = (meta?.hasMinorUnitOverride ?? false)
+          ? meta?.minorUnit
+          : packageSubunit;
+      final packageSubunitMatches =
+          minorUnitBase != null &&
+          packageSubunit != null &&
+          minorUnitBase.toLowerCase() == packageSubunit.toLowerCase();
+      final minorUnit = minorUnitBase == null
           ? null
           : localizer.resolveField(
               isoCode: iso,
               field: 'minor_unit',
-              baseValue: meta!.minorUnit,
+              baseValue: minorUnitBase,
               overlayEntry: overlayEntry,
             );
+      final minorUnitsPerMajor = (meta?.hasMinorUnitsPerMajorOverride ?? false)
+          ? meta?.minorUnitsPerMajor
+          : packageSubunitMatches
+          ? standardCurrency?.subunitToUnit
+          : null;
       final coinsWithMajorUnit = localizer.localizeDenominations(
         denominations: meta?.coins ?? const [],
         baseUnit: meta?.majorUnit,
@@ -102,7 +116,7 @@ class CurrencyCatalogService {
       );
       final coins = localizer.localizeDenominations(
         denominations: coinsWithMajorUnit,
-        baseUnit: meta?.minorUnit,
+        baseUnit: minorUnitBase,
         localizedUnit: minorUnit,
       );
       final banknotesWithMajorUnit = localizer.localizeDenominations(
@@ -112,15 +126,15 @@ class CurrencyCatalogService {
       );
       final banknotes = localizer.localizeDenominations(
         denominations: banknotesWithMajorUnit,
-        baseUnit: meta?.minorUnit,
+        baseUnit: minorUnitBase,
         localizedUnit: minorUnit,
       );
 
       return Currency(
         isoCode: iso,
-        isoNumeric: meta?.isoNumeric,
+        isoNumeric: meta?.isoNumeric ?? standardCurrency?.codeNumeric,
         name: name,
-        symbol: meta?.symbol,
+        symbol: meta?.symbol ?? standardCurrency?.symbol,
         regions: regions,
         regionCodes: regionCodes,
         description: description,
@@ -128,10 +142,9 @@ class CurrencyCatalogService {
         banknotes: banknotes,
         majorUnit: majorUnit?.isEmpty ?? true ? null : majorUnit,
         minorUnit: minorUnit?.isEmpty ?? true ? null : minorUnit,
-        minorUnitsPerMajor: meta?.minorUnitsPerMajor,
+        minorUnitsPerMajor: minorUnitsPerMajor,
       );
-    }).toList()
-      ..sort((a, b) => a.isoCode.compareTo(b.isoCode));
+    }).toList()..sort((a, b) => a.isoCode.compareTo(b.isoCode));
 
     _currenciesLocaleKey = localeKey;
 

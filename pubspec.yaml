@@ -3,7 +3,7 @@ description: OpenFXpedia — cross-platform (Windows + Android) currency convert
 publish_to: none
 version: 1.0.6
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.11.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -25,6 +25,7 @@ dependencies:
   flutter_native_splash: ^2.4.8
   pinyin: 3.3.0
   fl_chart: ^1.2.0
+  sealed_currencies: ^3.4.0
 
 dev_dependencies:
   flutter_test:
