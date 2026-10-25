@@ -12,8 +12,8 @@
     "@history_month": {
         "description": "選取一個月匯率歷史資料的範圍選項。"
     },
-    "history_quarter": "3月",
-    "@history_quarter": {
+    "history_year": "1年",
+    "@history_year": {
         "description": "選取三個月匯率歷史資料的範圍選項。"
     },
     "history_unavailable": "此時間範圍內沒有可用的歷史匯率。請嘗試其他日期或匯率來源。",

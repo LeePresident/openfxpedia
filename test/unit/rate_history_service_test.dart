@@ -6,25 +6,31 @@ import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/rate_history_service.dart';
 
 void main() {
-  test('samples endpoints with bounded requests and unit amounts', () async {
-    final conversion = _Conversion();
-    final samples = await RateHistoryService(conversion).load(
-      base: 'USD',
-      target: 'EUR',
-      endDate: DateTime(2024, 3, 31),
-      days: 90,
-      forceRefresh: true,
-    );
-    expect(samples.length, 8);
-    expect(samples.first.requestedDate, DateTime.utc(2024, 1, 2));
-    expect(samples.last.requestedDate, DateTime.utc(2024, 3, 31));
-    expect(conversion.amounts, everyElement(1));
-    expect(conversion.refreshes, everyElement(isTrue));
-    expect(
-      samples.map((sample) => sample.quote!.rate.source),
-      everyElement('frankfurter'),
-    );
-  });
+  test(
+    'samples one-year endpoints with bounded requests and unit amounts',
+    () async {
+      final conversion = _Conversion();
+      final samples = await RateHistoryService(conversion).load(
+        base: 'USD',
+        target: 'EUR',
+        endDate: DateTime(2024, 3, 31),
+        days: 365,
+        forceRefresh: true,
+      );
+      expect(samples.length, 8);
+      expect(
+        samples.first.requestedDate,
+        DateTime.utc(2024, 3, 31).subtract(const Duration(days: 364)),
+      );
+      expect(samples.last.requestedDate, DateTime.utc(2024, 3, 31));
+      expect(conversion.amounts, everyElement(1));
+      expect(conversion.refreshes, everyElement(isTrue));
+      expect(
+        samples.map((sample) => sample.quote!.rate.source),
+        everyElement('frankfurter'),
+      );
+    },
+  );
 
   test(
     'missing and out-of-range quotes remain gaps; actual dates survive',

@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get history_month => '1M';
 
   @override
-  String get history_quarter => '3M';
+  String get history_year => '1Y';
 
   @override
   String get history_unavailable =>

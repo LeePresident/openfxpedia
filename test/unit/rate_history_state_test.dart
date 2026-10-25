@@ -50,7 +50,10 @@ void main() {
 
     expect(state.setDays(7), isTrue);
     expect(state.days, 7);
+    expect(state.setDays(365), isTrue);
+    expect(state.days, 365);
     expect(() => state.setDays(14), throwsArgumentError);
+    expect(() => state.setDays(90), throwsArgumentError);
   });
 }
 

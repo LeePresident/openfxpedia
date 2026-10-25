@@ -118,11 +118,11 @@ abstract class AppLocalizations {
   /// **'1M'**
   String get history_month;
 
-  /// No description provided for @history_quarter.
+  /// No description provided for @history_year.
   ///
   /// In en, this message translates to:
-  /// **'3M'**
-  String get history_quarter;
+  /// **'1Y'**
+  String get history_year;
 
   /// No description provided for @history_unavailable.
   ///

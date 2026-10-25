@@ -88,7 +88,7 @@ class RateHistoryChart extends StatelessWidget {
                 segments: [
                   ButtonSegment(value: 7, label: Text(l10n.history_week)),
                   ButtonSegment(value: 30, label: Text(l10n.history_month)),
-                  ButtonSegment(value: 90, label: Text(l10n.history_quarter)),
+                  ButtonSegment(value: 365, label: Text(l10n.history_year)),
                 ],
                 selected: {state.historyDays},
                 onSelectionChanged: (values) =>

@@ -12,8 +12,8 @@
     "@history_month": {
         "description": "选择一个月汇率历史数据的范围选项。"
     },
-    "history_quarter": "3月",
-    "@history_quarter": {
+    "history_year": "1年",
+    "@history_year": {
         "description": "选择三个月汇率历史数据的范围选项。"
     },
     "history_unavailable": "此时间范围内没有可用的历史汇率。请尝试其他日期或汇率来源。",

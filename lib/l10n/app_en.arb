@@ -3,7 +3,7 @@
     "history_title": "Rate history",
     "history_week": "1W",
     "history_month": "1M",
-    "history_quarter": "3M",
+    "history_year": "1Y",
     "history_unavailable": "No historical quotes available for this range. Try another date or rate source.",
     "history_available": "Sampled quotes: {available}/{total}",
     "@history_available": {

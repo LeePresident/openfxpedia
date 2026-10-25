@@ -35,7 +35,7 @@ class RateHistoryState {
   }
 
   bool setDays(int days) {
-    if (![7, 30, 90].contains(days)) throw ArgumentError.value(days, 'days');
+    if (![7, 30, 365].contains(days)) throw ArgumentError.value(days, 'days');
     if (_days == days) return false;
     _days = days;
     return true;

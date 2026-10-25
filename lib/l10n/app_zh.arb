@@ -3,7 +3,7 @@
     "history_title": "历史汇率",
     "history_week": "1周",
     "history_month": "1月",
-    "history_quarter": "3月",
+    "history_year": "1年",
     "history_unavailable": "此时间范围内没有可用的历史汇率。请尝试其他日期或汇率来源。",
     "history_available": "采样报价：{available}/{total}",
     "converter_date": "换算日期",

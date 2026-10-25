@@ -18,7 +18,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get history_month => '1月';
 
   @override
-  String get history_quarter => '3月';
+  String get history_year => '1年';
 
   @override
   String get history_unavailable => '此时间范围内没有可用的历史汇率。请尝试其他日期或汇率来源。';
@@ -441,7 +441,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get history_month => '1月';
 
   @override
-  String get history_quarter => '3月';
+  String get history_year => '1年';
 
   @override
   String get history_unavailable => '此时间范围内没有可用的历史汇率。请尝试其他日期或汇率来源。';
@@ -864,7 +864,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get history_month => '1月';
 
   @override
-  String get history_quarter => '3月';
+  String get history_year => '1年';
 
   @override
   String get history_unavailable => '此時間範圍內沒有可用的歷史匯率。請嘗試其他日期或匯率來源。';

@@ -64,6 +64,11 @@ void main() {
             .length,
         1,
       );
+      await tester.ensureVisible(find.text('1Y'));
+      await tester.tap(find.text('1Y'));
+      await tester.pumpAndSettle();
+      expect(state.historyDays, 365);
+      expect(state.historySamples.length, 8);
       final amount = state.convertedAmount;
       await tester.ensureVisible(find.byKey(const Key('history-refresh')));
       await tester.tap(find.byKey(const Key('history-refresh')));
