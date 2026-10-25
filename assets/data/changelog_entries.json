@@ -1,5 +1,40 @@
 [
     {
+        "version": "v1.0.7",
+        "date": "2026-10-25",
+        "summary": "Extended historical exchange-rate charts to one year and added an in-app privacy statement.",
+        "highlights": [
+            "Extended historical exchange-rate charts from three months to one year.",
+            "Added an in-app privacy statement in Settings.",
+            "Improved exchange-rate handling, currency metadata, localization, and application state management.",
+            "Updated Android build tooling and added automated platform smoke and release-build workflows."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.7",
+                "date": "2026-10-25",
+                "summary": "历史汇率图表现已支持查看一年数据，并在设置中新增隐私声明。",
+                "highlights": [
+                    "历史汇率图表的时间范围从三个月扩展至一年。",
+                    "在设置中新增应用内隐私声明。",
+                    "改进汇率处理、货币元数据、本地化和应用状态管理。",
+                    "更新 Android 构建工具，并新增平台冒烟测试和自动发布构建工作流。"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.7",
+                "date": "2026-10-25",
+                "summary": "歷史匯率圖表現已支援檢視一年資料，並在設定中新增隱私聲明。",
+                "highlights": [
+                    "歷史匯率圖表的時間範圍從三個月擴展至一年。",
+                    "在設定中新增應用程式內的隱私聲明。",
+                    "改進匯率處理、貨幣中繼資料、本地化和應用程式狀態管理。",
+                    "更新 Android 建置工具，並新增平台冒煙測試和自動發行建置工作流程。"
+                ]
+            }
+        }
+    },
+    {
         "version": "v1.0.6",
         "date": "2026-10-09",
         "summary": "Added historical exchange-rate charts and a multi-currency calculator, with improved conversion behavior and responsive layouts.",

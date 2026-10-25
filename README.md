@@ -6,7 +6,7 @@
 
 OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (flags, symbols, regions, and descriptions). The app targets Windows (desktop) and Android.
 
-Current release: `1.0.6`
+Current release: `1.0.7`
 
 ## Quick Links
 

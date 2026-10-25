@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.7] - 2026-10-25
+
+- Extended historical exchange-rate charts from three months to one year.
+- Added an in-app privacy statement in Settings.
+- Improved exchange-rate handling, currency metadata, localization, and application state management.
+- Updated Android build tooling and added automated platform smoke and release-build workflows.
+
 ## [1.0.6] - 2026-10-09
 
 - Added historical exchange-rate charts and date-based currency conversion.

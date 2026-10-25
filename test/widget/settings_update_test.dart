@@ -82,7 +82,7 @@ void main() {
   ) async {
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
     final updateService = _FakeUpdateService(
-      const LatestStableRelease(version: '1.0.6', data: {'tag_name': 'v1.0.6'}),
+      const LatestStableRelease(version: '1.0.7', data: {'tag_name': 'v1.0.7'}),
     );
     final state = _createAppState();
     addTearDown(state.dispose);
@@ -91,12 +91,12 @@ void main() {
       tester,
       state: state,
       updateService: updateService,
-      currentVersion: '1.0.6',
+      currentVersion: '1.0.7',
     );
     await tester.tap(find.text(l10n.settings_check_updates));
     await tester.pumpAndSettle();
 
-    expect(find.text(l10n.settings_latest_version('1.0.6')), findsOneWidget);
+    expect(find.text(l10n.settings_latest_version('1.0.7')), findsOneWidget);
     expect(find.text(l10n.update_available), findsNothing);
     expect(updateService.verifiedAssetCount, 0);
     expect(updateService.downloadCount, 0);
