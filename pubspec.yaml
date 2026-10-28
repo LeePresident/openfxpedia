@@ -24,8 +24,8 @@ dependencies:
   url_launcher: ^6.3.3
   flutter_native_splash: ^2.4.8
   pinyin: 3.3.0
-  fl_chart: ^1.2.0
-  sealed_currencies: ^3.4.0
+  fl_chart: ^1.3.0
+  sealed_currencies: ^3.4.1
 
 dev_dependencies:
   flutter_test:
