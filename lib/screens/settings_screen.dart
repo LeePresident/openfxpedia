@@ -76,7 +76,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
             assetName: assetName,
             digest: artifact.digest,
           );
-          await OpenFilex.open(file.path);
+          final openResult = await OpenFilex.open(
+            file.path,
+            type: Platform.isAndroid
+                ? 'application/vnd.android.package-archive'
+                : null,
+          );
+          if (openResult.type != ResultType.done) {
+            debugPrint(
+              'Update installer launch failed: '
+              '${openResult.type}: ${openResult.message}',
+            );
+            _showMessage(l10n.error_generic);
+          }
         }
       }
     } catch (e) {
