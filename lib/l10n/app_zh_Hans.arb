@@ -106,6 +106,47 @@
     "@calculator_title": {
         "description": "多货币计算器页面的标题。"
     },
+    "comparison_title": "汇率比较",
+    "@comparison_title": {
+        "description": "多货币汇率比较页面的标题。"
+    },
+    "comparison_base_currency": "基准货币",
+    "@comparison_base_currency": {
+        "description": "比较汇率时使用的基准货币标签。"
+    },
+    "comparison_select_currencies": "选择货币",
+    "@comparison_select_currencies": {
+        "description": "选择要比较汇率的货币的操作。"
+    },
+    "comparison_choose_currencies": "选择要比较的货币",
+    "@comparison_choose_currencies": {
+        "description": "选择比较货币对话框的标题和搜索提示。"
+    },
+    "comparison_done": "完成",
+    "@comparison_done": {
+        "description": "完成比较货币选择的操作。"
+    },
+    "comparison_currency": "货币",
+    "@comparison_currency": {
+        "description": "比较表格中的货币列标题。"
+    },
+    "comparison_rate_for_base": "1 {base} 的汇率",
+    "@comparison_rate_for_base": {
+        "description": "比较表格中的汇率列标题。",
+        "placeholders": {
+            "base": {
+                "type": "String"
+            }
+        }
+    },
+    "comparison_no_rate": "暂无汇率",
+    "@comparison_no_rate": {
+        "description": "所选货币没有对应汇率时显示的文本。"
+    },
+    "comparison_empty": "请在上方选择货币以查看汇率。",
+    "@comparison_empty": {
+        "description": "未选择比较货币时显示的提示。"
+    },
     "calculator_amount": "金额",
     "@calculator_amount": {
         "description": "计算器中金额输入框的标签。"

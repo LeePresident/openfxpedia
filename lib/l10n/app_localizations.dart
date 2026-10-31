@@ -232,6 +232,60 @@ abstract class AppLocalizations {
   /// **'Calculator'**
   String get calculator_title;
 
+  /// Title for the multi-currency rate comparison screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare rates'**
+  String get comparison_title;
+
+  /// Label for the currency used as the base of comparison rates.
+  ///
+  /// In en, this message translates to:
+  /// **'Base currency'**
+  String get comparison_base_currency;
+
+  /// Action to choose currencies for rate comparison.
+  ///
+  /// In en, this message translates to:
+  /// **'Select currencies'**
+  String get comparison_select_currencies;
+
+  /// Dialog title and search hint for selecting comparison currencies.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose currencies to compare'**
+  String get comparison_choose_currencies;
+
+  /// Action to finish selecting comparison currencies.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get comparison_done;
+
+  /// Currency column heading in the comparison table.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get comparison_currency;
+
+  /// Rate column heading in the comparison table.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate per 1 {base}'**
+  String comparison_rate_for_base(String base);
+
+  /// Displayed when a selected currency has no quote in the rate snapshot.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available'**
+  String get comparison_no_rate;
+
+  /// Prompt shown when no comparison currencies are selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose currencies above to see rates.'**
+  String get comparison_empty;
+
   /// No description provided for @calculator_amount.
   ///
   /// In en, this message translates to:

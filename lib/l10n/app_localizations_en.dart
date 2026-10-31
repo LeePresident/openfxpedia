@@ -83,6 +83,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get calculator_title => 'Calculator';
 
   @override
+  String get comparison_title => 'Compare rates';
+
+  @override
+  String get comparison_base_currency => 'Base currency';
+
+  @override
+  String get comparison_select_currencies => 'Select currencies';
+
+  @override
+  String get comparison_choose_currencies => 'Choose currencies to compare';
+
+  @override
+  String get comparison_done => 'Done';
+
+  @override
+  String get comparison_currency => 'Currency';
+
+  @override
+  String comparison_rate_for_base(String base) {
+    return 'Rate per 1 $base';
+  }
+
+  @override
+  String get comparison_no_rate => 'Not available';
+
+  @override
+  String get comparison_empty => 'Choose currencies above to see rates.';
+
+  @override
   String get calculator_amount => 'Amount';
 
   @override

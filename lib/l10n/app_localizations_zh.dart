@@ -82,6 +82,35 @@ class AppLocalizationsZh extends AppLocalizations {
   String get calculator_title => '计算器';
 
   @override
+  String get comparison_title => '汇率比较';
+
+  @override
+  String get comparison_base_currency => '基准货币';
+
+  @override
+  String get comparison_select_currencies => '选择货币';
+
+  @override
+  String get comparison_choose_currencies => '选择要比较的货币';
+
+  @override
+  String get comparison_done => '完成';
+
+  @override
+  String get comparison_currency => '货币';
+
+  @override
+  String comparison_rate_for_base(String base) {
+    return '1 $base 的汇率';
+  }
+
+  @override
+  String get comparison_no_rate => '暂无汇率';
+
+  @override
+  String get comparison_empty => '请在上方选择货币以查看汇率。';
+
+  @override
   String get calculator_amount => '金额';
 
   @override
@@ -505,6 +534,35 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get calculator_title => '计算器';
 
   @override
+  String get comparison_title => '汇率比较';
+
+  @override
+  String get comparison_base_currency => '基准货币';
+
+  @override
+  String get comparison_select_currencies => '选择货币';
+
+  @override
+  String get comparison_choose_currencies => '选择要比较的货币';
+
+  @override
+  String get comparison_done => '完成';
+
+  @override
+  String get comparison_currency => '货币';
+
+  @override
+  String comparison_rate_for_base(String base) {
+    return '1 $base 的汇率';
+  }
+
+  @override
+  String get comparison_no_rate => '暂无汇率';
+
+  @override
+  String get comparison_empty => '请在上方选择货币以查看汇率。';
+
+  @override
   String get calculator_amount => '金额';
 
   @override
@@ -926,6 +984,35 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get calculator_title => '計算機';
+
+  @override
+  String get comparison_title => '匯率比較';
+
+  @override
+  String get comparison_base_currency => '基準貨幣';
+
+  @override
+  String get comparison_select_currencies => '選擇貨幣';
+
+  @override
+  String get comparison_choose_currencies => '選擇要比較的貨幣';
+
+  @override
+  String get comparison_done => '完成';
+
+  @override
+  String get comparison_currency => '貨幣';
+
+  @override
+  String comparison_rate_for_base(String base) {
+    return '1 $base 的匯率';
+  }
+
+  @override
+  String get comparison_no_rate => '暫無匯率';
+
+  @override
+  String get comparison_empty => '請在上方選擇貨幣以查看匯率。';
 
   @override
   String get calculator_amount => '金額';

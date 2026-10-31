@@ -106,6 +106,47 @@
     "@calculator_title": {
         "description": "多貨幣計算機頁面的標題。"
     },
+    "comparison_title": "匯率比較",
+    "@comparison_title": {
+        "description": "多幣別匯率比較頁面的標題。"
+    },
+    "comparison_base_currency": "基準貨幣",
+    "@comparison_base_currency": {
+        "description": "比較匯率時使用的基準貨幣標籤。"
+    },
+    "comparison_select_currencies": "選擇貨幣",
+    "@comparison_select_currencies": {
+        "description": "選擇要比較匯率的貨幣的操作。"
+    },
+    "comparison_choose_currencies": "選擇要比較的貨幣",
+    "@comparison_choose_currencies": {
+        "description": "選擇比較貨幣對話方塊的標題和搜尋提示。"
+    },
+    "comparison_done": "完成",
+    "@comparison_done": {
+        "description": "完成比較貨幣選擇的操作。"
+    },
+    "comparison_currency": "貨幣",
+    "@comparison_currency": {
+        "description": "比較表格中的貨幣欄標題。"
+    },
+    "comparison_rate_for_base": "1 {base} 的匯率",
+    "@comparison_rate_for_base": {
+        "description": "比較表格中的匯率欄標題。",
+        "placeholders": {
+            "base": {
+                "type": "String"
+            }
+        }
+    },
+    "comparison_no_rate": "暫無匯率",
+    "@comparison_no_rate": {
+        "description": "所選貨幣沒有對應匯率時顯示的文字。"
+    },
+    "comparison_empty": "請在上方選擇貨幣以查看匯率。",
+    "@comparison_empty": {
+        "description": "未選擇比較貨幣時顯示的提示。"
+    },
     "calculator_amount": "金額",
     "@calculator_amount": {
         "description": "計算機中金額輸入欄位的標籤。"

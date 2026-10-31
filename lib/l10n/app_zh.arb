@@ -46,6 +46,22 @@
     },
     "converter_title": "转换器",
     "calculator_title": "计算器",
+    "comparison_title": "汇率比较",
+    "comparison_base_currency": "基准货币",
+    "comparison_select_currencies": "选择货币",
+    "comparison_choose_currencies": "选择要比较的货币",
+    "comparison_done": "完成",
+    "comparison_currency": "货币",
+    "comparison_rate_for_base": "1 {base} 的汇率",
+    "@comparison_rate_for_base": {
+        "placeholders": {
+            "base": {
+                "type": "String"
+            }
+        }
+    },
+    "comparison_no_rate": "暂无汇率",
+    "comparison_empty": "请在上方选择货币以查看汇率。",
     "calculator_amount": "金额",
     "calculator_currency": "货币",
     "calculator_result_currency": "结果货币",

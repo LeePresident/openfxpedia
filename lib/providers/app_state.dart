@@ -245,6 +245,11 @@ class AppState extends ChangeNotifier {
 
   Future<void> calculateCalculator() => _calculatorState.calculate();
 
+  Future<LatestRatesResult> loadComparisonRates(
+    String base, {
+    bool forceRefresh = false,
+  }) => _conversionService.loadLatestRates(base, forceRefresh: forceRefresh);
+
   void swapCurrencies() => _converterState.swapCurrencies();
 
   Future<void> setConversionDate(DateTime? date) =>

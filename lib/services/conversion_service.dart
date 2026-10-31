@@ -17,6 +17,20 @@ class ConversionResult {
   });
 }
 
+class LatestRatesResult {
+  final Map<String, double> rates;
+  final DateTime timestamp;
+  final String source;
+  final bool fromCache;
+
+  LatestRatesResult({
+    required Map<String, double> rates,
+    required this.timestamp,
+    required this.source,
+    required this.fromCache,
+  }) : rates = Map.unmodifiable(rates);
+}
+
 class ConversionService {
   final ExchangeClient _client;
   final CacheService _cache;
@@ -64,6 +78,75 @@ class ConversionService {
     String target,
     DateTime date,
   ) => _convert(amount, base, target, date: date, roundAmount: false);
+
+  Future<LatestRatesResult> loadLatestRates(
+    String base, {
+    bool forceRefresh = false,
+  }) async {
+    final normalizedBase = base.toLowerCase();
+    final preferredSource = _preferredSource;
+    final cacheWriteGeneration = _cacheWriteGeneration;
+    final cached = _cache.getCachedRateSnapshot(normalizedBase);
+    final compatibleSource = _matchesPreferredSource(
+      cached.source,
+      preferredSource,
+    );
+
+    if (!forceRefresh &&
+        cached.rates != null &&
+        cached.timestamp != null &&
+        !cached.isStale &&
+        compatibleSource) {
+      return LatestRatesResult(
+        rates: cached.rates!,
+        timestamp: cached.timestamp!,
+        source: cached.source!,
+        fromCache: true,
+      );
+    }
+
+    try {
+      final snapshot = await _fetchLatestSnapshot(
+        normalizedBase,
+        preferredSource: preferredSource,
+      );
+      if (snapshot.baseCurrency != normalizedBase ||
+          snapshot.rates.isEmpty ||
+          snapshot.rates.values.any(
+            (rate) => !rate.isFinite || rate <= 0,
+          )) {
+        throw ExchangeApiException('Invalid latest rates snapshot');
+      }
+      if (cacheWriteGeneration == _cacheWriteGeneration) {
+        await _cache.putRateSnapshot(
+          normalizedBase,
+          snapshot.rates,
+          snapshot.quotedAt,
+          source: snapshot.sourceId,
+        );
+      }
+      return LatestRatesResult(
+        rates: snapshot.rates,
+        timestamp: snapshot.quotedAt,
+        source: snapshot.sourceId,
+        fromCache: false,
+      );
+    } catch (_) {
+      if (cached.rates != null &&
+          cached.timestamp != null &&
+          (compatibleSource ||
+              (preferredSource == ExchangeApiSource.auto &&
+                  cached.source == null))) {
+        return LatestRatesResult(
+          rates: cached.rates!,
+          timestamp: cached.timestamp!,
+          source: cached.source ?? 'cache',
+          fromCache: true,
+        );
+      }
+      rethrow;
+    }
+  }
 
   Future<ConversionResult> _convert(
     double amount,

@@ -90,6 +90,47 @@
     "@calculator_title": {
         "description": "Title for the multi-currency calculator page."
     },
+    "comparison_title": "Compare rates",
+    "@comparison_title": {
+        "description": "Title for the multi-currency rate comparison screen."
+    },
+    "comparison_base_currency": "Base currency",
+    "@comparison_base_currency": {
+        "description": "Label for the currency used as the base of comparison rates."
+    },
+    "comparison_select_currencies": "Select currencies",
+    "@comparison_select_currencies": {
+        "description": "Action to choose currencies for rate comparison."
+    },
+    "comparison_choose_currencies": "Choose currencies to compare",
+    "@comparison_choose_currencies": {
+        "description": "Dialog title and search hint for selecting comparison currencies."
+    },
+    "comparison_done": "Done",
+    "@comparison_done": {
+        "description": "Action to finish selecting comparison currencies."
+    },
+    "comparison_currency": "Currency",
+    "@comparison_currency": {
+        "description": "Currency column heading in the comparison table."
+    },
+    "comparison_rate_for_base": "Rate per 1 {base}",
+    "@comparison_rate_for_base": {
+        "description": "Rate column heading in the comparison table.",
+        "placeholders": {
+            "base": {
+                "type": "String"
+            }
+        }
+    },
+    "comparison_no_rate": "Not available",
+    "@comparison_no_rate": {
+        "description": "Displayed when a selected currency has no quote in the rate snapshot."
+    },
+    "comparison_empty": "Choose currencies above to see rates.",
+    "@comparison_empty": {
+        "description": "Prompt shown when no comparison currencies are selected."
+    },
     "calculator_amount": "Amount",
     "calculator_currency": "Currency",
     "calculator_result_currency": "Result currency",
