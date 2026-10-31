@@ -91,6 +91,8 @@ void main() {
 
   test('unsupported or empty system locales leave the default unresolved', () {
     expect(LocaleResolver.resolveSystemLocale(const [Locale('fr')]), isNull);
+    expect(LocaleResolver.resolveSystemLocale(const [Locale('ar')]), isNull);
+    expect(LocaleResolver.resolveSystemLocale(const [Locale('he')]), isNull);
     expect(LocaleResolver.resolveSystemLocale(const []), isNull);
   });
 }

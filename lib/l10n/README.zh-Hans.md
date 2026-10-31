@@ -16,6 +16,12 @@
 2. 在仓库根目录运行 `flutter gen-l10n`，然后运行 `dart format lib/l10n`，重新生成并格式化纳入版本控制的本地化输出。请勿手动编辑生成的 Dart 文件。
 3. 逐步将硬编码文本替换为本地化消息调用。
 
+## 从右向左语言的准备
+
+目前尚未支持阿拉伯语和希伯来语。今后添加从右向左语言时，按常规添加对应的 ARB/生成的本地化实现，并将其加入受支持语言区域。`GlobalWidgetsLocalizations.delegate` 已会根据解析后的语言区域提供 `Directionality`；请保留此委托，不要强制应用使用从左向右布局。
+
+对于首尾方向相关的布局，请使用 `EdgeInsetsDirectional`、`AlignmentDirectional`、`TextAlign.start`/`end`、`BorderDirectional` 和 `PositionedDirectional` 等方向感知 API。添加该语言时，也应增加从右向左方向和布局的 widget 测试。`test/widget/rtl_directionality_test.dart` 在不添加当前尚未支持的翻译的情况下，验证 Flutter 会根据语言区域自动设置方向。
+
 说明：
 - `app_zh.arb` 是通用中文回退源文件，用于设备报告的语言区域为 `zh` 且不带文字代码的情况。
 - `app_localizations_zh.dart` 包含通用中文回退实现，以及区分简繁体的中文实现。

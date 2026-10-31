@@ -16,6 +16,12 @@ To expand translations later:
 2. Run `flutter gen-l10n`, then `dart format lib/l10n` from the repository root to regenerate and format the checked-in localization output. Do not edit the generated Dart files manually.
 3. Replace hard-coded strings incrementally with localized message lookups.
 
+## Right-to-left readiness
+
+Arabic and Hebrew are not currently supported locales. When adding an RTL locale, add its ARB/generated localization and include it in the supported locales as usual. `GlobalWidgetsLocalizations.delegate` already derives `Directionality` from the resolved locale; keep it enabled and do not force the app to left-to-right.
+
+Use directional layout APIs such as `EdgeInsetsDirectional`, `AlignmentDirectional`, `TextAlign.start`/`end`, `BorderDirectional`, and `PositionedDirectional` for leading/trailing UI. Add widget tests for RTL direction and layout when introducing the locale. `test/widget/rtl_directionality_test.dart` verifies Flutter's locale-driven direction behavior without adding an RTL translation today.
+
 Notes:
 - `app_zh.arb` is the neutral Chinese fallback source file used when the device reports `zh` without a script code.
 - `app_localizations_zh.dart` contains the neutral Chinese fallback implementation and the script-specific Chinese implementations.

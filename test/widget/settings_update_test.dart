@@ -17,6 +17,35 @@ import 'package:openfxpedia/services/favorites_service.dart';
 import 'package:openfxpedia/services/update_service.dart';
 
 void main() {
+  for (final direction in TextDirection.values) {
+    testWidgets('settings navigation chevrons mirror in $direction direction', (
+      tester,
+    ) async {
+      final state = _createAppState();
+      addTearDown(state.dispose);
+
+      await _pumpSettings(
+        tester,
+        state: state,
+        updateService: _FakeUpdateService(null),
+        currentVersion: '1.0.6',
+        textDirection: direction,
+      );
+
+      expect(find.byIcon(Icons.chevron_right), findsNWidgets(4));
+      expect(Icons.chevron_right.matchTextDirection, isTrue);
+
+      final title = tester.getCenter(find.text('Language'));
+      final icon = tester.getCenter(find.byIcon(Icons.chevron_right).first);
+      expect(
+        direction == TextDirection.rtl
+            ? icon.dx < title.dx
+            : icon.dx > title.dx,
+        isTrue,
+      );
+    });
+  }
+
   testWidgets('privacy statement is available from settings', (tester) async {
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
     final state = _createAppState();
@@ -173,6 +202,7 @@ Future<void> _pumpSettings(
   required AppState state,
   required _FakeUpdateService updateService,
   required String currentVersion,
+  TextDirection textDirection = TextDirection.ltr,
 }) async {
   await tester.pumpWidget(
     ChangeNotifierProvider<AppState>.value(
@@ -186,6 +216,8 @@ Future<void> _pumpSettings(
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
+        builder: (context, child) =>
+            Directionality(textDirection: textDirection, child: child!),
         home: SettingsScreen(
           updateService: updateService,
           packageInfoLoader: () async => PackageInfo(
