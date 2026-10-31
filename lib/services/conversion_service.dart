@@ -112,9 +112,7 @@ class ConversionService {
       );
       if (snapshot.baseCurrency != normalizedBase ||
           snapshot.rates.isEmpty ||
-          snapshot.rates.values.any(
-            (rate) => !rate.isFinite || rate <= 0,
-          )) {
+          snapshot.rates.values.any((rate) => !rate.isFinite || rate <= 0)) {
         throw ExchangeApiException('Invalid latest rates snapshot');
       }
       if (cacheWriteGeneration == _cacheWriteGeneration) {

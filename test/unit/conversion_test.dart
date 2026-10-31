@@ -322,28 +322,31 @@ void main() {
       expect(client.snapshotFetchCalls, 1);
     });
 
-    test('uses fresh source-compatible rates and stale cache offline', () async {
-      final cache = _StubCacheService(stale: false)
-        .._storedRates = {'eur': 0.9, 'gbp': 0.8}
-        .._storedTimestamp = DateTime.utc(2026, 5, 7)
-        .._storedSource = 'frankfurter';
-      final client = _FakeExchangeClient({});
-      final service = ConversionService(client: client, cache: cache);
+    test(
+      'uses fresh source-compatible rates and stale cache offline',
+      () async {
+        final cache = _StubCacheService(stale: false)
+          .._storedRates = {'eur': 0.9, 'gbp': 0.8}
+          .._storedTimestamp = DateTime.utc(2026, 5, 7)
+          .._storedSource = 'frankfurter';
+        final client = _FakeExchangeClient({});
+        final service = ConversionService(client: client, cache: cache);
 
-      final fresh = await service.loadLatestRates('USD');
-      expect(fresh.fromCache, isTrue);
-      expect(client.snapshotFetchCalls, 0);
+        final fresh = await service.loadLatestRates('USD');
+        expect(fresh.fromCache, isTrue);
+        expect(client.snapshotFetchCalls, 0);
 
-      cache._stale = true;
-      final offline = await service.loadLatestRates(
-        'USD',
-        forceRefresh: true,
-      );
-      expect(offline.rates, {'eur': 0.9, 'gbp': 0.8});
-      expect(offline.fromCache, isTrue);
-      expect(offline.source, 'frankfurter');
-      expect(client.snapshotFetchCalls, 1);
-    });
+        cache._stale = true;
+        final offline = await service.loadLatestRates(
+          'USD',
+          forceRefresh: true,
+        );
+        expect(offline.rates, {'eur': 0.9, 'gbp': 0.8});
+        expect(offline.fromCache, isTrue);
+        expect(offline.source, 'frankfurter');
+        expect(client.snapshotFetchCalls, 1);
+      },
+    );
 
     for (final refresh in [false, true]) {
       test(
