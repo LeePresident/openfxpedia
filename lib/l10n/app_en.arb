@@ -74,11 +74,11 @@
     "@language_english": {
         "description": "English language name."
     },
-    "language_simplified_chinese": "Simplified Chinese",
+    "language_simplified_chinese": "简体中文",
     "@language_simplified_chinese": {
         "description": "Simplified Chinese language name."
     },
-    "language_traditional_chinese": "Traditional Chinese",
+    "language_traditional_chinese": "繁體中文",
     "@language_traditional_chinese": {
         "description": "Traditional Chinese language name."
     },

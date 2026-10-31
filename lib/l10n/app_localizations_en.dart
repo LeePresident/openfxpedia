@@ -71,10 +71,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language_english => 'English';
 
   @override
-  String get language_simplified_chinese => 'Simplified Chinese';
+  String get language_simplified_chinese => '简体中文';
 
   @override
-  String get language_traditional_chinese => 'Traditional Chinese';
+  String get language_traditional_chinese => '繁體中文';
 
   @override
   String get converter_title => 'Converter';

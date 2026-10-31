@@ -67,13 +67,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get clear_search => '清除搜索';
 
   @override
-  String get language_english => '英文';
+  String get language_english => 'English';
 
   @override
   String get language_simplified_chinese => '简体中文';
 
   @override
-  String get language_traditional_chinese => '繁体中文';
+  String get language_traditional_chinese => '繁體中文';
 
   @override
   String get converter_title => '转换器';
@@ -519,13 +519,13 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get clear_search => '清除搜索';
 
   @override
-  String get language_english => '英文';
+  String get language_english => 'English';
 
   @override
   String get language_simplified_chinese => '简体中文';
 
   @override
-  String get language_traditional_chinese => '繁体中文';
+  String get language_traditional_chinese => '繁體中文';
 
   @override
   String get converter_title => '转换器';
@@ -971,10 +971,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get clear_search => '清除搜尋';
 
   @override
-  String get language_english => '英文';
+  String get language_english => 'English';
 
   @override
-  String get language_simplified_chinese => '簡體中文';
+  String get language_simplified_chinese => '简体中文';
 
   @override
   String get language_traditional_chinese => '繁體中文';

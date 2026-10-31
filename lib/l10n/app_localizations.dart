@@ -211,13 +211,13 @@ abstract class AppLocalizations {
   /// Simplified Chinese language name.
   ///
   /// In en, this message translates to:
-  /// **'Simplified Chinese'**
+  /// **'简体中文'**
   String get language_simplified_chinese;
 
   /// Traditional Chinese language name.
   ///
   /// In en, this message translates to:
-  /// **'Traditional Chinese'**
+  /// **'繁體中文'**
   String get language_traditional_chinese;
 
   /// Title for the converter screen.

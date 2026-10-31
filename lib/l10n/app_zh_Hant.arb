@@ -86,11 +86,11 @@
     "@clear_search": {
         "description": "清除搜尋查詢按鈕的工具提示。"
     },
-    "language_english": "英文",
+    "language_english": "English",
     "@language_english": {
         "description": "英文語言名稱。"
     },
-    "language_simplified_chinese": "簡體中文",
+    "language_simplified_chinese": "简体中文",
     "@language_simplified_chinese": {
         "description": "簡體中文語言名稱。"
     },

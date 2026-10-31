@@ -76,7 +76,11 @@ void main() {
     await tester.tap(find.text('Select language'));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Simplified Chinese'));
+    expect(find.text('简体中文'), findsOneWidget);
+    expect(find.text('繁體中文'), findsOneWidget);
+    expect(find.text('English'), findsNWidgets(2));
+
+    await tester.tap(find.text('简体中文'));
     await tester.pumpAndSettle();
 
     expect(find.text('语言'), findsOneWidget);
@@ -92,6 +96,13 @@ void main() {
 
     expect(find.text('语言'), findsOneWidget);
     expect(find.text('简体中文'), findsOneWidget);
+
+    await tester.tap(find.text('选择语言'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('简体中文'), findsNWidgets(2));
+    expect(find.text('繁體中文'), findsOneWidget);
+    expect(find.text('English'), findsOneWidget);
   });
 }
 

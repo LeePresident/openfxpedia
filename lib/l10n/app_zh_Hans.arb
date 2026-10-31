@@ -86,7 +86,7 @@
     "@clear_search": {
         "description": "清除搜索查询按钮的工具提示。"
     },
-    "language_english": "英文",
+    "language_english": "English",
     "@language_english": {
         "description": "英文语言名称。"
     },
@@ -94,7 +94,7 @@
     "@language_simplified_chinese": {
         "description": "简体中文语言名称。"
     },
-    "language_traditional_chinese": "繁体中文",
+    "language_traditional_chinese": "繁體中文",
     "@language_traditional_chinese": {
         "description": "繁体中文语言名称。"
     },
