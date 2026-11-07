@@ -130,12 +130,25 @@ void main() {
       conversion.holdRequests = true;
       state.setHistoryVisible(true);
       state.setHistoryDays(7);
-      expect(conversion.pending.length, 2);
+      expect(conversion.pending.length, 6);
       conversion.holdRequests = false;
-      conversion.pending[1].complete(_result(DateTime.utc(2024, 3, 4), 0.9));
-      await Future<void>.delayed(Duration.zero);
+      var completedThrough = 3;
+      while (state.historyLoading) {
+        final pendingCount = conversion.pending.length;
+        for (var index = completedThrough; index < pendingCount; index++) {
+          conversion.pending[index].complete(
+            _result(conversion.pendingDates[index]!, 0.9),
+          );
+        }
+        completedThrough = pendingCount;
+        await Future<void>.delayed(Duration.zero);
+      }
       expect(state.historySamples.length, 7);
-      conversion.pending[0].complete(_result(DateTime.utc(2024, 2, 10), 0.9));
+      for (var index = 0; index < 3; index++) {
+        conversion.pending[index].complete(
+          _result(conversion.pendingDates[index]!, 0.9),
+        );
+      }
       await Future<void>.delayed(Duration.zero);
       expect(state.historySamples.length, 7);
       expect(
@@ -143,13 +156,22 @@ void main() {
         DateTime.utc(2024, 3, 4),
       );
       conversion.holdRequests = true;
+      final refreshStart = conversion.pending.length;
       final refresh = state.loadHistory(forceRefresh: true);
       state.setHistoryVisible(false);
-      conversion.pending.last.complete(_result(DateTime.utc(2024, 3, 4), 0.9));
+      for (
+        var index = refreshStart;
+        index < conversion.pending.length;
+        index++
+      ) {
+        conversion.pending[index].complete(
+          _result(conversion.pendingDates[index]!, 0.9),
+        );
+      }
       await refresh;
       expect(state.historySamples, isEmpty);
       expect(state.historyLoading, isFalse);
-      expect(conversion.pending.length, 3);
+      expect(conversion.pending.length, refreshStart + 3);
     },
   );
 
@@ -370,6 +392,7 @@ class _Conversion extends ConversionService {
   bool forceRefresh = false;
   DateTime? lastDate;
   final pending = <Completer<ConversionResult>>[];
+  final pendingDates = <DateTime?>[];
 
   Future<ConversionResult> _request(DateTime? date, double amount) async {
     lastDate = date;
@@ -377,6 +400,7 @@ class _Conversion extends ConversionService {
     if (holdRequests) {
       final completer = Completer<ConversionResult>();
       pending.add(completer);
+      pendingDates.add(date);
       return completer.future;
     }
     return _result(

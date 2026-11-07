@@ -32,6 +32,20 @@ void main() {
     },
   );
 
+  test('loads history with at most three concurrent requests', () async {
+    final conversion = _ConcurrentConversion();
+    final samples = await RateHistoryService(conversion).load(
+      base: 'USD',
+      target: 'EUR',
+      endDate: DateTime(2024, 3, 31),
+      days: 365,
+    );
+
+    expect(samples.length, 8);
+    expect(conversion.maximumActiveRequests, greaterThan(1));
+    expect(conversion.maximumActiveRequests, lessThanOrEqualTo(3));
+  });
+
   test(
     'missing and out-of-range quotes remain gaps; actual dates survive',
     () async {
@@ -96,5 +110,36 @@ class _Conversion extends ConversionService {
       ),
       fromCache: true,
     );
+  }
+}
+
+class _ConcurrentConversion extends _Conversion {
+  int activeRequests = 0;
+  int maximumActiveRequests = 0;
+
+  @override
+  Future<ConversionResult> convertHistorical(
+    double amount,
+    String base,
+    String target,
+    DateTime date, {
+    bool forceRefresh = false,
+  }) async {
+    activeRequests++;
+    if (activeRequests > maximumActiveRequests) {
+      maximumActiveRequests = activeRequests;
+    }
+    try {
+      await Future<void>.delayed(const Duration(milliseconds: 5));
+      return await super.convertHistorical(
+        amount,
+        base,
+        target,
+        date,
+        forceRefresh: forceRefresh,
+      );
+    } finally {
+      activeRequests--;
+    }
   }
 }

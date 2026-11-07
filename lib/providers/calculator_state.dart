@@ -22,6 +22,7 @@ class CalculatorState {
 
   int _requestSequence = 0;
   int _nextEntryId = 0;
+  Timer? _calculationDebounce;
   String? _outputCurrencyCode;
   DateTime? _date;
   double? _total;
@@ -77,7 +78,20 @@ class CalculatorState {
 
   void setEntryAmount(int id, double amount) {
     if (!amount.isFinite || amount < 0) return;
-    _updateEntry(id, (entry) => entry.copyWith(amount: amount));
+    final index = _entries.indexWhere((entry) => entry.id == id);
+    if (index < 0 || _entries[index].amount == amount) return;
+    _entries[index] = _entries[index].copyWith(amount: amount);
+    _requestSequence++;
+    _lineResults.clear();
+    _total = null;
+    _loading = true;
+    _errorCode = null;
+    _onChanged();
+    _calculationDebounce?.cancel();
+    _calculationDebounce = Timer(const Duration(milliseconds: 250), () {
+      _calculationDebounce = null;
+      unawaited(calculate());
+    });
   }
 
   void setEntryCurrency(int id, Currency currency) {
@@ -112,6 +126,8 @@ class CalculatorState {
   }
 
   Future<void> calculate() async {
+    _calculationDebounce?.cancel();
+    _calculationDebounce = null;
     final requestId = ++_requestSequence;
     final entries = List<CalculatorEntry>.of(_entries);
     final target = _outputCurrencyCode;
@@ -186,6 +202,8 @@ class CalculatorState {
   }
 
   void cancelPending() {
+    _calculationDebounce?.cancel();
+    _calculationDebounce = null;
     _requestSequence++;
   }
 

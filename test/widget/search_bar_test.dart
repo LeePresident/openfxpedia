@@ -162,6 +162,30 @@ void main() {
       expect(selected, isNull);
     });
 
+    testWidgets('reopening selector starts with a fresh search state', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_buildWidget(onSelected: (_) {}));
+
+      await tester.tap(find.byType(InkWell));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byKey(const Key('currency_search_field')),
+        '392',
+      );
+      await tester.pump();
+      await tester.tapAt(const Offset(0, 0));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(InkWell));
+      await tester.pumpAndSettle();
+
+      expect(find.text('JPY'), findsOneWidget);
+      expect(find.text('USD'), findsOneWidget);
+      expect(find.byKey(const Key('currency_search_clear')), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('compact selector shows selected currency label', (
       tester,
     ) async {

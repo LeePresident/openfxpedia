@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/error_messages.dart';
 import '../models/currency.dart';
+import '../models/currency_search_index.dart';
 import '../providers/app_state.dart';
 import '../services/conversion_service.dart';
 import '../services/error_classifier.dart';
@@ -389,6 +390,7 @@ class _ComparisonCurrencyDialog extends StatefulWidget {
 class _ComparisonCurrencyDialogState extends State<_ComparisonCurrencyDialog> {
   late final TextEditingController _controller;
   late final Set<String> _selectedCodes;
+  late final List<CurrencySearchIndex> _currencies;
   String _query = '';
 
   @override
@@ -396,6 +398,9 @@ class _ComparisonCurrencyDialogState extends State<_ComparisonCurrencyDialog> {
     super.initState();
     _controller = TextEditingController();
     _selectedCodes = Set<String>.of(widget.selectedCodes);
+    _currencies = widget.currencies
+        .map(CurrencySearchIndex.new)
+        .toList(growable: false);
   }
 
   @override
@@ -407,14 +412,13 @@ class _ComparisonCurrencyDialogState extends State<_ComparisonCurrencyDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final visibleCurrencies = widget.currencies.where((currency) {
-      if (currency.isoCode.toLowerCase() == widget.baseCode.toLowerCase()) {
+    final query = CurrencySearchQuery(_query);
+    final baseCode = widget.baseCode.toLowerCase();
+    final visibleCurrencies = _currencies.where((entry) {
+      if (entry.normalizedIsoCode == baseCode) {
         return false;
       }
-      final normalizedQuery = _query.toLowerCase();
-      return currency.isoCode.toLowerCase().contains(normalizedQuery) ||
-          currency.name.toLowerCase().contains(normalizedQuery) ||
-          (currency.isoNumeric?.contains(normalizedQuery) ?? false);
+      return entry.matches(query);
     }).toList();
 
     return Dialog(
@@ -458,7 +462,7 @@ class _ComparisonCurrencyDialogState extends State<_ComparisonCurrencyDialog> {
                 child: ListView.builder(
                   itemCount: visibleCurrencies.length,
                   itemBuilder: (context, index) {
-                    final currency = visibleCurrencies[index];
+                    final currency = visibleCurrencies[index].currency;
                     return CheckboxListTile(
                       key: ValueKey('comparison-currency-${currency.isoCode}'),
                       value: _selectedCodes.contains(currency.isoCode),

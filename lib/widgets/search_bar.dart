@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/currency.dart';
+import '../models/currency_search_index.dart';
 import '../l10n/app_localizations.dart';
 
 class CurrencySearchBar extends StatefulWidget {
@@ -60,83 +61,10 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
   Future<void> _openSelectorDialog() async {
     final picked = await showDialog<Currency>(
       context: context,
-      builder: (dialogContext) {
-        List<Currency> localFiltered = widget.currencies;
-        final TextEditingController dialogController = TextEditingController();
-
-        return StatefulBuilder(
-          builder: (context, setDialogState) {
-            return Dialog(
-              insetPadding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 24.0,
-              ),
-              child: SizedBox(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.75,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: TextField(
-                        key: const Key('currency_search_field'),
-                        controller: dialogController,
-                        autofocus: true,
-                        decoration: InputDecoration(
-                          hintText: widget.hint,
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.search),
-                          suffixIcon: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (dialogController.text.isNotEmpty)
-                                IconButton(
-                                  key: const Key('currency_search_clear'),
-                                  icon: const Icon(Icons.clear),
-                                  tooltip: 'Clear search',
-                                  onPressed: () {
-                                    dialogController.clear();
-                                    setDialogState(() {
-                                      localFiltered = widget.currencies;
-                                    });
-                                  },
-                                ),
-                            ],
-                          ),
-                        ),
-                        onChanged: (query) {
-                          final q = query.toLowerCase();
-                          setDialogState(() {
-                            localFiltered = widget.currencies.where((c) {
-                              return c.isoCode.toLowerCase().contains(q) ||
-                                  c.name.toLowerCase().contains(q) ||
-                                  (c.isoNumeric?.contains(q) ?? false);
-                            }).toList();
-                          });
-                        },
-                      ),
-                    ),
-                    const Divider(height: 1),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: localFiltered.length,
-                        itemBuilder: (context, index) {
-                          final currency = localFiltered[index];
-                          return ListTile(
-                            title: Text(currency.isoCode),
-                            subtitle: Text(currency.name),
-                            onTap: () => Navigator.pop(dialogContext, currency),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
+      builder: (_) => _CurrencySelectorDialog(
+        currencies: widget.currencies,
+        hint: widget.hint,
+      ),
     );
 
     if (picked != null) {
@@ -174,6 +102,96 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _CurrencySelectorDialog extends StatefulWidget {
+  const _CurrencySelectorDialog({required this.currencies, required this.hint});
+
+  final List<Currency> currencies;
+  final String hint;
+
+  @override
+  State<_CurrencySelectorDialog> createState() =>
+      _CurrencySelectorDialogState();
+}
+
+class _CurrencySelectorDialogState extends State<_CurrencySelectorDialog> {
+  final TextEditingController _controller = TextEditingController();
+  late final List<CurrencySearchIndex> _currencies;
+  String _query = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _currencies = widget.currencies
+        .map(CurrencySearchIndex.new)
+        .toList(growable: false);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final query = CurrencySearchQuery(_query);
+    final filtered = _currencies
+        .where((currency) => currency.matches(query))
+        .toList(growable: false);
+
+    return Dialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+      child: SizedBox(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height * 0.75,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: TextField(
+                key: const Key('currency_search_field'),
+                controller: _controller,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: widget.hint,
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: _controller.text.isEmpty
+                      ? null
+                      : IconButton(
+                          key: const Key('currency_search_clear'),
+                          icon: const Icon(Icons.clear),
+                          tooltip: 'Clear search',
+                          onPressed: () {
+                            _controller.clear();
+                            setState(() => _query = '');
+                          },
+                        ),
+                ),
+                onChanged: (query) => setState(() => _query = query),
+              ),
+            ),
+            const Divider(height: 1),
+            Expanded(
+              child: ListView.builder(
+                itemCount: filtered.length,
+                itemBuilder: (context, index) {
+                  final currency = filtered[index].currency;
+                  return ListTile(
+                    title: Text(currency.isoCode),
+                    subtitle: Text(currency.name),
+                    onTap: () => Navigator.pop(context, currency),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

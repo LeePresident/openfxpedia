@@ -24,33 +24,57 @@ class RateHistoryService {
     final end = DateTime.utc(endDate.year, endDate.month, endDate.day);
     final start = end.subtract(Duration(days: days - 1));
     final count = days < 8 ? days : 8;
-    final samples = <RateHistorySample>[];
-    for (var index = 0; index < count; index++) {
-      if (isCancelled?.call() ?? false) break;
-      final date = start.add(
-        Duration(days: (index * (days - 1) / (count - 1)).round()),
-      );
-      ConversionResult? quote;
-      try {
-        final result = await _conversion.convertHistorical(
-          1,
-          base,
-          target,
-          date,
+    final samples = List<RateHistorySample?>.filled(count, null);
+    var nextIndex = 0;
+
+    Future<void> loadSamples() async {
+      while (!(isCancelled?.call() ?? false)) {
+        final index = nextIndex++;
+        if (index >= count) return;
+        final date = start.add(
+          Duration(days: (index * (days - 1) / (count - 1)).round()),
+        );
+        samples[index] = await _loadSample(
+          base: base,
+          target: target,
+          date: date,
+          start: start,
           forceRefresh: forceRefresh,
         );
-        final timestamp = result.rate.timestamp;
-        if (!timestamp.isBefore(start) &&
-            !timestamp.isAfter(date) &&
-            result.rate.rate.isFinite &&
-            result.rate.rate > 0) {
-          quote = result;
-        }
-      } catch (_) {
-        quote = null;
       }
-      samples.add(RateHistorySample(date, quote));
     }
-    return samples;
+
+    final workerCount = count < 3 ? count : 3;
+    await Future.wait(List.generate(workerCount, (_) => loadSamples()));
+    return samples.whereType<RateHistorySample>().toList(growable: false);
+  }
+
+  Future<RateHistorySample> _loadSample({
+    required String base,
+    required String target,
+    required DateTime date,
+    required DateTime start,
+    required bool forceRefresh,
+  }) async {
+    ConversionResult? quote;
+    try {
+      final result = await _conversion.convertHistorical(
+        1,
+        base,
+        target,
+        date,
+        forceRefresh: forceRefresh,
+      );
+      final timestamp = result.rate.timestamp;
+      if (!timestamp.isBefore(start) &&
+          !timestamp.isAfter(date) &&
+          result.rate.rate.isFinite &&
+          result.rate.rate > 0) {
+        quote = result;
+      }
+    } catch (_) {
+      quote = null;
+    }
+    return RateHistorySample(date, quote);
   }
 }

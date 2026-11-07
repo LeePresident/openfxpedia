@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/app_state.dart';
 import '../models/currency.dart';
+import '../models/currency_search_index.dart';
 import '../widgets/region_flag.dart';
 import 'currency_detail_screen.dart';
 
@@ -19,6 +20,9 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
   String _query = '';
   _CurrencySort _sort = _CurrencySort.codeAscending;
   bool _favoritesOnly = false;
+  List<Currency>? _indexedCurrenciesSource;
+  String? _indexedLanguageCode;
+  List<_CurrencySearchEntry> _indexedCurrencies = [];
 
   @override
   void dispose() {
@@ -32,28 +36,29 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
       builder: (context, state, _) {
         final l10n = AppLocalizations.of(context);
         final all = state.currencies;
-        final filtered =
-            (_query.isEmpty
-                    ? List<Currency>.of(all)
-                    : all.where((c) {
-                        final q = _query.toLowerCase();
-                        return c.isoCode.toLowerCase().contains(q) ||
-                            c.name.toLowerCase().contains(q) ||
-                            (c.isoNumeric?.contains(q) ?? false);
-                      }).toList())
-                .where(
-                  (currency) =>
-                      !_favoritesOnly || state.isFavorite(currency.isoCode),
-                )
-                .toList();
-        filtered.sort(
-          (first, second) => _sort.compare(
-            first,
-            second,
-            useChineseCollation:
-                Localizations.localeOf(context).languageCode == 'zh',
-          ),
-        );
+        final languageCode = Localizations.localeOf(context).languageCode;
+        if (!identical(_indexedCurrenciesSource, all) ||
+            _indexedLanguageCode != languageCode) {
+          _indexedCurrenciesSource = all;
+          _indexedLanguageCode = languageCode;
+          _indexedCurrencies = all
+              .map(
+                (currency) => _CurrencySearchEntry(
+                  searchIndex: CurrencySearchIndex(currency),
+                  sortName: languageCode == 'zh'
+                      ? PinyinHelper.getPinyin(currency.name, separator: '')
+                      : currency.name,
+                ),
+              )
+              .toList(growable: false);
+        }
+
+        final query = CurrencySearchQuery(_query);
+        final filtered = _indexedCurrencies.where((entry) {
+          return entry.searchIndex.matches(query) &&
+              (!_favoritesOnly ||
+                  state.isFavorite(entry.searchIndex.currency.isoCode));
+        }).toList()..sort((first, second) => _sort.compare(first, second));
 
         return Scaffold(
           appBar: AppBar(
@@ -130,7 +135,7 @@ class _EncyclopediaScreenState extends State<EncyclopediaScreen> {
                   itemExtent: 72,
                   itemCount: filtered.length,
                   itemBuilder: (context, index) {
-                    final currency = filtered[index];
+                    final currency = filtered[index].searchIndex.currency;
                     return _CurrencyTile(currency: currency, state: state);
                   },
                 ),
@@ -146,20 +151,14 @@ enum _CurrencySort {
   nameAscending,
   nameDescending;
 
-  int compare(
-    Currency first,
-    Currency second, {
-    required bool useChineseCollation,
-  }) {
+  int compare(_CurrencySearchEntry first, _CurrencySearchEntry second) {
     final comparison = switch (this) {
-      _CurrencySort.codeAscending ||
-      _CurrencySort.codeDescending => first.isoCode.compareTo(second.isoCode),
+      _CurrencySort.codeAscending || _CurrencySort.codeDescending =>
+        first.searchIndex.normalizedIsoCode.compareTo(
+          second.searchIndex.normalizedIsoCode,
+        ),
       _CurrencySort.nameAscending ||
-      _CurrencySort.nameDescending => _compareNames(
-        first.name,
-        second.name,
-        useChineseCollation: useChineseCollation,
-      ),
+      _CurrencySort.nameDescending => first.sortName.compareTo(second.sortName),
     };
 
     return switch (this) {
@@ -168,19 +167,16 @@ enum _CurrencySort {
       _ => comparison,
     };
   }
+}
 
-  int _compareNames(
-    String first,
-    String second, {
-    required bool useChineseCollation,
-  }) {
-    if (!useChineseCollation) return first.compareTo(second);
+class _CurrencySearchEntry {
+  const _CurrencySearchEntry({
+    required this.searchIndex,
+    required this.sortName,
+  });
 
-    return PinyinHelper.getPinyin(
-      first,
-      separator: '',
-    ).compareTo(PinyinHelper.getPinyin(second, separator: ''));
-  }
+  final CurrencySearchIndex searchIndex;
+  final String sortName;
 }
 
 class _CurrencyTile extends StatelessWidget {

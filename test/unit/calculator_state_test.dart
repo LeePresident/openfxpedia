@@ -41,6 +41,32 @@ void main() {
     },
   );
 
+  test('debounces rapid amount edits into one calculation', () async {
+    final currency = Currency(
+      isoCode: 'USD',
+      name: 'US Dollar',
+      minorUnitsPerMajor: 100,
+    );
+    final conversion = _CountingConversion();
+    final state = CalculatorState(
+      conversionService: conversion,
+      currencies: () => [currency],
+      onChanged: () {},
+    );
+    state.initialize(baseCurrency: currency, targetCurrency: currency);
+
+    final entryId = state.entries.single.id;
+    state.setEntryAmount(entryId, 1);
+    state.setEntryAmount(entryId, 2);
+    state.setEntryAmount(entryId, 3);
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+
+    expect(conversion.calls, 1);
+    expect(state.total, 3.01);
+    expect(state.loading, isFalse);
+    state.cancelPending();
+  });
+
   test('reset discards pending conversion results', () async {
     final currency = Currency(isoCode: 'USD', name: 'US Dollar');
     final conversion = _DeferredConversion();
@@ -125,6 +151,20 @@ class _ImmediateConversion extends ConversionService {
       rate: _rate(base, target, rate),
       fromCache: false,
     );
+  }
+}
+
+class _CountingConversion extends _ImmediateConversion {
+  int calls = 0;
+
+  @override
+  Future<ConversionResult> convertPrecise(
+    double amount,
+    String base,
+    String target,
+  ) {
+    calls++;
+    return super.convertPrecise(amount, base, target);
   }
 }
 

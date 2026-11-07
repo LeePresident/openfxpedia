@@ -79,19 +79,25 @@ class _BootstrapAppState extends State<_BootstrapApp> {
 
   Future<void> _bootstrap() async {
     final startupTimer = Stopwatch()..start();
+    AppState? appState;
 
     try {
-      final appState = await _createAppState();
-      await appState.initialize();
+      final createdAppState = await _createAppState();
+      appState = createdAppState;
+      final initialized = await createdAppState.initialize();
+      if (!initialized) {
+        throw StateError(
+          'Application initialization failed: '
+          '${createdAppState.errorCode ?? 'unknown error'}',
+        );
+      }
 
       final remainingSplashTime =
           const Duration(seconds: 2) - startupTimer.elapsed;
       if (!remainingSplashTime.isNegative) {
         await Future.delayed(remainingSplashTime);
       }
-
       if (!mounted) {
-        appState.dispose();
         return;
       }
 
@@ -100,8 +106,9 @@ class _BootstrapAppState extends State<_BootstrapApp> {
       }
 
       setState(() {
-        _appState = appState;
+        _appState = createdAppState;
       });
+      appState = null;
     } catch (error) {
       if (!mounted) {
         return;
@@ -114,6 +121,8 @@ class _BootstrapAppState extends State<_BootstrapApp> {
       setState(() {
         _startupError = error;
       });
+    } finally {
+      appState?.dispose();
     }
   }
 
@@ -293,8 +302,9 @@ class OpenFXpediaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppState>(
-      builder: (context, state, _) {
+    return Selector<AppState, (Locale?, ThemeMode)>(
+      selector: (context, state) => (state.locale, state.themeMode),
+      builder: (context, settings, _) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
@@ -305,8 +315,8 @@ class OpenFXpediaApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          locale: state.locale,
-          themeMode: state.themeMode,
+          locale: settings.$1,
+          themeMode: settings.$2,
           theme: _buildLightTheme(),
           darkTheme: _buildDarkTheme(),
           home: const _HomeShell(),
@@ -450,13 +460,15 @@ class _HomeShellState extends State<_HomeShell> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppState>(
-      builder: (context, state, _) {
+    return Selector<AppState, int>(
+      selector: (context, state) => state.selectedTab,
+      builder: (context, selectedTab, _) {
+        final state = context.read<AppState>();
         final l10n = AppLocalizations.of(context);
         return Scaffold(
-          body: _screens[state.selectedTab],
+          body: _screens[selectedTab],
           bottomNavigationBar: NavigationBar(
-            selectedIndex: state.selectedTab,
+            selectedIndex: selectedTab,
             onDestinationSelected: state.setSelectedTab,
             destinations: [
               NavigationDestination(
