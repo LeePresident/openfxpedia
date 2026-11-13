@@ -1,0 +1,138 @@
+name: Linux bundle build and smoke test
+
+on:
+  workflow_call:
+    inputs:
+      verify-tag:
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ubuntu:22.04
+    steps:
+      - name: Install build dependencies
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            build-essential clang cmake ninja-build pkg-config libgtk-3-dev \
+            ca-certificates curl git libglu1-mesa unzip xz-utils zip
+
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Verify tag matches app version
+        if: inputs.verify-tag
+        shell: bash
+        run: |
+          version="$(awk '/^version:/ {print $2; exit}' pubspec.yaml)"
+          version="${version%%+*}"
+          if [ -z "$version" ] || [ "${GITHUB_REF_NAME#v}" != "$version" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match pubspec version $version" >&2
+            exit 1
+          fi
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build Linux release on Ubuntu 22.04
+        shell: bash
+        run: bash ./scripts/build_linux.sh
+
+      - name: Upload candidate bundle
+        uses: actions/upload-artifact@v7
+        with:
+          name: linux-bundle-candidate
+          path: build/linux/openfxpedia_*_linux_x64.tar.gz
+          if-no-files-found: error
+
+  smoke:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ['ubuntu:22.04', 'ubuntu:24.04', 'ubuntu:26.04', 'debian:13']
+    container: ${{ matrix.image }}
+    steps:
+      - name: Install runtime dependencies
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            libgtk-3-0 libgl1 libegl1 libgl1-mesa-dri fonts-dejavu-core \
+            dbus-x11 xauth xdotool xvfb
+
+      - name: Download candidate bundle
+        uses: actions/download-artifact@v7
+        with:
+          name: linux-bundle-candidate
+          path: bundle
+
+      - name: Launch bundled app
+        shell: bash
+        run: |
+          set -euo pipefail
+          archives=(bundle/openfxpedia_*_linux_x64.tar.gz)
+          if [ "${#archives[@]}" -ne 1 ] || [ ! -f "${archives[0]}" ]; then
+            echo "Expected exactly one Linux bundle" >&2
+            exit 1
+          fi
+          mkdir extracted
+          tar -xzf "${archives[0]}" -C extracted
+          apps=(extracted/openfxpedia_*_linux_x64/openfxpedia)
+          if [ "${#apps[@]}" -ne 1 ] || [ ! -x "${apps[0]}" ]; then
+            echo "Bundled executable is missing or not executable" >&2
+            exit 1
+          fi
+          export GDK_BACKEND=x11 LIBGL_ALWAYS_SOFTWARE=1
+          dbus-run-session -- xvfb-run -a bash -c '
+            set -euo pipefail
+            "$1" >app.log 2>&1 &
+            pid=$!
+            trap '"'"'kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true'"'"' EXIT
+            for attempt in $(seq 1 30); do
+              if ! kill -0 "$pid" 2>/dev/null; then
+                cat app.log
+                echo "Application exited before showing a window" >&2
+                exit 1
+              fi
+              if xdotool search --onlyvisible --pid "$pid" >/dev/null 2>&1; then
+                sleep 5
+                if kill -0 "$pid" 2>/dev/null; then
+                  echo "Application window is visible and process is running"
+                  exit 0
+                fi
+                cat app.log
+                echo "Application exited after showing a window" >&2
+                exit 1
+              fi
+              sleep 1
+            done
+            cat app.log
+            echo "Application window did not appear" >&2
+            exit 1
+          ' _ "${apps[0]}"
+
+  publish-artifact:
+    needs: [build, smoke]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download validated bundle
+        uses: actions/download-artifact@v7
+        with:
+          name: linux-bundle-candidate
+          path: bundle
+
+      - name: Upload Linux release artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: linux-release
+          path: bundle/openfxpedia_*_linux_x64.tar.gz
+          if-no-files-found: error

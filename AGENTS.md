@@ -4,7 +4,7 @@ These instructions apply to the entire repository. Keep changes focused, preserv
 
 ## Project Shape
 
-OpenFXpedia is a Flutter application for Windows and Android. It combines a currency converter with an offline-friendly currency encyclopedia.
+OpenFXpedia is a Flutter application for Windows and Linux desktop, and Android. Its official Linux support target is x86_64 Ubuntu LTS and Debian stable. It combines a currency converter with an offline-friendly currency encyclopedia.
 
 - `lib/models/`: domain data objects.
 - `lib/services/`: exchange-rate, persistence, catalog, update, error-classification, and platform integrations.
@@ -25,7 +25,7 @@ OpenFXpedia is a Flutter application for Windows and Android. It combines a curr
 - Classify technical failures into stable codes with `ErrorClassifier`, then map those codes to localized UI copy.
 - Preserve user state across theme, locale, navigation, and refresh changes.
 - Keep network access behind the existing exchange client/provider abstractions. Preserve cached and offline fallback behavior.
-- Use `CacheService` for persisted preferences and cached data. On Windows, Hive must use the application support directory rather than a potentially OneDrive-backed documents directory.
+- Use `CacheService` for persisted preferences and cached data. Hive must use the application support directory rather than a potentially cloud-synced documents directory.
 - Treat `assets/data/fiat_currencies.json` as the canonical bundled fiat dataset. Locale files are field-level overlays, not independent copies.
 - Keep `pubspec.yaml` asset declarations synchronized with added or moved assets.
 - Do not manually edit files under `build/`, `coverage/`, or generated platform intermediates.
@@ -62,7 +62,7 @@ flutter test test/widget/encyclopedia_locale_test.dart
 
 - The package version in `pubspec.yaml`, `CHANGELOG.md`, `releases/`, and bundled changelog data must agree.
 - Use the scripts under `scripts/` for distributable builds; do not rename artifacts independently of those scripts.
-- Windows release installers require NSIS. Android release builds produce an APK and SHA-1 file.
+- Windows release installers require NSIS. Linux release builds produce a tar.gz bundle on a Linux host. Android release builds produce an APK and SHA-1 file.
 
 ## Available Skills
 

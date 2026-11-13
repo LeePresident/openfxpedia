@@ -9,6 +9,11 @@ permissions:
   contents: read
 
 jobs:
+  linux-release:
+    uses: ./.github/workflows/linux-bundle.yml
+    with:
+      verify-tag: true
+
   windows-release:
     runs-on: windows-latest
     steps:

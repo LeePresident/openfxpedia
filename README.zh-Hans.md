@@ -4,7 +4,9 @@
 
 ## 概述
 
-OpenFXpedia 是一款轻量级 Flutter 应用，集货币换算与可搜索的货币百科于一体，提供旗帜、货币符号、地区和说明等信息。应用支持 Windows 桌面端和 Android。
+OpenFXpedia 是一款轻量级 Flutter 应用，集货币换算与可搜索的货币百科于一体，提供旗帜、货币符号、地区和说明等信息。应用支持 Windows、Linux 桌面端和 Android。
+
+Linux 支持目标为 x86_64 架构的 Ubuntu 22.04、24.04、26.04 LTS 和 Debian 13 稳定版。其他 Linux 发行版未列入支持范围，也不提供官方支持；它们可能可以运行，但不保证兼容。Linux 版本以 tar.gz 压缩包分发，运行需要 GTK 3 和图形系统库。应用内更新程序目前无法安装 Linux 版本；请手动下载并替换解压后的应用程序包。
 
 当前版本：`1.0.7`
 
@@ -42,14 +44,28 @@ OpenFXpedia 是一款轻量级 Flutter 应用，集货币换算与可搜索的�
 - 可在设置中选择英语、简体中文或繁体中文。
 - 提供收藏、快速交换源货币与目标货币，以及源货币和目标货币选择对话框。
 - 应用内检查更新会打开适用于当前设备的 GitHub 发布文件：Windows 为 `openfxpedia_<version>_setup.exe`，Android 为 `openfxpedia_<version>.apk`。
+- Linux 桌面版以 tar.gz 压缩包分发；Linux 更新目前需要手动安装。
 
 ## 环境要求
 
 - Flutter SDK（稳定通道）
 - Windows：安装 Visual Studio Build Tools 及“使用 C++ 的桌面开发”工作负载；使用 `flutter config --enable-windows-desktop` 启用桌面支持
 - Windows 发布版安装程序：NSIS（`makensis` 必须在 PATH 中）
+- Linux：64 位 Ubuntu LTS 或 Debian 稳定版，并安装 Flutter Linux 桌面依赖（`build-essential`、`clang`、`cmake`、`ninja-build`、`pkg-config` 和 `libgtk-3-dev`）
 - Android：Android SDK，以及模拟器或实体设备
 - 建议运行 `flutter doctor` 检查环境
+
+## 快速开始（Linux）
+
+在 Ubuntu 或 Debian 上安装 Linux 桌面构建依赖后，运行：
+
+```bash
+flutter config --enable-linux-desktop
+flutter pub get
+flutter run -d linux
+```
+
+官方 Linux 支持目标为 x86_64 架构的 Ubuntu 22.04、24.04、26.04 LTS 和 Debian 13 稳定版。其他未列出的发行版不提供官方支持。
 
 ## 快速开始（Windows）
 
@@ -85,6 +101,10 @@ flutter run
 ./scripts/build_android.ps1
 ./scripts/build_android.ps1 -Mode debug
 
+# Linux（在 Linux 主机上使用 PowerShell 7）
+pwsh -File ./scripts/build_linux.ps1
+pwsh -File ./scripts/build_linux.ps1 -Mode debug
+
 # APK 输出（发布版）
 # build/app/outputs/flutter-apk/openfxpedia_<version>.apk
 # SHA1 输出（发布版）
@@ -95,6 +115,13 @@ flutter run
 # Windows（Git Bash）
 bash ./scripts/build_windows.sh
 bash ./scripts/build_windows.sh debug
+
+# Linux（请在 Linux 主机上运行）
+bash ./scripts/build_linux.sh
+bash ./scripts/build_linux.sh debug
+
+# Linux 发布包
+# build/linux/openfxpedia_<version>_linux_x64.tar.gz
 
 # 便携版 EXE 输出（发布版）
 # build/windows/portable/openfxpedia_<version>.exe
@@ -110,6 +137,8 @@ bash ./scripts/build_android.sh debug
 # SHA1 输出（发布版）
 # build/app/outputs/flutter-apk/openfxpedia_<version>.apk.sha1
 ```
+
+Linux 发布工作流在 Ubuntu 22.04 上构建，并在列出的每个 Linux 目标上通过虚拟 X11 显示器启动同一程序包，然后将其上传为 GitHub Actions 构建产物。此检查仅验证窗口启动，不验证应用是否成功初始化，也不涵盖所有应用功能。与其他平台的构建产物一样，该文件需要单独附加到 GitHub Release。本地构建的程序包使用构建主机的系统库；分发至支持目标时，请使用 Ubuntu 22.04 作为构建基准。
 
 ## 性能基准测试
 
@@ -189,16 +218,17 @@ flutter test test/widget/converter_history_test.dart
 - `OpenFXpedia` 是产品名称，在所有语言中均保持不变。
 - 修改 ARB 后，运行 `flutter gen-l10n` 重新生成纳入版本控制的本地化输出，然后运行 `dart format lib/l10n`。
 
-启动界面由 Flutter 渲染，因此加载状态和启动错误可以使用所选语言显示。在 Windows 上，应用初始化期间会持续显示此 Flutter 启动界面；Android 则先显示原生启动画面，待 Flutter 就绪后将其移除。
+启动界面由 Flutter 渲染，因此加载状态和启动错误可以使用所选语言显示。在 Windows 和 Linux 上，应用初始化期间会持续显示此 Flutter 启动界面；Android 则先显示原生启动画面，待 Flutter 就绪后将其移除。
 
 ## VS Code
 
 - 仓库在 `.vscode.example/` 中提供 VS Code 配置示例；将该文件夹复制为 `.vscode/` 即可使用。本地 `.vscode/` 文件夹已加入 Git 忽略，个人设置不会被提交。
-- 打开工作区根目录，然后通过“运行”视图在 Windows 或 Android 上启动应用。
+- 打开工作区根目录，然后通过“运行”视图在 Windows、Linux 或 Android 上启动应用。
 
 ## 故障排查
 
-- 桌面构建失败：确认已启用 Windows 桌面支持，并安装了 Visual Studio 及 C++ 工作负载。
+- Windows 桌面构建失败：确认已启用 Windows 桌面支持，并安装了 Visual Studio 及 C++ 工作负载。
+- Linux 桌面构建失败：运行 `flutter doctor -v`，并确认已安装 GTK 3 开发库和 Linux 构建工具。
 - 安装程序构建失败：确认已安装 NSIS，且 `makensis` 可通过 PATH 访问。
 - Flutter 找不到设备：运行 `flutter doctor -v`，确认 Android SDK、模拟器或 Windows 桌面环境已正确配置。
 - 依赖问题：运行 `flutter pub get`，并解决 pub 报告的错误。

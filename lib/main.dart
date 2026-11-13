@@ -16,9 +16,13 @@ import 'services/currency_catalog.dart';
 import 'services/exchange_client.dart';
 import 'services/favorites_service.dart';
 
+bool get _usesFlutterRenderedStartup =>
+    defaultTargetPlatform == TargetPlatform.windows ||
+    defaultTargetPlatform == TargetPlatform.linux;
+
 Future<void> main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
-  if (defaultTargetPlatform == TargetPlatform.windows) {
+  if (_usesFlutterRenderedStartup) {
     PaintingBinding.shaderWarmUp = const _OpenFXShaderWarmUp();
   } else {
     FlutterNativeSplash.preserve(widgetsBinding: binding);
@@ -101,7 +105,7 @@ class _BootstrapAppState extends State<_BootstrapApp> {
         return;
       }
 
-      if (defaultTargetPlatform != TargetPlatform.windows) {
+      if (!_usesFlutterRenderedStartup) {
         FlutterNativeSplash.remove();
       }
 
@@ -114,7 +118,7 @@ class _BootstrapAppState extends State<_BootstrapApp> {
         return;
       }
 
-      if (defaultTargetPlatform != TargetPlatform.windows) {
+      if (!_usesFlutterRenderedStartup) {
         FlutterNativeSplash.remove();
       }
 

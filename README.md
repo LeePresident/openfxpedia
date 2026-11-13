@@ -4,7 +4,9 @@
 
 ## Overview
 
-OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (flags, symbols, regions, and descriptions). The app targets Windows (desktop) and Android.
+OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (flags, symbols, regions, and descriptions). The app targets Windows and Linux (desktop), and Android.
+
+Linux support targets x86_64 Ubuntu 22.04, 24.04, and 26.04 LTS, and Debian 13 stable. Other Linux distributions are unlisted and are not officially supported; they may work, but compatibility is not guaranteed. Linux releases are built as tar.gz bundles and require GTK 3 and graphics system libraries. The in-app updater does not install Linux releases; download and replace the extracted app bundle manually.
 
 Current release: `1.0.7`
 
@@ -42,14 +44,28 @@ The catalog loaders cache data within their service instance. The catalog servic
 - English, Simplified Chinese, and Traditional Chinese language selection in Settings.
 - Favorites, quick-swap, and From/To chooser dialogs for fast workflows.
 - In-app update checks open the device-specific GitHub release asset: `openfxpedia_<version>_setup.exe` on Windows and `openfxpedia_<version>.apk` on Android.
+- Linux desktop builds are distributed as a tar.gz bundle; Linux updates are currently installed manually.
 
 ## Prerequisites
 
 - Flutter SDK (stable channel)
 - Windows: Visual Studio Build Tools with the Desktop development with C++ workload; enable desktop support with `flutter config --enable-windows-desktop`
 - Windows release installer: NSIS (`makensis` must be on PATH)
+- Linux: Ubuntu LTS or Debian stable (64-bit), with Flutter's Linux desktop dependencies (`build-essential`, `clang`, `cmake`, `ninja-build`, `pkg-config`, and `libgtk-3-dev`)
 - Android: Android SDK + emulator or device
 - Recommended: run `flutter doctor` to verify environment
+
+## Quickstart (Linux)
+
+On Ubuntu or Debian, install the Linux desktop build dependencies, then run:
+
+```bash
+flutter config --enable-linux-desktop
+flutter pub get
+flutter run -d linux
+```
+
+The official Linux support target is x86_64 Ubuntu 22.04, 24.04, and 26.04 LTS and Debian 13 stable. Other distributions are unlisted and not officially supported.
 
 ## Quickstart (Windows)
 
@@ -85,6 +101,10 @@ flutter run
 ./scripts/build_android.ps1
 ./scripts/build_android.ps1 -Mode debug
 
+# Linux (PowerShell 7 on a Linux host)
+pwsh -File ./scripts/build_linux.ps1
+pwsh -File ./scripts/build_linux.ps1 -Mode debug
+
 # APK output (release)
 # build/app/outputs/flutter-apk/openfxpedia_<version>.apk
 # SHA1 output (release)
@@ -95,6 +115,13 @@ flutter run
 # Windows (Git Bash)
 bash ./scripts/build_windows.sh
 bash ./scripts/build_windows.sh debug
+
+# Linux (run on a Linux host)
+bash ./scripts/build_linux.sh
+bash ./scripts/build_linux.sh debug
+
+# Linux release bundle
+# build/linux/openfxpedia_<version>_linux_x64.tar.gz
 
 # Portable EXE output (release)
 # build/windows/portable/openfxpedia_<version>.exe
@@ -110,6 +137,14 @@ bash ./scripts/build_android.sh debug
 # SHA1 output (release)
 # build/app/outputs/flutter-apk/openfxpedia_<version>.apk.sha1
 ```
+
+The Linux release workflow builds on Ubuntu 22.04 and launches the same bundle
+under a virtual X11 display on each listed Linux target before uploading it as
+a GitHub Actions artifact. This checks window launch, not successful app
+initialization or every application feature.
+The artifact must be attached to a GitHub Release separately, as with the other
+platform artifacts. Locally built bundles use the build host's system libraries;
+build on the Ubuntu 22.04 baseline when distributing to the supported targets.
 
 ## Performance Benchmark
 
@@ -189,16 +224,17 @@ flutter test test/widget/converter_history_test.dart
 - `OpenFXpedia` is a product name and remains unchanged in every locale.
 - Regenerate the checked-in localization output after ARB changes with `flutter gen-l10n`, then run `dart format lib/l10n`.
 
-The startup screen is rendered by Flutter so its loading status and startup errors can use the selected locale. Windows keeps this Flutter-rendered screen visible while the app initializes; Android uses the native splash until Flutter is ready and then removes it.
+The startup screen is rendered by Flutter so its loading status and startup errors can use the selected locale. Windows and Linux keep this Flutter-rendered screen visible while the app initializes; Android uses the native splash until Flutter is ready and then removes it.
 
 ## VS Code
 
 - Shared VS Code configuration examples are in `.vscode.example/`; copy that folder to `.vscode/` to use them. The local `.vscode/` folder is gitignored so personal settings are not committed.
-- Open the workspace root, then use the Run view to launch the app on Windows or Android.
+- Open the workspace root, then use the Run view to launch the app on Windows, Linux, or Android.
 
 ## Troubleshooting
 
-- If desktop build fails: verify desktop support and Visual Studio (with C++ workload) are installed for Windows.
+- If a Windows desktop build fails: verify desktop support and Visual Studio (with C++ workload) are installed.
+- If a Linux desktop build fails: run `flutter doctor -v` and verify the GTK 3 development libraries and Linux build tools are installed.
 - If installer build fails: verify NSIS is installed and `makensis` is available in PATH.
 - If Flutter cannot find devices: run `flutter doctor -v` and ensure Android SDK/emulator or Windows desktop is configured.
 - For dependency issues: run `flutter pub get` and resolve pub errors.
