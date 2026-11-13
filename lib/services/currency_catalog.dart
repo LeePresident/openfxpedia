@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 import 'package:sealed_currencies/sealed_currencies.dart' show FiatCurrency;
 
