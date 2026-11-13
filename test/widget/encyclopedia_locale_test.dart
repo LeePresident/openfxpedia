@@ -8,6 +8,7 @@ import 'package:http/testing.dart';
 import 'package:provider/provider.dart';
 
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/l10n/localization_delegates.dart';
 import 'package:openfxpedia/models/cached_catalog.dart';
 import 'package:openfxpedia/models/cached_rate_snapshot.dart';
 import 'package:openfxpedia/models/currency.dart';
@@ -91,7 +92,7 @@ void main() {
           value: state,
           child: MaterialApp(
             supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            localizationsDelegates: appLocalizationDelegates,
             home: Builder(
               builder: (context) => TextButton(
                 onPressed: () => Navigator.of(context).push(
@@ -142,7 +143,7 @@ void main() {
         value: state,
         child: MaterialApp(
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationDelegates,
           home: Consumer<AppState>(
             builder: (context, currentState, _) => Scaffold(
               body: Column(
@@ -284,7 +285,7 @@ void main() {
           child: MaterialApp(
             locale: state.locale,
             supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            localizationsDelegates: appLocalizationDelegates,
             home: const EncyclopediaScreen(),
           ),
         ),

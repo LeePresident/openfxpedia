@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/l10n/localization_delegates.dart';
 import 'package:openfxpedia/models/cached_catalog.dart';
 import 'package:openfxpedia/models/cached_rate_snapshot.dart';
 import 'package:openfxpedia/models/currency.dart';
@@ -122,7 +123,7 @@ void main() {
         child: MaterialApp(
           locale: state.locale,
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationDelegates,
           home: const ComparisonScreen(),
         ),
       ),

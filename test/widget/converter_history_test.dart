@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/l10n/localization_delegates.dart';
 import 'package:openfxpedia/screens/converter_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -356,7 +357,7 @@ class _Harness extends StatelessWidget {
       builder: (context, state, _) => MaterialApp(
         locale: state.locale,
         themeMode: state.themeMode,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: const ConverterScreen(),
       ),

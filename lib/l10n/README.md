@@ -2,9 +2,9 @@
 
 [English](README.md) | [简体中文](README.zh-Hans.md) | [繁體中文](README.zh-Hant.md)
 
-This project enables Flutter localization delegates in `lib/main.dart` and currently declares support for:
+The app uses `appLocalizationDelegates` from `localization_delegates.dart` to provide both Flutter SDK and `material_ui` localization delegates. It currently declares support for:
 - `en` (English)
-- `zh` (Traditional Chinese fallback)
+- `zh` (neutral Chinese fallback)
 - `zh_Hans` (Simplified Chinese)
 - `zh_Hant` (Traditional Chinese, Hong Kong usage)
 

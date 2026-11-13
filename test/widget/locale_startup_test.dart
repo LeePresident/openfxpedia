@@ -1,8 +1,10 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart' as flutter_material;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/l10n/localization_delegates.dart';
 import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/providers/app_state.dart';
 import 'package:openfxpedia/services/cache_service.dart';
@@ -12,6 +14,41 @@ import 'package:openfxpedia/services/exchange_client.dart';
 import 'package:openfxpedia/services/favorites_service.dart';
 
 void main() {
+  testWidgets('all supported locales load both Material implementations', (
+    tester,
+  ) async {
+    final expectedLanguages = {
+      const Locale('en'): 'Language',
+      const Locale('zh'): '语言',
+      const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'): '语言',
+      const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'): '語言',
+    };
+
+    for (final entry in expectedLanguages.entries) {
+      await tester.pumpWidget(
+        MaterialApp(
+          locale: entry.key,
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: appLocalizationDelegates,
+          home: Builder(
+            builder: (context) {
+              final material = MaterialLocalizations.of(context);
+              final flutterMaterial = flutter_material.MaterialLocalizations.of(
+                context,
+              );
+              expect(material.cancelButtonLabel, isNotEmpty);
+              expect(flutterMaterial.cancelButtonLabel, isNotEmpty);
+              return Text(AppLocalizations.of(context).settings_language);
+            },
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text(entry.value), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    }
+  });
+
   testWidgets('first run starts in the matching supported locale', (
     tester,
   ) async {
@@ -41,7 +78,7 @@ void main() {
             return MaterialApp(
               locale: state.locale,
               supportedLocales: AppLocalizations.supportedLocales,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              localizationsDelegates: appLocalizationDelegates,
               home: const _LocaleProbePage(),
             );
           },
@@ -87,7 +124,7 @@ void main() {
             return MaterialApp(
               locale: state.locale,
               supportedLocales: AppLocalizations.supportedLocales,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              localizationsDelegates: appLocalizationDelegates,
               home: const _LocaleProbePage(),
             );
           },

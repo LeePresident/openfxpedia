@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/l10n/localization_delegates.dart';
 import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/widgets/search_bar.dart' as app_search;
 
@@ -12,7 +13,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         locale: const Locale('en'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: app_search.CurrencySearchBar(

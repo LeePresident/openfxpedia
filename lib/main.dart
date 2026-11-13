@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'l10n/app_localizations.dart';
+import 'l10n/localization_delegates.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_state.dart';
 import 'screens/converter_screen.dart';
@@ -164,7 +165,7 @@ class _BootstrapAppState extends State<_BootstrapApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       themeMode: ThemeMode.system,
       theme: _buildLightTheme(),
@@ -306,7 +307,7 @@ class OpenFXpediaApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: settings.$1,
           themeMode: settings.$2,

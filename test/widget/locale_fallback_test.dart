@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/l10n/localization_delegates.dart';
 import 'package:openfxpedia/l10n/app_localizations_en.dart';
 import 'package:openfxpedia/screens/changelog_screen.dart';
 import 'package:openfxpedia/services/observability.dart';
@@ -71,7 +72,7 @@ void main() {
           scriptCode: 'Hans',
         ),
         supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationDelegates,
         home: ChangelogScreen(
           bundle: _MapAssetBundle({
             'assets/data/changelog_entries.json': jsonFixture,

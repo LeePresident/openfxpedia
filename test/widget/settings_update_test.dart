@@ -6,6 +6,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/l10n/localization_delegates.dart';
 import 'package:openfxpedia/providers/app_state.dart';
 import 'package:openfxpedia/screens/settings_screen.dart';
 import 'package:openfxpedia/services/cache_service.dart';
@@ -209,7 +210,7 @@ Future<void> _pumpSettings(
       child: MaterialApp(
         locale: const Locale('en'),
         supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationDelegates,
         builder: (context, child) =>
             Directionality(textDirection: textDirection, child: child!),
         home: SettingsScreen(

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'package:openfxpedia/core/config.dart';
 import 'package:openfxpedia/l10n/app_localizations.dart';
+import 'package:openfxpedia/l10n/localization_delegates.dart';
 import 'package:openfxpedia/models/currency.dart';
 import 'package:openfxpedia/providers/app_state.dart';
 import 'package:openfxpedia/services/cache_service.dart';
@@ -130,7 +131,7 @@ class _TestHarness extends StatelessWidget {
           return MaterialApp(
             locale: state.locale,
             supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            localizationsDelegates: appLocalizationDelegates,
             home: child,
           );
         },
