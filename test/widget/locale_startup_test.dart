@@ -1,5 +1,7 @@
-import 'package:material_ui/material_ui.dart';
+// Flutter SDK widgets still require the SDK's localization delegate.
+// ignore: deprecated_member_use
 import 'package:flutter/material.dart' as flutter_material;
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +39,10 @@ void main() {
                 context,
               );
               expect(material.cancelButtonLabel, isNotEmpty);
-              expect(flutterMaterial.cancelButtonLabel, isNotEmpty);
+              expect(
+                flutterMaterial.cancelButtonLabel,
+                material.cancelButtonLabel,
+              );
               return Text(AppLocalizations.of(context).settings_language);
             },
           ),

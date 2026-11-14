@@ -3,3 +3,5 @@ template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 output-class: AppLocalizations
 nullable-getter: false
+# Flutter's generator still emits deprecated SDK localization delegates.
+header: "// ignore_for_file: deprecated_member_use"

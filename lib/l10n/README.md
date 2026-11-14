@@ -10,6 +10,7 @@ The app uses `appLocalizationDelegates` from `localization_delegates.dart` to pr
 
 Localization messages are provided by `lib/l10n/app_localizations.dart` as the shared entry point, with ARB source files in this directory.
 The checked-in generated implementations are `app_localizations_en.dart` and `app_localizations_zh.dart`; the latter contains the neutral `zh`, Simplified Chinese, and Traditional Chinese implementations.
+Flutter's generator still emits deprecated SDK delegates, so `l10n.yaml` suppresses that diagnostic only in generated localization files. Keep the separately maintained `appLocalizationDelegates` list for both SDK and `material_ui` widgets.
 
 To expand translations later:
 1. Add new keys to `app_en.arb` first, then keep the ARB files for the other supported locales aligned. Add a new ARB file when introducing a new locale.
