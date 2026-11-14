@@ -85,6 +85,8 @@ flutter run
 
 ## 建置發行版本
 
+Linux 建置必須在 Linux 環境（包括 WSL）中執行，並安裝 Linux 版 Flutter SDK 和桌面建置相依套件；Windows PowerShell 無法交叉編譯 Linux 版本。
+
 ```powershell
 # Windows
 ./scripts/build_windows.ps1
@@ -100,10 +102,6 @@ flutter run
 # Android（Windows PowerShell）
 ./scripts/build_android.ps1
 ./scripts/build_android.ps1 -Mode debug
-
-# Linux（在 Linux 主機上使用 PowerShell 7）
-pwsh -File ./scripts/build_linux.ps1
-pwsh -File ./scripts/build_linux.ps1 -Mode debug
 
 # APK 輸出（發行版）
 # build/app/outputs/flutter-apk/openfxpedia_<version>.apk

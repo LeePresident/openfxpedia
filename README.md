@@ -85,6 +85,9 @@ flutter run
 
 ## Release Builds
 
+Linux builds must run on Linux, including inside WSL, with the Linux Flutter SDK
+and desktop build dependencies installed; Windows PowerShell cannot cross-build them.
+
 ```powershell
 # Windows
 ./scripts/build_windows.ps1
@@ -100,10 +103,6 @@ flutter run
 # Android (Windows PowerShell)
 ./scripts/build_android.ps1
 ./scripts/build_android.ps1 -Mode debug
-
-# Linux (PowerShell 7 on a Linux host)
-pwsh -File ./scripts/build_linux.ps1
-pwsh -File ./scripts/build_linux.ps1 -Mode debug
 
 # APK output (release)
 # build/app/outputs/flutter-apk/openfxpedia_<version>.apk

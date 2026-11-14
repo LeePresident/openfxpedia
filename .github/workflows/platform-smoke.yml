@@ -43,8 +43,8 @@ jobs:
           cache: true
 
       - name: Build Linux debug app
-        shell: pwsh
-        run: ./scripts/build_linux.ps1 -Mode debug
+        shell: bash
+        run: bash ./scripts/build_linux.sh debug
 
   linux-bundle-smoke:
     uses: ./.github/workflows/linux-bundle.yml
