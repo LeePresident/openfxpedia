@@ -1,5 +1,43 @@
 [
     {
+        "version": "v1.0.8",
+        "date": "2026-11-14",
+        "summary": "Added Linux desktop support and multi-currency comparison, with faster currency search and improved localization.",
+        "highlights": [
+            "Added Linux desktop support with versioned x86_64 release bundles.",
+            "Added a multi-currency comparison screen.",
+            "Improved currency search responsiveness with indexing and debouncing.",
+            "Added right-to-left language support and native-language names in the language selector.",
+            "Improved Android in-app updates and localization integration."
+        ],
+        "translations": {
+            "zh_Hans": {
+                "version": "v1.0.8",
+                "date": "2026-11-14",
+                "summary": "新增 Linux 桌面版和多币种对比功能，并提升货币搜索速度和本地化体验。",
+                "highlights": [
+                    "新增 Linux 桌面版，并提供带版本号的 x86_64 发布包。",
+                    "新增多币种对比页面。",
+                    "通过索引和防抖处理提升货币搜索响应速度。",
+                    "新增从右向左阅读方向支持，并在语言选择器中显示语言的本地名称。",
+                    "改进 Android 应用内更新流程和本地化集成。"
+                ]
+            },
+            "zh_Hant": {
+                "version": "v1.0.8",
+                "date": "2026-11-14",
+                "summary": "新增 Linux 桌面版和多幣別比較功能，並提升貨幣搜尋速度和在地化體驗。",
+                "highlights": [
+                    "新增 Linux 桌面版，並提供帶版本號的 x86_64 發行套件。",
+                    "新增多幣別比較頁面。",
+                    "透過索引和防抖處理提升貨幣搜尋回應速度。",
+                    "新增由右至左閱讀方向支援，並在語言選擇器中顯示語言的原生名稱。",
+                    "改進 Android 應用程式內更新流程和在地化整合。"
+                ]
+            }
+        }
+    },
+    {
         "version": "v1.0.7",
         "date": "2026-10-25",
         "summary": "Extended historical exchange-rate charts to one year and added an in-app privacy statement.",

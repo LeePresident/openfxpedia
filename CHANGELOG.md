@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.8] - 2026-11-14
+
+- Added Linux desktop support with versioned x86_64 release bundles.
+- Added a multi-currency comparison screen.
+- Improved currency search responsiveness with indexing and debouncing.
+- Added right-to-left language support and native-language names in the language selector.
+- Improved Android in-app updates and localization integration.
+
 ## [1.0.7] - 2026-10-25
 
 - Extended historical exchange-rate charts from three months to one year.

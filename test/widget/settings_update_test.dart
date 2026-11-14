@@ -28,7 +28,7 @@ void main() {
         tester,
         state: state,
         updateService: _FakeUpdateService(null),
-        currentVersion: '1.0.6',
+        currentVersion: '1.0.7',
         textDirection: direction,
       );
 
@@ -55,7 +55,7 @@ void main() {
       tester,
       state: state,
       updateService: _FakeUpdateService(null),
-      currentVersion: '1.0.6',
+      currentVersion: '1.0.7',
     );
 
     await tester.ensureVisible(find.text(l10n.settings_privacy));
@@ -73,8 +73,8 @@ void main() {
       final l10n = await AppLocalizations.delegate.load(const Locale('en'));
       final updateService = _FakeUpdateService(
         const LatestStableRelease(
-          version: '1.0.7',
-          data: {'tag_name': 'v1.0.7'},
+          version: '1.0.8',
+          data: {'tag_name': 'v1.0.8'},
         ),
       );
       final state = _createAppState();
@@ -84,7 +84,7 @@ void main() {
         tester,
         state: state,
         updateService: updateService,
-        currentVersion: '1.0.6',
+        currentVersion: '1.0.7',
       );
       await tester.tap(find.text(l10n.settings_check_updates));
       await tester.pump();
@@ -92,7 +92,7 @@ void main() {
 
       expect(find.text(l10n.update_available), findsOneWidget);
       expect(
-        find.text(l10n.update_download_prompt('1.0.7', 'installer-1.0.7.exe')),
+        find.text(l10n.update_download_prompt('1.0.8', 'installer-1.0.8.exe')),
         findsOneWidget,
       );
 
@@ -111,7 +111,7 @@ void main() {
   ) async {
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
     final updateService = _FakeUpdateService(
-      const LatestStableRelease(version: '1.0.7', data: {'tag_name': 'v1.0.7'}),
+      const LatestStableRelease(version: '1.0.8', data: {'tag_name': 'v1.0.8'}),
     );
     final state = _createAppState();
     addTearDown(state.dispose);
@@ -120,12 +120,12 @@ void main() {
       tester,
       state: state,
       updateService: updateService,
-      currentVersion: '1.0.7',
+      currentVersion: '1.0.8',
     );
     await tester.tap(find.text(l10n.settings_check_updates));
     await tester.pumpAndSettle();
 
-    expect(find.text(l10n.settings_latest_version('1.0.7')), findsOneWidget);
+    expect(find.text(l10n.settings_latest_version('1.0.8')), findsOneWidget);
     expect(find.text(l10n.update_available), findsNothing);
     expect(updateService.verifiedAssetCount, 0);
     expect(updateService.downloadCount, 0);
@@ -146,7 +146,7 @@ void main() {
       tester,
       state: state,
       updateService: updateService,
-      currentVersion: '1.0.6',
+      currentVersion: '1.0.7',
     );
     await tester.tap(find.text(l10n.settings_check_updates));
     await tester.pumpAndSettle();
@@ -161,7 +161,7 @@ void main() {
   ) async {
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
     final updateService = _FakeUpdateService(
-      const LatestStableRelease(version: '1.0.7', data: {'tag_name': 'v1.0.7'}),
+      const LatestStableRelease(version: '1.0.8', data: {'tag_name': 'v1.0.8'}),
       assetAvailable: false,
     );
     final state = _createAppState();
@@ -171,7 +171,7 @@ void main() {
       tester,
       state: state,
       updateService: updateService,
-      currentVersion: '1.0.6',
+      currentVersion: '1.0.7',
     );
     await tester.tap(find.text(l10n.settings_check_updates));
     await tester.pump();
@@ -259,7 +259,7 @@ class _FakeUpdateService extends UpdateService {
     if (!assetAvailable) return null;
     return VerifiedUpdateArtifact(
       uri: Uri.parse(
-        'https://github.com/LeePresident/openfxpedia/releases/download/v1.0.7/$assetName',
+        'https://github.com/LeePresident/openfxpedia/releases/download/v1.0.8/$assetName',
       ),
       digest: 'sha256:${'a' * 64}',
     );
