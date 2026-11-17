@@ -70,7 +70,7 @@ jobs:
             dbus-x11 xauth xdotool xvfb
 
       - name: Download candidate bundle
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: linux-bundle-candidate
           path: bundle
@@ -125,7 +125,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download validated bundle
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: linux-bundle-candidate
           path: bundle
