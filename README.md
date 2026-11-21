@@ -6,7 +6,7 @@
 
 OpenFXpedia is a lightweight Flutter application combining a currency converter with a searchable currency encyclopedia (flags, symbols, regions, and descriptions). The app targets Windows and Linux (desktop), and Android.
 
-Linux support targets x86_64 Ubuntu 22.04, 24.04, and 26.04 LTS, and Debian 13 stable. Other Linux distributions are unlisted and are not officially supported; they may work, but compatibility is not guaranteed. Linux releases are built as tar.gz bundles and require GTK 3 and graphics system libraries. The in-app updater does not install Linux releases; download and replace the extracted app bundle manually.
+Linux support targets x86_64 Ubuntu 22.04, 24.04, and 26.04 LTS, and Debian 13 stable. Other Linux distributions are unlisted and are not officially supported; they may work, but compatibility is not guaranteed. Linux releases are built as tar.gz bundles and require GTK 3 and graphics system libraries, including `libgles2`. The in-app updater does not install Linux releases; download and replace the extracted app bundle manually.
 
 Current release: `1.0.8`
 

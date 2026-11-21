@@ -68,7 +68,7 @@ jobs:
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y \
-            libgtk-3-0 libgl1 libegl1 libgl1-mesa-dri fonts-dejavu-core \
+            libgtk-3-0 libgl1 libegl1 libgles2 libgl1-mesa-dri fonts-dejavu-core \
             dbus-x11 xauth xdotool xvfb
 
       - name: Download candidate bundle
