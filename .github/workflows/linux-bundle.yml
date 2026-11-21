@@ -44,7 +44,9 @@ jobs:
 
       - name: Build Linux release on Ubuntu 22.04
         shell: bash
-        run: bash ./scripts/build_linux.sh
+        run: |
+          git config --global --add safe.directory "$FLUTTER_ROOT"
+          bash ./scripts/build_linux.sh
 
       - name: Upload candidate bundle
         uses: actions/upload-artifact@v7
