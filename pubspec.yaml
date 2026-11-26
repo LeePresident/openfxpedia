@@ -17,7 +17,7 @@ dependencies:
   open_filex: ^5.0.0
   path_provider: ^2.1.6
   provider: ^6.1.0
-  flutter_svg: ^2.3.2
+  flutter_svg: ^2.5.0
   country_flags: ^4.1.2
   intl: ^0.20.2
   package_info_plus: ^10.2.2
@@ -26,7 +26,7 @@ dependencies:
   pinyin: 3.3.0
   fl_chart: ^1.3.0
   sealed_currencies: ^3.4.1
-  material_ui: ^1.11.0
+  material_ui: ^1.11.1
 
 dev_dependencies:
   flutter_test:
