@@ -48,6 +48,7 @@ flutter:
     - assets/data/fiat_currencies.json
     - assets/data/fiat_currency_overlays/
     - assets/data/changelog_entries.json
+    - assets/data/world-map-50m.json
 
 flutter_launcher_icons:
   image_path: assets/branding/openfxpedia_logo.png

@@ -20,11 +20,13 @@ class SettingsScreen extends StatefulWidget {
     this.updateService,
     this.packageInfoLoader,
     this.updateAssetNameResolver,
+    this.onBack,
   });
 
   final UpdateService? updateService;
   final Future<PackageInfo> Function()? packageInfoLoader;
   final String? Function(String version)? updateAssetNameResolver;
+  final VoidCallback? onBack;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -146,7 +148,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final l10n = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settings_title)),
+      appBar: AppBar(
+        leading: widget.onBack == null
+            ? null
+            : BackButton(onPressed: widget.onBack),
+        title: Text(l10n.settings_title),
+      ),
       body: FutureBuilder<PackageInfo>(
         future: _pkgInfo,
         builder: (context, snap) {

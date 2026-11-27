@@ -153,6 +153,26 @@
     "@encyclopedia_title": {
         "description": "Title for the encyclopedia screen."
     },
+    "more_title": "More",
+    "@more_title": {
+        "description": "Title for the additional destinations screen and navigation item."
+    },
+    "map_title": "Currency map",
+    "map_choose_currency": "Search for a currency",
+    "map_clear_currency": "Clear currency selection",
+    "map_find_region": "Find a country or region",
+    "map_search_region": "Search countries and regions",
+    "map_no_regions": "No matching countries or regions",
+    "map_instructions": "Select a country or region on the map, or search for a currency to highlight where it is used.",
+    "map_catalog_note": "Currency usage follows the app's catalog. Small territories may be easier to find using search.",
+    "map_no_currency": "No currency is listed for this region.",
+    "map_no_map": "Could not load the offline map.",
+    "map_zoom_in": "Zoom in",
+    "map_zoom_out": "Zoom out",
+    "map_reset_zoom": "Reset map",
+    "map_currency_regions": "Catalog regions using this currency",
+    "map_legend_usage": "Currency use",
+    "map_legend_selected": "Selected region",
     "settings_title": "Settings",
     "@settings_title": {
         "description": "Title for the settings screen."

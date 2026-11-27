@@ -199,6 +199,23 @@
     "@encyclopedia_title": {
         "description": "百科畫面的標題。"
     },
+    "more_title": "更多",
+    "map_title": "貨幣地圖",
+    "map_choose_currency": "搜尋貨幣",
+    "map_clear_currency": "清除貨幣選擇",
+    "map_find_region": "尋找國家或地區",
+    "map_search_region": "搜尋國家和地區",
+    "map_no_regions": "沒有相符的國家或地區",
+    "map_instructions": "在地圖上選擇國家或地區，或搜尋貨幣以醒目顯示使用該貨幣的地區。",
+    "map_catalog_note": "貨幣使用情況依據應用程式內的目錄。較小的地區可能更容易透過搜尋找到。",
+    "map_no_currency": "目錄中沒有列出此地區的貨幣。",
+    "map_no_map": "無法載入離線地圖。",
+    "map_zoom_in": "放大",
+    "map_zoom_out": "縮小",
+    "map_reset_zoom": "重設地圖",
+    "map_currency_regions": "目錄中使用此貨幣的地區",
+    "map_legend_usage": "使用此貨幣",
+    "map_legend_selected": "選取的地區",
     "settings_title": "設定",
     "@settings_title": {
         "description": "設定畫面的標題。"

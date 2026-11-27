@@ -87,6 +87,23 @@
     "@encyclopedia_title": {
         "description": "百科屏幕的标题。"
     },
+    "more_title": "更多",
+    "map_title": "货币地图",
+    "map_choose_currency": "搜索货币",
+    "map_clear_currency": "清除货币选择",
+    "map_find_region": "查找国家或地区",
+    "map_search_region": "搜索国家和地区",
+    "map_no_regions": "没有匹配的国家或地区",
+    "map_instructions": "在地图上选择国家或地区，或搜索货币以突出显示使用该货币的地区。",
+    "map_catalog_note": "货币使用情况依据应用内目录。较小的地区可能更容易通过搜索找到。",
+    "map_no_currency": "目录中没有列出此地区的货币。",
+    "map_no_map": "无法加载离线地图。",
+    "map_zoom_in": "放大",
+    "map_zoom_out": "缩小",
+    "map_reset_zoom": "重置地图",
+    "map_currency_regions": "目录中使用此货币的地区",
+    "map_legend_usage": "使用此货币",
+    "map_legend_selected": "选中的地区",
     "settings_title": "设置",
     "@settings_title": {
         "description": "设置屏幕的标题。"

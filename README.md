@@ -36,6 +36,11 @@ The catalog loaders cache data within their service instance. The catalog servic
 - Date-based conversion with historical rates, requested and actual rate dates, and a quick return to latest rates.
 - Historical exchange-rate charts and a calculator for combining amounts in multiple currencies.
 - Compare selected currencies side by side against a chosen base currency.
+- Open Settings from the More tab in the bottom navigation bar.
+- Explore the offline currency map under More: select a region or search for a
+  currency to highlight its catalog regions. Zoom, pan, or search for small
+  territories. Small regions have map markers; choose from the list when
+  regions overlap. Currency usage follows the bundled catalog.
 - Select the exchange-rate API source from Settings, with automatic primary/fallback behavior.
 - Encyclopedia entries for fiat currencies: names, symbols, regions, descriptions, and usage-region flags.
 - Major/minor units and coin/banknote denominations, with shortcuts for converting a selected denomination.

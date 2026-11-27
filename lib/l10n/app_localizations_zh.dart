@@ -151,6 +151,57 @@ class AppLocalizationsZh extends AppLocalizations {
   String get encyclopedia_title => '百科';
 
   @override
+  String get more_title => '更多';
+
+  @override
+  String get map_title => '货币地图';
+
+  @override
+  String get map_choose_currency => '搜索货币';
+
+  @override
+  String get map_clear_currency => '清除货币选择';
+
+  @override
+  String get map_find_region => '查找国家或地区';
+
+  @override
+  String get map_search_region => '搜索国家和地区';
+
+  @override
+  String get map_no_regions => '没有匹配的国家或地区';
+
+  @override
+  String get map_instructions => '在地图上选择国家或地区，或搜索货币以突出显示使用该货币的地区。';
+
+  @override
+  String get map_catalog_note => '货币使用情况依据应用内目录。较小的地区可能更容易通过搜索找到。';
+
+  @override
+  String get map_no_currency => '目录中没有列出此地区的货币。';
+
+  @override
+  String get map_no_map => '无法加载离线地图。';
+
+  @override
+  String get map_zoom_in => '放大';
+
+  @override
+  String get map_zoom_out => '缩小';
+
+  @override
+  String get map_reset_zoom => '重置地图';
+
+  @override
+  String get map_currency_regions => '目录中使用此货币的地区';
+
+  @override
+  String get map_legend_usage => '使用此货币';
+
+  @override
+  String get map_legend_selected => '选中的地区';
+
+  @override
   String get settings_title => '设置';
 
   @override
@@ -603,6 +654,57 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get encyclopedia_title => '百科';
 
   @override
+  String get more_title => '更多';
+
+  @override
+  String get map_title => '货币地图';
+
+  @override
+  String get map_choose_currency => '搜索货币';
+
+  @override
+  String get map_clear_currency => '清除货币选择';
+
+  @override
+  String get map_find_region => '查找国家或地区';
+
+  @override
+  String get map_search_region => '搜索国家和地区';
+
+  @override
+  String get map_no_regions => '没有匹配的国家或地区';
+
+  @override
+  String get map_instructions => '在地图上选择国家或地区，或搜索货币以突出显示使用该货币的地区。';
+
+  @override
+  String get map_catalog_note => '货币使用情况依据应用内目录。较小的地区可能更容易通过搜索找到。';
+
+  @override
+  String get map_no_currency => '目录中没有列出此地区的货币。';
+
+  @override
+  String get map_no_map => '无法加载离线地图。';
+
+  @override
+  String get map_zoom_in => '放大';
+
+  @override
+  String get map_zoom_out => '缩小';
+
+  @override
+  String get map_reset_zoom => '重置地图';
+
+  @override
+  String get map_currency_regions => '目录中使用此货币的地区';
+
+  @override
+  String get map_legend_usage => '使用此货币';
+
+  @override
+  String get map_legend_selected => '选中的地区';
+
+  @override
   String get settings_title => '设置';
 
   @override
@@ -1053,6 +1155,57 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get encyclopedia_title => '百科';
+
+  @override
+  String get more_title => '更多';
+
+  @override
+  String get map_title => '貨幣地圖';
+
+  @override
+  String get map_choose_currency => '搜尋貨幣';
+
+  @override
+  String get map_clear_currency => '清除貨幣選擇';
+
+  @override
+  String get map_find_region => '尋找國家或地區';
+
+  @override
+  String get map_search_region => '搜尋國家和地區';
+
+  @override
+  String get map_no_regions => '沒有相符的國家或地區';
+
+  @override
+  String get map_instructions => '在地圖上選擇國家或地區，或搜尋貨幣以醒目顯示使用該貨幣的地區。';
+
+  @override
+  String get map_catalog_note => '貨幣使用情況依據應用程式內的目錄。較小的地區可能更容易透過搜尋找到。';
+
+  @override
+  String get map_no_currency => '目錄中沒有列出此地區的貨幣。';
+
+  @override
+  String get map_no_map => '無法載入離線地圖。';
+
+  @override
+  String get map_zoom_in => '放大';
+
+  @override
+  String get map_zoom_out => '縮小';
+
+  @override
+  String get map_reset_zoom => '重設地圖';
+
+  @override
+  String get map_currency_regions => '目錄中使用此貨幣的地區';
+
+  @override
+  String get map_legend_usage => '使用此貨幣';
+
+  @override
+  String get map_legend_selected => '選取的地區';
 
   @override
   String get settings_title => '設定';

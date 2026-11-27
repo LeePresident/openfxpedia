@@ -10,6 +10,7 @@ import 'screens/calculator_screen.dart';
 import 'screens/comparison_screen.dart';
 import 'screens/encyclopedia_screen.dart';
 import 'screens/settings_screen.dart';
+import 'screens/currency_map_screen.dart';
 import 'services/cache_service.dart';
 import 'services/conversion_service.dart';
 import 'services/currency_catalog.dart';
@@ -454,8 +455,13 @@ class _HomeShellState extends State<_HomeShell> {
     CalculatorScreen(),
     ComparisonScreen(),
     EncyclopediaScreen(),
-    SettingsScreen(),
   ];
+
+  _MorePage? _morePage;
+
+  void _closeMorePage() {
+    setState(() => _morePage = null);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -464,36 +470,84 @@ class _HomeShellState extends State<_HomeShell> {
       builder: (context, selectedTab, _) {
         final state = context.read<AppState>();
         final l10n = AppLocalizations.of(context);
-        return Scaffold(
-          body: _screens[selectedTab],
-          bottomNavigationBar: NavigationBar(
-            selectedIndex: selectedTab,
-            onDestinationSelected: state.setSelectedTab,
-            destinations: [
-              NavigationDestination(
-                icon: const Icon(Icons.currency_exchange),
-                label: l10n.converter_title,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.calculate_outlined),
-                label: l10n.calculator_title,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.compare_arrows),
-                label: l10n.comparison_title,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.menu_book),
-                label: l10n.encyclopedia_title,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.settings),
-                label: l10n.settings_title,
-              ),
-            ],
+        final showingMorePage = selectedTab == 4 && _morePage != null;
+        return PopScope(
+          canPop: !showingMorePage,
+          onPopInvokedWithResult: (didPop, result) {
+            if (!didPop && showingMorePage) _closeMorePage();
+          },
+          child: Scaffold(
+            body: IndexedStack(
+              index: selectedTab == 4 ? 1 : 0,
+              children: [
+                selectedTab == 4
+                    ? const SizedBox.shrink()
+                    : _screens[selectedTab],
+                switch (_morePage) {
+                  _MorePage.settings => SettingsScreen(onBack: _closeMorePage),
+                  _MorePage.map => CurrencyMapScreen(onBack: _closeMorePage),
+                  null => Scaffold(
+                    appBar: AppBar(title: Text(l10n.more_title)),
+                    body: ListView(
+                      padding: const EdgeInsets.all(8),
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.public),
+                          title: Text(l10n.map_title),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () =>
+                              setState(() => _morePage = _MorePage.map),
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.settings),
+                          title: Text(l10n.settings_title),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () =>
+                              setState(() => _morePage = _MorePage.settings),
+                        ),
+                      ],
+                    ),
+                  ),
+                },
+              ],
+            ),
+            bottomNavigationBar: NavigationBar(
+              selectedIndex: selectedTab,
+              onDestinationSelected: (index) {
+                if (index == 4 && selectedTab == 4 && _morePage != null) {
+                  _closeMorePage();
+                } else {
+                  state.setSelectedTab(index);
+                }
+              },
+              destinations: [
+                NavigationDestination(
+                  icon: const Icon(Icons.currency_exchange),
+                  label: l10n.converter_title,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.calculate_outlined),
+                  label: l10n.calculator_title,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.compare_arrows),
+                  label: l10n.comparison_title,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.menu_book),
+                  label: l10n.encyclopedia_title,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.more_horiz),
+                  label: l10n.more_title,
+                ),
+              ],
+            ),
           ),
         );
       },
     );
   }
 }
+
+enum _MorePage { settings, map }

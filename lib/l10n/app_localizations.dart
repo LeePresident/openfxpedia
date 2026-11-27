@@ -359,6 +359,108 @@ abstract class AppLocalizations {
   /// **'Encyclopedia'**
   String get encyclopedia_title;
 
+  /// Title for the additional destinations screen and navigation item.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get more_title;
+
+  /// No description provided for @map_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency map'**
+  String get map_title;
+
+  /// No description provided for @map_choose_currency.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a currency'**
+  String get map_choose_currency;
+
+  /// No description provided for @map_clear_currency.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear currency selection'**
+  String get map_clear_currency;
+
+  /// No description provided for @map_find_region.
+  ///
+  /// In en, this message translates to:
+  /// **'Find a country or region'**
+  String get map_find_region;
+
+  /// No description provided for @map_search_region.
+  ///
+  /// In en, this message translates to:
+  /// **'Search countries and regions'**
+  String get map_search_region;
+
+  /// No description provided for @map_no_regions.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching countries or regions'**
+  String get map_no_regions;
+
+  /// No description provided for @map_instructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a country or region on the map, or search for a currency to highlight where it is used.'**
+  String get map_instructions;
+
+  /// No description provided for @map_catalog_note.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency usage follows the app\'s catalog. Small territories may be easier to find using search.'**
+  String get map_catalog_note;
+
+  /// No description provided for @map_no_currency.
+  ///
+  /// In en, this message translates to:
+  /// **'No currency is listed for this region.'**
+  String get map_no_currency;
+
+  /// No description provided for @map_no_map.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the offline map.'**
+  String get map_no_map;
+
+  /// No description provided for @map_zoom_in.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom in'**
+  String get map_zoom_in;
+
+  /// No description provided for @map_zoom_out.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom out'**
+  String get map_zoom_out;
+
+  /// No description provided for @map_reset_zoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset map'**
+  String get map_reset_zoom;
+
+  /// No description provided for @map_currency_regions.
+  ///
+  /// In en, this message translates to:
+  /// **'Catalog regions using this currency'**
+  String get map_currency_regions;
+
+  /// No description provided for @map_legend_usage.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency use'**
+  String get map_legend_usage;
+
+  /// No description provided for @map_legend_selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected region'**
+  String get map_legend_selected;
+
   /// Title for the settings screen.
   ///
   /// In en, this message translates to:

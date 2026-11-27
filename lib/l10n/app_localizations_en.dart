@@ -152,6 +152,59 @@ class AppLocalizationsEn extends AppLocalizations {
   String get encyclopedia_title => 'Encyclopedia';
 
   @override
+  String get more_title => 'More';
+
+  @override
+  String get map_title => 'Currency map';
+
+  @override
+  String get map_choose_currency => 'Search for a currency';
+
+  @override
+  String get map_clear_currency => 'Clear currency selection';
+
+  @override
+  String get map_find_region => 'Find a country or region';
+
+  @override
+  String get map_search_region => 'Search countries and regions';
+
+  @override
+  String get map_no_regions => 'No matching countries or regions';
+
+  @override
+  String get map_instructions =>
+      'Select a country or region on the map, or search for a currency to highlight where it is used.';
+
+  @override
+  String get map_catalog_note =>
+      'Currency usage follows the app\'s catalog. Small territories may be easier to find using search.';
+
+  @override
+  String get map_no_currency => 'No currency is listed for this region.';
+
+  @override
+  String get map_no_map => 'Could not load the offline map.';
+
+  @override
+  String get map_zoom_in => 'Zoom in';
+
+  @override
+  String get map_zoom_out => 'Zoom out';
+
+  @override
+  String get map_reset_zoom => 'Reset map';
+
+  @override
+  String get map_currency_regions => 'Catalog regions using this currency';
+
+  @override
+  String get map_legend_usage => 'Currency use';
+
+  @override
+  String get map_legend_selected => 'Selected region';
+
+  @override
   String get settings_title => 'Settings';
 
   @override

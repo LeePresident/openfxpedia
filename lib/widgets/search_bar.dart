@@ -8,6 +8,7 @@ class CurrencySearchBar extends StatefulWidget {
   final ValueChanged<Currency> onSelected;
   final Currency? selectedCurrency;
   final String hint;
+  final String? unselectedLabel;
 
   const CurrencySearchBar({
     super.key,
@@ -15,6 +16,7 @@ class CurrencySearchBar extends StatefulWidget {
     required this.onSelected,
     this.selectedCurrency,
     this.hint = 'Search currency...',
+    this.unselectedLabel,
   });
 
   @override
@@ -92,7 +94,8 @@ class _CurrencySearchBarState extends State<CurrencySearchBar> {
                   child: Text(
                     widget.selectedCurrency != null
                         ? '${widget.selectedCurrency!.isoCode} — ${widget.selectedCurrency!.name}'
-                        : AppLocalizations.of(context).pick,
+                        : widget.unselectedLabel ??
+                              AppLocalizations.of(context).pick,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
